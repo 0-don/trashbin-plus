@@ -18,6 +18,8 @@ import { useTrashbinStore } from "./store/trashbin-store";
 function App() {
   const trashbinStore = useTrashbinStore();
 
+  console.log("trashbin+ loaded");
+
   useEffect(() => {
     trashbinStore.initializeFromStorage();
   }, [trashbinStore.initializeFromStorage]);
@@ -77,10 +79,7 @@ function App() {
 
   return (
     <>
-      {/* <div
-        onClick={manageSmartShuffleQueue}
-        className="pointer-events-auto cursor-pointer text-red-500"
-      >
+      {/* <div className="pointer-events-auto cursor-pointer text-red-500">
         trashbin+
       </div> */}
       <Providers>

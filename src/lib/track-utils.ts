@@ -38,7 +38,16 @@ export function extractTrackData(element: Element): TrackData {
     while (fiber && (!trackURI || !isEnhancedRecommendation || !uid)) {
       try {
         const props = fiber.memoizedProps ?? fiber.props ?? {};
-        const propsString = JSON.stringify(props);
+
+        // Simple circular reference handler
+        const seen = new WeakSet();
+        const propsString = JSON.stringify(props, (key, value) => {
+          if (typeof value === "object" && value !== null) {
+            if (seen.has(value)) return "[Circular]";
+            seen.add(value);
+          }
+          return value;
+        });
 
         if (!trackURI) {
           const match = propsString.match(TRACK_URI_REGEX);
