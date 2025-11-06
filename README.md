@@ -68,4 +68,8 @@ yarn install
 yarn build
 spicetify config extensions trashbin-plus.js
 spicetify apply
+
+## To uninstall:
+spicetify config extensions trashbin-plus.js-
+spicetify apply
 ``` -->
