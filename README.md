@@ -47,3 +47,25 @@ Access settings through your profile menu → "Trashbin+ Settings":
 ## Need help?
 
 [Report issues or ask questions here](https://github.com/0-don/trashbin-plus/issues)
+
+<!-- ## Step 1:
+
+```bash
+git clone https://github.com/0-don/spicetify-creator.git
+cd spicetify-creator
+npm install
+npm run build
+npm link
+
+```
+
+## Step 2:
+
+```bash
+cd /path/to/your/trashbin-plus
+npm link spicetify-creator
+yarn install
+yarn build
+spicetify config extensions trashbin-plus.js
+spicetify apply
+``` -->

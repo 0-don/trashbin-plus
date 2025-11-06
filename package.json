@@ -11,15 +11,13 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "4.1.16",
-    "@types/minimatch": "^6.0.0",
     "@types/react": "18.3.26",
     "@types/react-dom": "18.3.7",
     "concurrently": "9.2.1",
     "prettier": "3.6.2",
     "prettier-plugin-tailwindcss": "0.7.1",
     "spicetify-creator": "github:0-don/spicetify-creator",
-    "tailwindcss": "4.1.8",
-    "typescript": "5.9.3"
+    "tailwindcss": "4.1.8"
   },
   "dependencies": {
     "@tanstack/react-virtual": "3.13.10",
