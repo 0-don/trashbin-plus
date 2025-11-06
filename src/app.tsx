@@ -26,7 +26,7 @@ function App() {
 
   useEffect(() => {
     if (trashbinStore.autoplayOnStart && !Spicetify.Player.isPlaying())
-      Spicetify.Player.play();
+      setTimeout(Spicetify.Player.play);
   }, [trashbinStore.autoplayOnStart]);
 
   useEffect(() => {
