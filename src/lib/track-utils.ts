@@ -137,10 +137,12 @@ export async function skipToNextAllowedTrack() {
           await Spicetify.Player.playUri(
             currentContextUri,
             {},
-            { skipTo: { uri: nextTrack.uri, uid: nextTrack.uid } },
+            { skipTo: { uri: nextTrack.uri } },
           );
           return;
-        } catch (_) {}
+        } catch (err) {
+          console.error("Error skipping to next allowed track:", err);
+        }
       }
     }
   }
