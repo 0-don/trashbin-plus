@@ -9,11 +9,15 @@ import { TrashbinSettings } from "./components/ui/settings-modal";
 import { TrashedItemsModal } from "./components/ui/trashed-items-modal";
 import "./global.css";
 import { SELECTORS } from "./lib/constants";
+import { PlaylistMonitor } from "./lib/playlist-monitor";
 import {
   isTrackEffectivelyTrashed,
   skipToNextAllowedTrack,
 } from "./lib/track-utils";
 import { useTrashbinStore } from "./store/trashbin-store";
+
+// Global instance
+let playlistMonitor: PlaylistMonitor | null = null;
 
 function App() {
   const trashbinStore = useTrashbinStore();
@@ -28,6 +32,20 @@ function App() {
     if (trashbinStore.autoplayOnStart && !Spicetify.Player.isPlaying())
       setTimeout(Spicetify.Player.play);
   }, [trashbinStore.autoplayOnStart]);
+
+  // Initialize playlist monitor
+  useEffect(() => {
+    if (!playlistMonitor) {
+      playlistMonitor = new PlaylistMonitor();
+    }
+
+    return () => {
+      if (playlistMonitor) {
+        playlistMonitor.destroy();
+        playlistMonitor = null;
+      }
+    };
+  }, []);
 
   useEffect(() => {
     if (!trashbinStore.trashbinEnabled) return;
@@ -79,9 +97,6 @@ function App() {
 
   return (
     <>
-      {/* <div className="pointer-events-auto cursor-pointer text-red-500">
-        trashbin+
-      </div> */}
       <Providers>
         <TrashbinWidget />
         <TrashbinSettings />
@@ -103,6 +118,9 @@ async function main() {
   ReactDOM.render(<App />, appRoot);
 
   return () => {
+    if (playlistMonitor) {
+      playlistMonitor.destroy();
+    }
     ReactDOM.unmountComponentAtNode(appRoot);
     appRoot.remove();
   };
