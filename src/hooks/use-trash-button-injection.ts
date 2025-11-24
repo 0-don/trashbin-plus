@@ -41,6 +41,7 @@ export const useTrashButtonInjection = (
       if (!row) return;
 
       const { trackURI } = extractTrackData(row);
+      console.log(row, trackURI);
       if (!trackURI || row.querySelector(config.buttonSelector)) return;
 
       const isTrashed = !!store.trashSongList[trackURI];

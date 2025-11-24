@@ -69,7 +69,11 @@ yarn build
 spicetify config extensions trashbin-plus.js
 spicetify apply
 
+spicetify enable-devtools
+spicetify apply
+
 ## To uninstall:
 spicetify config extensions trashbin-plus.js-
 spicetify apply
+
 ``` -->

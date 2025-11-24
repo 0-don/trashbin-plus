@@ -34,12 +34,12 @@ export function extractTrackData(element: Element): TrackData {
 
   if (reactKey) {
     let fiber = elementWithFiber[reactKey] as ReactFiber | undefined;
+    const trackURICount = new Map<string, number>();
 
     while (fiber && (!trackURI || !isEnhancedRecommendation || !uid)) {
       try {
         const props = fiber.memoizedProps ?? fiber.props ?? {};
 
-        // Simple circular reference handler
         const seen = new WeakSet();
         const propsString = JSON.stringify(props, (key, value) => {
           if (typeof value === "object" && value !== null) {
@@ -49,9 +49,14 @@ export function extractTrackData(element: Element): TrackData {
           return value;
         });
 
-        if (!trackURI) {
-          const match = propsString.match(TRACK_URI_REGEX);
-          if (match?.[0]) trackURI = match[0];
+        // Count all track URI occurrences
+        const matches = propsString.match(
+          new RegExp(TRACK_URI_REGEX.source, "g"),
+        );
+        if (matches) {
+          matches.forEach((uri) => {
+            trackURICount.set(uri, (trackURICount.get(uri) || 0) + 1);
+          });
         }
 
         if (!isEnhancedRecommendation) {
@@ -68,6 +73,13 @@ export function extractTrackData(element: Element): TrackData {
       } catch {
         break;
       }
+    }
+
+    // Find the track URI with the most occurrences
+    if (trackURICount.size > 0) {
+      trackURI = Array.from(trackURICount.entries()).sort(
+        ([, countA], [, countB]) => countB - countA,
+      )[0][0];
     }
   }
 
