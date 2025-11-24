@@ -22,7 +22,7 @@ let playlistMonitor: PlaylistMonitor | null = null;
 function App() {
   const trashbinStore = useTrashbinStore();
 
-  console.log("trashbin+ loaded");
+  console.log("trashbin+ loaded!");
 
   useEffect(() => {
     trashbinStore.initializeFromStorage();

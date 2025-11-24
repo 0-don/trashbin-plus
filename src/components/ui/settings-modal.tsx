@@ -59,8 +59,6 @@ const SettingsModal: React.FC = () => {
   const { t } = useTranslation();
   const store = useTrashbinStore();
 
-  console.log(store);
-
   const handleFileImport = () => {
     const input = document.createElement("input");
     input.type = "file";
