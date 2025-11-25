@@ -12,6 +12,7 @@ import { SELECTORS } from "./lib/constants";
 import { PlaylistMonitor } from "./lib/playlist-monitor";
 import {
   isTrackEffectivelyTrashed,
+  manageSmartShuffleQueue,
   skipToNextAllowedTrack,
 } from "./lib/track-utils";
 import { useTrashbinStore } from "./store/trashbin-store";
@@ -79,6 +80,7 @@ function App() {
         )
       ) {
         skipToNextAllowedTrack();
+        manageSmartShuffleQueue();
       }
     };
 

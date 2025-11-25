@@ -35,6 +35,7 @@ export function extractTrackData(element: Element): TrackData {
   if (reactKey) {
     let fiber = elementWithFiber[reactKey] as ReactFiber | undefined;
     const trackURICount = new Map<string, number>();
+    const uidCount = new Map<string, number>();
 
     while (fiber && (!trackURI || !isEnhancedRecommendation || !uid)) {
       try {
@@ -50,23 +51,30 @@ export function extractTrackData(element: Element): TrackData {
         });
 
         // Count all track URI occurrences
-        const matches = propsString.match(
+        const trackMatches = propsString.match(
           new RegExp(TRACK_URI_REGEX.source, "g"),
         );
-        if (matches) {
-          matches.forEach((uri) => {
+        if (trackMatches) {
+          trackMatches.forEach((uri) => {
             trackURICount.set(uri, (trackURICount.get(uri) || 0) + 1);
+          });
+        }
+
+        // Count all UID occurrences
+        const uidMatches = propsString.match(new RegExp(UID_REGEX.source, "g"));
+        if (uidMatches) {
+          uidMatches.forEach((match) => {
+            const uidMatch = match.match(UID_REGEX);
+            if (uidMatch?.[1]) {
+              const uidValue = uidMatch[1];
+              uidCount.set(uidValue, (uidCount.get(uidValue) || 0) + 1);
+            }
           });
         }
 
         if (!isEnhancedRecommendation) {
           isEnhancedRecommendation =
             ENHANCED_RECOMMENDATION_REGEX.test(propsString);
-        }
-
-        if (!uid) {
-          const uidMatch = propsString.match(UID_REGEX);
-          if (uidMatch?.[1]) uid = uidMatch[1];
         }
 
         fiber = fiber.return;
@@ -78,6 +86,13 @@ export function extractTrackData(element: Element): TrackData {
     // Find the track URI with the most occurrences
     if (trackURICount.size > 0) {
       trackURI = Array.from(trackURICount.entries()).sort(
+        ([, countA], [, countB]) => countB - countA,
+      )[0][0];
+    }
+
+    // Find the UID with the most occurrences
+    if (uidCount.size > 0) {
+      uid = Array.from(uidCount.entries()).sort(
         ([, countA], [, countB]) => countB - countA,
       )[0][0];
     }

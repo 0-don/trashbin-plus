@@ -20,6 +20,7 @@ export const TrashbinWidget = React.memo(() => {
     if (isTrack) {
       widget.active = isTrashed;
       widget.label = isTrashed ? t("ACTION_UNTHROW") : t("ACTION_THROW");
+      widget.icon = TRASH_ICON(18, isTrashed ? "text-green-500" : "");
     } else {
       widget.deregister();
     }
@@ -39,7 +40,6 @@ export const TrashbinWidget = React.memo(() => {
     );
 
     widgetRef.current = widget;
-
     updateWidgetState(widget);
 
     const handleSongChange = () => updateWidgetState(widget);
