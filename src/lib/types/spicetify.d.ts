@@ -302,6 +302,11 @@ declare namespace Spicetify {
     targetBitrateAvailable: boolean;
     hifiStatus: number;
   };
+
+  namespace Mousetrap {
+    function bind(keys: string, callback: (event: KeyboardEvent) => void): void;
+    function unbind(keys: string): void;
+  }
   namespace Player {
     /**
      * Register a listener `type` on Spicetify.Player.

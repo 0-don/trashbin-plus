@@ -48,5 +48,7 @@
   "DESCRIPTION_SETTINGS_QUEUE_TRASHBIN": "Add trash icons next to each song in your upcoming queue for easy management",
   "DESCRIPTION_SETTINGS_TRACKLIST_TRASHBIN": "Add trash icons next to songs in album and playlist views for quick filtering",
   "DESCRIPTION_SETTINGS_RESHUFFLE_ON_SKIP": "When skipping a trashed song, automatically jump to the next non-trashed track in the queue",
-  "DESCRIPTION_SETTINGS_PLAYLIST_MONITOR": "Automatically recover from Spotify playback glitches by resuming your last playlist"
+  "DESCRIPTION_SETTINGS_PLAYLIST_MONITOR": "Automatically recover from Spotify playback glitches by resuming your last playlist",
+  "SETTINGS_TRASH_ON_NEXT_HOTKEY": "Trash on Next Hotkey",
+  "DESCRIPTION_SETTINGS_TRASH_ON_NEXT_HOTKEY": "Automatically trash the current song when using Ctrl+Shift+Right keyboard shortcut to skip to next track"
 }

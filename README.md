@@ -53,9 +53,9 @@ Access settings through your profile menu → "Trashbin+ Settings":
 ```bash
 git clone https://github.com/0-don/spicetify-creator.git
 cd spicetify-creator
-npm install
-npm run build
-npm link
+yarn install
+yarn run build
+yarn link
 
 ```
 
@@ -63,7 +63,7 @@ npm link
 
 ```bash
 cd /path/to/your/trashbin-plus
-npm link spicetify-creator
+yarn link "spicetify-creator"
 yarn install
 yarn build
 spicetify config extensions trashbin-plus.js

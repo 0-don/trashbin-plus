@@ -12,6 +12,7 @@ export const STORAGE_KEYS = {
   TRACKLIST_TRASHBIN: "trashbin-tracklist-enabled",
   RESHUFFLE_ON_SKIP: "trashbin-reshuffle-on-skip",
   PLAYLIST_MONITOR: "trashbin-playlist-monitor",
+  TRASH_ON_NEXT_HOTKEY: "trashbin-trash-on-next-hotkey",
 } as const;
 
 interface TrashbinState {
@@ -23,6 +24,7 @@ interface TrashbinState {
   tracklistTrashbinEnabled: boolean;
   reshuffleOnSkip: boolean;
   playlistMonitorEnabled: boolean;
+  trashOnNextHotkey: boolean;
   trashSongList: Record<string, boolean>;
   trashArtistList: Record<string, boolean>;
   userHitBack: boolean;
@@ -36,6 +38,7 @@ interface TrashbinState {
   setTracklistTrashbinEnabled: (enabled: boolean) => void;
   setReshuffleOnSkip: (enabled: boolean) => void;
   setPlaylistMonitorEnabled: (enabled: boolean) => void;
+  setTrashOnNextHotkey: (enabled: boolean) => void;
   setUserHitBack: (hitBack: boolean) => void;
 
   // Unified actions
@@ -73,6 +76,7 @@ export const useTrashbinStore = create<TrashbinState>((set, get) => ({
   tracklistTrashbinEnabled: true,
   reshuffleOnSkip: false,
   playlistMonitorEnabled: true,
+  trashOnNextHotkey: false,
   trashSongList: {},
   trashArtistList: {},
   userHitBack: false,
@@ -91,6 +95,8 @@ export const useTrashbinStore = create<TrashbinState>((set, get) => ({
         true,
       ),
       reshuffleOnSkip: initValue(STORAGE_KEYS.RESHUFFLE_ON_SKIP, false),
+      playlistMonitorEnabled: initValue(STORAGE_KEYS.PLAYLIST_MONITOR, true),
+      trashOnNextHotkey: initValue(STORAGE_KEYS.TRASH_ON_NEXT_HOTKEY, false),
     });
   },
 
@@ -140,6 +146,14 @@ export const useTrashbinStore = create<TrashbinState>((set, get) => ({
     set({ playlistMonitorEnabled: enabled });
     Spicetify.LocalStorage.set(
       STORAGE_KEYS.PLAYLIST_MONITOR,
+      JSON.stringify(enabled),
+    );
+  },
+
+  setTrashOnNextHotkey: (enabled: boolean) => {
+    set({ trashOnNextHotkey: enabled });
+    Spicetify.LocalStorage.set(
+      STORAGE_KEYS.TRASH_ON_NEXT_HOTKEY,
       JSON.stringify(enabled),
     );
   },

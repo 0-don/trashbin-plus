@@ -221,6 +221,12 @@ const SettingsModal: React.FC = () => {
         onChange={store.setPlaylistMonitorEnabled}
         description={t("DESCRIPTION_SETTINGS_PLAYLIST_MONITOR")}
       />
+      <Toggle
+        label={t("SETTINGS_TRASH_ON_NEXT_HOTKEY")}
+        enabled={store.trashOnNextHotkey}
+        onChange={store.setTrashOnNextHotkey}
+        description={t("DESCRIPTION_SETTINGS_TRASH_ON_NEXT_HOTKEY")}
+      />
 
       <h2 className="my-2.5! text-lg font-bold text-(--spice-text) first-of-type:mt-0">
         {t("SETTINGS_LOCAL_STORAGE")}

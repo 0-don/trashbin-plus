@@ -16,12 +16,14 @@ import {
   skipToNextAllowedTrack,
 } from "./lib/track-utils";
 import { useTrashbinStore } from "./store/trashbin-store";
+import { useHotkeyDetection } from "./hooks/use-hotkey-detection";
 
 // Global instance
 let playlistMonitor: PlaylistMonitor | null = null;
 
 function App() {
   const trashbinStore = useTrashbinStore();
+  useHotkeyDetection();
 
   console.log("trashbin+ loaded!");
 
