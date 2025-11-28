@@ -83,7 +83,12 @@ const Toggle: React.FC<{
           "bg-[rgba(var(--spice-rgb-shadow),0.7)]! text-(--spice-text)!",
           !enabled && "text-[rgba(var(--spice-rgb-text),0.3)]!",
         )}
-        onClick={() => onChange(!enabled)}
+        type="button"
+        onClick={(event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          onChange(!enabled);
+        }}
       >
         <svg height="16" width="16" viewBox="0 0 16 16" fill="currentColor">
           {enabled && (
