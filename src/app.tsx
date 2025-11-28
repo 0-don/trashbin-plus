@@ -9,8 +9,8 @@ import { TrashbinSettings } from "./components/ui/settings-modal";
 import { TrashedItemsModal } from "./components/ui/trashed-items-modal";
 import "./global.css";
 import { useHotkeyDetection } from "./hooks/use-hotkey-detection";
+import { usePlaylistMonitor } from "./hooks/use-playlist-monitor";
 import { SELECTORS } from "./lib/constants";
-import { PlaylistMonitor } from "./lib/playlist-monitor";
 import {
   isTrackEffectivelyTrashed,
   manageSmartShuffleQueue,
@@ -18,14 +18,12 @@ import {
 } from "./lib/track-utils";
 import { useTrashbinStore } from "./store/trashbin-store";
 
-// Global instance
-let playlistMonitor: PlaylistMonitor | null = null;
-
 function App() {
+  console.log("trashbin+ loaded!");
+
   const trashbinStore = useTrashbinStore();
   useHotkeyDetection();
-
-  console.log("trashbin+ loaded!");
+  usePlaylistMonitor(trashbinStore.playlistMonitorEnabled);
 
   useEffect(() => {
     trashbinStore.initializeFromStorage();
@@ -33,24 +31,8 @@ function App() {
 
   useEffect(() => {
     if (trashbinStore.autoplayOnStart && !Spicetify.Player.isPlaying())
-      setTimeout(Spicetify.Player.play);
+      setTimeout(Spicetify.Player.play, 5000);
   }, [trashbinStore.autoplayOnStart]);
-
-  useEffect(() => {
-    if (trashbinStore.playlistMonitorEnabled && !playlistMonitor) {
-      playlistMonitor = new PlaylistMonitor();
-    } else if (!trashbinStore.playlistMonitorEnabled && playlistMonitor) {
-      playlistMonitor.destroy();
-      playlistMonitor = null;
-    }
-
-    return () => {
-      if (playlistMonitor) {
-        playlistMonitor.destroy();
-        playlistMonitor = null;
-      }
-    };
-  }, [trashbinStore.playlistMonitorEnabled]);
 
   useEffect(() => {
     if (!trashbinStore.trashbinEnabled) return;
@@ -123,9 +105,6 @@ async function main() {
   ReactDOM.render(<App />, appRoot);
 
   return () => {
-    if (playlistMonitor) {
-      playlistMonitor.destroy();
-    }
     ReactDOM.unmountComponentAtNode(appRoot);
     appRoot.remove();
   };
