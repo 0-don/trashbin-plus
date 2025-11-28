@@ -54,7 +54,7 @@ export const TrashedItemsView: React.FC = () => {
       <style>{`${SELECTORS.TRACK_CREDITS_MODAL} {overflow-y: hidden !important;}`}</style>
 
       {/* Tab Navigation */}
-      <div className="!mb-4 flex border-b border-white/10">
+      <div className="mb-4! flex border-b border-white/10">
         {tabs.map((tab) => (
           <TabButton
             key={tab.key}

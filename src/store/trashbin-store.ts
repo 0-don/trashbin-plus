@@ -11,6 +11,7 @@ export const STORAGE_KEYS = {
   QUEUE_TRASHBIN: "trashbin-queue-enabled",
   TRACKLIST_TRASHBIN: "trashbin-tracklist-enabled",
   RESHUFFLE_ON_SKIP: "trashbin-reshuffle-on-skip",
+  PLAYLIST_MONITOR: "trashbin-playlist-monitor",
 } as const;
 
 interface TrashbinState {
@@ -21,6 +22,7 @@ interface TrashbinState {
   queueTrashbinEnabled: boolean;
   tracklistTrashbinEnabled: boolean;
   reshuffleOnSkip: boolean;
+  playlistMonitorEnabled: boolean;
   trashSongList: Record<string, boolean>;
   trashArtistList: Record<string, boolean>;
   userHitBack: boolean;
@@ -33,6 +35,7 @@ interface TrashbinState {
   setQueueTrashbinEnabled: (enabled: boolean) => void;
   setTracklistTrashbinEnabled: (enabled: boolean) => void;
   setReshuffleOnSkip: (enabled: boolean) => void;
+  setPlaylistMonitorEnabled: (enabled: boolean) => void;
   setUserHitBack: (hitBack: boolean) => void;
 
   // Unified actions
@@ -69,6 +72,7 @@ export const useTrashbinStore = create<TrashbinState>((set, get) => ({
   queueTrashbinEnabled: true,
   tracklistTrashbinEnabled: true,
   reshuffleOnSkip: false,
+  playlistMonitorEnabled: true,
   trashSongList: {},
   trashArtistList: {},
   userHitBack: false,
@@ -128,6 +132,14 @@ export const useTrashbinStore = create<TrashbinState>((set, get) => ({
     set({ reshuffleOnSkip: enabled });
     Spicetify.LocalStorage.set(
       STORAGE_KEYS.RESHUFFLE_ON_SKIP,
+      JSON.stringify(enabled),
+    );
+  },
+
+  setPlaylistMonitorEnabled: (enabled: boolean) => {
+    set({ playlistMonitorEnabled: enabled });
+    Spicetify.LocalStorage.set(
+      STORAGE_KEYS.PLAYLIST_MONITOR,
       JSON.stringify(enabled),
     );
   },

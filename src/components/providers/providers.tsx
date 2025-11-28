@@ -1,7 +1,7 @@
 import i18n from "i18next";
 import React, { useEffect, useState } from "react";
 import { I18nextProvider, initReactI18next } from "react-i18next";
-export { default as i18n } from 'i18next';
+export { default as i18n } from "i18next";
 
 const messages: Record<string, () => Promise<any>> = {
   af: () => import("../../i18n/af.json"),

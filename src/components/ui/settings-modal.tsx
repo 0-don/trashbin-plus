@@ -10,15 +10,15 @@ const Toggle: React.FC<{
   enabled: boolean;
   onChange: (enabled: boolean) => void;
 }> = ({ label, enabled, onChange }) => (
-  <div className="flex items-center justify-between !gap-2.5 !py-2.5">
+  <div className="flex items-center justify-between gap-2.5! py-2.5!">
     <label className="w-full pr-4">{label}</label>
     <div className="text-right">
       <button
         className={cn(
-          "!flex !cursor-pointer !items-center !rounded-full !border-0",
-          "!ml-3 !p-2 !transition-colors",
-          "!bg-[rgba(var(--spice-rgb-shadow),0.7)] !text-[var(--spice-text)]",
-          !enabled && "!text-[rgba(var(--spice-rgb-text),0.3)]",
+          "flex! cursor-pointer! items-center! rounded-full! border-0!",
+          "ml-3! p-2! transition-colors!",
+          "bg-[rgba(var(--spice-rgb-shadow),0.7)]! text-(--spice-text)!",
+          !enabled && "text-[rgba(var(--spice-rgb-text),0.3)]!",
         )}
         onClick={() => onChange(!enabled)}
       >
@@ -37,15 +37,15 @@ const ActionButton: React.FC<{
   description: string;
   onClick: () => void;
 }> = ({ label, description, onClick }) => (
-  <div className="flex items-center justify-between !gap-2.5 !py-2.5">
+  <div className="flex items-center justify-between gap-2.5! py-2.5!">
     <label className="w-full pr-4">{description}</label>
     <div className="text-right">
       <button
         className={cn(
-          "!rounded-full !bg-transparent !font-bold !transition-transform",
-          "!border !border-[#727272] !px-[15px] !duration-[33ms]",
-          "!min-h-8 !cursor-pointer !text-[var(--spice-text)]",
-          "hover:!scale-[1.04] hover:!border-[var(--spice-text)]",
+          "rounded-full! bg-transparent! font-bold! transition-transform!",
+          "border! border-[#727272]! px-[15px]! duration-33!",
+          "min-h-8! cursor-pointer! text-(--spice-text)!",
+          "hover:scale-[1.04]! hover:border-(--spice-text)!",
         )}
         onClick={onClick}
       >
@@ -109,7 +109,7 @@ const SettingsModal: React.FC = () => {
 
   return (
     <div className="p-4">
-      <h2 className="!my-2.5 text-lg font-bold text-[var(--spice-text)] first-of-type:mt-0">
+      <h2 className="my-2.5! text-lg font-bold text-(--spice-text) first-of-type:mt-0">
         {t("SETTINGS_OPTIONS")}
       </h2>
       <Toggle
@@ -123,7 +123,7 @@ const SettingsModal: React.FC = () => {
         onChange={store.setWidgetEnabled}
       />
 
-      <h2 className="!my-2.5 text-lg font-bold text-[var(--spice-text)] first-of-type:mt-0">
+      <h2 className="my-2.5! text-lg font-bold text-(--spice-text) first-of-type:mt-0">
         {t("SETTINGS_FEATURES")}
       </h2>
       <Toggle
@@ -147,7 +147,7 @@ const SettingsModal: React.FC = () => {
         onChange={store.setReshuffleOnSkip}
       />
 
-      <h2 className="!my-2.5 text-lg font-bold text-[var(--spice-text)] first-of-type:mt-0">
+      <h2 className="my-2.5! text-lg font-bold text-(--spice-text) first-of-type:mt-0">
         {t("SETTINGS_LOCAL_STORAGE")}
       </h2>
       <ActionButton

@@ -50,7 +50,7 @@ export const ItemRow: React.FC<ItemRowProps> = ({ item, onUntrash }) => {
           e.preventDefault();
           onUntrash(item.uri);
         }}
-        className="!mx-2 rounded-full p-2 hover:bg-red-500/20 hover:text-red-400"
+        className="mx-2! rounded-full p-2 hover:bg-red-500/20 hover:text-red-400"
         title="Remove from trashbin"
       >
         <IoClose className="h-5 w-5 text-white/70" />
@@ -107,15 +107,15 @@ export const TabButton: React.FC<TabButtonProps> = ({
   <button
     onClick={onClick}
     className={cn(
-      "relative !px-4 !py-2 text-lg font-medium transition-colors",
+      "relative px-4! py-2! text-lg font-medium transition-colors",
       "border-b-2 border-transparent",
       isActive
-        ? "!border-green-500 !text-white"
+        ? "border-green-500! text-white!"
         : "text-white/60 hover:text-white/80",
     )}
   >
     {label}
-    <span className="!mx-1 text-xs text-white/60">({count})</span>
+    <span className="mx-1! text-xs text-white/60">({count})</span>
     {isActive && (
       <div className="absolute right-0 bottom-0 left-0 h-0.5 bg-green-500" />
     )}

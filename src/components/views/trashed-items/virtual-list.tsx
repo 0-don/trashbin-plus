@@ -123,7 +123,7 @@ export const VirtualList: React.FC<VirtualListProps> = ({
         </div>
       </div>
 
-      <div className="!py-4 text-center">
+      <div className="py-4! text-center">
         <p className="text-sm text-white/40">
           {t("ITEMS_LOADED_COUNT", {
             loaded: itemCache.size,
