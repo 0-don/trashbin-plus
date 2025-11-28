@@ -8,6 +8,7 @@ import { Providers } from "./components/providers/providers";
 import { TrashbinSettings } from "./components/ui/settings-modal";
 import { TrashedItemsModal } from "./components/ui/trashed-items-modal";
 import "./global.css";
+import { useHotkeyDetection } from "./hooks/use-hotkey-detection";
 import { SELECTORS } from "./lib/constants";
 import { PlaylistMonitor } from "./lib/playlist-monitor";
 import {
@@ -16,7 +17,6 @@ import {
   skipToNextAllowedTrack,
 } from "./lib/track-utils";
 import { useTrashbinStore } from "./store/trashbin-store";
-import { useHotkeyDetection } from "./hooks/use-hotkey-detection";
 
 // Global instance
 let playlistMonitor: PlaylistMonitor | null = null;

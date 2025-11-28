@@ -1,6 +1,6 @@
 interface PlaylistMonitorState {
   currentPlaylistUri: string | null;
-  monitorInterval: NodeJS.Timeout | null;
+  monitorInterval: number | null;
 }
 
 export class PlaylistMonitor {
