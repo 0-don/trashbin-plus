@@ -29,9 +29,10 @@
   "SETTINGS_QUEUE_TRASHBIN": "대기열 휴지통 활성화",
   "SETTINGS_TRACKLIST_TRASHBIN": "트랙리스트 휴지통 활성화",
   "SETTINGS_RESHUFFLE_ON_SKIP": "다음 비휴지 및 재혼합 대기열로 건너뛰기",
+  "SETTINGS_PLAYLIST_MONITOR": "재생목록 모니터",
   "ITEMS_TITLE": "쓰레기통+ 아이템",
-  "ITEMS_EMPTY_SONGS": "<strong> 휴지통에 버린 노래 없음! <\/strong> <br\/> 휴지통에 추가한 노래는 여기에 표시됩니다.",
-  "ITEMS_EMPTY_ARTISTS": "<strong> 삭제된 아티스트 없음! <\/strong> <br\/> 휴지통에 추가한 아티스트는 여기에 표시됩니다.",
+  "ITEMS_EMPTY_SONGS": "<strong> 휴지통에 버린 노래 없음! <\\/strong> <br\\/> 휴지통에 추가한 노래는 여기에 표시됩니다.",
+  "ITEMS_EMPTY_ARTISTS": "<strong> 삭제된 아티스트 없음! <\\/strong> <br\\/> 휴지통에 추가한 아티스트는 여기에 표시됩니다.",
   "ITEMS_TAB_SONGS": "노래",
   "ITEMS_TAB_ARTISTS": "아티스트",
   "ITEMS_LOADED_COUNT": "{{total}} 개 중 {{loaded}} {{type}} 개가 로드됨",
@@ -40,5 +41,12 @@
   "DESCRIPTION_IMPORT": ".json 파일을 통해 휴지통에 있는 모든 항목을 덮어씁니다.",
   "DESCRIPTION_CLEAR": "휴지통의 모든 항목을 지웁니다(되돌릴 수 없습니다).",
   "ITEMS_EMPTY_SONGS_TITLE": "쓰레기 노래는 안돼요!",
-  "ITEMS_EMPTY_ARTISTS_TITLE": "폄하하는 아티스트는 없습니다!"
+  "ITEMS_EMPTY_ARTISTS_TITLE": "폄하하는 아티스트는 없습니다!",
+  "DESCRIPTION_SETTINGS_ENABLED": "모든 Trashbin+ 기능을 활성화하거나 비활성화하는 마스터 토글",
+  "DESCRIPTION_SETTINGS_SHOW_WIDGET": "빠른 액세스를 위해 재생 표시줄에 현재 재생 중인 트랙 옆에 휴지통 아이콘 표시",
+  "DESCRIPTION_SETTINGS_AUTOPLAY": "Spotify가 열리거나 확장 프로그램이 로드될 때 자동으로 음악 재생 시작",
+  "DESCRIPTION_SETTINGS_QUEUE_TRASHBIN": "간편한 관리를 위해 다가오는 대기열의 각 노래 옆에 휴지통 아이콘 추가",
+  "DESCRIPTION_SETTINGS_TRACKLIST_TRASHBIN": "빠른 필터링을 위해 앨범 및 재생 목록 보기의 노래 옆에 휴지통 아이콘 추가",
+  "DESCRIPTION_SETTINGS_RESHUFFLE_ON_SKIP": "휴지통에 버린 노래를 건너뛸 때 대기열에서 다음 휴지통에 없는 트랙으로 자동 이동",
+  "DESCRIPTION_SETTINGS_PLAYLIST_MONITOR": "마지막 재생 목록을 재개하여 Spotify 재생 문제에서 자동으로 복구"
 }

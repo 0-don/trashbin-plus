@@ -34,10 +34,12 @@ function App() {
       setTimeout(Spicetify.Player.play);
   }, [trashbinStore.autoplayOnStart]);
 
-  // Initialize playlist monitor
   useEffect(() => {
-    if (!playlistMonitor) {
+    if (trashbinStore.playlistMonitorEnabled && !playlistMonitor) {
       playlistMonitor = new PlaylistMonitor();
+    } else if (!trashbinStore.playlistMonitorEnabled && playlistMonitor) {
+      playlistMonitor.destroy();
+      playlistMonitor = null;
     }
 
     return () => {
@@ -46,7 +48,7 @@ function App() {
         playlistMonitor = null;
       }
     };
-  }, []);
+  }, [trashbinStore.playlistMonitorEnabled]);
 
   useEffect(() => {
     if (!trashbinStore.trashbinEnabled) return;
@@ -61,7 +63,6 @@ function App() {
       const track = Spicetify.Player.data?.item;
       const state = useTrashbinStore.getState();
 
-      // dont skip if connected to remote device
       if (
         Spicetify.Platform.ConnectAPI.state.activeDevice.id !== "local_device"
       ) {

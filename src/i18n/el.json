@@ -29,9 +29,10 @@
   "SETTINGS_QUEUE_TRASHBIN": "Ενεργοποίηση κάδου απορριμμάτων ουράς",
   "SETTINGS_TRACKLIST_TRASHBIN": "Ενεργοποίηση κάδου απορριμμάτων λίστας κομματιών",
   "SETTINGS_RESHUFFLE_ON_SKIP": "Μετάβαση στην επόμενη ουρά που δεν έχει μεταφερθεί στον κάδο απορριμμάτων και αναδιάταξη",
+  "SETTINGS_PLAYLIST_MONITOR": "Παρακολούθηση λίστας αναπαραγωγής",
   "ITEMS_TITLE": "Κάδος απορριμμάτων+ Αντικείμενα",
-  "ITEMS_EMPTY_SONGS": "<strong> Δεν υπάρχουν τραγούδια που έχουν διαγραφεί! <\/strong> <br\/> Τα τραγούδια που προσθέτετε στον κάδο απορριμμάτων θα εμφανίζονται εδώ.",
-  "ITEMS_EMPTY_ARTISTS": "<strong> Κανένας καλλιτέχνης που έχει απορριφθεί! <\/strong> <br\/> Οι καλλιτέχνες που προσθέτετε στον κάδο απορριμμάτων θα εμφανίζονται εδώ.",
+  "ITEMS_EMPTY_SONGS": "<strong> Δεν υπάρχουν τραγούδια που έχουν διαγραφεί! </strong> <br/> Τα τραγούδια που προσθέτετε στον κάδο απορριμμάτων θα εμφανίζονται εδώ.",
+  "ITEMS_EMPTY_ARTISTS": "<strong> Κανένας καλλιτέχνης που έχει απορριφθεί! </strong> <br/> Οι καλλιτέχνες που προσθέτετε στον κάδο απορριμμάτων θα εμφανίζονται εδώ.",
   "ITEMS_TAB_SONGS": "Τραγούδια",
   "ITEMS_TAB_ARTISTS": "Καλλιτέχνες",
   "ITEMS_LOADED_COUNT": "{{loaded}} από {{total}} {{type}} φορτώθηκε",
@@ -40,5 +41,12 @@
   "DESCRIPTION_IMPORT": "Αντικατάσταση όλων των στοιχείων στον κάδο απορριμμάτων μέσω αρχείου .json.",
   "DESCRIPTION_CLEAR": "Διαγραφή όλων των στοιχείων από τον κάδο απορριμμάτων (δεν είναι δυνατή η επαναφορά).",
   "ITEMS_EMPTY_SONGS_TITLE": "Όχι τραγούδια που έχουν καταστραφεί!",
-  "ITEMS_EMPTY_ARTISTS_TITLE": "Κανένας καλλιτέχνης που έχει χάσει την τύχη του!"
+  "ITEMS_EMPTY_ARTISTS_TITLE": "Κανένας καλλιτέχνης που έχει χάσει την τύχη του!",
+  "DESCRIPTION_SETTINGS_ENABLED": "Master toggle to enable or disable all Trashbin+ functionality",
+  "DESCRIPTION_SETTINGS_SHOW_WIDGET": "Display a trash icon in the playback bar next to the currently playing track for quick access",
+  "DESCRIPTION_SETTINGS_AUTOPLAY": "Automatically start playing music when Spotify opens or the extension loads",
+  "DESCRIPTION_SETTINGS_QUEUE_TRASHBIN": "Add trash icons next to each song in your upcoming queue for easy management",
+  "DESCRIPTION_SETTINGS_TRACKLIST_TRASHBIN": "Add trash icons next to songs in album and playlist views for quick filtering",
+  "DESCRIPTION_SETTINGS_RESHUFFLE_ON_SKIP": "When skipping a trashed song, automatically jump to the next non-trashed track in the queue",
+  "DESCRIPTION_SETTINGS_PLAYLIST_MONITOR": "Automatically recover from Spotify playback glitches by resuming your last playlist"
 }

@@ -29,9 +29,10 @@
   "SETTINGS_QUEUE_TRASHBIN": "ወረፋ መጣያ ያንቁ",
   "SETTINGS_TRACKLIST_TRASHBIN": "የትራክ ዝርዝር መጣያቢን ያንቁ",
   "SETTINGS_RESHUFFLE_ON_SKIP": "ወደ ቀጣዩ ያልተጣለ ይዝለሉ እና ወረፋ ይቀይሩ",
+  "SETTINGS_PLAYLIST_MONITOR": "የአጫወት ዝርዝር ማሳያ",
   "ITEMS_TITLE": "ቆሻሻ መጣያ+ እቃዎች",
-  "ITEMS_EMPTY_SONGS": "<strong> ምንም የተጣሉ ዘፈኖች የሉም! <\/strong> <br\/> ወደ ቆሻሻ መጣያ ውስጥ የሚያክሏቸው ዘፈኖች እዚህ ይታያሉ።",
-  "ITEMS_EMPTY_ARTISTS": "<strong> ምንም የተጣሉ አርቲስቶች የሉም! <\/strong> <br\/> ወደ መጣያ መጣያ ውስጥ የሚያክሏቸው አርቲስቶች እዚህ ይታያሉ።",
+  "ITEMS_EMPTY_SONGS": "<strong> ምንም የተጣሉ ዘፈኖች የሉም! </strong> <br/> ወደ ቆሻሻ መጣያ ውስጥ የሚያክሏቸው ዘፈኖች እዚህ ይታያሉ።",
+  "ITEMS_EMPTY_ARTISTS": "<strong> ምንም የተጣሉ አርቲስቶች የሉም! </strong> <br/> ወደ መጣያ መጣያ ውስጥ የሚያክሏቸው አርቲስቶች እዚህ ይታያሉ።",
   "ITEMS_TAB_SONGS": "ዘፈኖች",
   "ITEMS_TAB_ARTISTS": "አርቲስቶች",
   "ITEMS_LOADED_COUNT": "ከ {{total}} {{type}} {{loaded}}",
@@ -40,5 +41,12 @@
   "DESCRIPTION_IMPORT": "ሁሉንም እቃዎች በመጣያ .json ፋይል በኩል ይፃፉ።",
   "DESCRIPTION_CLEAR": "ሁሉንም እቃዎች ከቆሻሻ መጣያ ውስጥ አጽዳ (መመለስ አይቻልም)።",
   "ITEMS_EMPTY_SONGS_TITLE": "ምንም የተጣሉ ዘፈኖች የሉም!",
-  "ITEMS_EMPTY_ARTISTS_TITLE": "ምንም የተጣሉ አርቲስቶች የሉም!"
+  "ITEMS_EMPTY_ARTISTS_TITLE": "ምንም የተጣሉ አርቲስቶች የሉም!",
+  "DESCRIPTION_SETTINGS_ENABLED": "Master toggle to enable or disable all Trashbin+ functionality",
+  "DESCRIPTION_SETTINGS_SHOW_WIDGET": "Display a trash icon in the playback bar next to the currently playing track for quick access",
+  "DESCRIPTION_SETTINGS_AUTOPLAY": "Automatically start playing music when Spotify opens or the extension loads",
+  "DESCRIPTION_SETTINGS_QUEUE_TRASHBIN": "Add trash icons next to each song in your upcoming queue for easy management",
+  "DESCRIPTION_SETTINGS_TRACKLIST_TRASHBIN": "Add trash icons next to songs in album and playlist views for quick filtering",
+  "DESCRIPTION_SETTINGS_RESHUFFLE_ON_SKIP": "When skipping a trashed song, automatically jump to the next non-trashed track in the queue",
+  "DESCRIPTION_SETTINGS_PLAYLIST_MONITOR": "Automatically recover from Spotify playback glitches by resuming your last playlist"
 }

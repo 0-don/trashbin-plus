@@ -29,9 +29,10 @@
   "SETTINGS_QUEUE_TRASHBIN": "Activer la corbeille de la file d'attente",
   "SETTINGS_TRACKLIST_TRASHBIN": "Activer la corbeille de la liste des pistes",
   "SETTINGS_RESHUFFLE_ON_SKIP": "Passer à la file d'attente suivante non mise à la corbeille et réorganiser",
+  "SETTINGS_PLAYLIST_MONITOR": "Moniteur de Playlist",
   "ITEMS_TITLE": "Corbeille + Articles",
-  "ITEMS_EMPTY_SONGS": "<strong> Pas de chansons mises à la poubelle ! <\/strong> <br\/> Les chansons que vous ajoutez à la corbeille apparaîtront ici.",
-  "ITEMS_EMPTY_ARTISTS": "<strong> Aucun artiste n'est mis à la poubelle ! <\/strong> <br\/> Les artistes que vous ajoutez à la corbeille apparaîtront ici.",
+  "ITEMS_EMPTY_SONGS": "<strong> Pas de chansons mises à la poubelle ! <\\/strong> <br\\/> Les chansons que vous ajoutez à la corbeille apparaîtront ici.",
+  "ITEMS_EMPTY_ARTISTS": "<strong> Aucun artiste n'est mis à la poubelle ! <\\/strong> <br\\/> Les artistes que vous ajoutez à la corbeille apparaîtront ici.",
   "ITEMS_TAB_SONGS": "Chansons",
   "ITEMS_TAB_ARTISTS": "Artistes",
   "ITEMS_LOADED_COUNT": "{{loaded}} sur {{total}} {{type}} chargé",
@@ -40,5 +41,12 @@
   "DESCRIPTION_IMPORT": "Écraser tous les éléments de la corbeille via le fichier .json.",
   "DESCRIPTION_CLEAR": "Effacer tous les éléments de la corbeille (ne peut pas être annulé).",
   "ITEMS_EMPTY_SONGS_TITLE": "Pas de chansons trash !",
-  "ITEMS_EMPTY_ARTISTS_TITLE": "Pas d'artistes saccagés !"
+  "ITEMS_EMPTY_ARTISTS_TITLE": "Pas d'artistes saccagés !",
+  "DESCRIPTION_SETTINGS_ENABLED": "Interrupteur principal pour activer ou désactiver toutes les fonctionnalités de Trashbin+",
+  "DESCRIPTION_SETTINGS_SHOW_WIDGET": "Afficher une icône de corbeille dans la barre de lecture à côté de la piste en cours pour un accès rapide",
+  "DESCRIPTION_SETTINGS_AUTOPLAY": "Démarrer automatiquement la lecture de musique lors de l'ouverture de Spotify ou du chargement de l'extension",
+  "DESCRIPTION_SETTINGS_QUEUE_TRASHBIN": "Ajouter des icônes de corbeille à côté de chaque chanson dans votre file d'attente à venir pour une gestion facile",
+  "DESCRIPTION_SETTINGS_TRACKLIST_TRASHBIN": "Ajouter des icônes de corbeille à côté des chansons dans les vues d'albums et de listes de lecture pour un filtrage rapide",
+  "DESCRIPTION_SETTINGS_RESHUFFLE_ON_SKIP": "Lors du saut d'une chanson mise à la corbeille, passer automatiquement à la piste suivante non mise à la corbeille dans la file d'attente",
+  "DESCRIPTION_SETTINGS_PLAYLIST_MONITOR": "Récupérer automatiquement des problèmes de lecture Spotify en reprenant votre dernière liste de lecture"
 }

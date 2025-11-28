@@ -29,6 +29,7 @@
   "SETTINGS_QUEUE_TRASHBIN": "Kuyruk Çöp Kutusunu Etkinleştir",
   "SETTINGS_TRACKLIST_TRASHBIN": "Parça Listesi Çöp Kutusunu Etkinleştir",
   "SETTINGS_RESHUFFLE_ON_SKIP": "Sonraki Çöp Kutusuna Atılmayanlara Atla ve Sırayı Yeniden Karıştır",
+  "SETTINGS_PLAYLIST_MONITOR": "Oynatma Listesi İzleyicisi",
   "ITEMS_TITLE": "Çöp Kutusu+ Öğeler",
   "ITEMS_EMPTY_SONGS": "<strong> Çöp kutusuna atılan şarkı yok! <\/strong> <br\/> Çöp kutusuna eklediğiniz şarkılar burada görünecektir.",
   "ITEMS_EMPTY_ARTISTS": "<strong> Çöp kutusuna atılan sanatçı yok! <\/strong> <br\/> Çöp kutusuna eklediğiniz sanatçılar burada görünecektir.",
@@ -41,4 +42,12 @@
   "DESCRIPTION_CLEAR": "Çöp kutusundaki tüm öğeleri temizle (geri alınamaz).",
   "ITEMS_EMPTY_SONGS_TITLE": "Çöp şarkılar yok!",
   "ITEMS_EMPTY_ARTISTS_TITLE": "Çöpe atılan sanatçı yok!"
+,
+  "DESCRIPTION_SETTINGS_ENABLED": "Tüm Trashbin+ işlevselliğini etkinleştirmek veya devre dışı bırakmak için ana anahtar",
+  "DESCRIPTION_SETTINGS_SHOW_WIDGET": "Hızlı erişim için oynatma çubuğunda şu anda çalan parçanın yanında bir çöp kutusu simgesi görüntüleyin",
+  "DESCRIPTION_SETTINGS_AUTOPLAY": "Spotify açıldığında veya uzantı yüklendiğinde müzik çalmayı otomatik olarak başlat",
+  "DESCRIPTION_SETTINGS_QUEUE_TRASHBIN": "Kolay yönetim için yaklaşan kuyruğunuzdaki her şarkının yanına çöp kutusu simgeleri ekleyin",
+  "DESCRIPTION_SETTINGS_TRACKLIST_TRASHBIN": "Hızlı filtreleme için albüm ve çalma listesi görünümlerindeki şarkıların yanına çöp kutusu simgeleri ekleyin",
+  "DESCRIPTION_SETTINGS_RESHUFFLE_ON_SKIP": "Çöpe atılmış bir şarkıyı atlarken, kuyruktaki bir sonraki çöpe atılmamış parçaya otomatik olarak atla",
+  "DESCRIPTION_SETTINGS_PLAYLIST_MONITOR": "Son çalma listesini sürdürerek Spotify oynatma aksaklıklarından otomatik olarak kurtulun"
 }

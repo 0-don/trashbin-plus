@@ -1,17 +1,80 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { HiOutlineQuestionMarkCircle } from "react-icons/hi2";
 import { SELECTORS } from "../../lib/constants";
 import { cn } from "../../lib/utils";
 import { useTrashbinStore } from "../../store/trashbin-store";
 import { TRASH_ICON } from "../icons";
 
+const Tooltip: React.FC<{
+  children: React.ReactNode;
+  content: string;
+}> = ({ children, content }) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const timeoutRef = useRef<NodeJS.Timeout>();
+
+  const handleMouseEnter = (e: React.MouseEvent) => {
+    clearTimeout(timeoutRef.current);
+    const rect = e.currentTarget.getBoundingClientRect();
+    setPosition({
+      x: rect.left + rect.width / 2,
+      y: rect.top - 8,
+    });
+    setIsVisible(true);
+  };
+
+  const handleMouseLeave = () => {
+    timeoutRef.current = setTimeout(() => {
+      setIsVisible(false);
+    }, 100);
+  };
+
+  useEffect(() => {
+    return () => clearTimeout(timeoutRef.current);
+  }, []);
+
+  return (
+    <>
+      <span onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+        {children}
+      </span>
+      {isVisible && (
+        <div
+          className="pointer-events-none fixed z-50 rounded bg-black px-2 py-1 text-xs text-white shadow-lg"
+          style={{
+            left: position.x,
+            top: position.y,
+            transform: "translate(-50%, -100%)",
+            maxWidth: "200px",
+            wordWrap: "break-word",
+          }}
+        >
+          {content}
+          <div className="absolute top-full left-1/2 -translate-x-1/2 transform border-4 border-transparent border-t-black" />
+        </div>
+      )}
+    </>
+  );
+};
+
 const Toggle: React.FC<{
   label: string;
   enabled: boolean;
   onChange: (enabled: boolean) => void;
-}> = ({ label, enabled, onChange }) => (
+  description?: string;
+}> = ({ label, enabled, onChange, description }) => (
   <div className="flex items-center justify-between gap-2.5! py-2.5!">
-    <label className="w-full pr-4">{label}</label>
+    <label className="flex w-full items-center gap-1.5! pr-4">
+      {label}
+      {description && (
+        <Tooltip content={description}>
+          <span className="inline-flex! cursor-help! text-[rgba(var(--spice-rgb-text),0.5)]! transition-colors! hover:text-(--spice-text)!">
+            <HiOutlineQuestionMarkCircle size={14} />
+          </span>
+        </Tooltip>
+      )}
+    </label>
     <div className="text-right">
       <button
         className={cn(
@@ -116,11 +179,13 @@ const SettingsModal: React.FC = () => {
         label={t("SETTINGS_ENABLED")}
         enabled={store.trashbinEnabled}
         onChange={store.setTrashbinEnabled}
+        description={t("DESCRIPTION_SETTINGS_ENABLED")}
       />
       <Toggle
         label={t("SETTINGS_SHOW_WIDGET")}
         enabled={store.widgetEnabled}
         onChange={store.setWidgetEnabled}
+        description={t("DESCRIPTION_SETTINGS_SHOW_WIDGET")}
       />
 
       <h2 className="my-2.5! text-lg font-bold text-(--spice-text) first-of-type:mt-0">
@@ -130,21 +195,31 @@ const SettingsModal: React.FC = () => {
         label={t("SETTINGS_AUTOPLAY")}
         enabled={store.autoplayOnStart}
         onChange={store.setAutoplayOnStart}
+        description={t("DESCRIPTION_SETTINGS_AUTOPLAY")}
       />
       <Toggle
         label={t("SETTINGS_QUEUE_TRASHBIN")}
         enabled={store.queueTrashbinEnabled}
         onChange={store.setQueueTrashbinEnabled}
+        description={t("DESCRIPTION_SETTINGS_QUEUE_TRASHBIN")}
       />
       <Toggle
         label={t("SETTINGS_TRACKLIST_TRASHBIN")}
         enabled={store.tracklistTrashbinEnabled}
         onChange={store.setTracklistTrashbinEnabled}
+        description={t("DESCRIPTION_SETTINGS_TRACKLIST_TRASHBIN")}
       />
       <Toggle
         label={t("SETTINGS_RESHUFFLE_ON_SKIP")}
         enabled={store.reshuffleOnSkip}
         onChange={store.setReshuffleOnSkip}
+        description={t("DESCRIPTION_SETTINGS_RESHUFFLE_ON_SKIP")}
+      />
+      <Toggle
+        label={t("SETTINGS_PLAYLIST_MONITOR")}
+        enabled={store.playlistMonitorEnabled}
+        onChange={store.setPlaylistMonitorEnabled}
+        description={t("DESCRIPTION_SETTINGS_PLAYLIST_MONITOR")}
       />
 
       <h2 className="my-2.5! text-lg font-bold text-(--spice-text) first-of-type:mt-0">

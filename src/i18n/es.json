@@ -29,6 +29,7 @@
   "SETTINGS_QUEUE_TRASHBIN": "Habilitar la papelera de cola",
   "SETTINGS_TRACKLIST_TRASHBIN": "Habilitar la papelera de la lista de pistas",
   "SETTINGS_RESHUFFLE_ON_SKIP": "Saltar a la siguiente cola de no eliminados y reorganizados",
+  "SETTINGS_PLAYLIST_MONITOR": "Monitor de Lista de Reproducción",
   "ITEMS_TITLE": "Papelera + Artículos",
   "ITEMS_EMPTY_SONGS": "<strong> No hay canciones desechadas! <\/strong> <br\/> Las canciones que agregues a la papelera aparecerán aquí.",
   "ITEMS_EMPTY_ARTISTS": "<strong> No hay artistas descartados! <\/strong> <br\/> Los artistas que agregues a la papelera aparecerán aquí.",
@@ -40,5 +41,12 @@
   "DESCRIPTION_IMPORT": "Sobrescribir todos los elementos en la papelera mediante el archivo .json.",
   "DESCRIPTION_CLEAR": "Limpia todos los elementos de la papelera (no se puede revertir).",
   "ITEMS_EMPTY_SONGS_TITLE": "¡No hay canciones desechadas!",
-  "ITEMS_EMPTY_ARTISTS_TITLE": "¡No hay artistas desechados!"
+  "ITEMS_EMPTY_ARTISTS_TITLE": "¡No hay artistas desechados!",
+  "DESCRIPTION_SETTINGS_ENABLED": "Interruptor maestro para habilitar o deshabilitar toda la funcionalidad de Trashbin+",
+  "DESCRIPTION_SETTINGS_SHOW_WIDGET": "Mostrar un icono de papelera en la barra de reproducción junto a la pista actual para acceso rápido",
+  "DESCRIPTION_SETTINGS_AUTOPLAY": "Iniciar automáticamente la reproducción de música cuando se abra Spotify o se cargue la extensión",
+  "DESCRIPTION_SETTINGS_QUEUE_TRASHBIN": "Agregar iconos de papelera junto a cada canción en su cola próxima para una gestión fácil",
+  "DESCRIPTION_SETTINGS_TRACKLIST_TRASHBIN": "Agregar iconos de papelera junto a las canciones en las vistas de álbumes y listas de reproducción para un filtrado rápido",
+  "DESCRIPTION_SETTINGS_RESHUFFLE_ON_SKIP": "Al saltar una canción eliminada, saltar automáticamente a la siguiente pista no eliminada en la cola",
+  "DESCRIPTION_SETTINGS_PLAYLIST_MONITOR": "Recuperarse automáticamente de fallas de reproducción de Spotify reanudando su última lista de reproducción"
 }

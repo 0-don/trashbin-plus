@@ -29,9 +29,10 @@
   "SETTINGS_QUEUE_TRASHBIN": "ਕਤਾਰ ਟਰੈਸ਼ਬਿਨ ਨੂੰ ਸਮਰੱਥ ਕਰੋ",
   "SETTINGS_TRACKLIST_TRASHBIN": "ਟਰੈਕਲਿਸਟ ਟਰੈਸ਼ਬਿਨ ਨੂੰ ਸਮਰੱਥ ਕਰੋ",
   "SETTINGS_RESHUFFLE_ON_SKIP": "ਅਗਲੀ ਗੈਰ-ਕੂੜਾ-ਕਰਕਟ ਅਤੇ ਫੇਰਬਦਲ ਕਤਾਰ 'ਤੇ ਜਾਓ",
+  "SETTINGS_PLAYLIST_MONITOR": "ਪਲੇਲਿਸਟ ਮਾਨੀਟਰ",
   "ITEMS_TITLE": "ਟਰੈਸ਼ਬਿਨ + ਆਈਟਮਾਂ",
-  "ITEMS_EMPTY_SONGS": "<strong>ਕੋਈ ਕੂੜਾ-ਕਰਕਟ ਗੀਤ ਨਹੀਂ!<\/strong><br\/>ਤੁਹਾਡੇ ਵੱਲੋਂ ਟਰੈਸ਼ਬਿਨ ਵਿੱਚ ਸ਼ਾਮਲ ਕੀਤੇ ਗੀਤ ਇੱਥੇ ਦਿਖਾਈ ਦੇਣਗੇ।",
-  "ITEMS_EMPTY_ARTISTS": "<strong>ਕੋਈ ਕੂੜਾ ਕਲਾਕਾਰ ਨਹੀਂ!<\/strong><br\/>ਤੁਹਾਡੇ ਵੱਲੋਂ ਟਰੈਸ਼ਬਿਨ ਵਿੱਚ ਸ਼ਾਮਲ ਕੀਤੇ ਗਏ ਕਲਾਕਾਰ ਇੱਥੇ ਦਿਖਾਈ ਦੇਣਗੇ।",
+  "ITEMS_EMPTY_SONGS": "<strong>ਕੋਈ ਕੂੜਾ-ਕਰਕਟ ਗੀਤ ਨਹੀਂ!</strong><br/>ਤੁਹਾਡੇ ਵੱਲੋਂ ਟਰੈਸ਼ਬਿਨ ਵਿੱਚ ਸ਼ਾਮਲ ਕੀਤੇ ਗੀਤ ਇੱਥੇ ਦਿਖਾਈ ਦੇਣਗੇ।",
+  "ITEMS_EMPTY_ARTISTS": "<strong>ਕੋਈ ਕੂੜਾ ਕਲਾਕਾਰ ਨਹੀਂ!</strong><br/>ਤੁਹਾਡੇ ਵੱਲੋਂ ਟਰੈਸ਼ਬਿਨ ਵਿੱਚ ਸ਼ਾਮਲ ਕੀਤੇ ਗਏ ਕਲਾਕਾਰ ਇੱਥੇ ਦਿਖਾਈ ਦੇਣਗੇ।",
   "ITEMS_TAB_SONGS": "ਗੀਤ",
   "ITEMS_TAB_ARTISTS": "ਕਲਾਕਾਰ",
   "ITEMS_LOADED_COUNT": "{{loaded}}{{total}} {{type}} ਲੋਡ ਕੀਤਾ ਗਿਆ",
@@ -40,5 +41,12 @@
   "DESCRIPTION_IMPORT": "ਫਾਇਲ ਰਾਹੀਂ ਟਰੈਸ਼ਬਿਨ ਵਿੱਚ ਸਾਰੀਆਂ ਆਈਟਮਾਂ .json ਓਵਰਰਾਈਟ ਕਰੋ।",
   "DESCRIPTION_CLEAR": "ਟਰੈਸ਼ਬਿਨ ਤੋਂ ਸਾਰੀਆਂ ਚੀਜ਼ਾਂ ਸਾਫ਼ ਕਰੋ (ਵਾਪਸ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਦਾ)।",
   "ITEMS_EMPTY_SONGS_TITLE": "ਕੋਈ ਕੂੜਾ-ਕਰਕਟ ਗੀਤ ਨਹੀਂ!",
-  "ITEMS_EMPTY_ARTISTS_TITLE": "ਕੋਈ ਕੂੜਾ ਕਲਾਕਾਰ ਨਹੀਂ!"
+  "ITEMS_EMPTY_ARTISTS_TITLE": "ਕੋਈ ਕੂੜਾ ਕਲਾਕਾਰ ਨਹੀਂ!",
+  "DESCRIPTION_SETTINGS_ENABLED": "Master toggle to enable or disable all Trashbin+ functionality",
+  "DESCRIPTION_SETTINGS_SHOW_WIDGET": "Display a trash icon in the playback bar next to the currently playing track for quick access",
+  "DESCRIPTION_SETTINGS_AUTOPLAY": "Automatically start playing music when Spotify opens or the extension loads",
+  "DESCRIPTION_SETTINGS_QUEUE_TRASHBIN": "Add trash icons next to each song in your upcoming queue for easy management",
+  "DESCRIPTION_SETTINGS_TRACKLIST_TRASHBIN": "Add trash icons next to songs in album and playlist views for quick filtering",
+  "DESCRIPTION_SETTINGS_RESHUFFLE_ON_SKIP": "When skipping a trashed song, automatically jump to the next non-trashed track in the queue",
+  "DESCRIPTION_SETTINGS_PLAYLIST_MONITOR": "Automatically recover from Spotify playback glitches by resuming your last playlist"
 }

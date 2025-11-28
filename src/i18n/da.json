@@ -29,9 +29,10 @@
   "SETTINGS_QUEUE_TRASHBIN": "Aktivér køens papirkurv",
   "SETTINGS_TRACKLIST_TRASHBIN": "Aktivér papirkurven for sporliste",
   "SETTINGS_RESHUFFLE_ON_SKIP": "Spring til næste ikke-papirkurv og omroker køen",
+  "SETTINGS_PLAYLIST_MONITOR": "Afspilningslistemonitor",
   "ITEMS_TITLE": "Papirkurv+ genstande",
-  "ITEMS_EMPTY_SONGS": "<strong> Ingen smidte sange! <\/strong> <br\/> Sange, du tilføjer til skraldespanden, vises her.",
-  "ITEMS_EMPTY_ARTISTS": "<strong> Ingen smidte kunstnere! <\/strong> <br\/> Kunstnere, du tilføjer til skraldespanden, vil blive vist her.",
+  "ITEMS_EMPTY_SONGS": "<strong> Ingen smidte sange! </strong> <br/> Sange, du tilføjer til skraldespanden, vises her.",
+  "ITEMS_EMPTY_ARTISTS": "<strong> Ingen smidte kunstnere! </strong> <br/> Kunstnere, du tilføjer til skraldespanden, vil blive vist her.",
   "ITEMS_TAB_SONGS": "Sange",
   "ITEMS_TAB_ARTISTS": "Kunstnere",
   "ITEMS_LOADED_COUNT": "{{loaded}} af {{total}} {{type}} indlæst",
@@ -40,5 +41,12 @@
   "DESCRIPTION_IMPORT": "Overskriv alle elementer i papirkurven via .json-filen.",
   "DESCRIPTION_CLEAR": "Ryd alle elementer fra papirkurven (kan ikke fortrydes).",
   "ITEMS_EMPTY_SONGS_TITLE": "Ingen ødelagte sange!",
-  "ITEMS_EMPTY_ARTISTS_TITLE": "Ingen udskældte kunstnere!"
+  "ITEMS_EMPTY_ARTISTS_TITLE": "Ingen udskældte kunstnere!",
+  "DESCRIPTION_SETTINGS_ENABLED": "Master toggle to enable or disable all Trashbin+ functionality",
+  "DESCRIPTION_SETTINGS_SHOW_WIDGET": "Display a trash icon in the playback bar next to the currently playing track for quick access",
+  "DESCRIPTION_SETTINGS_AUTOPLAY": "Automatically start playing music when Spotify opens or the extension loads",
+  "DESCRIPTION_SETTINGS_QUEUE_TRASHBIN": "Add trash icons next to each song in your upcoming queue for easy management",
+  "DESCRIPTION_SETTINGS_TRACKLIST_TRASHBIN": "Add trash icons next to songs in album and playlist views for quick filtering",
+  "DESCRIPTION_SETTINGS_RESHUFFLE_ON_SKIP": "When skipping a trashed song, automatically jump to the next non-trashed track in the queue",
+  "DESCRIPTION_SETTINGS_PLAYLIST_MONITOR": "Automatically recover from Spotify playback glitches by resuming your last playlist"
 }

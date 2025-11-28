@@ -29,9 +29,10 @@
   "SETTINGS_QUEUE_TRASHBIN": "启用队列垃圾箱",
   "SETTINGS_TRACKLIST_TRASHBIN": "启用曲目列表垃圾箱",
   "SETTINGS_RESHUFFLE_ON_SKIP": "跳至下一个未删除的并重新排列队列",
+  "SETTINGS_PLAYLIST_MONITOR": "播放列表监视器",
   "ITEMS_TITLE": "垃圾桶+物品",
-  "ITEMS_EMPTY_SONGS": "<strong>没有已删除的歌曲！ <\/strong> <br\/>您添加到垃圾箱的歌曲将显示在这里。",
-  "ITEMS_EMPTY_ARTISTS": "<strong>没有被丢弃的艺术家！ <\/strong> <br\/>您添加到垃圾箱的艺术家将显示在这里。",
+  "ITEMS_EMPTY_SONGS": "<strong>没有已删除的歌曲！ <\\/strong> <br\\/>您添加到垃圾箱的歌曲将显示在这里。",
+  "ITEMS_EMPTY_ARTISTS": "<strong>没有被丢弃的艺术家！ <\\/strong> <br\\/>您添加到垃圾箱的艺术家将显示在这里。",
   "ITEMS_TAB_SONGS": "歌曲",
   "ITEMS_TAB_ARTISTS": "艺术家",
   "ITEMS_LOADED_COUNT": "已{{loaded}}个{{total}} {{type}}个",
@@ -40,5 +41,12 @@
   "DESCRIPTION_IMPORT": "通过 .json 文件覆盖垃圾桶中的所有项目。",
   "DESCRIPTION_CLEAR": "清除垃圾箱中的所有物品（无法恢复）。",
   "ITEMS_EMPTY_SONGS_TITLE": "没有被丢弃的歌曲！",
-  "ITEMS_EMPTY_ARTISTS_TITLE": "禁止诋毁艺术家！"
+  "ITEMS_EMPTY_ARTISTS_TITLE": "禁止诋毁艺术家！",
+  "DESCRIPTION_SETTINGS_ENABLED": "启用或禁用所有Trashbin+功能的主开关",
+  "DESCRIPTION_SETTINGS_SHOW_WIDGET": "在播放栏中当前曲目旁边显示垃圾桶图标以便快速访问",
+  "DESCRIPTION_SETTINGS_AUTOPLAY": "当Spotify打开或扩展加载时自动开始播放音乐",
+  "DESCRIPTION_SETTINGS_QUEUE_TRASHBIN": "在即将播放的队列中每首歌曲旁边添加垃圾桶图标以便于管理",
+  "DESCRIPTION_SETTINGS_TRACKLIST_TRASHBIN": "在专辑和播放列表视图中的歌曲旁边添加垃圾桶图标以便快速过滤",
+  "DESCRIPTION_SETTINGS_RESHUFFLE_ON_SKIP": "跳过垃圾歌曲时，自动跳转到队列中下一首未删除的曲目",
+  "DESCRIPTION_SETTINGS_PLAYLIST_MONITOR": "通过恢复上次播放列表自动从Spotify播放故障中恢复"
 }

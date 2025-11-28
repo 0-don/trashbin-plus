@@ -29,9 +29,10 @@
   "SETTINGS_QUEUE_TRASHBIN": "Abilita cestino coda",
   "SETTINGS_TRACKLIST_TRASHBIN": "Abilita Cestino Tracklist",
   "SETTINGS_RESHUFFLE_ON_SKIP": "Passa alla coda successiva non eliminata e rimescolata",
+  "SETTINGS_PLAYLIST_MONITOR": "Monitor Playlist",
   "ITEMS_TITLE": "Cestino+ Oggetti",
-  "ITEMS_EMPTY_SONGS": "<strong> Nessuna canzone nel cestino! <\/strong> <br\/> Le canzoni che aggiungi al cestino appariranno qui.",
-  "ITEMS_EMPTY_ARTISTS": "<strong> Nessun artista eliminato! <\/strong> <br\/> Gli artisti che aggiungi al cestino appariranno qui.",
+  "ITEMS_EMPTY_SONGS": "<strong> Nessuna canzone nel cestino! <\\/strong> <br\\/> Le canzoni che aggiungi al cestino appariranno qui.",
+  "ITEMS_EMPTY_ARTISTS": "<strong> Nessun artista eliminato! <\\/strong> <br\\/> Gli artisti che aggiungi al cestino appariranno qui.",
   "ITEMS_TAB_SONGS": "Canzoni",
   "ITEMS_TAB_ARTISTS": "Artisti",
   "ITEMS_LOADED_COUNT": "{{loaded}} di {{total}} {{type}} caricato",
@@ -40,5 +41,12 @@
   "DESCRIPTION_IMPORT": "Sovrascrivi tutti gli elementi nel cestino tramite il file .json.",
   "DESCRIPTION_CLEAR": "Cancella tutti gli elementi dal cestino (non è possibile annullare l'operazione).",
   "ITEMS_EMPTY_SONGS_TITLE": "Niente canzoni spazzatura!",
-  "ITEMS_EMPTY_ARTISTS_TITLE": "Nessun artista buttato via!"
+  "ITEMS_EMPTY_ARTISTS_TITLE": "Nessun artista buttato via!",
+  "DESCRIPTION_SETTINGS_ENABLED": "Interruttore principale per abilitare o disabilitare tutte le funzionalità di Trashbin+",
+  "DESCRIPTION_SETTINGS_SHOW_WIDGET": "Mostra un'icona del cestino nella barra di riproduzione accanto al brano in riproduzione per un accesso rapido",
+  "DESCRIPTION_SETTINGS_AUTOPLAY": "Avvia automaticamente la riproduzione della musica all'apertura di Spotify o al caricamento dell'estensione",
+  "DESCRIPTION_SETTINGS_QUEUE_TRASHBIN": "Aggiungi icone del cestino accanto a ogni brano nella tua coda in arrivo per una facile gestione",
+  "DESCRIPTION_SETTINGS_TRACKLIST_TRASHBIN": "Aggiungi icone del cestino accanto ai brani nelle viste di album e playlist per un filtraggio rapido",
+  "DESCRIPTION_SETTINGS_RESHUFFLE_ON_SKIP": "Quando salti un brano cestinato, passa automaticamente al brano successivo non cestinato nella coda",
+  "DESCRIPTION_SETTINGS_PLAYLIST_MONITOR": "Recupera automaticamente dai problemi di riproduzione di Spotify riprendendo la tua ultima playlist"
 }

@@ -29,9 +29,10 @@
   "SETTINGS_QUEUE_TRASHBIN": "ಕ್ಯೂ ಟ್ರ್ಯಾಶ್‌ಬಿನ್ ಅನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ",
   "SETTINGS_TRACKLIST_TRASHBIN": "ಟ್ರ್ಯಾಕ್‌ಲಿಸ್ಟ್ ಕಸದ ಬುಟ್ಟಿಯನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ",
   "SETTINGS_RESHUFFLE_ON_SKIP": "ಮುಂದಿನ ಅನುಪಯುಕ್ತವಲ್ಲದ & ಮರುಹೊಂದಿಸುವ ಸರದಿಗೆ ಹೋಗಿ",
+  "SETTINGS_PLAYLIST_MONITOR": "ಪ್ಲೇಪಟ್ಟಿ ಮಾನಿಟರ್",
   "ITEMS_TITLE": "ಕಸದ ಬುಟ್ಟಿ+ ವಸ್ತುಗಳು",
-  "ITEMS_EMPTY_SONGS": "<strong> ಅನುಪಯುಕ್ತ ಹಾಡುಗಳಿಲ್ಲ! <\/strong> <br\/> ನೀವು ಕಸದ ಬುಟ್ಟಿಗೆ ಸೇರಿಸುವ ಹಾಡುಗಳು ಇಲ್ಲಿ ಕಾಣಿಸಿಕೊಳ್ಳುತ್ತವೆ.",
-  "ITEMS_EMPTY_ARTISTS": "<strong> ಅನುಪಯುಕ್ತ ಕಲಾವಿದರು ಇಲ್ಲ! <\/strong> <br\/> ನೀವು ಕಸದ ಬುಟ್ಟಿಗೆ ಸೇರಿಸುವ ಕಲಾವಿದರು ಇಲ್ಲಿ ಕಾಣಿಸಿಕೊಳ್ಳುತ್ತಾರೆ.",
+  "ITEMS_EMPTY_SONGS": "<strong> ಅನುಪಯುಕ್ತ ಹಾಡುಗಳಿಲ್ಲ! </strong> <br/> ನೀವು ಕಸದ ಬುಟ್ಟಿಗೆ ಸೇರಿಸುವ ಹಾಡುಗಳು ಇಲ್ಲಿ ಕಾಣಿಸಿಕೊಳ್ಳುತ್ತವೆ.",
+  "ITEMS_EMPTY_ARTISTS": "<strong> ಅನುಪಯುಕ್ತ ಕಲಾವಿದರು ಇಲ್ಲ! </strong> <br/> ನೀವು ಕಸದ ಬುಟ್ಟಿಗೆ ಸೇರಿಸುವ ಕಲಾವಿದರು ಇಲ್ಲಿ ಕಾಣಿಸಿಕೊಳ್ಳುತ್ತಾರೆ.",
   "ITEMS_TAB_SONGS": "ಹಾಡುಗಳು",
   "ITEMS_TAB_ARTISTS": "ಕಲಾವಿದರು",
   "ITEMS_LOADED_COUNT": "{{loaded}} {{total}} {{type}} ಲೋಡ್ ಮಾಡಿದ {{loaded}}",
@@ -40,5 +41,12 @@
   "DESCRIPTION_IMPORT": ".json ಫೈಲ್ ಮೂಲಕ ಕಸದ ಬುಟ್ಟಿಯಲ್ಲಿರುವ ಎಲ್ಲಾ ಐಟಂಗಳನ್ನು ಓವರ್‌ರೈಟ್ ಮಾಡಿ.",
   "DESCRIPTION_CLEAR": "ಕಸದ ಬುಟ್ಟಿಯಿಂದ ಎಲ್ಲಾ ವಸ್ತುಗಳನ್ನು ತೆರವುಗೊಳಿಸಿ (ಹಿಂತಿರುಗಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ).",
   "ITEMS_EMPTY_SONGS_TITLE": "ಕಸದ ಹಾಡುಗಳಿಲ್ಲ!",
-  "ITEMS_EMPTY_ARTISTS_TITLE": "ಕಸದ ಕಲಾವಿದರು ಬೇಡ!"
+  "ITEMS_EMPTY_ARTISTS_TITLE": "ಕಸದ ಕಲಾವಿದರು ಬೇಡ!",
+  "DESCRIPTION_SETTINGS_ENABLED": "Master toggle to enable or disable all Trashbin+ functionality",
+  "DESCRIPTION_SETTINGS_SHOW_WIDGET": "Display a trash icon in the playback bar next to the currently playing track for quick access",
+  "DESCRIPTION_SETTINGS_AUTOPLAY": "Automatically start playing music when Spotify opens or the extension loads",
+  "DESCRIPTION_SETTINGS_QUEUE_TRASHBIN": "Add trash icons next to each song in your upcoming queue for easy management",
+  "DESCRIPTION_SETTINGS_TRACKLIST_TRASHBIN": "Add trash icons next to songs in album and playlist views for quick filtering",
+  "DESCRIPTION_SETTINGS_RESHUFFLE_ON_SKIP": "When skipping a trashed song, automatically jump to the next non-trashed track in the queue",
+  "DESCRIPTION_SETTINGS_PLAYLIST_MONITOR": "Automatically recover from Spotify playback glitches by resuming your last playlist"
 }

@@ -29,9 +29,10 @@
   "SETTINGS_QUEUE_TRASHBIN": "Omogući koš za smeće u redu čekanja",
   "SETTINGS_TRACKLIST_TRASHBIN": "Omogući koš za smeće popisa pjesama",
   "SETTINGS_RESHUFFLE_ON_SKIP": "Preskoči na sljedeće nebaceno i premjesti red čekanja",
+  "SETTINGS_PLAYLIST_MONITOR": "Monitor popisa za reprodukciju",
   "ITEMS_TITLE": "Kanta za smeće+ Predmeti",
-  "ITEMS_EMPTY_SONGS": "<strong> Nema pjesama u smeću! <\/strong> <br\/> Pjesme koje dodate u koš za smeće pojavit će se ovdje.",
-  "ITEMS_EMPTY_ARTISTS": "<strong> Nema izvođača u košu za smeće! <\/strong> <br\/> Izvođači koje dodate u koš za smeće pojavit će se ovdje.",
+  "ITEMS_EMPTY_SONGS": "<strong> Nema pjesama u smeću! </strong> <br/> Pjesme koje dodate u koš za smeće pojavit će se ovdje.",
+  "ITEMS_EMPTY_ARTISTS": "<strong> Nema izvođača u košu za smeće! </strong> <br/> Izvođači koje dodate u koš za smeće pojavit će se ovdje.",
   "ITEMS_TAB_SONGS": "Pjesme",
   "ITEMS_TAB_ARTISTS": "Umjetnici",
   "ITEMS_LOADED_COUNT": "{{loaded}} od {{total}} {{type}} loaded",
@@ -40,5 +41,12 @@
   "DESCRIPTION_IMPORT": "Prepiši sve stavke u košu za smeće putem .json datoteke.",
   "DESCRIPTION_CLEAR": "Obriši sve stavke iz koša za smeće (ne može se poništiti).",
   "ITEMS_EMPTY_SONGS_TITLE": "Nema odbačenih pjesama!",
-  "ITEMS_EMPTY_ARTISTS_TITLE": "Nema otpisanih umjetnika!"
+  "ITEMS_EMPTY_ARTISTS_TITLE": "Nema otpisanih umjetnika!",
+  "DESCRIPTION_SETTINGS_ENABLED": "Master toggle to enable or disable all Trashbin+ functionality",
+  "DESCRIPTION_SETTINGS_SHOW_WIDGET": "Display a trash icon in the playback bar next to the currently playing track for quick access",
+  "DESCRIPTION_SETTINGS_AUTOPLAY": "Automatically start playing music when Spotify opens or the extension loads",
+  "DESCRIPTION_SETTINGS_QUEUE_TRASHBIN": "Add trash icons next to each song in your upcoming queue for easy management",
+  "DESCRIPTION_SETTINGS_TRACKLIST_TRASHBIN": "Add trash icons next to songs in album and playlist views for quick filtering",
+  "DESCRIPTION_SETTINGS_RESHUFFLE_ON_SKIP": "When skipping a trashed song, automatically jump to the next non-trashed track in the queue",
+  "DESCRIPTION_SETTINGS_PLAYLIST_MONITOR": "Automatically recover from Spotify playback glitches by resuming your last playlist"
 }

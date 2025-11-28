@@ -29,6 +29,7 @@
   "SETTINGS_QUEUE_TRASHBIN": "Wachtrij Prullenbak inschakelen",
   "SETTINGS_TRACKLIST_TRASHBIN": "Tracklist-prullenbak inschakelen",
   "SETTINGS_RESHUFFLE_ON_SKIP": "Ga naar de volgende niet-verwijderde en herschikte wachtrij",
+  "SETTINGS_PLAYLIST_MONITOR": "Afspeellijstmonitor",
   "ITEMS_TITLE": "Prullenbak+ Items",
   "ITEMS_EMPTY_SONGS": "<strong> Geen nummers in de prullenbak! <\/strong> <br\/> Nummers die u aan de prullenbak toevoegt, verschijnen hier.",
   "ITEMS_EMPTY_ARTISTS": "<strong> Geen verwijderde artiesten! <\/strong> <br\/> Artiesten die u aan de prullenbak toevoegt, verschijnen hier.",
@@ -41,4 +42,12 @@
   "DESCRIPTION_CLEAR": "Alle items uit de prullenbak verwijderen (kan niet ongedaan worden gemaakt).",
   "ITEMS_EMPTY_SONGS_TITLE": "Geen verpeste nummers!",
   "ITEMS_EMPTY_ARTISTS_TITLE": "Geen afgekraakte artiesten!"
+,
+  "DESCRIPTION_SETTINGS_ENABLED": "Hoofdschakelaar om alle Trashbin+-functionaliteit in of uit te schakelen",
+  "DESCRIPTION_SETTINGS_SHOW_WIDGET": "Geef een prullenbakpictogram weer in de afspeelbalk naast het huidige nummer voor snelle toegang",
+  "DESCRIPTION_SETTINGS_AUTOPLAY": "Muziek automatisch afspelen wanneer Spotify wordt geopend of de extensie wordt geladen",
+  "DESCRIPTION_SETTINGS_QUEUE_TRASHBIN": "Voeg prullenbakpictogrammen toe naast elk nummer in uw aankomende wachtrij voor eenvoudig beheer",
+  "DESCRIPTION_SETTINGS_TRACKLIST_TRASHBIN": "Voeg prullenbakpictogrammen toe naast nummers in album- en afspeellijstweergaven voor snelle filtering",
+  "DESCRIPTION_SETTINGS_RESHUFFLE_ON_SKIP": "Bij het overslaan van een verwijderd nummer automatisch naar het volgende niet-verwijderde nummer in de wachtrij springen",
+  "DESCRIPTION_SETTINGS_PLAYLIST_MONITOR": "Automatisch herstellen van Spotify-afspeelproblemen door uw laatste afspeellijst te hervatten"
 }

@@ -29,6 +29,7 @@
   "SETTINGS_QUEUE_TRASHBIN": "Bật Thùng rác hàng đợi",
   "SETTINGS_TRACKLIST_TRASHBIN": "Bật Thùng rác danh sách theo dõi",
   "SETTINGS_RESHUFFLE_ON_SKIP": "Bỏ qua đến Hàng đợi không bị xóa và sắp xếp lại tiếp theo",
+  "SETTINGS_PLAYLIST_MONITOR": "Giám Sát Danh Sách Phát",
   "ITEMS_TITLE": "Thùng rác+ Mục",
   "ITEMS_EMPTY_SONGS": "<strong> Không có bài hát nào bị xóa! <\/strong> <br\/> Các bài hát bạn thêm vào thùng rác sẽ xuất hiện ở đây.",
   "ITEMS_EMPTY_ARTISTS": "<strong> Không có nghệ sĩ nào bị xóa! <\/strong> <br\/> Các nghệ sĩ bạn thêm vào thùng rác sẽ xuất hiện ở đây.",
@@ -41,4 +42,12 @@
   "DESCRIPTION_CLEAR": "Xóa tất cả các mục khỏi thùng rác (không thể hoàn tác).",
   "ITEMS_EMPTY_SONGS_TITLE": "Không có bài hát nào bị vứt bỏ!",
   "ITEMS_EMPTY_ARTISTS_TITLE": "Không có nghệ sĩ nào bị hủy hoại!"
+,
+  "DESCRIPTION_SETTINGS_ENABLED": "Công tắc chính để bật hoặc tắt tất cả chức năng của Trashbin+",
+  "DESCRIPTION_SETTINGS_SHOW_WIDGET": "Hiển thị biểu tượng thùng rác trong thanh phát lại bên cạnh bản nhạc đang phát để truy cập nhanh",
+  "DESCRIPTION_SETTINGS_AUTOPLAY": "Tự động bắt đầu phát nhạc khi Spotify mở hoặc tiện ích mở rộng tải",
+  "DESCRIPTION_SETTINGS_QUEUE_TRASHBIN": "Thêm biểu tượng thùng rác bên cạnh mỗi bài hát trong hàng đợi sắp tới của bạn để quản lý dễ dàng",
+  "DESCRIPTION_SETTINGS_TRACKLIST_TRASHBIN": "Thêm biểu tượng thùng rác bên cạnh các bài hát trong chế độ xem album và danh sách phát để lọc nhanh",
+  "DESCRIPTION_SETTINGS_RESHUFFLE_ON_SKIP": "Khi bỏ qua một bài hát đã bị xóa, tự động chuyển đến bản nhạc không bị xóa tiếp theo trong hàng đợi",
+  "DESCRIPTION_SETTINGS_PLAYLIST_MONITOR": "Tự động phục hồi từ các sự cố phát của Spotify bằng cách tiếp tục danh sách phát cuối cùng của bạn"
 }

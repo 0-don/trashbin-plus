@@ -29,9 +29,10 @@
   "SETTINGS_QUEUE_TRASHBIN": "تمكين سلة المهملات",
   "SETTINGS_TRACKLIST_TRASHBIN": "تمكين سلة المهملات لقائمة التشغيل",
   "SETTINGS_RESHUFFLE_ON_SKIP": "انتقل إلى قائمة الانتظار التالية غير المحذوفة وإعادة الترتيب",
+  "SETTINGS_PLAYLIST_MONITOR": "مراقب قائمة التشغيل",
   "ITEMS_TITLE": "سلة المهملات + العناصر",
-  "ITEMS_EMPTY_SONGS": "<strong> لا توجد أغانٍ محذوفة! <\/strong> <br\/> ستظهر الأغاني التي تضيفها إلى سلة المهملات هنا.",
-  "ITEMS_EMPTY_ARTISTS": "<strong> لا يوجد فنانين تم حذفهم! <\/strong> <br\/> الفنانون الذين تضيفهم إلى سلة المهملات سيظهرون هنا.",
+  "ITEMS_EMPTY_SONGS": "<strong> لا توجد أغانٍ محذوفة! <\\/strong> <br\\/> ستظهر الأغاني التي تضيفها إلى سلة المهملات هنا.",
+  "ITEMS_EMPTY_ARTISTS": "<strong> لا يوجد فنانين تم حذفهم! <\\/strong> <br\\/> الفنانون الذين تضيفهم إلى سلة المهملات سيظهرون هنا.",
   "ITEMS_TAB_SONGS": "الأغاني",
   "ITEMS_TAB_ARTISTS": "الفنانون",
   "ITEMS_LOADED_COUNT": "تم {{loaded}} من {{total}} {{type}}",
@@ -40,5 +41,12 @@
   "DESCRIPTION_IMPORT": "قم باستبدال جميع العناصر الموجودة في سلة المهملات عبر ملف .json.",
   "DESCRIPTION_CLEAR": "مسح كافة العناصر من سلة المهملات (لا يمكن التراجع عنها).",
   "ITEMS_EMPTY_SONGS_TITLE": "لا للأغاني المحذوفة!",
-  "ITEMS_EMPTY_ARTISTS_TITLE": "لا يوجد فنانين مدمرين!"
+  "ITEMS_EMPTY_ARTISTS_TITLE": "لا يوجد فنانين مدمرين!",
+  "DESCRIPTION_SETTINGS_ENABLED": "مفتاح رئيسي لتمكين أو تعطيل جميع وظائف Trashbin+",
+  "DESCRIPTION_SETTINGS_SHOW_WIDGET": "عرض أيقونة سلة المهملات في شريط التشغيل بجوار المسار الحالي للوصول السريع",
+  "DESCRIPTION_SETTINGS_AUTOPLAY": "ابدأ تشغيل الموسيقى تلقائيًا عند فتح Spotify أو تحميل الامتداد",
+  "DESCRIPTION_SETTINGS_QUEUE_TRASHBIN": "أضف رموز سلة المهملات بجوار كل أغنية في قائمة الانتظار القادمة لسهولة الإدارة",
+  "DESCRIPTION_SETTINGS_TRACKLIST_TRASHBIN": "أضف رموز سلة المهملات بجوار الأغاني في طرق عرض الألبومات وقوائم التشغيل للتصفية السريعة",
+  "DESCRIPTION_SETTINGS_RESHUFFLE_ON_SKIP": "عند تخطي أغنية محذوفة، انتقل تلقائيًا إلى المسار التالي غير المحذوف في قائمة الانتظار",
+  "DESCRIPTION_SETTINGS_PLAYLIST_MONITOR": "التعافي تلقائيًا من مشكلات تشغيل Spotify من خلال استئناف قائمة التشغيل الأخيرة"
 }

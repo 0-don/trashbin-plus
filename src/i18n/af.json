@@ -29,9 +29,10 @@
   "SETTINGS_QUEUE_TRASHBIN": "Aktiveer Waglys Asblik",
   "SETTINGS_TRACKLIST_TRASHBIN": "Aktiveer die snitlys-asblik",
   "SETTINGS_RESHUFFLE_ON_SKIP": "Slaan oor na volgende nie-asblik en herskommeling van waglys",
+  "SETTINGS_PLAYLIST_MONITOR": "Speellysmoni tor",
   "ITEMS_TITLE": "Asblik+ Items",
-  "ITEMS_EMPTY_SONGS": "<strong> Geen liedjies wat in die asblik gelaai is nie! <\/strong> <br\/> Liedjies wat jy by die asblik voeg, sal hier verskyn.",
-  "ITEMS_EMPTY_ARTISTS": "<strong> Geen kunstenaars wat by die asblik gevoeg word nie! <\/strong> <br\/> Kunstenaars wat jy by die asblik voeg, sal hier verskyn.",
+  "ITEMS_EMPTY_SONGS": "<strong> Geen liedjies wat in die asblik gelaai is nie! </strong> <br/> Liedjies wat jy by die asblik voeg, sal hier verskyn.",
+  "ITEMS_EMPTY_ARTISTS": "<strong> Geen kunstenaars wat by die asblik gevoeg word nie! </strong> <br/> Kunstenaars wat jy by die asblik voeg, sal hier verskyn.",
   "ITEMS_TAB_SONGS": "Liedjies",
   "ITEMS_TAB_ARTISTS": "Kunstenaars",
   "ITEMS_LOADED_COUNT": "{{loaded}} van {{total}} {{type}} gelaai",
@@ -40,5 +41,12 @@
   "DESCRIPTION_IMPORT": "Oorskryf alle items in die asblik via die .json-lêer.",
   "DESCRIPTION_CLEAR": "Vee alle items uit die asblik uit (kan nie teruggedraai word nie).",
   "ITEMS_EMPTY_SONGS_TITLE": "Geen vermorste liedjies nie!",
-  "ITEMS_EMPTY_ARTISTS_TITLE": "Geen verwaarloosde kunstenaars nie!"
+  "ITEMS_EMPTY_ARTISTS_TITLE": "Geen verwaarloosde kunstenaars nie!",
+  "DESCRIPTION_SETTINGS_ENABLED": "Master toggle to enable or disable all Trashbin+ functionality",
+  "DESCRIPTION_SETTINGS_SHOW_WIDGET": "Display a trash icon in the playback bar next to the currently playing track for quick access",
+  "DESCRIPTION_SETTINGS_AUTOPLAY": "Automatically start playing music when Spotify opens or the extension loads",
+  "DESCRIPTION_SETTINGS_QUEUE_TRASHBIN": "Add trash icons next to each song in your upcoming queue for easy management",
+  "DESCRIPTION_SETTINGS_TRACKLIST_TRASHBIN": "Add trash icons next to songs in album and playlist views for quick filtering",
+  "DESCRIPTION_SETTINGS_RESHUFFLE_ON_SKIP": "When skipping a trashed song, automatically jump to the next non-trashed track in the queue",
+  "DESCRIPTION_SETTINGS_PLAYLIST_MONITOR": "Automatically recover from Spotify playback glitches by resuming your last playlist"
 }

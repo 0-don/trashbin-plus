@@ -29,9 +29,10 @@
   "SETTINGS_QUEUE_TRASHBIN": "Habilita la paperera de la cua",
   "SETTINGS_TRACKLIST_TRASHBIN": "Activa la paperera de la llista de cançons",
   "SETTINGS_RESHUFFLE_ON_SKIP": "Salta a la següent cua no enviada a la paperera i reordena",
+  "SETTINGS_PLAYLIST_MONITOR": "Monitor de llista de reproducció",
   "ITEMS_TITLE": "Paperera+ Elements",
-  "ITEMS_EMPTY_SONGS": "<strong> No hi ha cançons a la paperera! <\/strong> <br\/> Les cançons que afegiu a la paperera apareixeran aquí.",
-  "ITEMS_EMPTY_ARTISTS": "<strong> Cap artista eliminat a la paperera! <\/strong> <br\/> Els artistes que afegiu a la paperera apareixeran aquí.",
+  "ITEMS_EMPTY_SONGS": "<strong> No hi ha cançons a la paperera! </strong> <br/> Les cançons que afegiu a la paperera apareixeran aquí.",
+  "ITEMS_EMPTY_ARTISTS": "<strong> Cap artista eliminat a la paperera! </strong> <br/> Els artistes que afegiu a la paperera apareixeran aquí.",
   "ITEMS_TAB_SONGS": "Cançons",
   "ITEMS_TAB_ARTISTS": "Artistes",
   "ITEMS_LOADED_COUNT": "{{loaded}} de {{total}} {{type}} carregats",
@@ -40,5 +41,12 @@
   "DESCRIPTION_IMPORT": "Sobreescriu tots els elements de la paperera mitjançant el fitxer .json.",
   "DESCRIPTION_CLEAR": "Esborra tots els elements de la paperera (no es pot desfer).",
   "ITEMS_EMPTY_SONGS_TITLE": "Cap cançó tallada a la paperera!",
-  "ITEMS_EMPTY_ARTISTS_TITLE": "Cap artista destrossat!"
+  "ITEMS_EMPTY_ARTISTS_TITLE": "Cap artista destrossat!",
+  "DESCRIPTION_SETTINGS_ENABLED": "Master toggle to enable or disable all Trashbin+ functionality",
+  "DESCRIPTION_SETTINGS_SHOW_WIDGET": "Display a trash icon in the playback bar next to the currently playing track for quick access",
+  "DESCRIPTION_SETTINGS_AUTOPLAY": "Automatically start playing music when Spotify opens or the extension loads",
+  "DESCRIPTION_SETTINGS_QUEUE_TRASHBIN": "Add trash icons next to each song in your upcoming queue for easy management",
+  "DESCRIPTION_SETTINGS_TRACKLIST_TRASHBIN": "Add trash icons next to songs in album and playlist views for quick filtering",
+  "DESCRIPTION_SETTINGS_RESHUFFLE_ON_SKIP": "When skipping a trashed song, automatically jump to the next non-trashed track in the queue",
+  "DESCRIPTION_SETTINGS_PLAYLIST_MONITOR": "Automatically recover from Spotify playback glitches by resuming your last playlist"
 }

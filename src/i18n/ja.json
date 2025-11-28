@@ -29,9 +29,10 @@
   "SETTINGS_QUEUE_TRASHBIN": "キューゴミ箱を有効にする",
   "SETTINGS_TRACKLIST_TRASHBIN": "トラックリストゴミ箱を有効にする",
   "SETTINGS_RESHUFFLE_ON_SKIP": "次のゴミ箱に入らないキューにスキップしてシャッフルする",
+  "SETTINGS_PLAYLIST_MONITOR": "プレイリストモニター",
   "ITEMS_TITLE": "ゴミ箱+アイテム",
-  "ITEMS_EMPTY_SONGS": "<strong>ゴミ箱に入れた曲はありません! <\/strong> <br\/>ゴミ箱に追加した曲がここに表示されます。",
-  "ITEMS_EMPTY_ARTISTS": "<strong>ゴミ箱に入れたアーティストはありません! <\/strong> <br\/>ゴミ箱に追加したアーティストがここに表示されます。",
+  "ITEMS_EMPTY_SONGS": "<strong>ゴミ箱に入れた曲はありません! <\\/strong> <br\\/>ゴミ箱に追加した曲がここに表示されます。",
+  "ITEMS_EMPTY_ARTISTS": "<strong>ゴミ箱に入れたアーティストはありません! <\\/strong> <br\\/>ゴミ箱に追加したアーティストがここに表示されます。",
   "ITEMS_TAB_SONGS": "歌",
   "ITEMS_TAB_ARTISTS": "アーティスト",
   "ITEMS_LOADED_COUNT": "{{loaded}}が読み込まれました{{total}} {{type}}個)",
@@ -40,5 +41,12 @@
   "DESCRIPTION_IMPORT": ".json ファイルを使用してゴミ箱内のすべてのアイテムを上書きします。",
   "DESCRIPTION_CLEAR": "ゴミ箱からすべてのアイテムをクリアします（元に戻すことはできません）。",
   "ITEMS_EMPTY_SONGS_TITLE": "捨て曲はありません!",
-  "ITEMS_EMPTY_ARTISTS_TITLE": "批判されるアーティストはいない！"
+  "ITEMS_EMPTY_ARTISTS_TITLE": "批判されるアーティストはいない！",
+  "DESCRIPTION_SETTINGS_ENABLED": "すべてのTrashbin+機能を有効または無効にするマスタースイッチ",
+  "DESCRIPTION_SETTINGS_SHOW_WIDGET": "再生バーに現在再生中のトラックの横にゴミ箱アイコンを表示してすばやくアクセス",
+  "DESCRIPTION_SETTINGS_AUTOPLAY": "Spotifyを開いたとき、または拡張機能が読み込まれたときに自動的に音楽の再生を開始",
+  "DESCRIPTION_SETTINGS_QUEUE_TRASHBIN": "今後のキューの各曲の横にゴミ箱アイコンを追加して簡単に管理",
+  "DESCRIPTION_SETTINGS_TRACKLIST_TRASHBIN": "アルバムとプレイリストビューの曲の横にゴミ箱アイコンを追加してすばやくフィルタリング",
+  "DESCRIPTION_SETTINGS_RESHUFFLE_ON_SKIP": "ゴミ箱に入れた曲をスキップするときに、キュー内の次のゴミ箱に入っていないトラックに自動的にジャンプ",
+  "DESCRIPTION_SETTINGS_PLAYLIST_MONITOR": "最後のプレイリストを再開することにより、Spotifyの再生の問題から自動的に回復"
 }

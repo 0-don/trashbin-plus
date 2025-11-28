@@ -29,9 +29,10 @@
   "SETTINGS_QUEUE_TRASHBIN": "Zibil qutusunun növbəsini aktivləşdirin",
   "SETTINGS_TRACKLIST_TRASHBIN": "Tracklist Zibil qutusunu aktivləşdirin",
   "SETTINGS_RESHUFFLE_ON_SKIP": "Növbəti Zibil qutusuna atılmayan və dəyişdirmə növbəsinə keçin",
+  "SETTINGS_PLAYLIST_MONITOR": "Pleylist Monitoru",
   "ITEMS_TITLE": "Zibil qutusu+ Elementlər",
-  "ITEMS_EMPTY_SONGS": "<strong> Zibil qutusuna atılan mahnı yoxdur! <\/strong> <br\/> Zibil qutusuna əlavə etdiyiniz mahnılar burada görünəcək.",
-  "ITEMS_EMPTY_ARTISTS": "<strong> Zibil qutusuna atılan sənətçilər yoxdur! <\/strong> <br\/> Zibil qutusuna əlavə etdiyiniz sənətçilər burada görünəcək.",
+  "ITEMS_EMPTY_SONGS": "<strong> Zibil qutusuna atılan mahnı yoxdur! </strong> <br/> Zibil qutusuna əlavə etdiyiniz mahnılar burada görünəcək.",
+  "ITEMS_EMPTY_ARTISTS": "<strong> Zibil qutusuna atılan sənətçilər yoxdur! </strong> <br/> Zibil qutusuna əlavə etdiyiniz sənətçilər burada görünəcək.",
   "ITEMS_TAB_SONGS": "Mahnılar",
   "ITEMS_TAB_ARTISTS": "Rəssamlar",
   "ITEMS_LOADED_COUNT": "{{total}} {{type}} {{loaded}} } yükləndi",
@@ -40,5 +41,12 @@
   "DESCRIPTION_IMPORT": ".json faylı vasitəsilə zibil qutusundakı bütün elementlərin üzərinə yazın.",
   "DESCRIPTION_CLEAR": "Zibil qutusundan bütün elementləri silin (geri qaytarmaq mümkün deyil).",
   "ITEMS_EMPTY_SONGS_TITLE": "Zibil mahnıları yoxdur!",
-  "ITEMS_EMPTY_ARTISTS_TITLE": "Zibillənmiş sənətkarlar yoxdur!"
+  "ITEMS_EMPTY_ARTISTS_TITLE": "Zibillənmiş sənətkarlar yoxdur!",
+  "DESCRIPTION_SETTINGS_ENABLED": "Master toggle to enable or disable all Trashbin+ functionality",
+  "DESCRIPTION_SETTINGS_SHOW_WIDGET": "Display a trash icon in the playback bar next to the currently playing track for quick access",
+  "DESCRIPTION_SETTINGS_AUTOPLAY": "Automatically start playing music when Spotify opens or the extension loads",
+  "DESCRIPTION_SETTINGS_QUEUE_TRASHBIN": "Add trash icons next to each song in your upcoming queue for easy management",
+  "DESCRIPTION_SETTINGS_TRACKLIST_TRASHBIN": "Add trash icons next to songs in album and playlist views for quick filtering",
+  "DESCRIPTION_SETTINGS_RESHUFFLE_ON_SKIP": "When skipping a trashed song, automatically jump to the next non-trashed track in the queue",
+  "DESCRIPTION_SETTINGS_PLAYLIST_MONITOR": "Automatically recover from Spotify playback glitches by resuming your last playlist"
 }

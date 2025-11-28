@@ -29,9 +29,10 @@
   "SETTINGS_QUEUE_TRASHBIN": "Aktiver søppelbøtte i kø",
   "SETTINGS_TRACKLIST_TRASHBIN": "Aktiver sporliste-søppelbøtten",
   "SETTINGS_RESHUFFLE_ON_SKIP": "Hopp til neste ikke-papirkurv og omstokk køen",
+  "SETTINGS_PLAYLIST_MONITOR": "Spilleliste Monitor",
   "ITEMS_TITLE": "Søppelbøtte+ elementer",
-  "ITEMS_EMPTY_SONGS": "<strong> Ingen kastede sanger! <\/strong> <br\/> Sanger du legger til i søpla vil vises her.",
-  "ITEMS_EMPTY_ARTISTS": "<strong> Ingen søppelkartister! <\/strong> <br\/> Artister du legger til i søppelkartet vil vises her.",
+  "ITEMS_EMPTY_SONGS": "<strong> Ingen kastede sanger! </strong> <br/> Sanger du legger til i søpla vil vises her.",
+  "ITEMS_EMPTY_ARTISTS": "<strong> Ingen søppelkartister! </strong> <br/> Artister du legger til i søppelkartet vil vises her.",
   "ITEMS_TAB_SONGS": "Sanger",
   "ITEMS_TAB_ARTISTS": "Kunstnere",
   "ITEMS_LOADED_COUNT": "{{loaded}} av {{total}} {{type}} lastet",
@@ -40,5 +41,12 @@
   "DESCRIPTION_IMPORT": "Overskriv alle elementene i søppelbøtten via .json-filen.",
   "DESCRIPTION_CLEAR": "Fjern alle elementer fra søppelbøtten (kan ikke angres).",
   "ITEMS_EMPTY_SONGS_TITLE": "Ingen søppelsanger!",
-  "ITEMS_EMPTY_ARTISTS_TITLE": "Ingen forkastede artister!"
+  "ITEMS_EMPTY_ARTISTS_TITLE": "Ingen forkastede artister!",
+  "DESCRIPTION_SETTINGS_ENABLED": "Master toggle to enable or disable all Trashbin+ functionality",
+  "DESCRIPTION_SETTINGS_SHOW_WIDGET": "Display a trash icon in the playback bar next to the currently playing track for quick access",
+  "DESCRIPTION_SETTINGS_AUTOPLAY": "Automatically start playing music when Spotify opens or the extension loads",
+  "DESCRIPTION_SETTINGS_QUEUE_TRASHBIN": "Add trash icons next to each song in your upcoming queue for easy management",
+  "DESCRIPTION_SETTINGS_TRACKLIST_TRASHBIN": "Add trash icons next to songs in album and playlist views for quick filtering",
+  "DESCRIPTION_SETTINGS_RESHUFFLE_ON_SKIP": "When skipping a trashed song, automatically jump to the next non-trashed track in the queue",
+  "DESCRIPTION_SETTINGS_PLAYLIST_MONITOR": "Automatically recover from Spotify playback glitches by resuming your last playlist"
 }

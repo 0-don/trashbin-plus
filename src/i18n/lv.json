@@ -29,9 +29,10 @@
   "SETTINGS_QUEUE_TRASHBIN": "Iespējot rindas atkritumu tvertni",
   "SETTINGS_TRACKLIST_TRASHBIN": "Ieslēgt dziesmu saraksta miskasti",
   "SETTINGS_RESHUFFLE_ON_SKIP": "Pāriet uz nākamo neatkritnē esošo un pārkārtot rindu",
+  "SETTINGS_PLAYLIST_MONITOR": "Atskaņošanas saraksta monitors",
   "ITEMS_TITLE": "Atkritumu tvertne+ preces",
-  "ITEMS_EMPTY_SONGS": "<strong> Nav dziesmu, kas ievietotas atkritnē! <\/strong> <br\/> Dziesmas, ko pievienosiet atkritnei, parādīsies šeit.",
-  "ITEMS_EMPTY_ARTISTS": "<strong> Nav miskastē ievietotu mākslinieku! <\/strong> <br\/> Šeit parādīsies mākslinieki, kurus pievienosiet miskastei.",
+  "ITEMS_EMPTY_SONGS": "<strong> Nav dziesmu, kas ievietotas atkritnē! </strong> <br/> Dziesmas, ko pievienosiet atkritnei, parādīsies šeit.",
+  "ITEMS_EMPTY_ARTISTS": "<strong> Nav miskastē ievietotu mākslinieku! </strong> <br/> Šeit parādīsies mākslinieki, kurus pievienosiet miskastei.",
   "ITEMS_TAB_SONGS": "Dziesmas",
   "ITEMS_TAB_ARTISTS": "Mākslinieki",
   "ITEMS_LOADED_COUNT": "{{loaded}} no {{total}} {{type}} ielādēta",
@@ -40,5 +41,12 @@
   "DESCRIPTION_IMPORT": "Pārrakstīt visus atkritnē esošos vienumus, izmantojot .json failu.",
   "DESCRIPTION_CLEAR": "Notīrīt visus vienumus no miskastes (nevar atsaukt).",
   "ITEMS_EMPTY_SONGS_TITLE": "Nav izmestu dziesmu!",
-  "ITEMS_EMPTY_ARTISTS_TITLE": "Nav noniecinātu mākslinieku!"
+  "ITEMS_EMPTY_ARTISTS_TITLE": "Nav noniecinātu mākslinieku!",
+  "DESCRIPTION_SETTINGS_ENABLED": "Master toggle to enable or disable all Trashbin+ functionality",
+  "DESCRIPTION_SETTINGS_SHOW_WIDGET": "Display a trash icon in the playback bar next to the currently playing track for quick access",
+  "DESCRIPTION_SETTINGS_AUTOPLAY": "Automatically start playing music when Spotify opens or the extension loads",
+  "DESCRIPTION_SETTINGS_QUEUE_TRASHBIN": "Add trash icons next to each song in your upcoming queue for easy management",
+  "DESCRIPTION_SETTINGS_TRACKLIST_TRASHBIN": "Add trash icons next to songs in album and playlist views for quick filtering",
+  "DESCRIPTION_SETTINGS_RESHUFFLE_ON_SKIP": "When skipping a trashed song, automatically jump to the next non-trashed track in the queue",
+  "DESCRIPTION_SETTINGS_PLAYLIST_MONITOR": "Automatically recover from Spotify playback glitches by resuming your last playlist"
 }

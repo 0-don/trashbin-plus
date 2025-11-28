@@ -29,6 +29,7 @@
   "SETTINGS_QUEUE_TRASHBIN": "कतार ट्रैशबिन सक्षम करें",
   "SETTINGS_TRACKLIST_TRASHBIN": "ट्रैकलिस्ट ट्रैशबिन सक्षम करें",
   "SETTINGS_RESHUFFLE_ON_SKIP": "अगले नॉन-ट्रैश्ड और रीशफल कतार पर जाएं",
+  "SETTINGS_PLAYLIST_MONITOR": "प्लेलिस्ट मॉनिटर",
   "ITEMS_TITLE": "ट्रैशबिन+ आइटम",
   "ITEMS_EMPTY_SONGS": "<strong> कोई भी गीत ट्रैश में नहीं डाला जाएगा! <\/strong> <br\/> आपके द्वारा ट्रैशबिन में डाले गए गीत यहां दिखाई देंगे.",
   "ITEMS_EMPTY_ARTISTS": "<strong> कोई ट्रैश किए गए कलाकार नहीं! <\/strong> <br\/> आपके द्वारा ट्रैशबिन में जोड़े गए कलाकार यहां दिखाई देंगे.",
@@ -41,4 +42,12 @@
   "DESCRIPTION_CLEAR": "ट्रैशबिन से सभी आइटम साफ़ करें (वापस नहीं किया जा सकता).",
   "ITEMS_EMPTY_SONGS_TITLE": "कोई भी बेकार गाना नहीं!",
   "ITEMS_EMPTY_ARTISTS_TITLE": "कोई भी कलाकार बर्बाद नहीं होगा!"
+,
+  "DESCRIPTION_SETTINGS_ENABLED": "सभी Trashbin+ कार्यक्षमता को सक्षम या अक्षम करने के लिए मास्टर टॉगल",
+  "DESCRIPTION_SETTINGS_SHOW_WIDGET": "त्वरित पहुंच के लिए प्लेबैक बार में वर्तमान ट्रैक के बगल में एक ट्रैशबिन आइकन प्रदर्शित करें",
+  "DESCRIPTION_SETTINGS_AUTOPLAY": "Spotify खुलने या एक्सटेंशन लोड होने पर स्वचालित रूप से संगीत चलाना शुरू करें",
+  "DESCRIPTION_SETTINGS_QUEUE_TRASHBIN": "आसान प्रबंधन के लिए अपनी आगामी कतार में प्रत्येक गीत के बगल में ट्रैश आइकन जोड़ें",
+  "DESCRIPTION_SETTINGS_TRACKLIST_TRASHBIN": "त्वरित फ़िल्टरिंग के लिए एल्बम और प्लेलिस्ट दृश्यों में गानों के बगल में ट्रैश आइकन जोड़ें",
+  "DESCRIPTION_SETTINGS_RESHUFFLE_ON_SKIP": "ट्रैश किए गए गीत को छोड़ते समय, कतार में अगले गैर-ट्रैश किए गए ट्रैक पर स्वचालित रूप से जाएं",
+  "DESCRIPTION_SETTINGS_PLAYLIST_MONITOR": "अपनी अंतिम प्लेलिस्ट को फिर से शुरू करके Spotify प्लेबैक खराबी से स्वचालित रूप से पुनर्प्राप्त करें"
 }

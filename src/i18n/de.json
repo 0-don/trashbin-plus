@@ -29,9 +29,10 @@
   "SETTINGS_QUEUE_TRASHBIN": "Warteschlangen-Papierkorb aktivieren",
   "SETTINGS_TRACKLIST_TRASHBIN": "Tracklist-Papierkorb aktivieren",
   "SETTINGS_RESHUFFLE_ON_SKIP": "Zum nächsten nicht gelöschten Inhalt springen und die Warteschlange neu ordnen",
+  "SETTINGS_PLAYLIST_MONITOR": "Playlist-Monitor",
   "ITEMS_TITLE": "Papierkorb+ Gegenstände",
-  "ITEMS_EMPTY_SONGS": "<strong> Keine Songs im Papierkorb! <\/strong> <br\/> Songs, die Sie in den Papierkorb legen, werden hier angezeigt.",
-  "ITEMS_EMPTY_ARTISTS": "<strong> Keine gelöschten Künstler! <\/strong> <br\/> Künstler, die Sie zum Papierkorb hinzufügen, werden hier angezeigt.",
+  "ITEMS_EMPTY_SONGS": "<strong> Keine Songs im Papierkorb! <\\/strong> <br\\/> Songs, die Sie in den Papierkorb legen, werden hier angezeigt.",
+  "ITEMS_EMPTY_ARTISTS": "<strong> Keine gelöschten Künstler! <\\/strong> <br\\/> Künstler, die Sie zum Papierkorb hinzufügen, werden hier angezeigt.",
   "ITEMS_TAB_SONGS": "Lieder",
   "ITEMS_TAB_ARTISTS": "Künstler",
   "ITEMS_LOADED_COUNT": "{{loaded}} von {{total}} {{type}} geladen",
@@ -40,5 +41,12 @@
   "DESCRIPTION_IMPORT": "Überschreibt alle Elemente im Papierkorb über eine JSON-Datei.",
   "DESCRIPTION_CLEAR": "Alle Elemente aus dem Papierkorb löschen (kann nicht rückgängig gemacht werden).",
   "ITEMS_EMPTY_SONGS_TITLE": "Keine verpfuschten Lieder!",
-  "ITEMS_EMPTY_ARTISTS_TITLE": "Keine vernichteten Künstler!"
+  "ITEMS_EMPTY_ARTISTS_TITLE": "Keine vernichteten Künstler!",
+  "DESCRIPTION_SETTINGS_ENABLED": "Hauptschalter zum Aktivieren oder Deaktivieren aller Trashbin+-Funktionen",
+  "DESCRIPTION_SETTINGS_SHOW_WIDGET": "Ein Papierkorbsymbol in der Wiedergabeleiste neben dem aktuell gespielten Titel für schnellen Zugriff anzeigen",
+  "DESCRIPTION_SETTINGS_AUTOPLAY": "Musikwiedergabe automatisch starten, wenn Spotify geöffnet wird oder die Erweiterung geladen wird",
+  "DESCRIPTION_SETTINGS_QUEUE_TRASHBIN": "Papierkorbsymbole neben jedem Song in Ihrer bevorstehenden Warteschlange für einfache Verwaltung hinzufügen",
+  "DESCRIPTION_SETTINGS_TRACKLIST_TRASHBIN": "Papierkorbsymbole neben Songs in Album- und Playlist-Ansichten für schnelles Filtern hinzufügen",
+  "DESCRIPTION_SETTINGS_RESHUFFLE_ON_SKIP": "Beim Überspringen eines gelöschten Songs automatisch zum nächsten nicht gelöschten Titel in der Warteschlange springen",
+  "DESCRIPTION_SETTINGS_PLAYLIST_MONITOR": "Automatisch von Spotify-Wiedergabeproblemen erholen, indem Ihre letzte Playlist fortgesetzt wird"
 }

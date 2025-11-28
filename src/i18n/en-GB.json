@@ -29,9 +29,10 @@
   "SETTINGS_QUEUE_TRASHBIN": "Enable Queue Trashbin",
   "SETTINGS_TRACKLIST_TRASHBIN": "Enable Tracklist Trashbin",
   "SETTINGS_RESHUFFLE_ON_SKIP": "Skip to Next Non-Trashed & Reshuffle Queue",
+  "SETTINGS_PLAYLIST_MONITOR": "Playlist Monitor",
   "ITEMS_TITLE": "Trashbin+ Items",
-  "ITEMS_EMPTY_SONGS": "<strong>No trashed songs!<\/strong><br\/>Songs you add to the trashbin will appear here.",
-  "ITEMS_EMPTY_ARTISTS": "<strong>No trashed artists!<\/strong><br\/>Artists you add to the trashbin will appear here.",
+  "ITEMS_EMPTY_SONGS": "<strong>No trashed songs!</strong><br/>Songs you add to the trashbin will appear here.",
+  "ITEMS_EMPTY_ARTISTS": "<strong>No trashed artists!</strong><br/>Artists you add to the trashbin will appear here.",
   "ITEMS_TAB_SONGS": "Songs",
   "ITEMS_TAB_ARTISTS": "Artists",
   "ITEMS_LOADED_COUNT": "{{loaded}} of {{total}} {{type}} loaded",
@@ -40,5 +41,12 @@
   "DESCRIPTION_IMPORT": "Overwrite all items in trashbin via .json file.",
   "DESCRIPTION_CLEAR": "Clear all items from trashbin (cannot be reverted).",
   "ITEMS_EMPTY_SONGS_TITLE": "No trashed songs!",
-  "ITEMS_EMPTY_ARTISTS_TITLE": "No trashed artists!"
+  "ITEMS_EMPTY_ARTISTS_TITLE": "No trashed artists!",
+  "DESCRIPTION_SETTINGS_ENABLED": "Master toggle to enable or disable all Trashbin+ functionality",
+  "DESCRIPTION_SETTINGS_SHOW_WIDGET": "Display a trash icon in the playback bar next to the currently playing track for quick access",
+  "DESCRIPTION_SETTINGS_AUTOPLAY": "Automatically start playing music when Spotify opens or the extension loads",
+  "DESCRIPTION_SETTINGS_QUEUE_TRASHBIN": "Add trash icons next to each song in your upcoming queue for easy management",
+  "DESCRIPTION_SETTINGS_TRACKLIST_TRASHBIN": "Add trash icons next to songs in album and playlist views for quick filtering",
+  "DESCRIPTION_SETTINGS_RESHUFFLE_ON_SKIP": "When skipping a trashed song, automatically jump to the next non-trashed track in the queue",
+  "DESCRIPTION_SETTINGS_PLAYLIST_MONITOR": "Automatically recover from Spotify playback glitches by resuming your last playlist"
 }
