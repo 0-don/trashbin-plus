@@ -22,8 +22,9 @@ function App() {
   console.log("trashbin+ loaded!");
 
   const trashbinStore = useTrashbinStore();
+  
   useHotkeyTrash();
-  usePlaylistMonitor(trashbinStore.playlistMonitorEnabled);
+  usePlaylistMonitor();
 
   useEffect(() => {
     trashbinStore.initializeFromStorage();
