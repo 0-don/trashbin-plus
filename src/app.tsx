@@ -22,7 +22,7 @@ function App() {
   console.log("trashbin+ loaded!");
 
   const trashbinStore = useTrashbinStore();
-  
+
   useHotkeyTrash();
   usePlaylistMonitor();
 
@@ -31,8 +31,10 @@ function App() {
   }, [trashbinStore.initializeFromStorage]);
 
   useEffect(() => {
-    if (trashbinStore.autoplayOnStart && !Spicetify.Player.isPlaying())
+    if (trashbinStore.autoplayOnStart && !Spicetify.Player.isPlaying()) {
       setTimeout(Spicetify.Player.play, 5000);
+      setTimeout(Spicetify.Player.play, 60000);
+    }
   }, [trashbinStore.autoplayOnStart]);
 
   useEffect(() => {
