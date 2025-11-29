@@ -25,14 +25,12 @@ export const useHotkeyDetection = () => {
       }
     };
 
-    // Register shortcut using Spicetify.Mousetrap (like the example code)
-    Spicetify.Mousetrap.bind("ctrl+shift+right", handleTrashAndNext);
+    Spicetify.Mousetrap.bind("ctrl+right", handleTrashAndNext);
 
-    // Listen for song changes
     Spicetify.Player.addEventListener("songchange", handleSongChange);
 
     return () => {
-      Spicetify.Mousetrap.unbind("ctrl+shift+right");
+      Spicetify.Mousetrap.unbind("ctrl+right");
       Spicetify.Player.removeEventListener("songchange", handleSongChange);
     };
   }, [store.trashbinEnabled, store.trashOnNextHotkey, store.toggleSongTrash]);
