@@ -38,7 +38,7 @@ export const useTrashButtonInjection = (
       const row = moreBtn.closest(config.rowSelector);
       if (!row) return;
 
-      const { trackURI } = extractTrackData(row);
+      const { trackURI } = extractTrackData(moreBtn.parentElement || row);
 
       if (!trackURI || row.querySelector(config.buttonSelector)) return;
 

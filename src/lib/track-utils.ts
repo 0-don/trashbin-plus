@@ -13,8 +13,9 @@ export interface TrackData {
 }
 
 interface ReactFiber {
-  memoizedProps?: Record<string, unknown>;
-  props?: Record<string, unknown>;
+  memoizedProps?: Record<string, any>;
+  pendingProps?: Record<string, any>;
+  props?: Record<string, any>;
   return?: ReactFiber;
 }
 
@@ -29,72 +30,53 @@ export function extractTrackData(element: Element): TrackData {
 
   const elementWithFiber = element as ElementWithFiber;
   const reactKey = Object.keys(elementWithFiber).find((k) =>
-    k.includes("react"),
+    k.toLowerCase().includes("reactFiber".toLowerCase()),
   );
 
   if (reactKey) {
     let fiber = elementWithFiber[reactKey] as ReactFiber | undefined;
-    const trackURICount = new Map<string, number>();
-    const uidCount = new Map<string, number>();
 
-    while (fiber && (!trackURI || !isEnhancedRecommendation || !uid)) {
+    while (fiber) {
       try {
-        const props = fiber.memoizedProps ?? fiber.props ?? {};
+        const props =
+          fiber.memoizedProps ?? fiber.pendingProps ?? fiber.props ?? {};
 
-        const seen = new WeakSet();
-        const propsString = JSON.stringify(props, (key, value) => {
-          if (typeof value === "object" && value !== null) {
-            if (seen.has(value)) return "[Circular]";
-            seen.add(value);
+        // Check if this fiber has the item data we need
+        if (props.item && typeof props.item === "object") {
+          const item = props.item;
+
+          // Extract track URI
+          if (
+            item.uri &&
+            typeof item.uri === "string" &&
+            item.uri.startsWith("spotify:track:")
+          ) {
+            trackURI = item.uri;
           }
-          return value;
-        });
 
-        // Count all track URI occurrences
-        const trackMatches = propsString.match(
-          new RegExp(TRACK_URI_REGEX.source, "g"),
-        );
-        if (trackMatches) {
-          trackMatches.forEach((uri) => {
-            trackURICount.set(uri, (trackURICount.get(uri) || 0) + 1);
-          });
-        }
+          // Extract UID
+          if (item.uid && typeof item.uid === "string") {
+            uid = item.uid;
+          }
 
-        // Count all UID occurrences
-        const uidMatches = propsString.match(new RegExp(UID_REGEX.source, "g"));
-        if (uidMatches) {
-          uidMatches.forEach((match) => {
-            const uidMatch = match.match(UID_REGEX);
-            if (uidMatch?.[1]) {
-              const uidValue = uidMatch[1];
-              uidCount.set(uidValue, (uidCount.get(uidValue) || 0) + 1);
+          // Check for enhanced recommendation in the item or its metadata
+          if (item.metadata && typeof item.metadata === "object") {
+            const metadataString = JSON.stringify(item.metadata);
+            if (ENHANCED_RECOMMENDATION_REGEX.test(metadataString)) {
+              isEnhancedRecommendation = true;
             }
-          });
-        }
+          }
 
-        if (!isEnhancedRecommendation) {
-          isEnhancedRecommendation =
-            ENHANCED_RECOMMENDATION_REGEX.test(propsString);
+          // If we found what we need, we can break early
+          if (trackURI && uid) {
+            break;
+          }
         }
 
         fiber = fiber.return;
       } catch {
         break;
       }
-    }
-
-    // Find the track URI with the most occurrences
-    if (trackURICount.size > 0) {
-      trackURI = Array.from(trackURICount.entries()).sort(
-        ([, countA], [, countB]) => countB - countA,
-      )[0][0];
-    }
-
-    // Find the UID with the most occurrences
-    if (uidCount.size > 0) {
-      uid = Array.from(uidCount.entries()).sort(
-        ([, countA], [, countB]) => countB - countA,
-      )[0][0];
     }
   }
 

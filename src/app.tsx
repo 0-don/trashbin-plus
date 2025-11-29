@@ -89,6 +89,7 @@ function App() {
         <TrashbinSettings />
         <TrashedItemsModal />
         <TrashbinContextMenu />
+        
         <TrashbinTracklist />
         <TrashbinQueuelist />
       </Providers>
