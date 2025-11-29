@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { useTrashbinStore } from "../store/trashbin-store";
 
-export const useHotkeyDetection = () => {
+export const useHotkeyTrash = () => {
   const store = useTrashbinStore();
   const trackToTrashRef = useRef<string | null>(null);
 
@@ -9,7 +9,6 @@ export const useHotkeyDetection = () => {
     if (!store.trashbinEnabled || !store.trashOnNextHotkey) return;
 
     const handleTrashAndNext = () => {
-      console.log("Hotkey detected: Trash and Next");
       const currentTrack = Spicetify.Player.data?.item;
       if (currentTrack?.uri) {
         trackToTrashRef.current = currentTrack.uri;
@@ -18,7 +17,6 @@ export const useHotkeyDetection = () => {
     };
 
     const handleSongChange = () => {
-      console.log("Song changed");
       if (trackToTrashRef.current) {
         store.toggleSongTrash(trackToTrashRef.current, true);
         trackToTrashRef.current = null;

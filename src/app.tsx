@@ -8,7 +8,7 @@ import { Providers } from "./components/providers/providers";
 import { TrashbinSettings } from "./components/ui/settings-modal";
 import { TrashedItemsModal } from "./components/ui/trashed-items-modal";
 import "./global.css";
-import { useHotkeyDetection } from "./hooks/use-hotkey-detection";
+import { useHotkeyTrash } from "./hooks/use-hotkey-trash";
 import { usePlaylistMonitor } from "./hooks/use-playlist-monitor";
 import { SELECTORS } from "./lib/constants";
 import {
@@ -22,7 +22,7 @@ function App() {
   console.log("trashbin+ loaded!");
 
   const trashbinStore = useTrashbinStore();
-  useHotkeyDetection();
+  useHotkeyTrash();
   usePlaylistMonitor(trashbinStore.playlistMonitorEnabled);
 
   useEffect(() => {
@@ -89,7 +89,7 @@ function App() {
         <TrashbinSettings />
         <TrashedItemsModal />
         <TrashbinContextMenu />
-        
+
         <TrashbinTracklist />
         <TrashbinQueuelist />
       </Providers>
