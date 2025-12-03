@@ -38,11 +38,11 @@ export const useTrashButtonInjection = (
       const row = moreBtn.closest(config.rowSelector);
       if (!row) return;
 
-      const { trackURI } = extractTrackData(moreBtn.parentElement || row);
+      const trackData = extractTrackData(moreBtn.parentElement || row);
 
-      if (!trackURI || row.querySelector(config.buttonSelector)) return;
+      if (!trackData.trackURI || row.querySelector(config.buttonSelector)) return;
 
-      const isTrashed = !!store.trashSongList[trackURI];
+      const isTrashed = !!store.trashSongList[trackData.trackURI];
       const btn = document.createElement("button");
       btn.className = `${config.buttonClassName} bg-transparent border-none p-2 opacity-70 cursor-pointer hover:opacity-100 transition-opacity`;
       btn.innerHTML = TRASH_ICON(16, isTrashed ? "text-green-500" : "");
@@ -53,7 +53,7 @@ export const useTrashButtonInjection = (
         const newState = btn.dataset.visuallyTrashed !== "true";
         btn.innerHTML = TRASH_ICON(16, newState ? "text-green-500" : "");
         btn.dataset.visuallyTrashed = newState.toString();
-        store.toggleSongTrash(trackURI);
+        store.toggleSongTrash(trackData.trackURI!);
       };
 
       moreBtn.parentElement?.insertBefore(btn, moreBtn);

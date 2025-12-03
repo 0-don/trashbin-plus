@@ -14,7 +14,7 @@ import { SELECTORS } from "./lib/constants";
 import {
   isTrackEffectivelyTrashed,
   manageSmartShuffleQueue,
-  skipToNextAllowedTrack,
+  skipToNextAllowedTrack
 } from "./lib/track-utils";
 import { useTrashbinStore } from "./store/trashbin-store";
 
@@ -79,11 +79,7 @@ function App() {
       skipBackBtn?.removeEventListener("click", eventListener);
       Spicetify.Player.removeEventListener("songchange", handleSongChange);
     };
-  }, [
-    trashbinStore.trashbinEnabled,
-    trashbinStore.setUserHitBack,
-    skipToNextAllowedTrack,
-  ]);
+  }, [trashbinStore.trashbinEnabled]);
 
   return (
     <>
