@@ -164,8 +164,73 @@ declare namespace Spicetify {
     essential: ColorSetNamespaceColors;
     text: ColorSetNamespaceColors;
   };
-  type Metadata = Partial<Record<string, string>> & {
+
+  type Metadata = {
+    artistURI1?: string;
+    albumTitle: string;
+    collectionCanAdd: string;
+    shuffleDistribution: string;
+    collectionInCollection: string;
+    artist_uri: string;
+    artistName2?: string;
+    entityURI: "spotify:playlist:4Fv2qFZCTLcE6OF5Mcitq1";
+    canvasEntityURI?: string;
+    canvasArtistAvatar?: string;
+    imageURL: string;
+    imageXlargeURL?: string;
+    smartShuffleSignals: SmartShuffleSignals;
+    markedForDownload: string;
+    actionsSkippingNextPastTrack?: string;
+    canvasURL?: string;
+    canvasExplicit?: string;
+    artistName: string;
+    viewIndex: string;
+    contextURI: "spotify:playlist:4Fv2qFZCTLcE6OF5Mcitq1";
+    canvasArtistName?: string;
+    artistURI2?: string;
+    decisionID: "ssp~064510c8703c053d93cf5349389eebcb949f";
+    trackPlayer: "audio";
+    duration: string;
+    albumArtistName: string;
+    imageLargeURL?: string;
+    canvasArtistURI?: string;
+    collectionCanBan: string;
+    artistName1?: string;
+    albumURI: string;
+    imageSmallURL: string;
+    collectionIsBanned: string;
+    artistURI: string;
+    provider?: "enhanced_recommendation";
+    iteration: string;
+    canvasID?: string;
+    hasLyrics: string;
+    canvasUploadedBy?: CanvasUploadedBy;
+    canvasFileID?: string;
+    canvasType?: CanvasType;
+    canvasCanvasURI?: string;
+    actionsSkippingPrevPastTrack?: string;
+    title: string;
+    isExplicit?: string;
+    artistName3?: string;
+    videoAssociationImageHeightXxlarge?: string;
+    videoAssociationImage?: string;
+    videoAssociation?: string;
+    videoAssociationImageHeight?: string;
+    videoAssociationImageWidthXxlarge?: string;
+    videoAssociationImageWidthLarge?: string;
+    videoAssociationImageXxlarge?: string;
+    videoAssociationImageLarge?: string;
+    videoAssociationImageWidth?: string;
+    videoAssociationImageHeightLarge?: string;
+    artistURI3?: string;
+  } & {
     [key: `artist_uri:${number}`]: string;
+  };
+  type ProviderTrack = {
+    contextTrack: ContextTrack;
+    removed: any[];
+    blocked: any[];
+    provider: "context" | "autoplay";
   };
   type ContextTrack = {
     uri: string;
@@ -861,8 +926,8 @@ declare namespace Spicetify {
    * history of played tracks and current track metadata.
    */
   const Queue: {
-    nextTracks: any[];
-    prevTracks: any[];
+    nextTracks: ProviderTrack[];
+    prevTracks: ProviderTrack[];
     queueRevision: string;
     track: any;
   };

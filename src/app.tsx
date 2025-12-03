@@ -14,7 +14,7 @@ import { SELECTORS } from "./lib/constants";
 import {
   isTrackEffectivelyTrashed,
   manageSmartShuffleQueue,
-  skipToNextAllowedTrack
+  skipToNextAllowedTrack,
 } from "./lib/track-utils";
 import { useTrashbinStore } from "./store/trashbin-store";
 
@@ -60,15 +60,11 @@ function App() {
         trashbinStore.setUserHitBack(false);
         return;
       }
-      if (
-        isTrackEffectivelyTrashed(
-          track,
-          state.trashSongList,
-          state.trashArtistList,
-        )
-      ) {
+
+      manageSmartShuffleQueue();
+
+      if (isTrackEffectivelyTrashed(track)) {
         skipToNextAllowedTrack();
-        manageSmartShuffleQueue();
       }
     };
 

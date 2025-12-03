@@ -21,6 +21,12 @@ interface ElementWithFiber extends Element {
   [key: string]: unknown;
 }
 
+export function getQueueTracks() {
+  return (Spicetify?.Queue?.nextTracks || []).filter((track) =>
+    track.contextTrack.uri.includes("track"),
+  );
+}
+
 export function extractTrackData(element: Element): TrackData {
   let trackURI: string | null = null;
   let isEnhancedRecommendation = false;
@@ -90,16 +96,15 @@ export function extractTrackData(element: Element): TrackData {
 
 export function isTrackEffectivelyTrashed(
   track: Spicetify.PlayerTrack | Spicetify.ContextTrack | undefined | null,
-  trashSongList: Record<string, boolean>,
-  trashArtistList: Record<string, boolean>,
 ): boolean {
+  const state = useTrashbinStore.getState();
   if (!track || !track.uri) return true;
-  if (trashSongList[track.uri]) return true;
+  if (state.trashSongList[track.uri]) return true;
 
   const artistUris = new Set<string>();
   const playerTrack = track as Spicetify.PlayerTrack;
 
-  for (const artist of playerTrack.artists || []) {
+  for (const artist of playerTrack?.artists || []) {
     if (artist && artist.uri) artistUris.add(artist.uri);
   }
 
@@ -112,7 +117,7 @@ export function isTrackEffectivelyTrashed(
   }
 
   for (const artistUri of artistUris) {
-    if (trashArtistList[artistUri]) return true;
+    if (state.trashArtistList[artistUri]) return true;
   }
   return false;
 }
@@ -129,25 +134,16 @@ export async function skipToNextAllowedTrack() {
   // If reshuffle is enabled, search for next non-trashed track
   if (state.reshuffleOnSkip) {
     const currentContextUri = currentPlayerState.context.uri;
-    const tracksToSearch =
-      currentPlayerState.nextItems || Spicetify.Queue?.nextTracks || [];
 
-    for (const nextTrack of tracksToSearch) {
-      if (
-        !isTrackEffectivelyTrashed(
-          nextTrack,
-          state.trashSongList,
-          state.trashArtistList,
-        )
-      ) {
+    for (const nextTrack of getQueueTracks()) {
+      if (!isTrackEffectivelyTrashed(nextTrack.contextTrack)) {
         try {
           return await Spicetify.Player.playUri(
             currentContextUri,
-            {},
-            { skipTo: { uri: nextTrack.uri, uid: nextTrack.uid } },
+            { featureIdentifier: "playlist" },
+            { skipTo: { uri: nextTrack.contextTrack.uri } },
           );
         } catch (err) {
-
           console.error("Error skipping to next allowed track:", err);
         }
       }
@@ -182,32 +178,33 @@ export function shouldSkipTrack(uri: string, type: string): boolean {
 export async function manageSmartShuffleQueue(): Promise<void> {
   if (!document.querySelector(SELECTORS.SMART_SHUFFLE_BUTTON)) return;
 
-  const currentPlayerState = Spicetify.Player.data;
-  const queueTracks = currentPlayerState?.nextItems || Spicetify?.Queue?.nextTracks || [];
-  
+  const queueTracks = getQueueTracks();
+
   if (queueTracks.length === 0) return;
 
   const enhancedRecommendations = queueTracks.filter(
-    (track) => track?.metadata?.['smart-shuffle-signals'] === 'tpm' || 
-               track?.metadata?.provider === 'enhanced_recommendation'
+    (track) =>
+      track?.contextTrack.metadata?.provider === "enhanced_recommendation",
   );
 
   if (
     queueTracks.length > 4 &&
-    enhancedRecommendations.length <= 4 &&
+    // enhancedRecommendations.length <= 4 &&
     queueTracks.length > enhancedRecommendations.length
   ) {
     const tracksToRemove = queueTracks
       .filter(
         (track) =>
-          track.uri &&
-          !(track.metadata?.['smart-shuffle-signals'] === 'tpm' || 
-            track.metadata?.provider === 'enhanced_recommendation') &&
-          useTrashbinStore.getState().getTrashStatus(track.uri).isTrashed,
+          track.contextTrack.uri &&
+          !(
+            track.contextTrack.metadata?.provider === "enhanced_recommendation"
+          ) &&
+          useTrashbinStore.getState().getTrashStatus(track.contextTrack.uri)
+            .isTrashed,
       )
       .map((track) => ({
-        uri: track.uri,
-        uid: track.uid,
+        uri: track.contextTrack.uri,
+        uid: track.contextTrack.uid,
       }));
 
     // Exit if no tracks to remove (prevent infinite loop)
@@ -215,6 +212,6 @@ export async function manageSmartShuffleQueue(): Promise<void> {
 
     await Spicetify.removeFromQueue(tracksToRemove);
     await new Promise((resolve) => setTimeout(resolve, 1000));
-    await manageSmartShuffleQueue();
+    // await manageSmartShuffleQueue();
   }
 }
