@@ -34,9 +34,17 @@ Skip songs and artists you don't like automatically! A modern upgrade to the cla
 
 Access settings through your profile menu → "Trashbin+ Settings":
 
-- **Show trash buttons** - Add quick trash buttons next to songs
-- **Smart skipping** - Find next good song instead of just skipping
-- **Auto-start music** - Start playing when Spotify opens
+**Options**
+- **Enabled** - Master toggle to enable or disable Trashbin+
+- **Show Widget Icon** - Display trash icon in playback bar for quick access
+
+**Features**
+- **Autoplay on Start** - Automatically start playing when Spotify opens
+- **Enable Queue Trashbin** - Add trash buttons next to songs in your queue
+- **Enable Tracklist Trashbin** - Add trash buttons in playlist and album views
+- **Skip Trashed Tracks** - Automatically find next good song instead of just skipping
+- **Auto Clean Queue** - Remove trashed songs from Smart Shuffle queue
+- **Playlist Monitor** - Auto-recover from Spotify playback glitches
 
 ## Screenshots
 

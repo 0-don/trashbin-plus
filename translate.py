@@ -254,13 +254,13 @@ def main():
 
     print("Cleaning source file...")
     data = json.loads(source_file.read_text(encoding="utf-8"))
-    cleaned_data = filter_unused_keys(data, used_keys, dynamic_prefixes)
-    source_file.write_text(
-        json.dumps(cleaned_data, ensure_ascii=False, indent=2), encoding="utf-8"
-    )
+    # cleaned_data = filter_unused_keys(data, used_keys, dynamic_prefixes)
+    # source_file.write_text(
+    #     json.dumps(cleaned_data, ensure_ascii=False, indent=2), encoding="utf-8"
+    # )
 
     print("Flattening translations...")
-    texts, paths = flatten_json(cleaned_data)
+    texts, paths = flatten_json(data)
 
     model = TranslationModel()
     translations_by_lang = {lang_code: {} for lang_code in LANG_MAP}
