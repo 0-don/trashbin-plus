@@ -22,7 +22,6 @@ interface ElementWithFiber extends Element {
   [key: string]: unknown;
 }
 
-// Recursively search through props/children to find a spotify:track URI
 function findTrackUriInProps(obj: any, depth = 0, maxDepth = 10): string | null {
   if (depth > maxDepth || !obj || typeof obj !== "object") return null;
 
