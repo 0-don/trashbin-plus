@@ -5,7 +5,7 @@ const ENHANCED_RECOMMENDATION_REGEX = /enhanced_recommendation/;
 
 export interface TrackData {
   trackURI: string | null;
-  uid: string | null;
+  // uid: string | null;
   artistURIs: string[];
   isEnhancedRecommendation: boolean;
 }
@@ -15,10 +15,48 @@ interface ReactFiber {
   pendingProps?: Record<string, any>;
   props?: Record<string, any>;
   return?: ReactFiber;
+  child?: ReactFiber;
 }
 
 interface ElementWithFiber extends Element {
   [key: string]: unknown;
+}
+
+// Recursively search through props/children to find a spotify:track URI
+function findTrackUriInProps(obj: any, depth = 0, maxDepth = 10): string | null {
+  if (depth > maxDepth || !obj || typeof obj !== "object") return null;
+
+  // Direct uri property
+  if (typeof obj.uri === "string" && obj.uri.startsWith("spotify:track:")) {
+    return obj.uri;
+  }
+
+  // Check props.uri
+  if (obj.props?.uri && typeof obj.props.uri === "string" && obj.props.uri.startsWith("spotify:track:")) {
+    return obj.props.uri;
+  }
+
+  // Check children array
+  if (Array.isArray(obj.children)) {
+    for (const child of obj.children) {
+      const found = findTrackUriInProps(child, depth + 1, maxDepth);
+      if (found) return found;
+    }
+  }
+
+  // Check single child object
+  if (obj.children && typeof obj.children === "object" && !Array.isArray(obj.children)) {
+    const found = findTrackUriInProps(obj.children, depth + 1, maxDepth);
+    if (found) return found;
+  }
+
+  // Check props.children
+  if (obj.props?.children) {
+    const found = findTrackUriInProps(obj.props.children, depth + 1, maxDepth);
+    if (found) return found;
+  }
+
+  return null;
 }
 
 export function getQueueTracks() {
@@ -30,7 +68,7 @@ export function getQueueTracks() {
 export function extractTrackData(element: Element): TrackData {
   let trackURI: string | null = null;
   let isEnhancedRecommendation = false;
-  let uid: string | null = null;
+  // let uid: string | null = null;
 
   const elementWithFiber = element as ElementWithFiber;
   const reactKey = Object.keys(elementWithFiber).find((k) =>
@@ -59,9 +97,9 @@ export function extractTrackData(element: Element): TrackData {
           }
 
           // Extract UID
-          if (item.uid && typeof item.uid === "string") {
-            uid = item.uid;
-          }
+          // if (item.uid && typeof item.uid === "string") {
+          //   uid = item.uid;
+          // }
 
           // Check for enhanced recommendation in the item or its metadata
           if (item.metadata && typeof item.metadata === "object") {
@@ -72,7 +110,19 @@ export function extractTrackData(element: Element): TrackData {
           }
 
           // If we found what we need, we can break early
-          if (trackURI && uid) {
+          // if (trackURI && uid) {
+          //   break;
+          // }
+          if (trackURI) {
+            break;
+          }
+        }
+
+        // If no item found, try to find URI in nested children/props structure
+        if (!trackURI) {
+          const foundUri = findTrackUriInProps(props);
+          if (foundUri) {
+            trackURI = foundUri;
             break;
           }
         }
@@ -91,7 +141,8 @@ export function extractTrackData(element: Element): TrackData {
     .filter((id): id is string => Boolean(id))
     .map((id) => `spotify:artist:${id}`);
 
-  return { trackURI, uid, artistURIs, isEnhancedRecommendation };
+  return { trackURI,  artistURIs, isEnhancedRecommendation };
+  // return { trackURI, uid, artistURIs, isEnhancedRecommendation };
 }
 
 export function isTrackEffectivelyTrashed(
@@ -123,7 +174,6 @@ export function isTrackEffectivelyTrashed(
 }
 
 export async function skipToNextAllowedTrack() {
-  const state = useTrashbinStore.getState();
   const currentPlayerState = Spicetify.Player.data;
 
   if (!currentPlayerState?.context?.uri) {
@@ -131,21 +181,18 @@ export async function skipToNextAllowedTrack() {
     return;
   }
 
-  // If reshuffle is enabled, search for next non-trashed track
-  if (state.reshuffleOnSkip) {
-    const currentContextUri = currentPlayerState.context.uri;
+  const currentContextUri = currentPlayerState.context.uri;
 
-    for (const nextTrack of getQueueTracks()) {
-      if (!isTrackEffectivelyTrashed(nextTrack.contextTrack)) {
-        try {
-          return await Spicetify.Player.playUri(
-            currentContextUri,
-            { featureIdentifier: "playlist" },
-            { skipTo: { uri: nextTrack.contextTrack.uri } },
-          );
-        } catch (err) {
-          console.error("Error skipping to next allowed track:", err);
-        }
+  for (const nextTrack of getQueueTracks()) {
+    if (!isTrackEffectivelyTrashed(nextTrack.contextTrack)) {
+      try {
+        return await Spicetify.Player.playUri(
+          currentContextUri,
+          { featureIdentifier: "playlist" },
+          { skipTo: { uri: nextTrack.contextTrack.uri } },
+        );
+      } catch (err) {
+        console.error("Error skipping to next allowed track:", err);
       }
     }
   }

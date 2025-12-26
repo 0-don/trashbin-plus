@@ -61,9 +61,11 @@ function App() {
         return;
       }
 
-      manageSmartShuffleQueue();
+      if (state.autoCleanQueue) {
+        manageSmartShuffleQueue();
+      }
 
-      if (isTrackEffectivelyTrashed(track)) {
+      if (state.skipTrashedTracks && isTrackEffectivelyTrashed(track)) {
         skipToNextAllowedTrack();
       }
     };

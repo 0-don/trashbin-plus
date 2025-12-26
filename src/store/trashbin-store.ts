@@ -10,7 +10,8 @@ export const STORAGE_KEYS = {
   AUTOPLAY_ON_START: "trashbin-autoplay-on-start",
   QUEUE_TRASHBIN: "trashbin-queue-enabled",
   TRACKLIST_TRASHBIN: "trashbin-tracklist-enabled",
-  RESHUFFLE_ON_SKIP: "trashbin-reshuffle-on-skip",
+  SKIP_TRASHED_TRACKS: "trashbin-skip-trashed-tracks",
+  AUTO_CLEAN_QUEUE: "trashbin-auto-clean-queue",
   PLAYLIST_MONITOR: "trashbin-playlist-monitor",
   TRASH_ON_NEXT_HOTKEY: "trashbin-trash-on-next-hotkey",
 } as const;
@@ -22,7 +23,8 @@ interface TrashbinState {
   autoplayOnStart: boolean;
   queueTrashbinEnabled: boolean;
   tracklistTrashbinEnabled: boolean;
-  reshuffleOnSkip: boolean;
+  skipTrashedTracks: boolean;
+  autoCleanQueue: boolean;
   playlistMonitorEnabled: boolean;
   trashOnNextHotkey: boolean;
   trashSongList: Record<string, boolean>;
@@ -36,7 +38,8 @@ interface TrashbinState {
   setAutoplayOnStart: (enabled: boolean) => void;
   setQueueTrashbinEnabled: (enabled: boolean) => void;
   setTracklistTrashbinEnabled: (enabled: boolean) => void;
-  setReshuffleOnSkip: (enabled: boolean) => void;
+  setSkipTrashedTracks: (enabled: boolean) => void;
+  setAutoCleanQueue: (enabled: boolean) => void;
   setPlaylistMonitorEnabled: (enabled: boolean) => void;
   setTrashOnNextHotkey: (enabled: boolean) => void;
   setUserHitBack: (hitBack: boolean) => void;
@@ -74,7 +77,8 @@ export const useTrashbinStore = create<TrashbinState>((set, get) => ({
   autoplayOnStart: false,
   queueTrashbinEnabled: true,
   tracklistTrashbinEnabled: true,
-  reshuffleOnSkip: false,
+  skipTrashedTracks: false,
+  autoCleanQueue: false,
   playlistMonitorEnabled: true,
   trashOnNextHotkey: false,
   trashSongList: {},
@@ -94,7 +98,8 @@ export const useTrashbinStore = create<TrashbinState>((set, get) => ({
         STORAGE_KEYS.TRACKLIST_TRASHBIN,
         true,
       ),
-      reshuffleOnSkip: initValue(STORAGE_KEYS.RESHUFFLE_ON_SKIP, false),
+      skipTrashedTracks: initValue(STORAGE_KEYS.SKIP_TRASHED_TRACKS, false),
+      autoCleanQueue: initValue(STORAGE_KEYS.AUTO_CLEAN_QUEUE, false),
       playlistMonitorEnabled: initValue(STORAGE_KEYS.PLAYLIST_MONITOR, true),
       trashOnNextHotkey: initValue(STORAGE_KEYS.TRASH_ON_NEXT_HOTKEY, false),
     });
@@ -134,10 +139,18 @@ export const useTrashbinStore = create<TrashbinState>((set, get) => ({
     );
   },
 
-  setReshuffleOnSkip: (enabled: boolean) => {
-    set({ reshuffleOnSkip: enabled });
+  setSkipTrashedTracks: (enabled: boolean) => {
+    set({ skipTrashedTracks: enabled });
     Spicetify.LocalStorage.set(
-      STORAGE_KEYS.RESHUFFLE_ON_SKIP,
+      STORAGE_KEYS.SKIP_TRASHED_TRACKS,
+      JSON.stringify(enabled),
+    );
+  },
+
+  setAutoCleanQueue: (enabled: boolean) => {
+    set({ autoCleanQueue: enabled });
+    Spicetify.LocalStorage.set(
+      STORAGE_KEYS.AUTO_CLEAN_QUEUE,
       JSON.stringify(enabled),
     );
   },

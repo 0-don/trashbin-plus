@@ -32,15 +32,18 @@ export const useTrashButtonInjection = (
     if (!enabled || !store.trashbinEnabled) return;
 
     const container = document.querySelector(config.containerSelector);
+
     if (!container) return;
 
     container.querySelectorAll(config.moreButtonSelector).forEach((moreBtn) => {
       const row = moreBtn.closest(config.rowSelector);
+
       if (!row) return;
 
       const trackData = extractTrackData(moreBtn.parentElement || row);
 
-      if (!trackData.trackURI || row.querySelector(config.buttonSelector)) return;
+      if (!trackData.trackURI || row.querySelector(config.buttonSelector))
+        return;
 
       const isTrashed = !!store.trashSongList[trackData.trackURI];
       const btn = document.createElement("button");

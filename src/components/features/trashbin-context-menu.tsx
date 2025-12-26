@@ -5,15 +5,16 @@ import { TRASH_ICON } from "../icons";
 
 export function TrashbinContextMenu() {
   const { t } = useTranslation();
-  const { handleTrashToggle, shouldAddContextMenu, getContextMenuLabel } =
-    useTrashOperations();
+  const trashOperations = useTrashOperations();
   const contextMenuItemRef = useRef<{ name: string } | null>(null);
 
   const shouldAddContextMenuWithUpdate = (uris: string[]): boolean => {
-    const shouldAdd = shouldAddContextMenu(uris);
+    const shouldAdd = trashOperations.shouldAddContextMenu(uris);
 
     if (shouldAdd && contextMenuItemRef.current) {
-      contextMenuItemRef.current.name = getContextMenuLabel(uris[0]);
+      contextMenuItemRef.current.name = trashOperations.getContextMenuLabel(
+        uris[0],
+      );
     }
 
     return shouldAdd;
@@ -22,7 +23,7 @@ export function TrashbinContextMenu() {
   useEffect(() => {
     const contextMenuItem = new Spicetify.ContextMenu.Item(
       t("ACTION_THROW"),
-      handleTrashToggle,
+      trashOperations.handleTrashToggle,
       shouldAddContextMenuWithUpdate,
       TRASH_ICON(15),
     );
@@ -31,7 +32,7 @@ export function TrashbinContextMenu() {
     contextMenuItem.register();
 
     return () => contextMenuItem.deregister();
-  }, [handleTrashToggle, shouldAddContextMenuWithUpdate]);
+  }, [trashOperations.handleTrashToggle, shouldAddContextMenuWithUpdate]);
 
   return null;
 }

@@ -215,10 +215,16 @@ const SettingsModal: React.FC = () => {
         description={t("DESCRIPTION_SETTINGS_TRACKLIST_TRASHBIN")}
       />
       <Toggle
-        label={t("SETTINGS_RESHUFFLE_ON_SKIP")}
-        enabled={store.reshuffleOnSkip}
-        onChange={store.setReshuffleOnSkip}
-        description={t("DESCRIPTION_SETTINGS_RESHUFFLE_ON_SKIP")}
+        label={t("SETTINGS_SKIP_TRASHED_TRACKS")}
+        enabled={store.skipTrashedTracks}
+        onChange={store.setSkipTrashedTracks}
+        description={t("DESCRIPTION_SETTINGS_SKIP_TRASHED_TRACKS")}
+      />
+      <Toggle
+        label={t("SETTINGS_AUTO_CLEAN_QUEUE")}
+        enabled={store.autoCleanQueue}
+        onChange={store.setAutoCleanQueue}
+        description={t("DESCRIPTION_SETTINGS_AUTO_CLEAN_QUEUE")}
       />
       <Toggle
         label={t("SETTINGS_PLAYLIST_MONITOR")}
