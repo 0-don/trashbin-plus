@@ -10,6 +10,8 @@ import { TrashedItemsModal } from "./components/ui/trashed-items-modal";
 import "./global.css";
 import { useHotkeyTrash } from "./hooks/use-hotkey-trash";
 import { usePlaylistMonitor } from "./hooks/use-playlist-monitor";
+import { useRecommendationMonitor } from "./hooks/use-recommendation-monitor";
+import { useRemoteToggle } from "./hooks/use-remote-toggle";
 import { SELECTORS } from "./lib/constants";
 import {
   isTrackEffectivelyTrashed,
@@ -25,6 +27,8 @@ function App() {
 
   useHotkeyTrash();
   usePlaylistMonitor();
+  useRemoteToggle();
+  useRecommendationMonitor();
 
   useEffect(() => {
     trashbinStore.initializeFromStorage();
@@ -46,13 +50,13 @@ function App() {
 
     const eventListener = () => trashbinStore.setUserHitBack(true);
 
-    const handleSongChange = () => {
+    const handleSongChange = async () => {
       const track = Spicetify.Player.data?.item;
       const state = useTrashbinStore.getState();
 
-      if (
-        Spicetify.Platform.ConnectAPI.state.activeDevice.id !== "local_device"
-      ) {
+      const isLocalDevice =
+        Spicetify.Platform.ConnectAPI.state.activeDevice.id === "local_device";
+      if (!isLocalDevice && !state.remoteSkippingEnabled) {
         return;
       }
 

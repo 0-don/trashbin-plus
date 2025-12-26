@@ -22,7 +22,11 @@ interface ElementWithFiber extends Element {
   [key: string]: unknown;
 }
 
-function findTrackUriInProps(obj: any, depth = 0, maxDepth = 10): string | null {
+function findTrackUriInProps(
+  obj: any,
+  depth = 0,
+  maxDepth = 10,
+): string | null {
   if (depth > maxDepth || !obj || typeof obj !== "object") return null;
 
   // Direct uri property
@@ -31,7 +35,11 @@ function findTrackUriInProps(obj: any, depth = 0, maxDepth = 10): string | null 
   }
 
   // Check props.uri
-  if (obj.props?.uri && typeof obj.props.uri === "string" && obj.props.uri.startsWith("spotify:track:")) {
+  if (
+    obj.props?.uri &&
+    typeof obj.props.uri === "string" &&
+    obj.props.uri.startsWith("spotify:track:")
+  ) {
     return obj.props.uri;
   }
 
@@ -44,7 +52,11 @@ function findTrackUriInProps(obj: any, depth = 0, maxDepth = 10): string | null 
   }
 
   // Check single child object
-  if (obj.children && typeof obj.children === "object" && !Array.isArray(obj.children)) {
+  if (
+    obj.children &&
+    typeof obj.children === "object" &&
+    !Array.isArray(obj.children)
+  ) {
     const found = findTrackUriInProps(obj.children, depth + 1, maxDepth);
     if (found) return found;
   }
@@ -140,7 +152,7 @@ export function extractTrackData(element: Element): TrackData {
     .filter((id): id is string => Boolean(id))
     .map((id) => `spotify:artist:${id}`);
 
-  return { trackURI,  artistURIs, isEnhancedRecommendation };
+  return { trackURI, artistURIs, isEnhancedRecommendation };
   // return { trackURI, uid, artistURIs, isEnhancedRecommendation };
 }
 

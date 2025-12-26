@@ -42,7 +42,6 @@ export const useTrashButtonInjection = (
 
       const trackData = extractTrackData(moreBtn.parentElement || row);
 
-      // console.log("Injecting trash button for track:", row, trackData);
       if (!trackData.trackURI || row.querySelector(config.buttonSelector))
         return;
 

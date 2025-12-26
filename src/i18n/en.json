@@ -50,5 +50,15 @@
   "SETTINGS_AUTO_CLEAN_QUEUE": "Auto Clean Queue",
   "DESCRIPTION_SETTINGS_AUTO_CLEAN_QUEUE": "Automatically remove trashed songs from your Smart Shuffle queue",
   "SETTINGS_TRASH_ON_NEXT_HOTKEY": "Trash on Next Hotkey",
-  "DESCRIPTION_SETTINGS_TRASH_ON_NEXT_HOTKEY": "Automatically trash the current song when using Ctrl+Right keyboard shortcut to skip to next track"
+  "DESCRIPTION_SETTINGS_TRASH_ON_NEXT_HOTKEY": "Automatically trash the current song when using Ctrl+Right keyboard shortcut to skip to next track",
+  "SETTINGS_REMOTE_CONTROL": "Remote Control",
+  "SETTINGS_REMOTE_TOGGLE": "Enable Remote Toggle",
+  "DESCRIPTION_SETTINGS_REMOTE_TOGGLE": "Double-tap play/pause from mobile to toggle remote skipping on/off. A track skip confirms the toggle.",
+  "SETTINGS_REMOTE_SKIPPING": "Remote Skipping Active",
+  "DESCRIPTION_SETTINGS_REMOTE_SKIPPING": "When enabled, trash-skipping works even when controlling Spotify from another device (e.g., mobile)",
+  "MESSAGE_REMOTE_SKIPPING_ENABLED": "Remote skipping enabled",
+  "MESSAGE_REMOTE_SKIPPING_DISABLED": "Remote skipping disabled",
+  "MESSAGE_SONG_ADDED_REMOTE": "Song trashed via remote",
+  "SETTINGS_TRASH_VIA_LIKE": "Trash via Like",
+  "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "Like a song from mobile to trash it. Automatically unlikes and skips to next track."
 }

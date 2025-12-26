@@ -63,8 +63,12 @@ const Toggle: React.FC<{
   enabled: boolean;
   onChange: (enabled: boolean) => void;
   description?: string;
-}> = ({ label, enabled, onChange, description }) => (
-  <div className="flex items-center justify-between gap-2.5! py-2.5!">
+  disabled?: boolean;
+}> = ({ label, enabled, onChange, description, disabled }) => (
+  <div className={cn(
+    "flex items-center justify-between gap-2.5! py-2.5!",
+    disabled && "opacity-50!",
+  )}>
     <label className="flex w-full items-center gap-1.5! pr-4">
       {label}
       {description && (
@@ -78,16 +82,18 @@ const Toggle: React.FC<{
     <div className="text-right">
       <button
         className={cn(
-          "flex! cursor-pointer! items-center! rounded-full! border-0!",
+          "flex! items-center! rounded-full! border-0!",
           "ml-3! p-2! transition-colors!",
           "bg-[rgba(var(--spice-rgb-shadow),0.7)]! text-(--spice-text)!",
           !enabled && "text-[rgba(var(--spice-rgb-text),0.3)]!",
+          disabled ? "cursor-not-allowed!" : "cursor-pointer!",
         )}
         type="button"
+        disabled={disabled}
         onClick={(event) => {
           event.preventDefault();
           event.stopPropagation();
-          onChange(!enabled);
+          if (!disabled) onChange(!enabled);
         }}
       >
         <svg height="16" width="16" viewBox="0 0 16 16" fill="currentColor">
@@ -237,6 +243,30 @@ const SettingsModal: React.FC = () => {
         enabled={store.trashOnNextHotkey}
         onChange={store.setTrashOnNextHotkey}
         description={t("DESCRIPTION_SETTINGS_TRASH_ON_NEXT_HOTKEY")}
+      />
+
+      <h2 className="my-2.5! text-lg font-bold text-(--spice-text) first-of-type:mt-0">
+        {t("SETTINGS_REMOTE_CONTROL")}
+      </h2>
+      <Toggle
+        label={t("SETTINGS_REMOTE_TOGGLE")}
+        enabled={store.remoteToggleEnabled}
+        onChange={store.setRemoteToggleEnabled}
+        description={t("DESCRIPTION_SETTINGS_REMOTE_TOGGLE")}
+      />
+      <Toggle
+        label={t("SETTINGS_REMOTE_SKIPPING")}
+        enabled={store.remoteSkippingEnabled}
+        onChange={store.setRemoteSkippingEnabled}
+        description={t("DESCRIPTION_SETTINGS_REMOTE_SKIPPING")}
+        disabled={!store.remoteToggleEnabled}
+      />
+      <Toggle
+        label={t("SETTINGS_TRASH_VIA_LIKE")}
+        enabled={store.trashViaLikeEnabled}
+        onChange={store.setTrashViaLikeEnabled}
+        description={t("DESCRIPTION_SETTINGS_TRASH_VIA_LIKE")}
+        disabled={!store.remoteToggleEnabled}
       />
 
       <h2 className="my-2.5! text-lg font-bold text-(--spice-text) first-of-type:mt-0">

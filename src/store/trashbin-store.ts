@@ -14,6 +14,9 @@ export const STORAGE_KEYS = {
   AUTO_CLEAN_QUEUE: "trashbin-auto-clean-queue",
   PLAYLIST_MONITOR: "trashbin-playlist-monitor",
   TRASH_ON_NEXT_HOTKEY: "trashbin-trash-on-next-hotkey",
+  REMOTE_TOGGLE_ENABLED: "trashbin-remote-toggle-enabled",
+  REMOTE_SKIPPING_ENABLED: "trashbin-remote-skipping-enabled",
+  TRASH_VIA_LIKE: "trashbin-trash-via-like",
 } as const;
 
 interface TrashbinState {
@@ -30,6 +33,9 @@ interface TrashbinState {
   trashSongList: Record<string, boolean>;
   trashArtistList: Record<string, boolean>;
   userHitBack: boolean;
+  remoteToggleEnabled: boolean;
+  remoteSkippingEnabled: boolean;
+  trashViaLikeEnabled: boolean;
 
   // Actions
   initializeFromStorage: () => void;
@@ -43,6 +49,10 @@ interface TrashbinState {
   setPlaylistMonitorEnabled: (enabled: boolean) => void;
   setTrashOnNextHotkey: (enabled: boolean) => void;
   setUserHitBack: (hitBack: boolean) => void;
+  setRemoteToggleEnabled: (enabled: boolean) => void;
+  setRemoteSkippingEnabled: (enabled: boolean) => void;
+  toggleRemoteSkipping: () => void;
+  setTrashViaLikeEnabled: (enabled: boolean) => void;
 
   // Unified actions
   toggleSongTrash: (uri: string, showNotification?: boolean) => void;
@@ -84,6 +94,9 @@ export const useTrashbinStore = create<TrashbinState>((set, get) => ({
   trashSongList: {},
   trashArtistList: {},
   userHitBack: false,
+  remoteToggleEnabled: false,
+  remoteSkippingEnabled: false,
+  trashViaLikeEnabled: false,
 
   // Initialize from localStorage
   initializeFromStorage: () => {
@@ -102,6 +115,9 @@ export const useTrashbinStore = create<TrashbinState>((set, get) => ({
       autoCleanQueue: initValue(STORAGE_KEYS.AUTO_CLEAN_QUEUE, false),
       playlistMonitorEnabled: initValue(STORAGE_KEYS.PLAYLIST_MONITOR, true),
       trashOnNextHotkey: initValue(STORAGE_KEYS.TRASH_ON_NEXT_HOTKEY, false),
+      remoteToggleEnabled: initValue(STORAGE_KEYS.REMOTE_TOGGLE_ENABLED, false),
+      remoteSkippingEnabled: initValue(STORAGE_KEYS.REMOTE_SKIPPING_ENABLED, false),
+      trashViaLikeEnabled: initValue(STORAGE_KEYS.TRASH_VIA_LIKE, false),
     });
   },
 
@@ -172,6 +188,40 @@ export const useTrashbinStore = create<TrashbinState>((set, get) => ({
   },
 
   setUserHitBack: (hitBack: boolean) => set({ userHitBack: hitBack }),
+
+  setRemoteToggleEnabled: (enabled: boolean) => {
+    set({ remoteToggleEnabled: enabled });
+    Spicetify.LocalStorage.set(
+      STORAGE_KEYS.REMOTE_TOGGLE_ENABLED,
+      JSON.stringify(enabled),
+    );
+  },
+
+  setRemoteSkippingEnabled: (enabled: boolean) => {
+    set({ remoteSkippingEnabled: enabled });
+    Spicetify.LocalStorage.set(
+      STORAGE_KEYS.REMOTE_SKIPPING_ENABLED,
+      JSON.stringify(enabled),
+    );
+  },
+
+  toggleRemoteSkipping: () => {
+    const state = get();
+    const newValue = !state.remoteSkippingEnabled;
+    set({ remoteSkippingEnabled: newValue });
+    Spicetify.LocalStorage.set(
+      STORAGE_KEYS.REMOTE_SKIPPING_ENABLED,
+      JSON.stringify(newValue),
+    );
+  },
+
+  setTrashViaLikeEnabled: (enabled: boolean) => {
+    set({ trashViaLikeEnabled: enabled });
+    Spicetify.LocalStorage.set(
+      STORAGE_KEYS.TRASH_VIA_LIKE,
+      JSON.stringify(enabled),
+    );
+  },
 
   toggleSongTrash: (uri: string, showNotification = true) => {
     const state = get();
