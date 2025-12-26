@@ -29,14 +29,14 @@
   "SETTINGS_PLAYLIST_MONITOR": "Monitor della playlist",
   "ITEMS_TITLE": "Elementi del Cestino+",
   "ITEMS_EMPTY_SONGS": "<strong>Nessuna canzone nel cestino!</strong><br/>Le canzoni che aggiungi nel cestino appariranno qui.",
-  "ITEMS_EMPTY_ARTISTS": "<strong>Nessun artista nel cestino!</strong><br/>Gli artisti che aggiungi al cestino appariranno qui.",
+  "ITEMS_EMPTY_ARTISTS": "<strong>Nessun artista cestinato!</strong><br/>Gli artisti che aggiungi al cestino appariranno qui.",
   "ITEMS_TAB_SONGS": "Canzoni",
   "ITEMS_TAB_ARTISTS": "Artisti",
   "ITEMS_LOADED_COUNT": "{{loaded}} di {{total}} {{type}} caricati",
   "DESCRIPTION_COPY": "Copia tutti gli elementi nel cestino negli appunti.",
   "DESCRIPTION_EXPORT": "Salva tutti gli elementi nel cestino in un file .json.",
   "DESCRIPTION_IMPORT": "Sovrascrivi tutti gli elementi nel cestino tramite file .json.",
-  "DESCRIPTION_CLEAR": "Cancella tutti gli elementi dal cestino (operazione irreversibile).",
+  "DESCRIPTION_CLEAR": "Elimina tutti gli elementi dal cestino (operazione non reversibile).",
   "ITEMS_EMPTY_SONGS_TITLE": "Nessuna canzone eliminata!",
   "ITEMS_EMPTY_ARTISTS_TITLE": "Nessun artista scartato!",
   "DESCRIPTION_SETTINGS_ENABLED": "Interruttore principale per abilitare o disabilitare tutte le funzionalità di Trashbin+",
@@ -45,6 +45,10 @@
   "DESCRIPTION_SETTINGS_QUEUE_TRASHBIN": "Aggiungi icone del cestino accanto a ogni brano nella tua coda imminente per una gestione più semplice",
   "DESCRIPTION_SETTINGS_TRACKLIST_TRASHBIN": "Aggiungi icone del cestino accanto alle canzoni nelle visualizzazioni di album e playlist per un filtraggio rapido",
   "DESCRIPTION_SETTINGS_PLAYLIST_MONITOR": "Recupera automaticamente dai problemi di riproduzione di Spotify riprendendo l'ultima playlist",
+  "SETTINGS_SKIP_TRASHED_TRACKS": "Ignora le tracce eliminate",
+  "DESCRIPTION_SETTINGS_SKIP_TRASHED_TRACKS": "Salta automaticamente le canzoni eliminate e trova la traccia successiva consentita durante la riproduzione",
+  "SETTINGS_AUTO_CLEAN_QUEUE": "Coda pulizia automatica",
+  "DESCRIPTION_SETTINGS_AUTO_CLEAN_QUEUE": "Rimuovi automaticamente le canzoni eliminate dalla tua coda di riproduzione casuale intelligente",
   "SETTINGS_TRASH_ON_NEXT_HOTKEY": "Cestino sul prossimo tasto di scelta rapida",
-  "DESCRIPTION_SETTINGS_TRASH_ON_NEXT_HOTKEY": "Elimina automaticamente la canzone corrente quando si utilizza la scorciatoia da tastiera Ctrl+Destra per passare alla traccia successiva"
+  "DESCRIPTION_SETTINGS_TRASH_ON_NEXT_HOTKEY": "Sposta automaticamente la canzone corrente nel cestino quando si utilizza la scorciatoia da tastiera Ctrl+Destra per passare alla traccia successiva"
 }

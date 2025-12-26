@@ -169,79 +169,79 @@ def looks_like_translation_key(s: str) -> bool:
     return "." in s or (s.isupper() and "_" in s)
 
 
-def find_used_keys(src_dir: Path) -> Tuple[Set[str], Set[str]]:
-    used_keys = set()
-    dynamic_prefixes = set()
+# def find_used_keys(src_dir: Path) -> Tuple[Set[str], Set[str]]:
+#     used_keys = set()
+#     dynamic_prefixes = set()
 
-    for file_path in get_source_files(src_dir):
-        try:
-            with open(file_path, "r", encoding="utf-8") as f:
-                for line in f:
-                    if line.strip().startswith("//"):
-                        continue
-                    for string, is_dynamic in extract_strings_from_line(line):
-                        if is_dynamic and looks_like_translation_key(
-                            string.split("${")[0].strip()
-                        ):
-                            parts = string.split(".")
-                            prefix_parts = []
-                            for part in parts:
-                                if (
-                                    "${" in part
-                                    or "[" in part
-                                    or "}" in part
-                                    or "]" in part
-                                ):
-                                    break
-                                prefix_parts.append(part)
-                            if prefix_parts:
-                                dynamic_prefixes.add(".".join(prefix_parts))
-                        elif not is_dynamic:
-                            cleaned = string.strip()
-                            if looks_like_translation_key(cleaned):
-                                used_keys.add(cleaned)
-        except Exception:
-            pass
+#     for file_path in get_source_files(src_dir):
+#         try:
+#             with open(file_path, "r", encoding="utf-8") as f:
+#                 for line in f:
+#                     if line.strip().startswith("//"):
+#                         continue
+#                     for string, is_dynamic in extract_strings_from_line(line):
+#                         if is_dynamic and looks_like_translation_key(
+#                             string.split("${")[0].strip()
+#                         ):
+#                             parts = string.split(".")
+#                             prefix_parts = []
+#                             for part in parts:
+#                                 if (
+#                                     "${" in part
+#                                     or "[" in part
+#                                     or "}" in part
+#                                     or "]" in part
+#                                 ):
+#                                     break
+#                                 prefix_parts.append(part)
+#                             if prefix_parts:
+#                                 dynamic_prefixes.add(".".join(prefix_parts))
+#                         elif not is_dynamic:
+#                             cleaned = string.strip()
+#                             if looks_like_translation_key(cleaned):
+#                                 used_keys.add(cleaned)
+#         except Exception:
+#             pass
 
-    return used_keys, dynamic_prefixes
+#     return used_keys, dynamic_prefixes
 
 
-def filter_unused_keys(
-    obj: dict, used_keys: Set[str], dynamic_prefixes: Set[str], prefix: str = ""
-) -> dict:
-    if not isinstance(obj, dict):
-        return obj
+# def filter_unused_keys(
+#     obj: dict, used_keys: Set[str], dynamic_prefixes: Set[str], prefix: str = ""
+# ) -> dict:
+#     if not isinstance(obj, dict):
+#         return obj
 
-    result = {}
-    for k, v in obj.items():
-        current_key = f"{prefix}.{k}" if prefix else k
+#     result = {}
+#     for k, v in obj.items():
+#         current_key = f"{prefix}.{k}" if prefix else k
 
-        is_protected = any(
-            current_key.startswith(dp + ".") or current_key == dp
-            for dp in dynamic_prefixes
-        )
-        is_used = current_key in used_keys
+#         is_protected = any(
+#             current_key.startswith(dp + ".") or current_key == dp
+#             for dp in dynamic_prefixes
+#         )
+#         is_used = current_key in used_keys
 
-        if is_protected or is_used:
-            result[k] = (
-                filter_unused_keys(v, used_keys, dynamic_prefixes, current_key)
-                if isinstance(v, dict)
-                else v
-            )
-        elif isinstance(v, dict):
-            prefix_with_dot = current_key + "."
-            has_descendant = any(
-                key.startswith(prefix_with_dot) for key in used_keys
-            ) or any(dp.startswith(prefix_with_dot) for dp in dynamic_prefixes)
+#         if is_protected or is_used:
+#             result[k] = (
+#                 filter_unused_keys(v, used_keys, dynamic_prefixes, current_key)
+#                 if isinstance(v, dict)
+#                 else v
+#             )
+#         elif isinstance(v, dict):
+#             prefix_with_dot = current_key + "."
+#             has_descendant = any(
+#                 key.startswith(prefix_with_dot) for key in used_keys
+#             ) or any(dp.startswith(prefix_with_dot) for dp in dynamic_prefixes)
 
-            if has_descendant:
-                filtered = filter_unused_keys(
-                    v, used_keys, dynamic_prefixes, current_key
-                )
-                if filtered:
-                    result[k] = filtered
+#             if has_descendant:
+#                 filtered = filter_unused_keys(
+#                     v, used_keys, dynamic_prefixes, current_key
+#                 )
+#                 if filtered:
+#                     result[k] = filtered
 
-    return result
+#     return result
 
 
 def main():
@@ -249,10 +249,10 @@ def main():
     src_dir = Path("src")
     source_file = i18n_dir / "en.json"
 
-    print("Finding used keys...")
-    used_keys, dynamic_prefixes = find_used_keys(src_dir)
+    # print("Finding used keys...")
+    # used_keys, dynamic_prefixes = find_used_keys(src_dir)
 
-    print("Cleaning source file...")
+    # print("Cleaning source file...")
     data = json.loads(source_file.read_text(encoding="utf-8"))
     # cleaned_data = filter_unused_keys(data, used_keys, dynamic_prefixes)
     # source_file.write_text(
@@ -282,7 +282,7 @@ def main():
         file_path = i18n_dir / f"{lang_code}.json"
         file_path.write_text(
             json.dumps(
-                reconstruct_json(cleaned_data, translations_by_lang[lang_code]),
+                reconstruct_json(data, translations_by_lang[lang_code]),
                 ensure_ascii=False,
                 indent=2,
             ),
