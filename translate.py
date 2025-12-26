@@ -165,7 +165,8 @@ def extract_strings_from_line(line: str) -> List[tuple[str, bool]]:
 
 
 def looks_like_translation_key(s: str) -> bool:
-    return "." in s
+    # Match dotted keys (e.g., "settings.title") or SCREAMING_SNAKE_CASE keys (e.g., "ACTION_THROW")
+    return "." in s or (s.isupper() and "_" in s)
 
 
 def find_used_keys(src_dir: Path) -> Tuple[Set[str], Set[str]]:
