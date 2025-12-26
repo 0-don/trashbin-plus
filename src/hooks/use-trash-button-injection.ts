@@ -38,7 +38,6 @@ export const useTrashButtonInjection = (
 
     container.querySelectorAll(config.moreButtonSelector).forEach((moreBtn) => {
       const row = moreBtn.closest(config.rowSelector);
-      console.log("Found row for moreBtn:", moreBtn, row);
       if (!row) return;
 
       const trackData = extractTrackData(moreBtn.parentElement || row);

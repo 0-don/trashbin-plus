@@ -13,7 +13,8 @@ export const TRACKLIST_CONFIG = {
   containerSelector: "main",
   buttonSelector: ".trashbin-tracklist-btn",
   rowSelector: ".main-trackList-trackListRow",
-  moreButtonSelector: "button[aria-haspopup='menu']",
+  moreButtonSelector:
+    "button[aria-haspopup='menu'], button[data-testid='add-to-playlist-button']",
   buttonClassName: "trashbin-tracklist-btn",
 } as const;
 
