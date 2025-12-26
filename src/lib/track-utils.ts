@@ -233,19 +233,7 @@ export function shouldSkipTrack(uri: string, type: string): boolean {
   return false;
 }
 
-// Internal state for queue management
-let isQueueCleanInProgress = false;
-let lastQueueCleanAttempt = 0;
-const QUEUE_CLEAN_COOLDOWN_MS = 2000;
-
 export async function manageSmartShuffleQueue(): Promise<void> {
-  // Prevent concurrent calls
-  if (isQueueCleanInProgress) return;
-
-  // Cooldown to prevent too frequent calls
-  const now = Date.now();
-  if (now - lastQueueCleanAttempt < QUEUE_CLEAN_COOLDOWN_MS) return;
-
   if (!document.querySelector(SELECTORS.SMART_SHUFFLE_BUTTON)) return;
 
   const queueTracks = getQueueTracks();
@@ -280,29 +268,8 @@ export async function manageSmartShuffleQueue(): Promise<void> {
     // Exit if no tracks to remove (prevent infinite loop)
     if (tracksToRemove.length === 0) return;
 
-    isQueueCleanInProgress = true;
-    lastQueueCleanAttempt = now;
-
-    try {
-      await Spicetify.removeFromQueue(tracksToRemove);
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-
-      // Verify removal was successful by checking if tracks are still in queue
-      const updatedQueue = getQueueTracks();
-      const removedUris = new Set(tracksToRemove.map((t) => t.uri));
-      const stillPresent = updatedQueue.some((track) =>
-        removedUris.has(track.contextTrack.uri),
-      );
-
-      if (stillPresent) {
-        console.warn(
-          "[Trashbin+] Some tracks may not have been removed from queue",
-        );
-      }
-    } catch (err) {
-      console.error("[Trashbin+] Failed to remove tracks from queue:", err);
-    } finally {
-      isQueueCleanInProgress = false;
-    }
+    await Spicetify.removeFromQueue(tracksToRemove);
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    // await manageSmartShuffleQueue();
   }
 }
