@@ -35,10 +35,12 @@ Skip songs and artists you don't like automatically! A modern upgrade to the cla
 Access settings through your profile menu → "Trashbin+ Settings":
 
 **Options**
+
 - **Enabled** - Master toggle to enable or disable Trashbin+
 - **Show Widget Icon** - Display trash icon in playback bar for quick access
 
 **Features**
+
 - **Autoplay on Start** - Automatically start playing when Spotify opens
 - **Enable Queue Trashbin** - Add trash buttons next to songs in your queue
 - **Enable Tracklist Trashbin** - Add trash buttons in playlist and album views
@@ -55,6 +57,12 @@ Access settings through your profile menu → "Trashbin+ Settings":
 ## Need help?
 
 [Report issues or ask questions here](https://github.com/0-don/trashbin-plus/issues)
+
+<!--
+Go to: https://www.jsdelivr.com/tools/purge
+Enter: https://cdn.jsdelivr.net/gh/0-don/trashbin-plus@main/dist/trashbin-plus.js
+Click purge
+-->
 
 <!-- ## Step 1:
 
