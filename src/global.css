@@ -3,10 +3,11 @@
 @import "tailwindcss/utilities.css" layer(utilities);
 
 @layer base {
-  .main-trackCreditsModal-mainSection button {
-    background-color: transparent;
-    border: none;
-    padding: 0;
-    margin: 0;
+  .main-trackCreditsModal-mainSection button,
+  .main-addButton-button {
+    background-color: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
   }
 }
