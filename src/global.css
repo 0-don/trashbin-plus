@@ -3,8 +3,7 @@
 @import "tailwindcss/utilities.css" layer(utilities);
 
 @layer base {
-  /* Reset button styles that Spicetify overrides */
-  button {
+  .main-trackCreditsModal-mainSection button {
     background-color: transparent;
     border: none;
     padding: 0;
