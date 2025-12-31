@@ -13,91 +13,79 @@ export interface ArtistDisplayData {
   secondaryText: string;
 }
 
-export async function fetchTracksBatch(
-  trackIds: string[],
-): Promise<TrackDisplayData[]> {
-  try {
-    const response = await Spicetify.CosmosAsync.get(
-      `https://api.spotify.com/v1/tracks?ids=${trackIds.join(",")}`,
-    );
+const BASE62 = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-    return response.tracks.map((track: any, index: number) => ({
-      uri: `spotify:track:${trackIds[index]}`,
-      name: track?.name || "Unknown Track",
-      artist:
-        track?.artists?.map((a: any) => a.name).join(", ") || "Unknown Artist",
-      imageUrl: track?.album?.images?.[0]?.url,
-    }));
-  } catch (error) {
-    console.error("Failed to fetch tracks:", error);
-    return trackIds.map((id) => ({
-      uri: `spotify:track:${id}`,
-      name: "Error loading track",
-      artist: "Failed to load",
-    }));
+function toHex(id: string): string {
+  let n = BigInt(0);
+  for (const c of id) {
+    const i = BASE62.indexOf(c);
+    if (i === -1) return "0".repeat(32);
+    n = n * 62n + BigInt(i);
   }
+  return n.toString(16).padStart(32, "0");
+}
+
+async function fetchMetadata(type: "track" | "artist", id: string) {
+  const token = (await Spicetify.Platform.AuthorizationAPI.getState()).token
+    .accessToken;
+  const res = await fetch(
+    `https://spclient.wg.spotify.com/metadata/4/${type}/${toHex(id)}?market=from_token`,
+    {
+      headers: { Accept: "application/json", Authorization: `Bearer ${token}` },
+    },
+  );
+  return res.json();
 }
 
 export async function fetchTracksMetadata(
   uris: string[],
-  offset = 0,
-  limit = 50,
 ): Promise<TrackDisplayData[]> {
-  const batch = uris.slice(offset, offset + limit);
-  const trackIds = batch.map((uri) => uri.split(":")[2]);
-
-  // Split into chunks of 50 (Spotify API limit)
-  const results: TrackDisplayData[] = [];
-  for (let i = 0; i < trackIds.length; i += 50) {
-    const chunk = trackIds.slice(i, i + 50);
-    const chunkResults = await fetchTracksBatch(chunk);
-    results.push(...chunkResults);
-  }
-
-  return results;
-}
-
-async function fetchArtistsBatch(
-  artistIds: string[],
-): Promise<ArtistDisplayData[]> {
-  try {
-    const response = await Spicetify.CosmosAsync.get(
-      `https://api.spotify.com/v1/artists?ids=${artistIds.join(",")}`,
-    );
-
-    return response.artists.map((artist: any, index: number) => ({
-      uri: `spotify:artist:${artistIds[index]}`,
-      name: artist?.name || "Unknown Artist",
-      type: "artist" as const,
-      imageUrl: artist?.images?.[0]?.url,
-      secondaryText: "Artist",
-    }));
-  } catch (error) {
-    console.error("Failed to fetch artists batch:", error);
-    return artistIds.map((id) => ({
-      uri: `spotify:artist:${id}`,
-      name: "Error loading artist",
-      type: "artist" as const,
-      secondaryText: "Failed to load",
-    }));
-  }
+  return Promise.all(
+    uris.map(async (uri) => {
+      const id = uri.split(":")[2];
+      try {
+        const r = await fetchMetadata("track", id);
+        return {
+          uri,
+          name: r?.name || "Unknown Track",
+          artist:
+            r?.artist?.map((a: any) => a.name).join(", ") || "Unknown Artist",
+          imageUrl: r?.album?.cover_group?.image?.[0]?.file_id
+            ? `https://i.scdn.co/image/${r.album.cover_group.image[0].file_id}`
+            : undefined,
+        };
+      } catch {
+        return { uri, name: "Error loading track", artist: "Failed to load" };
+      }
+    }),
+  );
 }
 
 export async function fetchArtistsMetadata(
   uris: string[],
-  offset = 0,
-  limit = 50,
 ): Promise<ArtistDisplayData[]> {
-  const batch = uris.slice(offset, offset + limit);
-  const artistIds = batch.map((uri) => uri.split(":")[2]);
-
-  // Split into chunks of 50 (Spotify API limit)
-  const results: ArtistDisplayData[] = [];
-  for (let i = 0; i < artistIds.length; i += 50) {
-    const chunk = artistIds.slice(i, i + 50);
-    const chunkResults = await fetchArtistsBatch(chunk);
-    results.push(...chunkResults);
-  }
-
-  return results;
+  return Promise.all(
+    uris.map(async (uri) => {
+      const id = uri.split(":")[2];
+      try {
+        const r = await fetchMetadata("artist", id);
+        return {
+          uri,
+          name: r?.name || "Unknown Artist",
+          type: "artist" as const,
+          imageUrl: r?.portrait_group?.image?.[0]?.file_id
+            ? `https://i.scdn.co/image/${r.portrait_group.image[0].file_id}`
+            : undefined,
+          secondaryText: "Artist",
+        };
+      } catch {
+        return {
+          uri,
+          name: "Error loading artist",
+          type: "artist" as const,
+          secondaryText: "Failed to load",
+        };
+      }
+    }),
+  );
 }

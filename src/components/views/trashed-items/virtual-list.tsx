@@ -88,7 +88,7 @@ export const VirtualList: React.FC<VirtualListProps> = ({
     <>
       <div
         ref={parentRef}
-        className="h-[400px] overflow-auto rounded-lg border border-white/10 bg-black/20"
+        className="h-100 overflow-auto rounded-lg border border-white/10 bg-black/20"
       >
         <div
           style={{
