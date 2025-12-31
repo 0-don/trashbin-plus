@@ -7,7 +7,7 @@
     "build": "tsc --noEmit && spicetify-creator",
     "build:local": "tsc --noEmit && spicetify-creator --out=dist --minify",
     "dev:fix": "rm -rf yarn.lock && rm -rf node_modules && yarn && yarn cache clean && yarn --force && concurrently \"spicetify-creator --watch\" \"spicetify watch -e\"",
-    "dev": "concurrently \"spicetify-creator --watch\" \"spicetify watch -e\"",
+    "dev": "concurrently \"npx spicetify-creator --watch\" \"spicetify watch -e\"",
     "prettier": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json,css,md}\""
   },
   "dependencies": {
