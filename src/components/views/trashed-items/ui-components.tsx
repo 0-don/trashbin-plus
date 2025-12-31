@@ -50,10 +50,10 @@ export const ItemRow: React.FC<ItemRowProps> = ({ item, onUntrash }) => {
           e.preventDefault();
           onUntrash(item.uri);
         }}
-        className="mx-2! rounded-full p-2 hover:bg-red-500/20 hover:text-red-400"
+        className="group mx-2! cursor-pointer rounded-full bg-transparent! p-2! hover:bg-red-500/20"
         title="Remove from trashbin"
       >
-        <IoClose className="h-5 w-5 text-white/70" />
+        <IoClose className="h-5 w-5 text-white/70 group-hover:text-red-400" />
       </button>
     </div>
   );

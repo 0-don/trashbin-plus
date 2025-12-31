@@ -1,1 +1,13 @@
-@import "tailwindcss";
+@layer theme, base, components, utilities;
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);
+
+@layer base {
+  /* Reset button styles that Spicetify overrides */
+  button {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+  }
+}
