@@ -12,11 +12,19 @@ export const useRecommendationMonitor = () => {
   const processing = useRef(false);
 
   useEffect(() => {
-    if (!store.trashbinEnabled || !store.remoteToggleEnabled || !store.trashViaLikeEnabled) return;
+    if (
+      !store.trashbinEnabled ||
+      !store.remoteToggleEnabled ||
+      !store.trashViaLikeEnabled
+    )
+      return;
 
     const interval = setInterval(async () => {
       if (processing.current) return;
-      if (Spicetify.Platform.ConnectAPI.state.activeDevice.id === "local_device") return;
+      if (
+        Spicetify.Platform.ConnectAPI.state.activeDevice.id === "local_device"
+      )
+        return;
 
       const track = Spicetify.Player.data?.item;
       if (!track?.uri) return;
@@ -33,7 +41,9 @@ export const useRecommendationMonitor = () => {
         processing.current = true;
         try {
           const trackId = track.uri.split(":")[2];
-          await Spicetify.CosmosAsync.del(`https://api.spotify.com/v1/me/tracks?ids=${trackId}`);
+          await Spicetify.CosmosAsync.del(
+            `https://api.spotify.com/v1/me/tracks?ids=${trackId}`,
+          );
 
           if (!store.getTrashStatus(track.uri).isTrashed) {
             store.toggleSongTrash(track.uri, false);
@@ -50,5 +60,11 @@ export const useRecommendationMonitor = () => {
     }, 2000);
 
     return () => clearInterval(interval);
-  }, [store.trashbinEnabled, store.remoteToggleEnabled, store.trashViaLikeEnabled, store.getTrashStatus, store.toggleSongTrash]);
+  }, [
+    store.trashbinEnabled,
+    store.remoteToggleEnabled,
+    store.trashViaLikeEnabled,
+    store.getTrashStatus,
+    store.toggleSongTrash,
+  ]);
 };

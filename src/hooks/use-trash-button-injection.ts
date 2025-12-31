@@ -35,7 +35,6 @@ export const useTrashButtonInjection = (
 
     if (!container) return;
 
-
     container.querySelectorAll(config.moreButtonSelector).forEach((moreBtn) => {
       const row = moreBtn.closest(config.rowSelector);
       if (!row) return;

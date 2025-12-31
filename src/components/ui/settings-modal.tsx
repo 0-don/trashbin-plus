@@ -12,7 +12,7 @@ const Tooltip: React.FC<{
 }> = ({ children, content }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [position, setPosition] = useState({ x: 0, y: 0 });
-  const timeoutRef = useRef<number>();
+  const timeoutRef = useRef<NodeJS.Timeout>();
 
   const handleMouseEnter = (e: React.MouseEvent) => {
     clearTimeout(timeoutRef.current);
@@ -65,10 +65,12 @@ const Toggle: React.FC<{
   description?: string;
   disabled?: boolean;
 }> = ({ label, enabled, onChange, description, disabled }) => (
-  <div className={cn(
-    "flex items-center justify-between gap-2.5! py-2.5!",
-    disabled && "opacity-50!",
-  )}>
+  <div
+    className={cn(
+      "flex items-center justify-between gap-2.5! py-2.5!",
+      disabled && "opacity-50!",
+    )}
+  >
     <label className="flex w-full items-center gap-1.5! pr-4">
       {label}
       {description && (

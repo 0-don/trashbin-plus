@@ -20,6 +20,7 @@ function toHex(id: string): string {
   for (const c of id) {
     const i = BASE62.indexOf(c);
     if (i === -1) return "0".repeat(32);
+    // @ts-ignore
     n = n * 62n + BigInt(i);
   }
   return n.toString(16).padStart(32, "0");

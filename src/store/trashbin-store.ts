@@ -116,7 +116,10 @@ export const useTrashbinStore = create<TrashbinState>((set, get) => ({
       playlistMonitorEnabled: initValue(STORAGE_KEYS.PLAYLIST_MONITOR, true),
       trashOnNextHotkey: initValue(STORAGE_KEYS.TRASH_ON_NEXT_HOTKEY, false),
       remoteToggleEnabled: initValue(STORAGE_KEYS.REMOTE_TOGGLE_ENABLED, false),
-      remoteSkippingEnabled: initValue(STORAGE_KEYS.REMOTE_SKIPPING_ENABLED, false),
+      remoteSkippingEnabled: initValue(
+        STORAGE_KEYS.REMOTE_SKIPPING_ENABLED,
+        false,
+      ),
       trashViaLikeEnabled: initValue(STORAGE_KEYS.TRASH_VIA_LIKE, false),
     });
   },

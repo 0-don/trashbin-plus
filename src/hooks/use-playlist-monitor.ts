@@ -10,7 +10,7 @@ interface PlaylistMonitorState {
 
 export function usePlaylistMonitor() {
   const trashbinStore = useTrashbinStore();
-  const intervalRef = useRef<number | null>(null);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const stateRef = useRef<PlaylistMonitorState>({ currentPlaylistUri: null });
 
   const loadState = useCallback((): void => {
@@ -108,5 +108,10 @@ export function usePlaylistMonitor() {
       stopMonitoring();
       Spicetify.Player.removeEventListener("songchange", handleSongChange);
     };
-  }, [trashbinStore.playlistMonitorEnabled, handleSongChange, startMonitoring, stopMonitoring]);
+  }, [
+    trashbinStore.playlistMonitorEnabled,
+    handleSongChange,
+    startMonitoring,
+    stopMonitoring,
+  ]);
 }
