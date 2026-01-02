@@ -119,7 +119,7 @@ const ActionButton: React.FC<{
       <button
         className={cn(
           "rounded-full! bg-transparent! font-bold! transition-transform!",
-          "border! border-[#727272]! px-[15px]! duration-33!",
+          "border! border-[#727272]! px-3.75! duration-33!",
           "min-h-8! cursor-pointer! text-(--spice-text)!",
           "hover:scale-[1.04]! hover:border-(--spice-text)!",
         )}
