@@ -1,17 +1,13 @@
-@layer theme, base, components, utilities;
-@import "tailwindcss/theme.css" layer(theme);
-@import "tailwindcss/utilities.css" layer(utilities);
+@import "tailwindcss";
 
-@layer base {
-  .main-trackCreditsModal-mainSection button,
-  .main-addButton-button {
-    background-color: transparent !important;
-    border: none !important;
-    padding: 0 !important;
-    margin: 0 !important;
-  }
-  .main-addButton-button {
-    padding-top: 5px !important;
-    padding-left: 3px !important;
-  }
+.main-trackCreditsModal-mainSection button,
+.main-addButton-button {
+  background-color: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+.main-addButton-button {
+  padding-top: 5px !important;
+  padding-left: 3px !important;
 }
