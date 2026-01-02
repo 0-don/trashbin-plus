@@ -45,6 +45,13 @@ export const ItemRow: React.FC<ItemRowProps> = ({ item, onUntrash }) => {
         </div>
       </div>
       <button
+        onClick={() => navigator.clipboard.writeText(item.uri)}
+        className="shrink-0 cursor-pointer bg-transparent! text-xs text-white/40 hover:text-white/60"
+        title="Click to copy URI"
+      >
+        {item.uri}
+      </button>
+      <button
         onClick={(e) => {
           e.stopPropagation();
           e.preventDefault();
