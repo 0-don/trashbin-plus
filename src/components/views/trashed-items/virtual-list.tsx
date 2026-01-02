@@ -1,5 +1,5 @@
 import { useVirtualizer } from "@tanstack/react-virtual";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   fetchArtistsMetadata,
@@ -7,6 +7,17 @@ import {
 } from "../../../lib/metadata-utils";
 import { ItemData, TabType } from "../../../lib/types";
 import { ItemRow } from "./ui-components";
+
+function useDebounce<T>(value: T, delay: number): T {
+  const [debouncedValue, setDebouncedValue] = useState(value);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setDebouncedValue(value), delay);
+    return () => clearTimeout(timer);
+  }, [value, delay]);
+
+  return debouncedValue;
+}
 
 interface VirtualListProps {
   items: string[];
@@ -23,9 +34,35 @@ export const VirtualList: React.FC<VirtualListProps> = ({
   const parentRef = useRef<HTMLDivElement>(null);
   const [itemCache, setItemCache] = useState<Map<number, ItemData>>(new Map());
   const [loadingBatches, setLoadingBatches] = useState<Set<string>>(new Set());
+  const [searchQuery, setSearchQuery] = useState("");
+  const debouncedSearch = useDebounce(searchQuery, 300);
+
+  const filteredItems = useMemo(() => {
+    if (!debouncedSearch.trim()) {
+      return items.map((uri, index) => ({ uri, originalIndex: index }));
+    }
+
+    const query = debouncedSearch.toLowerCase();
+    return items
+      .map((uri, index) => ({ uri, originalIndex: index }))
+      .filter(({ uri, originalIndex }) => {
+        const cachedData = itemCache.get(originalIndex);
+        if (cachedData) {
+          const nameMatch = cachedData.name.toLowerCase().includes(query);
+          const secondaryMatch =
+            "artist" in cachedData
+              ? cachedData.artist.toLowerCase().includes(query)
+              : cachedData.secondaryText.toLowerCase().includes(query);
+          return (
+            nameMatch || secondaryMatch || uri.toLowerCase().includes(query)
+          );
+        }
+        return uri.toLowerCase().includes(query);
+      });
+  }, [items, debouncedSearch, itemCache]);
 
   const virtualizer = useVirtualizer({
-    count: items.length,
+    count: filteredItems.length,
     getScrollElement: () => parentRef.current,
     estimateSize: () => 60,
     overscan: 10,
@@ -86,6 +123,15 @@ export const VirtualList: React.FC<VirtualListProps> = ({
 
   return (
     <>
+      <div className="mb-3">
+        <input
+          type="text"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          placeholder={t("ITEMS_SEARCH_PLACEHOLDER")}
+          className="w-full rounded-lg border border-white/10 bg-black/30 px-4 py-2 text-sm text-white placeholder-white/40 outline-none focus:border-white/30"
+        />
+      </div>
       <div
         ref={parentRef}
         className="h-100 overflow-auto rounded-lg border border-white/10 bg-black/20"
@@ -96,18 +142,19 @@ export const VirtualList: React.FC<VirtualListProps> = ({
             position: "relative",
           }}
         >
-          {virtualizer.getVirtualItems().map((item) => {
-            const data = itemCache.get(item.index);
+          {virtualizer.getVirtualItems().map((virtualItem) => {
+            const { originalIndex } = filteredItems[virtualItem.index];
+            const data = itemCache.get(originalIndex);
             return (
               <div
-                key={item.key}
+                key={virtualItem.key}
                 style={{
                   position: "absolute",
                   top: 0,
                   left: 0,
                   width: "100%",
-                  height: item.size,
-                  transform: `translateY(${item.start}px)`,
+                  height: virtualItem.size,
+                  transform: `translateY(${virtualItem.start}px)`,
                 }}
               >
                 {data ? (
