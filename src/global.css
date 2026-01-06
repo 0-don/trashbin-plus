@@ -1,27 +1,7 @@
-@import "tailwindcss/preflight.css";
-@import "tailwindcss/utilities.css";
+@layer theme, base, components, utilities;
 
-@theme inline {
-  --color-red-400: #f87171;
-  --color-red-500: #ef4444;
-  --color-green-500: #22c55e;
-  --color-black: #000;
-  --color-white: #fff;
-  --spacing: 0.25rem;
-  --radius-md: 0.375rem;
-  --radius-lg: 0.5rem;
-  --font-weight-medium: 500;
-  --font-weight-semibold: 600;
-  --font-weight-bold: 700;
-  --text-xs: 0.75rem;
-  --text-xs--line-height: 1rem;
-  --text-sm: 0.875rem;
-  --text-sm--line-height: 1.25rem;
-  --text-lg: 1.125rem;
-  --text-lg--line-height: 1.75rem;
-  --text-xl: 1.25rem;
-  --text-xl--line-height: 1.75rem;
-}
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);
 
 .main-trackCreditsModal-mainSection button,
 .main-addButton-button {
@@ -32,4 +12,5 @@
 }
 .main-addButton-button {
   padding-left: 3px !important;
+  padding-top: 4px !important;
 }
