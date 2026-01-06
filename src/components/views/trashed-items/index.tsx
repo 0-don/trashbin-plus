@@ -102,6 +102,27 @@ export const TrashedItemsView: React.FC = () => {
         .trashbin-loaded-count {
           color: rgba(255, 255, 255, 0.4) !important;
         }
+        .trashbin-tab-btn {
+          color: rgba(255, 255, 255, 0.6) !important;
+          border-color: transparent !important;
+          background: transparent !important;
+        }
+        .trashbin-tab-btn:hover {
+          color: rgba(255, 255, 255, 0.8) !important;
+        }
+        .trashbin-tab-btn--active {
+          color: white !important;
+          border-color: #22c55e !important;
+        }
+        .trashbin-tab-btn--active:hover {
+          color: white !important;
+        }
+        .trashbin-tab-count {
+          color: rgba(255, 255, 255, 0.6) !important;
+        }
+        .trashbin-tab-indicator {
+          background-color: #22c55e !important;
+        }
       `}</style>
 
       {/* Tab Navigation */}

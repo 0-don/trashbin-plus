@@ -110,28 +110,15 @@ export const TabButton: React.FC<TabButtonProps> = (props) => (
   <button
     onClick={props.onClick}
     className={cn(
-      "relative px-4! py-2! text-lg font-medium transition-colors",
+      "trashbin-tab-btn relative px-4! py-2! text-lg font-medium transition-colors",
       "border-b-2",
+      props.isActive && "trashbin-tab-btn--active",
     )}
-    style={{
-      borderColor: props.isActive ? "#22c55e" : "transparent",
-      color: props.isActive ? "white" : "rgba(255, 255, 255, 0.6)",
-    }}
-    onMouseEnter={(e) => {
-      if (!props.isActive) {
-        e.currentTarget.style.color = "rgba(255, 255, 255, 0.8)";
-      }
-    }}
-    onMouseLeave={(e) => {
-      if (!props.isActive) {
-        e.currentTarget.style.color = "rgba(255, 255, 255, 0.6)";
-      }
-    }}
   >
     {props.label}
-    <span className="mx-1! text-xs" style={{ color: "rgba(255, 255, 255, 0.6)" }}>({props.count})</span>
+    <span className="trashbin-tab-count mx-1! text-xs">({props.count})</span>
     {props.isActive && (
-      <div className="absolute right-0 bottom-0 left-0 h-0.5" style={{ backgroundColor: "#22c55e" }} />
+      <div className="trashbin-tab-indicator absolute right-0 bottom-0 left-0 h-0.5" />
     )}
   </button>
 );
