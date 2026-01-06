@@ -1,7 +1,7 @@
-@layer theme, base, components, utilities;
+@layer theme;
 
 @import "tailwindcss/theme.css" layer(theme);
-@import "tailwindcss/utilities.css" layer(utilities);
+@import "tailwindcss/utilities.css";
 
 .main-trackCreditsModal-mainSection button,
 .main-addButton-button {
@@ -10,6 +10,7 @@
   padding: 0 !important;
   margin: 0 !important;
 }
+
 .main-addButton-button {
   padding-left: 3px !important;
   padding-top: 4px !important;
