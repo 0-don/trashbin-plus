@@ -24,7 +24,7 @@ export const ItemRow: React.FC<ItemRowProps> = ({ item, onUntrash }) => {
     : (item as TrackDisplayData).artist;
 
   return (
-    <div className="flex items-center justify-between rounded-md p-3 transition-colors" style={{ backgroundColor: "transparent" }} onMouseEnter={(e) => e.currentTarget.style.backgroundColor = "rgba(255, 255, 255, 0.05)"} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = "transparent"}>
+    <div className="trashbin-item-row flex items-center justify-between rounded-md p-3 transition-colors">
       <div className="flex min-w-0 flex-1 items-center gap-3">
         {item.imageUrl ? (
           <img
@@ -47,10 +47,7 @@ export const ItemRow: React.FC<ItemRowProps> = ({ item, onUntrash }) => {
       </div>
       <button
         onClick={() => navigator.clipboard.writeText(item.uri)}
-        className="shrink-0 cursor-pointer bg-transparent! text-xs transition-colors"
-        style={{ color: "rgba(255, 255, 255, 0.4)" }}
-        onMouseEnter={(e) => e.currentTarget.style.color = "rgba(255, 255, 255, 0.6)"}
-        onMouseLeave={(e) => e.currentTarget.style.color = "rgba(255, 255, 255, 0.4)"}
+        className="trashbin-uri-btn shrink-0 cursor-pointer text-xs transition-colors"
         title="Click to copy URI"
       >
         {item.uri}
@@ -61,21 +58,10 @@ export const ItemRow: React.FC<ItemRowProps> = ({ item, onUntrash }) => {
           e.preventDefault();
           onUntrash(item.uri);
         }}
-        className="mx-2! cursor-pointer rounded-full bg-transparent! p-2! transition-colors"
-        style={{ backgroundColor: "transparent" }}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.backgroundColor = "rgba(239, 68, 68, 0.2)";
-          const icon = e.currentTarget.querySelector("svg");
-          if (icon) icon.style.color = "#f87171";
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.backgroundColor = "transparent";
-          const icon = e.currentTarget.querySelector("svg");
-          if (icon) icon.style.color = "rgba(255, 255, 255, 0.7)";
-        }}
+        className="trashbin-remove-btn mx-2! cursor-pointer rounded-full p-2! transition-colors"
         title="Remove from trashbin"
       >
-        <IoClose className="h-5 w-5 transition-colors" style={{ color: "rgba(255, 255, 255, 0.7)" }} />
+        <IoClose className="h-5 w-5 transition-colors" />
       </button>
     </div>
   );

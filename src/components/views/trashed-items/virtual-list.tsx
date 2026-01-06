@@ -160,22 +160,13 @@ export const VirtualList: React.FC<VirtualListProps> = (props) => {
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           placeholder={t("ITEMS_SEARCH_PLACEHOLDER")}
-          className="w-full rounded-lg border px-4 py-2 text-sm outline-none"
-          style={{
-            borderColor: "rgba(255, 255, 255, 0.1)",
-            backgroundColor: "rgba(0, 0, 0, 0.3)",
-            color: "white",
-          }}
+          className="trashbin-search-input w-full rounded-lg border px-4 py-2 text-sm outline-none"
         />
       </div>
       <div
         ref={containerRef}
         onScroll={handleScroll}
-        className="h-100 overflow-auto rounded-lg border"
-        style={{
-          borderColor: "rgba(255, 255, 255, 0.1)",
-          backgroundColor: "rgba(0, 0, 0, 0.2)",
-        }}
+        className="trashbin-list-container h-100 overflow-auto rounded-lg border"
       >
         <div style={{ height: totalHeight, position: "relative" }}>
           {visibleItems.map((item) => {
@@ -195,7 +186,7 @@ export const VirtualList: React.FC<VirtualListProps> = (props) => {
                   <ItemRow item={data} onUntrash={props.onUntrash} />
                 ) : (
                   <div className="flex h-full items-center justify-center">
-                    <div className="h-6 w-6 animate-spin rounded-full border-2" style={{ borderColor: "rgba(255, 255, 255, 0.2)", borderTopColor: "rgba(255, 255, 255, 0.6)" }} />
+                    <div className="trashbin-spinner h-6 w-6 animate-spin rounded-full border-2" />
                   </div>
                 )}
               </div>
@@ -205,7 +196,7 @@ export const VirtualList: React.FC<VirtualListProps> = (props) => {
       </div>
 
       <div className="py-4! text-center">
-        <p className="text-sm" style={{ color: "rgba(255, 255, 255, 0.4)" }}>
+        <p className="trashbin-loaded-count text-sm">
           {t("ITEMS_LOADED_COUNT", {
             loaded: itemCache.size,
             total: props.items.length,
