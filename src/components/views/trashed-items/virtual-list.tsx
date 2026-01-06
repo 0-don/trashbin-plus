@@ -160,13 +160,22 @@ export const VirtualList: React.FC<VirtualListProps> = (props) => {
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           placeholder={t("ITEMS_SEARCH_PLACEHOLDER")}
-          className="w-full rounded-lg border border-white/10 bg-black/30 px-4 py-2 text-sm text-white placeholder-white/40 outline-none focus:border-white/30"
+          className="w-full rounded-lg border px-4 py-2 text-sm outline-none"
+          style={{
+            borderColor: "rgba(255, 255, 255, 0.1)",
+            backgroundColor: "rgba(0, 0, 0, 0.3)",
+            color: "white",
+          }}
         />
       </div>
       <div
         ref={containerRef}
         onScroll={handleScroll}
-        className="h-100 overflow-auto rounded-lg border border-white/10 bg-black/20"
+        className="h-100 overflow-auto rounded-lg border"
+        style={{
+          borderColor: "rgba(255, 255, 255, 0.1)",
+          backgroundColor: "rgba(0, 0, 0, 0.2)",
+        }}
       >
         <div style={{ height: totalHeight, position: "relative" }}>
           {visibleItems.map((item) => {
@@ -186,7 +195,7 @@ export const VirtualList: React.FC<VirtualListProps> = (props) => {
                   <ItemRow item={data} onUntrash={props.onUntrash} />
                 ) : (
                   <div className="flex h-full items-center justify-center">
-                    <div className="h-6 w-6 animate-spin rounded-full border-2 border-white/20 border-t-white/60" />
+                    <div className="h-6 w-6 animate-spin rounded-full border-2" style={{ borderColor: "rgba(255, 255, 255, 0.2)", borderTopColor: "rgba(255, 255, 255, 0.6)" }} />
                   </div>
                 )}
               </div>
@@ -196,7 +205,7 @@ export const VirtualList: React.FC<VirtualListProps> = (props) => {
       </div>
 
       <div className="py-4! text-center">
-        <p className="text-sm text-white/40">
+        <p className="text-sm" style={{ color: "rgba(255, 255, 255, 0.4)" }}>
           {t("ITEMS_LOADED_COUNT", {
             loaded: itemCache.size,
             total: props.items.length,

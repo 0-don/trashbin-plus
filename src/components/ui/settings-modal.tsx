@@ -41,17 +41,19 @@ const Tooltip: React.FC<{
       </span>
       {isVisible && (
         <div
-          className="pointer-events-none fixed z-50 rounded bg-black px-2 py-1 text-xs text-white shadow-lg"
+          className="pointer-events-none fixed z-50 rounded px-2 py-1 text-xs shadow-lg"
           style={{
             left: position.x,
             top: position.y,
             transform: "translate(-50%, -100%)",
             maxWidth: "200px",
             wordWrap: "break-word",
+            backgroundColor: "black",
+            color: "white",
           }}
         >
           {content}
-          <div className="absolute top-full left-1/2 -translate-x-1/2 transform border-4 border-transparent border-t-black" />
+          <div className="absolute top-full left-1/2 -translate-x-1/2 transform border-4 border-transparent" style={{ borderTopColor: "black" }} />
         </div>
       )}
     </>

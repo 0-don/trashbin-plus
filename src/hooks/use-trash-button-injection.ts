@@ -47,13 +47,13 @@ export const useTrashButtonInjection = (
       const isTrashed = !!store.trashSongList[trackData.trackURI];
       const btn = document.createElement("button");
       btn.className = `${config.buttonClassName} bg-transparent border-none p-2 opacity-70 cursor-pointer hover:opacity-100 transition-opacity`;
-      btn.innerHTML = TRASH_ICON(16, isTrashed ? "text-green-500" : "");
+      btn.innerHTML = TRASH_ICON(16, isTrashed ? "fill-[#22c55e]" : "");
       btn.dataset.visuallyTrashed = isTrashed.toString();
 
       btn.onclick = (e) => {
         e.stopPropagation();
         const newState = btn.dataset.visuallyTrashed !== "true";
-        btn.innerHTML = TRASH_ICON(16, newState ? "text-green-500" : "");
+        btn.innerHTML = TRASH_ICON(16, newState ? "fill-[#22c55e]" : "");
         btn.dataset.visuallyTrashed = newState.toString();
         store.toggleSongTrash(trackData.trackURI!);
       };

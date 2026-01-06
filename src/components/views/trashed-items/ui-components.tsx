@@ -24,7 +24,7 @@ export const ItemRow: React.FC<ItemRowProps> = ({ item, onUntrash }) => {
     : (item as TrackDisplayData).artist;
 
   return (
-    <div className="flex items-center justify-between rounded-md p-3 hover:bg-white/5">
+    <div className="flex items-center justify-between rounded-md p-3 transition-colors" style={{ backgroundColor: "transparent" }} onMouseEnter={(e) => e.currentTarget.style.backgroundColor = "rgba(255, 255, 255, 0.05)"} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = "transparent"}>
       <div className="flex min-w-0 flex-1 items-center gap-3">
         {item.imageUrl ? (
           <img
@@ -34,19 +34,23 @@ export const ItemRow: React.FC<ItemRowProps> = ({ item, onUntrash }) => {
           />
         ) : (
           <div
-            className={`flex h-12 w-12 items-center justify-center ${imageClass} bg-white/10`}
+            className={`flex h-12 w-12 items-center justify-center ${imageClass}`}
+            style={{ backgroundColor: "rgba(255, 255, 255, 0.1)" }}
           >
-            <Icon className="h-6 w-6 text-white/70" />
+            <Icon className="h-6 w-6" style={{ color: "rgba(255, 255, 255, 0.7)" }} />
           </div>
         )}
         <div className="min-w-0 flex-1">
-          <div className="truncate font-medium text-white">{item.name}</div>
-          <div className="truncate text-sm text-white/60">{secondaryText}</div>
+          <div className="truncate font-medium" style={{ color: "white" }}>{item.name}</div>
+          <div className="truncate text-sm" style={{ color: "rgba(255, 255, 255, 0.6)" }}>{secondaryText}</div>
         </div>
       </div>
       <button
         onClick={() => navigator.clipboard.writeText(item.uri)}
-        className="shrink-0 cursor-pointer bg-transparent! text-xs text-white/40 hover:text-white/60"
+        className="shrink-0 cursor-pointer bg-transparent! text-xs transition-colors"
+        style={{ color: "rgba(255, 255, 255, 0.4)" }}
+        onMouseEnter={(e) => e.currentTarget.style.color = "rgba(255, 255, 255, 0.6)"}
+        onMouseLeave={(e) => e.currentTarget.style.color = "rgba(255, 255, 255, 0.4)"}
         title="Click to copy URI"
       >
         {item.uri}
@@ -57,10 +61,21 @@ export const ItemRow: React.FC<ItemRowProps> = ({ item, onUntrash }) => {
           e.preventDefault();
           onUntrash(item.uri);
         }}
-        className="group mx-2! cursor-pointer rounded-full bg-transparent! p-2! hover:bg-red-500/20"
+        className="mx-2! cursor-pointer rounded-full bg-transparent! p-2! transition-colors"
+        style={{ backgroundColor: "transparent" }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.backgroundColor = "rgba(239, 68, 68, 0.2)";
+          const icon = e.currentTarget.querySelector("svg");
+          if (icon) icon.style.color = "#f87171";
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.backgroundColor = "transparent";
+          const icon = e.currentTarget.querySelector("svg");
+          if (icon) icon.style.color = "rgba(255, 255, 255, 0.7)";
+        }}
         title="Remove from trashbin"
       >
-        <IoClose className="h-5 w-5 text-white/70 group-hover:text-red-400" />
+        <IoClose className="h-5 w-5 transition-colors" style={{ color: "rgba(255, 255, 255, 0.7)" }} />
       </button>
     </div>
   );
@@ -70,24 +85,24 @@ interface EmptyStateProps {
   type: TabType;
 }
 
-export const EmptyState: React.FC<EmptyStateProps> = ({ type }) => {
+export const EmptyState: React.FC<EmptyStateProps> = (props) => {
   const { t } = useTranslation();
 
   return (
     <div className="p-8 text-center">
       <div className="flex flex-col items-center gap-6 py-12">
-        <BsTrash3 className="h-20 w-20 text-white/20" />
+        <BsTrash3 className="h-20 w-20" style={{ color: "rgba(255, 255, 255, 0.2)" }} />
         <div>
-          <h3 className="mb-2 text-xl font-semibold text-white">
-            {type === "songs"
+          <h3 className="mb-2 text-xl font-semibold" style={{ color: "white" }}>
+            {props.type === "songs"
               ? t("ITEMS_EMPTY_SONGS_TITLE")
               : t("ITEMS_EMPTY_ARTISTS_TITLE")}
           </h3>
           <p
-            className="text-white/60"
+            style={{ color: "rgba(255, 255, 255, 0.6)" }}
             dangerouslySetInnerHTML={{
               __html:
-                type === "songs"
+                props.type === "songs"
                   ? t("ITEMS_EMPTY_SONGS")
                   : t("ITEMS_EMPTY_ARTISTS"),
             }}
@@ -105,26 +120,32 @@ interface TabButtonProps {
   onClick: () => void;
 }
 
-export const TabButton: React.FC<TabButtonProps> = ({
-  label,
-  count,
-  isActive,
-  onClick,
-}) => (
+export const TabButton: React.FC<TabButtonProps> = (props) => (
   <button
-    onClick={onClick}
+    onClick={props.onClick}
     className={cn(
       "relative px-4! py-2! text-lg font-medium transition-colors",
-      "border-b-2 border-transparent",
-      isActive
-        ? "border-green-500! text-white!"
-        : "text-white/60 hover:text-white/80",
+      "border-b-2",
     )}
+    style={{
+      borderColor: props.isActive ? "#22c55e" : "transparent",
+      color: props.isActive ? "white" : "rgba(255, 255, 255, 0.6)",
+    }}
+    onMouseEnter={(e) => {
+      if (!props.isActive) {
+        e.currentTarget.style.color = "rgba(255, 255, 255, 0.8)";
+      }
+    }}
+    onMouseLeave={(e) => {
+      if (!props.isActive) {
+        e.currentTarget.style.color = "rgba(255, 255, 255, 0.6)";
+      }
+    }}
   >
-    {label}
-    <span className="mx-1! text-xs text-white/60">({count})</span>
-    {isActive && (
-      <div className="absolute right-0 bottom-0 left-0 h-0.5 bg-green-500" />
+    {props.label}
+    <span className="mx-1! text-xs" style={{ color: "rgba(255, 255, 255, 0.6)" }}>({props.count})</span>
+    {props.isActive && (
+      <div className="absolute right-0 bottom-0 left-0 h-0.5" style={{ backgroundColor: "#22c55e" }} />
     )}
   </button>
 );
