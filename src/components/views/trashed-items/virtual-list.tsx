@@ -1,5 +1,4 @@
-import { useVirtualizer } from "@tanstack/react-virtual";
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   fetchArtistsMetadata,
@@ -7,6 +6,9 @@ import {
 } from "../../../lib/metadata-utils";
 import { ItemData, TabType } from "../../../lib/types";
 import { ItemRow } from "./ui-components";
+
+const ITEM_HEIGHT = 60;
+const OVERSCAN = 5;
 
 function useDebounce<T>(value: T, delay: number): T {
   const [debouncedValue, setDebouncedValue] = useState(value);
@@ -25,25 +27,23 @@ interface VirtualListProps {
   onUntrash: (uri: string) => void;
 }
 
-export const VirtualList: React.FC<VirtualListProps> = ({
-  items,
-  activeTab,
-  onUntrash,
-}) => {
+export const VirtualList: React.FC<VirtualListProps> = (props) => {
   const { t } = useTranslation();
-  const parentRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [scrollTop, setScrollTop] = useState(0);
+  const [containerHeight, setContainerHeight] = useState(0);
   const [itemCache, setItemCache] = useState<Map<number, ItemData>>(new Map());
   const [loadingBatches, setLoadingBatches] = useState<Set<string>>(new Set());
   const [searchQuery, setSearchQuery] = useState("");
   const debouncedSearch = useDebounce(searchQuery, 300);
 
-  const filteredItems = useMemo(() => {
+  const getFilteredItems = () => {
     if (!debouncedSearch.trim()) {
-      return items.map((uri, index) => ({ uri, originalIndex: index }));
+      return props.items.map((uri, index) => ({ uri, originalIndex: index }));
     }
 
     const query = debouncedSearch.toLowerCase();
-    return items
+    return props.items
       .map((uri, index) => ({ uri, originalIndex: index }))
       .filter(({ uri, originalIndex }) => {
         const cachedData = itemCache.get(originalIndex);
@@ -59,39 +59,70 @@ export const VirtualList: React.FC<VirtualListProps> = ({
         }
         return uri.toLowerCase().includes(query);
       });
-  }, [items, debouncedSearch, itemCache]);
+  };
 
-  const virtualizer = useVirtualizer({
-    count: filteredItems.length,
-    getScrollElement: () => parentRef.current,
-    estimateSize: () => 60,
-    overscan: 10,
-  });
+  const filteredItems = getFilteredItems();
+  const totalHeight = filteredItems.length * ITEM_HEIGHT;
+
+  // Calculate visible range
+  const startIndex = Math.max(
+    0,
+    Math.floor(scrollTop / ITEM_HEIGHT) - OVERSCAN,
+  );
+  const visibleCount = Math.ceil(containerHeight / ITEM_HEIGHT) + OVERSCAN * 2;
+  const endIndex = Math.min(filteredItems.length, startIndex + visibleCount);
+
+  const visibleItems = filteredItems
+    .slice(startIndex, endIndex)
+    .map((item, i) => ({
+      ...item,
+      virtualIndex: startIndex + i,
+    }));
+
+  // Handle scroll
+  const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
+    setScrollTop(e.currentTarget.scrollTop);
+  };
+
+  // Measure container height
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const observer = new ResizeObserver((entries) => {
+      setContainerHeight(entries[0]?.contentRect.height ?? 0);
+    });
+
+    observer.observe(container);
+    setContainerHeight(container.clientHeight);
+
+    return () => observer.disconnect();
+  }, []);
 
   const loadBatch = async (batchIndex: number) => {
-    const batchKey = `${activeTab}-${batchIndex}`;
+    const batchKey = `${props.activeTab}-${batchIndex}`;
     if (loadingBatches.has(batchKey)) return;
 
     const BATCH_SIZE = 50;
-    const startIndex = batchIndex * BATCH_SIZE;
-    const endIndex = Math.min(startIndex + BATCH_SIZE, items.length);
+    const startIdx = batchIndex * BATCH_SIZE;
+    const endIdx = Math.min(startIdx + BATCH_SIZE, props.items.length);
 
     setLoadingBatches((prev) => new Set(prev).add(batchKey));
 
     try {
-      const urisSlice = items.slice(startIndex, endIndex);
+      const urisSlice = props.items.slice(startIdx, endIdx);
       const data =
-        activeTab === "songs"
+        props.activeTab === "songs"
           ? await fetchTracksMetadata(urisSlice)
           : await fetchArtistsMetadata(urisSlice);
 
       setItemCache((prev) => {
         const newCache = new Map(prev);
-        data.forEach((item, i) => newCache.set(startIndex + i, item));
+        data.forEach((item, i) => newCache.set(startIdx + i, item));
         return newCache;
       });
     } catch (error) {
-      console.error(`Failed to load ${activeTab} batch:`, error);
+      console.error(`Failed to load ${props.activeTab} batch:`, error);
     } finally {
       setLoadingBatches((prev) => {
         const newSet = new Set(prev);
@@ -101,25 +132,25 @@ export const VirtualList: React.FC<VirtualListProps> = ({
     }
   };
 
+  // Load batches for visible items
   useEffect(() => {
     const BATCH_SIZE = 50;
-    const visibleItems = virtualizer.getVirtualItems();
     const batchesToLoad = new Set<number>();
 
     visibleItems.forEach((item) => {
-      if (!itemCache.has(item.index)) {
-        batchesToLoad.add(Math.floor(item.index / BATCH_SIZE));
+      if (!itemCache.has(item.originalIndex)) {
+        batchesToLoad.add(Math.floor(item.originalIndex / BATCH_SIZE));
       }
     });
 
     batchesToLoad.forEach(loadBatch);
-  }, [virtualizer.getVirtualItems(), itemCache, loadBatch]);
+  }, [startIndex, endIndex, itemCache]);
 
   // Clear cache when tab or items change
   useEffect(() => {
     setItemCache(new Map());
     setLoadingBatches(new Set());
-  }, [activeTab, items]);
+  }, [props.activeTab, props.items]);
 
   return (
     <>
@@ -133,32 +164,26 @@ export const VirtualList: React.FC<VirtualListProps> = ({
         />
       </div>
       <div
-        ref={parentRef}
+        ref={containerRef}
+        onScroll={handleScroll}
         className="h-100 overflow-auto rounded-lg border border-white/10 bg-black/20"
       >
-        <div
-          style={{
-            height: virtualizer.getTotalSize(),
-            position: "relative",
-          }}
-        >
-          {virtualizer.getVirtualItems().map((virtualItem) => {
-            const { originalIndex } = filteredItems[virtualItem.index];
-            const data = itemCache.get(originalIndex);
+        <div style={{ height: totalHeight, position: "relative" }}>
+          {visibleItems.map((item) => {
+            const data = itemCache.get(item.originalIndex);
             return (
               <div
-                key={virtualItem.key}
+                key={item.uri}
                 style={{
                   position: "absolute",
-                  top: 0,
+                  top: item.virtualIndex * ITEM_HEIGHT,
                   left: 0,
-                  width: "100%",
-                  height: virtualItem.size,
-                  transform: `translateY(${virtualItem.start}px)`,
+                  right: 0,
+                  height: ITEM_HEIGHT,
                 }}
               >
                 {data ? (
-                  <ItemRow item={data} onUntrash={onUntrash} />
+                  <ItemRow item={data} onUntrash={props.onUntrash} />
                 ) : (
                   <div className="flex h-full items-center justify-center">
                     <div className="h-6 w-6 animate-spin rounded-full border-2 border-white/20 border-t-white/60" />
@@ -174,8 +199,8 @@ export const VirtualList: React.FC<VirtualListProps> = ({
         <p className="text-sm text-white/40">
           {t("ITEMS_LOADED_COUNT", {
             loaded: itemCache.size,
-            total: items.length,
-            type: activeTab,
+            total: props.items.length,
+            type: props.activeTab,
           })}
         </p>
       </div>
