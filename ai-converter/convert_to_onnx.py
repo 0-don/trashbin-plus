@@ -1,5 +1,3 @@
-import os
-
 import torch
 from torch import nn
 from sonics import HFAudioClassifier
@@ -7,7 +5,6 @@ import torchlibrosa as tl
 from fire import Fire
 import librosa
 import torchaudio.transforms as T
-from onnxruntime.quantization import quantize_dynamic, QuantType
 
 ORIGINAL_SR = 44100
 TARGET_SR = 16000
@@ -16,7 +13,6 @@ TARGET_SR = 16000
 def convert_to_onnx(
     model_id: str = "awsaf49/sonics-spectttra-alpha-5s",
     output_path: str = "sonics_model.onnx",
-    quantize: bool = True,
 ) -> None:
     print(f"Converting model {model_id}...")
     print(f"Downloading model from HuggingFace...")
@@ -28,35 +24,16 @@ def convert_to_onnx(
     max_time = model.config.audio.max_time
     dummy_input = torch.randn(1, ORIGINAL_SR * max_time)
 
-    raw_path = output_path if not quantize else output_path.replace(".onnx", "_raw.onnx")
-
-    print(f"Exporting to ONNX: {raw_path}...")
+    print(f"Exporting to ONNX: {output_path}...")
     torch.onnx.export(
         model,
         dummy_input,
-        raw_path,
+        output_path,
         dynamo=False,
         input_names=["audio"],
         output_names=["prob"],
         dynamic_axes={"input": {0: "batch_size"}, "output": {0: "batch_size"}},
     )
-
-    raw_size = os.path.getsize(raw_path)
-    print(f"Raw model size: {raw_size / 1024 / 1024:.1f} MB")
-
-    if quantize:
-        print("Quantizing model (float32 -> uint8)...")
-        quantize_dynamic(
-            model_input=raw_path,
-            model_output=output_path,
-            weight_type=QuantType.QUInt8,
-        )
-
-        quantized_size = os.path.getsize(output_path)
-        print(f"Quantized model size: {quantized_size / 1024 / 1024:.1f} MB")
-        print(f"Size reduction: {(1 - quantized_size / raw_size) * 100:.1f}%")
-
-        os.remove(raw_path)
 
 
 def replace_melspec(model: HFAudioClassifier) -> HFAudioClassifier:
