@@ -35,6 +35,11 @@ jobs:
           mkdir -p ../ai-assets
           uv run python convert_to_onnx.py --output_path ../ai-assets/sonics_model.onnx
 
+      - name: Download Fakeprint model from lofcz/ai-music-detector
+        run: |
+          curl -L -o ai-assets/ai_music_detector.onnx \
+            "https://huggingface.co/lofcz/ai-music-detector/resolve/main/ai_music_detector.onnx"
+
       - name: Set up Bun
         uses: oven-sh/setup-bun@v2
 
@@ -53,8 +58,7 @@ jobs:
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
-          pip install huggingface_hub
-          python -c "
+          uv run --with huggingface_hub python -c "
           from huggingface_hub import HfApi
           api = HfApi()
           api.upload_folder(

@@ -1,18 +1,23 @@
 import * as ort from "onnxruntime-web";
-
-export const SAMPLING_RATE = 44100;
-export const MAX_TIME = 5;
-export const INPUT_LENGTH = SAMPLING_RATE * MAX_TIME; // 220500
+import type { ModelConfig } from "./ai-model-config";
 
 let session: ort.InferenceSession | null = null;
+let activeConfig: ModelConfig | null = null;
 let inferenceQueue = Promise.resolve<number | null>(null);
+
+export function getActiveConfig(): ModelConfig | null {
+  return activeConfig;
+}
 
 export async function initEngine(
   modelBuffer: ArrayBuffer,
   wasmBuffer: ArrayBuffer,
+  config: ModelConfig,
 ): Promise<boolean> {
   try {
-    console.log(`[trashbin+ AI] initEngine: model=${modelBuffer.byteLength}B, wasm=${wasmBuffer.byteLength}B`);
+    console.log(
+      `[trashbin+ AI] initEngine: model=${config.id} (${modelBuffer.byteLength}B), wasm=${wasmBuffer.byteLength}B`,
+    );
     ort.env.wasm.numThreads = 1;
     (ort.env.wasm as any).wasmBinary = wasmBuffer;
 
@@ -20,6 +25,7 @@ export async function initEngine(
     session = await ort.InferenceSession.create(modelBuffer, {
       executionProviders: ["wasm"],
     });
+    activeConfig = config;
 
     console.log("[trashbin+ AI] Inference engine initialized");
     return true;
@@ -29,24 +35,26 @@ export async function initEngine(
   }
 }
 
-async function infer(audioData: Float32Array): Promise<number | null> {
-  if (!session) return null;
+async function infer(data: Float32Array): Promise<number | null> {
+  if (!session || !activeConfig) return null;
 
   try {
-    const tensor = new ort.Tensor("float32", audioData, [1, INPUT_LENGTH]);
-    const results = await session.run({ audio: tensor });
-    const outputData = results.prob.data as Float32Array;
-    return Array.from(outputData)[0];
+    const tensor = new ort.Tensor("float32", data, [1, data.length]);
+    const results = await session.run({
+      [activeConfig.inputName]: tensor,
+    });
+    const outputData = results[activeConfig.outputName].data as Float32Array;
+    return outputData[0];
   } catch (error) {
     console.error("[trashbin+ AI] Inference error:", error);
     return null;
   }
 }
 
-export function queueInference(audioData: Float32Array): Promise<number | null> {
+export function queueInference(data: Float32Array): Promise<number | null> {
   const promise = inferenceQueue.then(
-    () => infer(audioData),
-    () => infer(audioData),
+    () => infer(data),
+    () => infer(data),
   );
   inferenceQueue = promise.then(
     () => null,
@@ -60,6 +68,7 @@ export function disposeEngine(): void {
     session.release();
     session = null;
   }
+  activeConfig = null;
   inferenceQueue = Promise.resolve(null);
   console.log("[trashbin+ AI] Engine disposed");
 }

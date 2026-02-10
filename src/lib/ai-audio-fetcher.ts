@@ -1,15 +1,22 @@
-import { SAMPLING_RATE, INPUT_LENGTH } from "./ai-infer-engine";
-
 const CORS_PROXY = "https://cors-proxy.spicetify.app";
 
 let audioContext: AudioContext | null = null;
+let currentSampleRate = 44100;
 
-function getAudioContext(): AudioContext {
-  if (!audioContext || audioContext.state === "closed") {
+function getAudioContext(sampleRate: number): AudioContext {
+  if (
+    !audioContext ||
+    audioContext.state === "closed" ||
+    currentSampleRate !== sampleRate
+  ) {
+    if (audioContext && audioContext.state !== "closed") {
+      audioContext.close();
+    }
     audioContext = new AudioContext({
       latencyHint: "playback",
-      sampleRate: SAMPLING_RATE,
+      sampleRate,
     });
+    currentSampleRate = sampleRate;
   }
   return audioContext;
 }
@@ -65,6 +72,7 @@ export async function getPreviewUrls(
 
 export async function fetchAudioWaveform(
   url: string,
+  sampleRate: number,
 ): Promise<Float32Array> {
   const response = await fetch(url);
   if (!response.ok) {
@@ -72,7 +80,7 @@ export async function fetchAudioWaveform(
   }
 
   const arrayBuffer = await response.arrayBuffer();
-  const ctx = getAudioContext();
+  const ctx = getAudioContext(sampleRate);
   const decodedBuffer = await ctx.decodeAudioData(arrayBuffer);
 
   return decodedBuffer.getChannelData(0);
@@ -80,10 +88,9 @@ export async function fetchAudioWaveform(
 
 export function extractMiddleChunk(
   waveform: Float32Array,
-  targetLength: number = INPUT_LENGTH,
+  targetLength: number,
 ): Float32Array {
   if (waveform.length <= targetLength) {
-    // Pad with zeros if too short
     const padded = new Float32Array(targetLength);
     const offset = Math.floor((targetLength - waveform.length) / 2);
     padded.set(waveform, offset);

@@ -19,7 +19,7 @@ export const useAiDetection = () => {
 
     const init = async () => {
       store.setAiAssetsDownloading(true);
-      const ready = await initializeAiDetection((message) => {
+      const ready = await initializeAiDetection(store.aiModelId, (message) => {
         console.log(`[trashbin+ AI] ${message}`);
       });
       console.log(`[trashbin+ AI] Init result: ready=${ready}, cancelled=${cancelled}`);
@@ -39,5 +39,5 @@ export const useAiDetection = () => {
       cancelled = true;
       cleanupAiDetection();
     };
-  }, [store.aiDetectionEnabled]);
+  }, [store.aiDetectionEnabled, store.aiModelId]);
 };

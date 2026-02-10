@@ -1,5 +1,7 @@
 import { create } from "zustand";
 import { i18n } from "../components/providers/providers";
+import type { ModelId } from "../lib/ai-model-config";
+import { DEFAULT_MODEL } from "../lib/ai-model-config";
 import { shouldSkipTrack } from "../lib/track-utils";
 
 export const STORAGE_KEYS = {
@@ -18,6 +20,7 @@ export const STORAGE_KEYS = {
   REMOTE_SKIPPING_ENABLED: "trashbin-remote-skipping-enabled",
   TRASH_VIA_LIKE: "trashbin-trash-via-like",
   AI_DETECTION: "trashbin-ai-detection",
+  AI_MODEL: "trashbin-ai-model",
 } as const;
 
 interface TrashbinState {
@@ -40,6 +43,7 @@ interface TrashbinState {
 
   // AI Detection
   aiDetectionEnabled: boolean;
+  aiModelId: ModelId;
   aiAssetsReady: boolean;
   aiAssetsDownloading: boolean;
 
@@ -62,6 +66,7 @@ interface TrashbinState {
 
   // AI Detection actions
   setAiDetectionEnabled: (enabled: boolean) => void;
+  setAiModelId: (modelId: ModelId) => void;
   setAiAssetsReady: (ready: boolean) => void;
   setAiAssetsDownloading: (downloading: boolean) => void;
 
@@ -109,6 +114,7 @@ export const useTrashbinStore = create<TrashbinState>((set, get) => ({
   remoteSkippingEnabled: false,
   trashViaLikeEnabled: false,
   aiDetectionEnabled: false,
+  aiModelId: DEFAULT_MODEL,
   aiAssetsReady: false,
   aiAssetsDownloading: false,
 
@@ -136,6 +142,7 @@ export const useTrashbinStore = create<TrashbinState>((set, get) => ({
       ),
       trashViaLikeEnabled: initValue(STORAGE_KEYS.TRASH_VIA_LIKE, false),
       aiDetectionEnabled: initValue(STORAGE_KEYS.AI_DETECTION, false),
+      aiModelId: initValue(STORAGE_KEYS.AI_MODEL, DEFAULT_MODEL),
     });
   },
 
@@ -246,6 +253,14 @@ export const useTrashbinStore = create<TrashbinState>((set, get) => ({
     Spicetify.LocalStorage.set(
       STORAGE_KEYS.AI_DETECTION,
       JSON.stringify(enabled),
+    );
+  },
+
+  setAiModelId: (modelId: ModelId) => {
+    set({ aiModelId: modelId });
+    Spicetify.LocalStorage.set(
+      STORAGE_KEYS.AI_MODEL,
+      JSON.stringify(modelId),
     );
   },
 

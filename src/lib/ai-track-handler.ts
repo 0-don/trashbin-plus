@@ -6,7 +6,14 @@ import {
   getPreviewUrl,
   getPreviewUrls,
 } from "./ai-audio-fetcher";
-import { disposeEngine, initEngine, queueInference } from "./ai-infer-engine";
+import { extractFakeprint } from "./ai-fakeprint";
+import {
+  disposeEngine,
+  getActiveConfig,
+  initEngine,
+  queueInference,
+} from "./ai-infer-engine";
+import { type ModelId, MODELS } from "./ai-model-config";
 
 class LimitedMap<K, V> {
   private map: Map<K, V>;
@@ -72,9 +79,19 @@ async function classifyWithPreviewUrl(
   trackUri: string,
   previewUrl: string,
 ): Promise<number | null> {
-  const waveform = await fetchAudioWaveform(previewUrl);
-  const chunk = extractMiddleChunk(waveform);
-  const probability = await queueInference(chunk);
+  const config = getActiveConfig();
+  if (!config) return null;
+
+  const waveform = await fetchAudioWaveform(previewUrl, config.sampleRate);
+
+  let inputData: Float32Array;
+  if (config.preprocess === "fakeprint") {
+    inputData = extractFakeprint(waveform);
+  } else {
+    inputData = extractMiddleChunk(waveform, config.inputLength);
+  }
+
+  const probability = await queueInference(inputData);
 
   if (probability !== null) {
     resultCache.set(trackUri, probability);
@@ -90,10 +107,8 @@ export async function classifyTracks(
   trackUris: string[],
   onResult?: (trackUri: string, probability: number) => void,
 ): Promise<void> {
-  // Prevent overlapping batch calls (MutationObserver fires rapidly)
   if (batchInFlight) return;
 
-  // Filter to only uncached, non-processing tracks
   const toProcess = trackUris.filter(
     (uri) => resultCache.get(uri) === undefined && !processingTracks.has(uri),
   );
@@ -102,21 +117,23 @@ export async function classifyTracks(
 
   batchInFlight = true;
 
-  // Mark all as processing
   for (const uri of toProcess) processingTracks.add(uri);
 
   try {
-    // Batch fetch preview URLs in one API call
     const previewUrls = await getPreviewUrls(toProcess);
-    console.log(`[trashbin+ AI] Got ${previewUrls.size}/${toProcess.length} preview URLs`);
+    console.log(
+      `[trashbin+ AI] Got ${previewUrls.size}/${toProcess.length} preview URLs`,
+    );
 
-    // Process audio + inference with concurrency limit
     const withPreview = toProcess.filter((uri) => previewUrls.has(uri));
     let active = 0;
     let idx = 0;
 
     await new Promise<void>((resolve) => {
-      if (withPreview.length === 0) { resolve(); return; }
+      if (withPreview.length === 0) {
+        resolve();
+        return;
+      }
 
       const next = () => {
         while (active < MAX_CONCURRENT && idx < withPreview.length) {
@@ -143,9 +160,16 @@ export async function classifyTracks(
 }
 
 export async function initializeAiDetection(
+  modelId: ModelId,
   onProgress?: (message: string) => void,
 ): Promise<boolean> {
   try {
+    const config = MODELS[modelId];
+    if (!config) {
+      console.error(`[trashbin+ AI] Unknown model: ${modelId}`);
+      return false;
+    }
+
     onProgress?.("Checking assets...");
     const assetsReady = await ensureAssets(onProgress);
     if (!assetsReady) return false;
@@ -154,12 +178,12 @@ export async function initializeAiDetection(
     const wasmBuffer = await getAsset(ASSET_NAMES.WASM);
     if (!wasmBuffer) return false;
 
-    onProgress?.("Loading AI model...");
-    const modelBuffer = await getAsset(ASSET_NAMES.MODEL);
+    onProgress?.(`Loading ${config.label} model...`);
+    const modelBuffer = await getAsset(config.assetName);
     if (!modelBuffer) return false;
 
     onProgress?.("Initializing engine...");
-    const initialized = await initEngine(modelBuffer, wasmBuffer);
+    const initialized = await initEngine(modelBuffer, wasmBuffer, config);
 
     if (initialized) {
       onProgress?.("Ready");
