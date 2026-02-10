@@ -41,8 +41,7 @@ jobs:
           bun init -y
           bun add onnxruntime-web@1.24.1
           mkdir -p $GITHUB_WORKSPACE/ai-assets
-          cp node_modules/onnxruntime-web/dist/ort-wasm-simd.wasm $GITHUB_WORKSPACE/ai-assets/
-          cp node_modules/onnxruntime-web/dist/ort-wasm.wasm $GITHUB_WORKSPACE/ai-assets/
+          cp node_modules/onnxruntime-web/dist/ort-wasm-simd-threaded.wasm $GITHUB_WORKSPACE/ai-assets/
 
       - name: Prepare release assets
         run: |

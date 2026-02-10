@@ -7,8 +7,7 @@ const GITHUB_RELEASE_BASE =
 
 export const ASSET_NAMES = {
   MODEL: "sonics_model.onnx",
-  WASM_SIMD: "ort-wasm-simd.wasm",
-  WASM_FALLBACK: "ort-wasm.wasm",
+  WASM: "ort-wasm-simd-threaded.wasm",
   VERSION: "version.json",
 } as const;
 
@@ -107,7 +106,7 @@ export async function ensureAssets(
 
     // Check if all assets exist in IndexedDB
     const modelExists = await getAsset(ASSET_NAMES.MODEL);
-    const wasmExists = await getAsset(ASSET_NAMES.WASM_SIMD);
+    const wasmExists = await getAsset(ASSET_NAMES.WASM);
 
     if (localVersion === remoteVersion && modelExists && wasmExists) {
       onProgress?.("Assets up to date");
@@ -116,8 +115,8 @@ export async function ensureAssets(
 
     // Download all required assets
     onProgress?.("Downloading WASM runtime...");
-    const wasmData = await downloadAsset(ASSET_NAMES.WASM_SIMD);
-    await storeAsset(ASSET_NAMES.WASM_SIMD, wasmData, remoteVersion);
+    const wasmData = await downloadAsset(ASSET_NAMES.WASM);
+    await storeAsset(ASSET_NAMES.WASM, wasmData, remoteVersion);
 
     onProgress?.("Downloading AI model...");
     const modelData = await downloadAsset(ASSET_NAMES.MODEL);

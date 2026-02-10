@@ -89,7 +89,7 @@ export async function initializeAiDetection(
     if (!assetsReady) return false;
 
     onProgress?.("Loading WASM runtime...");
-    const wasmBuffer = await getAsset(ASSET_NAMES.WASM_SIMD);
+    const wasmBuffer = await getAsset(ASSET_NAMES.WASM);
     if (!wasmBuffer) return false;
 
     onProgress?.("Loading AI model...");
