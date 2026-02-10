@@ -9,4 +9,5 @@ dependencies = [
     "torchlibrosa>=0.1.0,<0.2.0",
     "onnx>=1.20.0,<2.0.0",
     "onnxruntime>=1.24.0,<2.0.0",
+    "onnxscript>=0.2.0",
 ]
