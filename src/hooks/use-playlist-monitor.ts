@@ -10,7 +10,7 @@ interface PlaylistMonitorState {
 
 export function usePlaylistMonitor() {
   const trashbinStore = useTrashbinStore();
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const stateRef = useRef<PlaylistMonitorState>({ currentPlaylistUri: null });
 
   const loadState = useCallback((): void => {

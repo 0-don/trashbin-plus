@@ -4,10 +4,9 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "build": "tsc --noEmit && spicetify-creator",
-    "build:local": "tsc --noEmit && spicetify-creator --out=dist --minify",
-    "dev:fix": "rm -rf yarn.lock && rm -rf node_modules && yarn && yarn cache clean && yarn --force && concurrently \"spicetify-creator --watch\" \"spicetify watch -e\"",
-    "dev": "concurrently \"npx spicetify-creator --watch\" \"spicetify watch -e\"",
+    "build": "tsc --noEmit && bun build.ts",
+    "build:local": "tsc --noEmit && bun build.ts --out=dist --minify",
+    "dev": "concurrently \"bun build.ts --watch\" \"spicetify watch -e\"",
     "prettier": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json,css,md}\""
   },
   "dependencies": {
@@ -20,10 +19,12 @@
     "@tailwindcss/postcss": "4.1.18",
     "@types/react": "18.3.26",
     "@types/react-dom": "18.3.7",
+    "@types/bun": "1.2.5",
     "concurrently": "9.2.1",
+    "postcss": "8.5.6",
+    "postcss-load-config": "6.0.1",
     "prettier": "3.7.4",
     "prettier-plugin-tailwindcss": "0.7.2",
-    "spicetify-creator": "github:0-don/spicetify-creator",
     "tailwindcss": "4.1.18",
     "typescript": "5.9.3"
   }

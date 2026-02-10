@@ -12,7 +12,7 @@ const Tooltip: React.FC<{
 }> = ({ children, content }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [position, setPosition] = useState({ x: 0, y: 0 });
-  const timeoutRef = useRef<NodeJS.Timeout>();
+  const timeoutRef = useRef<ReturnType<typeof setTimeout>>();
 
   const handleMouseEnter = (e: React.MouseEvent) => {
     clearTimeout(timeoutRef.current);
