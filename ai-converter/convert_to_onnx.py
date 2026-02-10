@@ -29,6 +29,7 @@ def convert_to_onnx(
         model,
         dummy_input,
         output_path,
+        dynamo=False,
         input_names=["audio"],
         output_names=["prob"],
         dynamic_axes={"input": {0: "batch_size"}, "output": {0: "batch_size"}},
