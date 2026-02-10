@@ -20,14 +20,14 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v6
         with:
-          python-version: "3.10"
+          python-version: "3.12"
 
       - name: Install Poetry
         run: pip install poetry
 
       - name: Install converter dependencies
         working-directory: ai-converter
-        run: poetry install --no-root
+        run: poetry lock --no-cache && poetry install --no-root
 
       - name: Convert SONICS model to ONNX
         working-directory: ai-converter
