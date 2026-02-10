@@ -1,12 +1,9 @@
 name: Release AI Assets
 
 on:
+  workflow_dispatch:
   push:
     branches: [main]
-    paths:
-      - "ai-converter/**"
-      - ".github/workflows/release-ai-assets.yml"
-  workflow_dispatch:
   concurrency:
     group: ${{ github.ref }}
     cancel-in-progress: true
