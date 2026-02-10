@@ -60,5 +60,11 @@
   "MESSAGE_REMOTE_SKIPPING_DISABLED": "ଦୂରବର୍ତ୍ତୀ ଅତିକ୍ରମଣ ଅକ୍ଷମ କରାଯାଇଛି",
   "MESSAGE_SONG_ADDED_REMOTE": "ସଙ୍ଗୀତକୁ ଦୂରବର୍ତ୍ତୀ ମାଧ୍ୟମରେ ନଷ୍ଟ କରାଯାଇଛି",
   "SETTINGS_TRASH_VIA_LIKE": "ଲାଇକ୍ ମାଧ୍ୟମରେ କଚରା",
-  "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "ଏକ ଗୀତ ଭଳି ମୋବାଇଲରୁ ଏହାକୁ ଫୋପାଡ଼ନ୍ତୁ। ସ୍ୱତଃ ଅସମର୍ଥନ କରି ପରବର୍ତ୍ତୀ ଟ୍ରାକକୁ ଯାଏ।"
+  "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "ଏକ ଗୀତ ଭଳି ମୋବାଇଲରୁ ଏହାକୁ ଫୋପାଡ଼ନ୍ତୁ। ସ୍ୱତଃ ଅସମର୍ଥନ କରି ପରବର୍ତ୍ତୀ ଟ୍ରାକକୁ ଯାଏ।",
+  "SETTINGS_AI_DETECTION": "AI Detection",
+  "SETTINGS_AI_DETECTION_ENABLED": "AI Song Detection",
+  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Detect AI-generated songs using the SONICS model and show a probability indicator. Downloads ~50MB model on first enable.",
+  "AI_ASSETS_DOWNLOADING": "Downloading AI model...",
+  "AI_ASSETS_READY": "AI model ready",
+  "AI_ASSETS_NOT_READY": "AI model not available"
 }

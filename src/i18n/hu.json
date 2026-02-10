@@ -60,5 +60,11 @@
   "MESSAGE_REMOTE_SKIPPING_DISABLED": "Távoli kihagyás letiltva",
   "MESSAGE_SONG_ADDED_REMOTE": "Dal törölve távolról",
   "SETTINGS_TRASH_VIA_LIKE": "Szemét Like-on keresztül",
-  "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "Mint egy dalt, amit a telefonról a kukába küld. Automatikusan visszavonja a kedvelést, és átugrik a következő számra."
+  "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "Mint egy dalt, amit a telefonról a kukába küld. Automatikusan visszavonja a kedvelést, és átugrik a következő számra.",
+  "SETTINGS_AI_DETECTION": "AI Detection",
+  "SETTINGS_AI_DETECTION_ENABLED": "AI Song Detection",
+  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Detect AI-generated songs using the SONICS model and show a probability indicator. Downloads ~50MB model on first enable.",
+  "AI_ASSETS_DOWNLOADING": "Downloading AI model...",
+  "AI_ASSETS_READY": "AI model ready",
+  "AI_ASSETS_NOT_READY": "AI model not available"
 }

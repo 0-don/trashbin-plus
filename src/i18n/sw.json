@@ -60,5 +60,11 @@
   "MESSAGE_REMOTE_SKIPPING_DISABLED": "Kusuka mbali kimezimwa",
   "MESSAGE_SONG_ADDED_REMOTE": "Wimbo umefukuzwa kwa mbali",
   "SETTINGS_TRASH_VIA_LIKE": "Taka kupitia Kama",
-  "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "Kama wimbo kutoka kwenye simu kwenda kwenye kisima. Inatondoa kama kiotomatoma na kuenda moja kwa moja kwenye wimbo ujao."
+  "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "Kama wimbo kutoka kwenye simu kwenda kwenye kisima. Inatondoa kama kiotomatoma na kuenda moja kwa moja kwenye wimbo ujao.",
+  "SETTINGS_AI_DETECTION": "AI Detection",
+  "SETTINGS_AI_DETECTION_ENABLED": "AI Song Detection",
+  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Detect AI-generated songs using the SONICS model and show a probability indicator. Downloads ~50MB model on first enable.",
+  "AI_ASSETS_DOWNLOADING": "Downloading AI model...",
+  "AI_ASSETS_READY": "AI model ready",
+  "AI_ASSETS_NOT_READY": "AI model not available"
 }

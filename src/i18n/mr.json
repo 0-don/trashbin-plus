@@ -60,5 +60,11 @@
   "MESSAGE_REMOTE_SKIPPING_DISABLED": "दूरस्थ स्किपिंग अक्षम केले आहे",
   "MESSAGE_SONG_ADDED_REMOTE": "गाणे दूरस्थरित्या नष्ट केले",
   "SETTINGS_TRASH_VIA_LIKE": "लायकेसह ट्रॅश",
-  "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "मोबाइलमधून ते ट्रॅश करण्यासाठी एक गाणे. स्वयंचलितपणे आवड नाही आणि पुढील ट्रॅकवर जाते."
+  "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "मोबाइलमधून ते ट्रॅश करण्यासाठी एक गाणे. स्वयंचलितपणे आवड नाही आणि पुढील ट्रॅकवर जाते.",
+  "SETTINGS_AI_DETECTION": "AI Detection",
+  "SETTINGS_AI_DETECTION_ENABLED": "AI Song Detection",
+  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Detect AI-generated songs using the SONICS model and show a probability indicator. Downloads ~50MB model on first enable.",
+  "AI_ASSETS_DOWNLOADING": "Downloading AI model...",
+  "AI_ASSETS_READY": "AI model ready",
+  "AI_ASSETS_NOT_READY": "AI model not available"
 }

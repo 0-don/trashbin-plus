@@ -60,5 +60,11 @@
   "MESSAGE_REMOTE_SKIPPING_DISABLED": "دور دراز تون چھلانگ دی اجازت منسوخ کر دتی گئی ہے",
   "MESSAGE_SONG_ADDED_REMOTE": "گانا دور درشن توں تباہ کر دتا گیا",
   "SETTINGS_TRASH_VIA_LIKE": "لائیک دے ذریعے کوڑا کرکٹ",
-  "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "موبائل توں ٹریش تک اک گانا وانگ جیوہ۔ خودکار طور تے ناپسند کر دے اتے اگلے ٹریک تے چلے جا۔"
+  "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "موبائل توں ٹریش تک اک گانا وانگ جیوہ۔ خودکار طور تے ناپسند کر دے اتے اگلے ٹریک تے چلے جا۔",
+  "SETTINGS_AI_DETECTION": "AI Detection",
+  "SETTINGS_AI_DETECTION_ENABLED": "AI Song Detection",
+  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Detect AI-generated songs using the SONICS model and show a probability indicator. Downloads ~50MB model on first enable.",
+  "AI_ASSETS_DOWNLOADING": "Downloading AI model...",
+  "AI_ASSETS_READY": "AI model ready",
+  "AI_ASSETS_NOT_READY": "AI model not available"
 }

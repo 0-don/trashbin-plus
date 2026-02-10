@@ -1,0 +1,62 @@
+name: Release AI Assets
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "ai-converter/**"
+      - ".github/workflows/release-ai-assets.yml"
+  workflow_dispatch:
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.10"
+
+      - name: Install Poetry
+        run: pip install poetry
+
+      - name: Install converter dependencies
+        working-directory: ai-converter
+        run: poetry install --no-root
+
+      - name: Convert SONICS model to ONNX
+        working-directory: ai-converter
+        run: poetry run python convert_to_onnx.py --output_path ../sonics_model.onnx
+
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: Collect WASM files from onnxruntime-web
+        run: |
+          mkdir -p /tmp/ort && cd /tmp/ort
+          bun init -y
+          bun add onnxruntime-web@1.24.1
+          mkdir -p $GITHUB_WORKSPACE/ai-assets
+          cp node_modules/onnxruntime-web/dist/ort-wasm-simd.wasm $GITHUB_WORKSPACE/ai-assets/
+          cp node_modules/onnxruntime-web/dist/ort-wasm.wasm $GITHUB_WORKSPACE/ai-assets/
+
+      - name: Prepare release assets
+        run: |
+          mv sonics_model.onnx ai-assets/
+          echo "{\"version\":\"${{ github.sha }}\",\"date\":\"$(date -u +%Y-%m-%dT%H:%M:%SZ)\"}" > ai-assets/version.json
+
+      - name: Create or update release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create ai-assets \
+            --title "AI Detection Assets" \
+            --notes "ONNX model and WebAssembly files for AI song detection" \
+            --latest=false \
+            2>/dev/null || true
+          gh release upload ai-assets ai-assets/* --clobber

@@ -60,5 +60,11 @@
   "MESSAGE_REMOTE_SKIPPING_DISABLED": "Đã tắt bỏ qua từ xa",
   "MESSAGE_SONG_ADDED_REMOTE": "Bài hát bị xóa từ xa",
   "SETTINGS_TRASH_VIA_LIKE": "Rác qua Thích",
-  "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "Giống như một bài hát từ điện thoại di động chuyển vào thùng rác. Tự động bỏ thích và chuyển sang bài tiếp theo."
+  "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "Giống như một bài hát từ điện thoại di động chuyển vào thùng rác. Tự động bỏ thích và chuyển sang bài tiếp theo.",
+  "SETTINGS_AI_DETECTION": "AI Detection",
+  "SETTINGS_AI_DETECTION_ENABLED": "AI Song Detection",
+  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Detect AI-generated songs using the SONICS model and show a probability indicator. Downloads ~50MB model on first enable.",
+  "AI_ASSETS_DOWNLOADING": "Downloading AI model...",
+  "AI_ASSETS_READY": "AI model ready",
+  "AI_ASSETS_NOT_READY": "AI model not available"
 }

@@ -60,5 +60,11 @@
   "MESSAGE_REMOTE_SKIPPING_DISABLED": "تم إيقاف التخطي عن بعد",
   "MESSAGE_SONG_ADDED_REMOTE": "اتكسرت الأغنية عن بعد",
   "SETTINGS_TRASH_VIA_LIKE": "زبالة عن طريق لايك",
-  "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "زي أغنية من الموبايل تتحذف. بيشيل اللايك تلقائي وياخد الأغنية الجاية."
+  "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "زي أغنية من الموبايل تتحذف. بيشيل اللايك تلقائي وياخد الأغنية الجاية.",
+  "SETTINGS_AI_DETECTION": "AI Detection",
+  "SETTINGS_AI_DETECTION_ENABLED": "AI Song Detection",
+  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Detect AI-generated songs using the SONICS model and show a probability indicator. Downloads ~50MB model on first enable.",
+  "AI_ASSETS_DOWNLOADING": "Downloading AI model...",
+  "AI_ASSETS_READY": "AI model ready",
+  "AI_ASSETS_NOT_READY": "AI model not available"
 }

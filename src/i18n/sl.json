@@ -60,5 +60,11 @@
   "MESSAGE_REMOTE_SKIPPING_DISABLED": "Oddaljeno preskakovanie onemogočeno",
   "MESSAGE_SONG_ADDED_REMOTE": "Pesem uničena na daljavo",
   "SETTINGS_TRASH_VIA_LIKE": "Smeti prek Like",
-  "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "Kot pesem iz mobilnega v smeti. Samodejno odstrani všeček in preklopi na naslednjo skladbo."
+  "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "Kot pesem iz mobilnega v smeti. Samodejno odstrani všeček in preklopi na naslednjo skladbo.",
+  "SETTINGS_AI_DETECTION": "AI Detection",
+  "SETTINGS_AI_DETECTION_ENABLED": "AI Song Detection",
+  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Detect AI-generated songs using the SONICS model and show a probability indicator. Downloads ~50MB model on first enable.",
+  "AI_ASSETS_DOWNLOADING": "Downloading AI model...",
+  "AI_ASSETS_READY": "AI model ready",
+  "AI_ASSETS_NOT_READY": "AI model not available"
 }

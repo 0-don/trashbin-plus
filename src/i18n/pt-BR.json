@@ -60,5 +60,11 @@
   "MESSAGE_REMOTE_SKIPPING_DISABLED": "Pular remoto desativado",
   "MESSAGE_SONG_ADDED_REMOTE": "Música excluída via controle remoto",
   "SETTINGS_TRASH_VIA_LIKE": "Lixo via Like",
-  "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "Como uma música do celular para descartá-la. Automaticamente remove o like e pula para a próxima faixa."
+  "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "Como uma música do celular para descartá-la. Automaticamente remove o like e pula para a próxima faixa.",
+  "SETTINGS_AI_DETECTION": "AI Detection",
+  "SETTINGS_AI_DETECTION_ENABLED": "AI Song Detection",
+  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Detect AI-generated songs using the SONICS model and show a probability indicator. Downloads ~50MB model on first enable.",
+  "AI_ASSETS_DOWNLOADING": "Downloading AI model...",
+  "AI_ASSETS_READY": "AI model ready",
+  "AI_ASSETS_NOT_READY": "AI model not available"
 }

@@ -60,5 +60,11 @@
   "MESSAGE_REMOTE_SKIPPING_DISABLED": "Uzaktan atlama devre dışı",
   "MESSAGE_SONG_ADDED_REMOTE": "Şarkı uzaktan yok edildi",
   "SETTINGS_TRASH_VIA_LIKE": "Like ile çöp",
-  "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "Bir şarkı gibi cep telefonundan çöpe atar. Otomatik olarak beğenisini kaldırır ve bir sonraki parçaya geçer."
+  "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "Bir şarkı gibi cep telefonundan çöpe atar. Otomatik olarak beğenisini kaldırır ve bir sonraki parçaya geçer.",
+  "SETTINGS_AI_DETECTION": "AI Detection",
+  "SETTINGS_AI_DETECTION_ENABLED": "AI Song Detection",
+  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Detect AI-generated songs using the SONICS model and show a probability indicator. Downloads ~50MB model on first enable.",
+  "AI_ASSETS_DOWNLOADING": "Downloading AI model...",
+  "AI_ASSETS_READY": "AI model ready",
+  "AI_ASSETS_NOT_READY": "AI model not available"
 }

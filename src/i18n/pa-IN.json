@@ -60,5 +60,11 @@
   "MESSAGE_REMOTE_SKIPPING_DISABLED": "ਦੂਰਦਰਾਜ਼ ਛਾਲ ਅਯੋਗ ਕੀਤਾ ਗਿਆ",
   "MESSAGE_SONG_ADDED_REMOTE": "ਗੀਤ ਰਿਮੋਟ ਰਾਹੀਂ ਖਰਾਬ ਕੀਤਾ ਗਿਆ",
   "SETTINGS_TRASH_VIA_LIKE": "ਲਾਈਕ ਰਾਹੀਂ ਕਚਰਾ",
-  "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "ਮੋਬਾਈਲ ਤੋਂ ਟਰੈਸ਼ ਕਰਨ ਲਈ ਇੱਕ ਗੀਤ ਵਾਂਗ। ਆਪਣੇ ਆਪ ਅਣਲਾਈਕ ਕਰਦਾ ਹੈ ਅਤੇ ਅਗਲੇ ਟਰੈਕ 'ਤੇ ਛਾਲ ਮਾਰਦਾ ਹੈ।"
+  "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "ਮੋਬਾਈਲ ਤੋਂ ਟਰੈਸ਼ ਕਰਨ ਲਈ ਇੱਕ ਗੀਤ ਵਾਂਗ। ਆਪਣੇ ਆਪ ਅਣਲਾਈਕ ਕਰਦਾ ਹੈ ਅਤੇ ਅਗਲੇ ਟਰੈਕ 'ਤੇ ਛਾਲ ਮਾਰਦਾ ਹੈ।",
+  "SETTINGS_AI_DETECTION": "AI Detection",
+  "SETTINGS_AI_DETECTION_ENABLED": "AI Song Detection",
+  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Detect AI-generated songs using the SONICS model and show a probability indicator. Downloads ~50MB model on first enable.",
+  "AI_ASSETS_DOWNLOADING": "Downloading AI model...",
+  "AI_ASSETS_READY": "AI model ready",
+  "AI_ASSETS_NOT_READY": "AI model not available"
 }

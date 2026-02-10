@@ -17,6 +17,7 @@ export const STORAGE_KEYS = {
   REMOTE_TOGGLE_ENABLED: "trashbin-remote-toggle-enabled",
   REMOTE_SKIPPING_ENABLED: "trashbin-remote-skipping-enabled",
   TRASH_VIA_LIKE: "trashbin-trash-via-like",
+  AI_DETECTION: "trashbin-ai-detection",
 } as const;
 
 interface TrashbinState {
@@ -37,6 +38,11 @@ interface TrashbinState {
   remoteSkippingEnabled: boolean;
   trashViaLikeEnabled: boolean;
 
+  // AI Detection
+  aiDetectionEnabled: boolean;
+  aiAssetsReady: boolean;
+  aiAssetsDownloading: boolean;
+
   // Actions
   initializeFromStorage: () => void;
   setTrashbinEnabled: (enabled: boolean) => void;
@@ -53,6 +59,11 @@ interface TrashbinState {
   setRemoteSkippingEnabled: (enabled: boolean) => void;
   toggleRemoteSkipping: () => void;
   setTrashViaLikeEnabled: (enabled: boolean) => void;
+
+  // AI Detection actions
+  setAiDetectionEnabled: (enabled: boolean) => void;
+  setAiAssetsReady: (ready: boolean) => void;
+  setAiAssetsDownloading: (downloading: boolean) => void;
 
   // Unified actions
   toggleSongTrash: (uri: string, showNotification?: boolean) => void;
@@ -97,6 +108,9 @@ export const useTrashbinStore = create<TrashbinState>((set, get) => ({
   remoteToggleEnabled: false,
   remoteSkippingEnabled: false,
   trashViaLikeEnabled: false,
+  aiDetectionEnabled: false,
+  aiAssetsReady: false,
+  aiAssetsDownloading: false,
 
   // Initialize from localStorage
   initializeFromStorage: () => {
@@ -121,6 +135,7 @@ export const useTrashbinStore = create<TrashbinState>((set, get) => ({
         false,
       ),
       trashViaLikeEnabled: initValue(STORAGE_KEYS.TRASH_VIA_LIKE, false),
+      aiDetectionEnabled: initValue(STORAGE_KEYS.AI_DETECTION, false),
     });
   },
 
@@ -225,6 +240,19 @@ export const useTrashbinStore = create<TrashbinState>((set, get) => ({
       JSON.stringify(enabled),
     );
   },
+
+  setAiDetectionEnabled: (enabled: boolean) => {
+    set({ aiDetectionEnabled: enabled });
+    Spicetify.LocalStorage.set(
+      STORAGE_KEYS.AI_DETECTION,
+      JSON.stringify(enabled),
+    );
+  },
+
+  setAiAssetsReady: (ready: boolean) => set({ aiAssetsReady: ready }),
+
+  setAiAssetsDownloading: (downloading: boolean) =>
+    set({ aiAssetsDownloading: downloading }),
 
   toggleSongTrash: (uri: string, showNotification = true) => {
     const state = get();

@@ -60,5 +60,11 @@
   "MESSAGE_REMOTE_SKIPPING_DISABLED": "A passagem remota foi desativada",
   "MESSAGE_SONG_ADDED_REMOTE": "Música eliminada à distância",
   "SETTINGS_TRASH_VIA_LIKE": "Lixo via Like",
-  "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "Como uma música do telemóvel para a eliminar. Descurte automaticamente e passa para a faixa seguinte."
+  "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "Como uma música do telemóvel para a eliminar. Descurte automaticamente e passa para a faixa seguinte.",
+  "SETTINGS_AI_DETECTION": "AI Detection",
+  "SETTINGS_AI_DETECTION_ENABLED": "AI Song Detection",
+  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Detect AI-generated songs using the SONICS model and show a probability indicator. Downloads ~50MB model on first enable.",
+  "AI_ASSETS_DOWNLOADING": "Downloading AI model...",
+  "AI_ASSETS_READY": "AI model ready",
+  "AI_ASSETS_NOT_READY": "AI model not available"
 }

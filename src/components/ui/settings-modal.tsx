@@ -274,6 +274,25 @@ const SettingsModal: React.FC = () => {
       />
 
       <h2 className="my-2.5! text-lg font-bold text-(--spice-text) first-of-type:mt-0">
+        {t("SETTINGS_AI_DETECTION")}
+      </h2>
+      <Toggle
+        label={t("SETTINGS_AI_DETECTION_ENABLED")}
+        enabled={store.aiDetectionEnabled}
+        onChange={store.setAiDetectionEnabled}
+        description={t("DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED")}
+      />
+      {store.aiDetectionEnabled && (
+        <div className="py-1! text-xs! text-[rgba(var(--spice-rgb-text),0.5)]!">
+          {store.aiAssetsDownloading
+            ? t("AI_ASSETS_DOWNLOADING")
+            : store.aiAssetsReady
+              ? t("AI_ASSETS_READY")
+              : t("AI_ASSETS_NOT_READY")}
+        </div>
+      )}
+
+      <h2 className="my-2.5! text-lg font-bold text-(--spice-text) first-of-type:mt-0">
         {t("SETTINGS_LOCAL_STORAGE")}
       </h2>
       <ActionButton

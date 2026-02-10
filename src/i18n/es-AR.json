@@ -60,5 +60,11 @@
   "MESSAGE_REMOTE_SKIPPING_DISABLED": "Salto remoto desactivado",
   "MESSAGE_SONG_ADDED_REMOTE": "Canción eliminada a distancia",
   "SETTINGS_TRASH_VIA_LIKE": "Basura a través de Like",
-  "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "Como una canción desde el móvil hasta la papelera. Automáticamente quita el \"me gusta\" y pasa a la siguiente pista."
+  "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "Como una canción desde el móvil hasta la papelera. Automáticamente quita el \"me gusta\" y pasa a la siguiente pista.",
+  "SETTINGS_AI_DETECTION": "AI Detection",
+  "SETTINGS_AI_DETECTION_ENABLED": "AI Song Detection",
+  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Detect AI-generated songs using the SONICS model and show a probability indicator. Downloads ~50MB model on first enable.",
+  "AI_ASSETS_DOWNLOADING": "Downloading AI model...",
+  "AI_ASSETS_READY": "AI model ready",
+  "AI_ASSETS_NOT_READY": "AI model not available"
 }

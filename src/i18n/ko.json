@@ -60,5 +60,11 @@
   "MESSAGE_REMOTE_SKIPPING_DISABLED": "원격 건너뛰기 비활성화됨",
   "MESSAGE_SONG_ADDED_REMOTE": "원격으로 곡 폐기됨",
   "SETTINGS_TRASH_VIA_LIKE": "좋아요를 통한 쓰레기",
-  "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "휴대폰에서 재생 중인 곡을 삭제하듯이 자동으로 좋아요를 취소하고 다음 곡으로 건너뜁니다."
+  "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "휴대폰에서 재생 중인 곡을 삭제하듯이 자동으로 좋아요를 취소하고 다음 곡으로 건너뜁니다.",
+  "SETTINGS_AI_DETECTION": "AI Detection",
+  "SETTINGS_AI_DETECTION_ENABLED": "AI Song Detection",
+  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Detect AI-generated songs using the SONICS model and show a probability indicator. Downloads ~50MB model on first enable.",
+  "AI_ASSETS_DOWNLOADING": "Downloading AI model...",
+  "AI_ASSETS_READY": "AI model ready",
+  "AI_ASSETS_NOT_READY": "AI model not available"
 }

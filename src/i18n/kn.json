@@ -60,5 +60,11 @@
   "MESSAGE_REMOTE_SKIPPING_DISABLED": "ದೂರದಲ್ಲಿರುವ ಕಿರುಹಾದು ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಲಾಗಿದೆ",
   "MESSAGE_SONG_ADDED_REMOTE": "ದೂರದಿಂದಲೇ ಹಾಡನ್ನು ನಾಶಪಡಿಸಲಾಯಿತು",
   "SETTINGS_TRASH_VIA_LIKE": "ಲೈಕ್ ಮೂಲಕ ತ್ಯಾಜ್ಯ",
-  "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "ಮೊಬೈಲ್‌ನಿಂದ ಹಾಡಿನಂತೆ ಅದನ್ನು ತ್ಯಜಿಸಿ. ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಅನ್‌ಲೈಕ್ ಮಾಡಿ ಮುಂದಿನ ಟ್ರ್ಯಾಕ್‌ಗೆ ಹೋಗಿ."
+  "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "ಮೊಬೈಲ್‌ನಿಂದ ಹಾಡಿನಂತೆ ಅದನ್ನು ತ್ಯಜಿಸಿ. ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಅನ್‌ಲೈಕ್ ಮಾಡಿ ಮುಂದಿನ ಟ್ರ್ಯಾಕ್‌ಗೆ ಹೋಗಿ.",
+  "SETTINGS_AI_DETECTION": "AI Detection",
+  "SETTINGS_AI_DETECTION_ENABLED": "AI Song Detection",
+  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Detect AI-generated songs using the SONICS model and show a probability indicator. Downloads ~50MB model on first enable.",
+  "AI_ASSETS_DOWNLOADING": "Downloading AI model...",
+  "AI_ASSETS_READY": "AI model ready",
+  "AI_ASSETS_NOT_READY": "AI model not available"
 }

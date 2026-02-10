@@ -60,5 +60,11 @@
   "MESSAGE_REMOTE_SKIPPING_DISABLED": "Daljinsko preskakanje onemogućeno",
   "MESSAGE_SONG_ADDED_REMOTE": "Pjesma oštećena na daljinu",
   "SETTINGS_TRASH_VIA_LIKE": "Smeće putem Sviđa mi se",
-  "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "Kao pjesma s mobilnog, izbaci je u otpad. Automatski uklanja sviđanje i prelazi na sljedeću pjesmu."
+  "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "Kao pjesma s mobilnog, izbaci je u otpad. Automatski uklanja sviđanje i prelazi na sljedeću pjesmu.",
+  "SETTINGS_AI_DETECTION": "AI Detection",
+  "SETTINGS_AI_DETECTION_ENABLED": "AI Song Detection",
+  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Detect AI-generated songs using the SONICS model and show a probability indicator. Downloads ~50MB model on first enable.",
+  "AI_ASSETS_DOWNLOADING": "Downloading AI model...",
+  "AI_ASSETS_READY": "AI model ready",
+  "AI_ASSETS_NOT_READY": "AI model not available"
 }

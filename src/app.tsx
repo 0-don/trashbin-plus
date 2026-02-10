@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
 import ReactDOM from "react-dom";
+import { AiDetectionWidget } from "./components/features/ai-detection-widget";
+import { AiTracklist } from "./components/features/injections/ai-tracklist";
 import { AutoAddRecommendations } from "./components/features/injections/auto-add-recommendations";
 import { TrashbinQueuelist } from "./components/features/injections/trashbin-queuelist";
 import { TrashbinTracklist } from "./components/features/injections/trashbin-tracklist";
@@ -12,6 +14,7 @@ import "./global.css";
 import { useHotkeyTrash } from "./hooks/use-hotkey-trash";
 import { usePlaylistMonitor } from "./hooks/use-playlist-monitor";
 import { useRecommendationMonitor } from "./hooks/use-recommendation-monitor";
+import { useAiDetection } from "./hooks/use-ai-detection";
 import { useRemoteToggle } from "./hooks/use-remote-toggle";
 import { SELECTORS } from "./lib/constants";
 import {
@@ -22,7 +25,7 @@ import {
 import { useTrashbinStore } from "./store/trashbin-store";
 
 function App() {
-  console.log("trashbin+ loaded v1.0.10!!");
+  console.log("trashbin+ loaded v1.0.10!");
 
   const trashbinStore = useTrashbinStore();
 
@@ -30,6 +33,7 @@ function App() {
   usePlaylistMonitor();
   useRemoteToggle();
   useRecommendationMonitor();
+  useAiDetection();
 
   useEffect(() => {
     trashbinStore.initializeFromStorage();
@@ -95,6 +99,9 @@ function App() {
         <TrashbinTracklist />
         <TrashbinQueuelist />
         <AutoAddRecommendations />
+
+        <AiDetectionWidget />
+        <AiTracklist />
       </Providers>
     </>
   );

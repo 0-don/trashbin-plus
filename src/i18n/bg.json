@@ -60,5 +60,11 @@
   "MESSAGE_REMOTE_SKIPPING_DISABLED": "Дистанционното пропускане е деактивирано",
   "MESSAGE_SONG_ADDED_REMOTE": "Песента е унищожена от разстояние",
   "SETTINGS_TRASH_VIA_LIKE": "Смет за лайк",
-  "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "Като песен от мобилно към кошчето. Автоматично премахва харесването и превърта към следващата песен."
+  "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "Като песен от мобилно към кошчето. Автоматично премахва харесването и превърта към следващата песен.",
+  "SETTINGS_AI_DETECTION": "AI Detection",
+  "SETTINGS_AI_DETECTION_ENABLED": "AI Song Detection",
+  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Detect AI-generated songs using the SONICS model and show a probability indicator. Downloads ~50MB model on first enable.",
+  "AI_ASSETS_DOWNLOADING": "Downloading AI model...",
+  "AI_ASSETS_READY": "AI model ready",
+  "AI_ASSETS_NOT_READY": "AI model not available"
 }

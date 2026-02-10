@@ -60,5 +60,11 @@
   "MESSAGE_REMOTE_SKIPPING_DISABLED": "ദൂരെ നിന്നുള്ള ഉപേക്ഷിക്കൽ പ്രവർത്തനരഹിതമാക്കി",
   "MESSAGE_SONG_ADDED_REMOTE": "റിമോട്ട് വഴി പാട്ട് നശിപ്പിച്ചു",
   "SETTINGS_TRASH_VIA_LIKE": "ലൈക്കിലൂടെ ചവറ്",
-  "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "മൊബൈലിൽ നിന്ന് ഒരു പാട്ട് തെരഞ്ഞെടുത്ത് അതിനെ ഒഴിവാക്കുന്നത് പോലെ. സ്വയമായി അൺലൈക്ക് ചെയ്ത് അടുത്ത ട്രാക്കിലേക്ക് മാറുന്നു."
+  "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "മൊബൈലിൽ നിന്ന് ഒരു പാട്ട് തെരഞ്ഞെടുത്ത് അതിനെ ഒഴിവാക്കുന്നത് പോലെ. സ്വയമായി അൺലൈക്ക് ചെയ്ത് അടുത്ത ട്രാക്കിലേക്ക് മാറുന്നു.",
+  "SETTINGS_AI_DETECTION": "AI Detection",
+  "SETTINGS_AI_DETECTION_ENABLED": "AI Song Detection",
+  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Detect AI-generated songs using the SONICS model and show a probability indicator. Downloads ~50MB model on first enable.",
+  "AI_ASSETS_DOWNLOADING": "Downloading AI model...",
+  "AI_ASSETS_READY": "AI model ready",
+  "AI_ASSETS_NOT_READY": "AI model not available"
 }
