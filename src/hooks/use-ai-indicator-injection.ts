@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { createAiIndicatorHTML } from "../components/features/ai-probability-indicator";
 import { TRACKLIST_CONFIG } from "../lib/constants";
 import {
-  classifyTrack,
+  classifyTracks,
   getCachedResult,
   isProcessing,
 } from "../lib/ai-track-handler";
@@ -23,7 +23,7 @@ export const useAiIndicatorInjection = () => {
       .forEach((el) => el.remove());
   };
 
-  const injectIndicators = async () => {
+  const injectCachedIndicators = () => {
     if (!enabled) return;
 
     const container = document.querySelector(
@@ -40,29 +40,52 @@ export const useAiIndicatorInjection = () => {
       if (!trackData.trackURI) continue;
 
       const cached = getCachedResult(trackData.trackURI);
+      if (cached === undefined) continue;
 
-      if (cached !== undefined) {
-        const indicator = document.createElement("span");
-        indicator.innerHTML = createAiIndicatorHTML(cached);
-        indicator.className = INDICATOR_CLASS;
-        indicator.style.marginLeft = "auto";
-        indicator.style.pointerEvents = "auto";
+      const indicator = document.createElement("span");
+      indicator.innerHTML = createAiIndicatorHTML(cached);
+      indicator.className = INDICATOR_CLASS;
+      indicator.style.marginLeft = "auto";
+      indicator.style.pointerEvents = "auto";
 
-        const moreBtn = row.querySelector(
-          TRACKLIST_CONFIG.moreButtonSelector,
-        );
-        if (moreBtn?.parentElement) {
-          moreBtn.parentElement.insertBefore(indicator, moreBtn);
-        }
-      } else if (!isProcessing(trackData.trackURI)) {
-        // Trigger async classification
-        classifyTrack(trackData.trackURI).then((result) => {
-          if (result !== null) {
-            injectIndicators();
-          }
-        });
+      const moreBtn = row.querySelector(
+        TRACKLIST_CONFIG.moreButtonSelector,
+      );
+      if (moreBtn?.parentElement) {
+        moreBtn.parentElement.insertBefore(indicator, moreBtn);
       }
     }
+  };
+
+  const injectIndicators = () => {
+    if (!enabled) return;
+
+    // First inject any cached results
+    injectCachedIndicators();
+
+    // Collect uncached track URIs for batch classification
+    const container = document.querySelector(
+      TRACKLIST_CONFIG.containerSelector,
+    );
+    if (!container) return;
+
+    const rows = container.querySelectorAll(TRACKLIST_CONFIG.rowSelector);
+    const uncachedUris: string[] = [];
+
+    for (const row of rows) {
+      const trackData = extractTrackData(row);
+      if (!trackData.trackURI) continue;
+      if (getCachedResult(trackData.trackURI) !== undefined) continue;
+      if (isProcessing(trackData.trackURI)) continue;
+      uncachedUris.push(trackData.trackURI);
+    }
+
+    if (uncachedUris.length === 0) return;
+
+    // Batch classify — re-inject cached indicators as results arrive
+    classifyTracks(uncachedUris, () => {
+      injectCachedIndicators();
+    });
   };
 
   useEffect(() => {

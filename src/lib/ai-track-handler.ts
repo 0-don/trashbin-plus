@@ -4,6 +4,7 @@ import {
   extractMiddleChunk,
   fetchAudioWaveform,
   getPreviewUrl,
+  getPreviewUrls,
 } from "./ai-audio-fetcher";
 import { disposeEngine, initEngine, queueInference } from "./ai-infer-engine";
 
@@ -55,34 +56,89 @@ export async function classifyTrack(
   processingTracks.add(trackUri);
 
   try {
-    console.log(`[trashbin+ AI] Classifying ${trackUri}...`);
     const previewUrl = await getPreviewUrl(trackUri);
-    if (!previewUrl) {
-      console.log(`[trashbin+ AI] No preview URL for ${trackUri}`);
-      return null;
-    }
-    console.log(`[trashbin+ AI] Preview URL: ${previewUrl}`);
+    if (!previewUrl) return null;
 
-    const waveform = await fetchAudioWaveform(previewUrl);
-    console.log(`[trashbin+ AI] Waveform: ${waveform.length} samples`);
-    const chunk = extractMiddleChunk(waveform);
-    console.log(`[trashbin+ AI] Chunk: ${chunk.length} samples, running inference...`);
-    const probability = await queueInference(chunk);
-    console.log(`[trashbin+ AI] Result for ${trackUri}: ${probability}`);
-
-    if (probability !== null) {
-      resultCache.set(trackUri, probability);
-    }
-
-    return probability;
+    return await classifyWithPreviewUrl(trackUri, previewUrl);
   } catch (error) {
-    console.error(
-      `[trashbin+ AI] Failed to classify ${trackUri}:`,
-      error,
-    );
+    console.error(`[trashbin+ AI] Failed to classify ${trackUri}:`, error);
     return null;
   } finally {
     processingTracks.delete(trackUri);
+  }
+}
+
+async function classifyWithPreviewUrl(
+  trackUri: string,
+  previewUrl: string,
+): Promise<number | null> {
+  const waveform = await fetchAudioWaveform(previewUrl);
+  const chunk = extractMiddleChunk(waveform);
+  const probability = await queueInference(chunk);
+
+  if (probability !== null) {
+    resultCache.set(trackUri, probability);
+  }
+
+  return probability;
+}
+
+const MAX_CONCURRENT = 3;
+let batchInFlight = false;
+
+export async function classifyTracks(
+  trackUris: string[],
+  onResult?: (trackUri: string, probability: number) => void,
+): Promise<void> {
+  // Prevent overlapping batch calls (MutationObserver fires rapidly)
+  if (batchInFlight) return;
+
+  // Filter to only uncached, non-processing tracks
+  const toProcess = trackUris.filter(
+    (uri) => resultCache.get(uri) === undefined && !processingTracks.has(uri),
+  );
+
+  if (toProcess.length === 0) return;
+
+  batchInFlight = true;
+
+  // Mark all as processing
+  for (const uri of toProcess) processingTracks.add(uri);
+
+  try {
+    // Batch fetch preview URLs in one API call
+    const previewUrls = await getPreviewUrls(toProcess);
+    console.log(`[trashbin+ AI] Got ${previewUrls.size}/${toProcess.length} preview URLs`);
+
+    // Process audio + inference with concurrency limit
+    const withPreview = toProcess.filter((uri) => previewUrls.has(uri));
+    let active = 0;
+    let idx = 0;
+
+    await new Promise<void>((resolve) => {
+      if (withPreview.length === 0) { resolve(); return; }
+
+      const next = () => {
+        while (active < MAX_CONCURRENT && idx < withPreview.length) {
+          const uri = withPreview[idx++];
+          active++;
+          classifyWithPreviewUrl(uri, previewUrls.get(uri)!)
+            .then((prob) => {
+              if (prob !== null) onResult?.(uri, prob);
+            })
+            .catch(() => {})
+            .finally(() => {
+              active--;
+              if (idx >= withPreview.length && active === 0) resolve();
+              else next();
+            });
+        }
+      };
+      next();
+    });
+  } finally {
+    for (const uri of toProcess) processingTracks.delete(uri);
+    batchInFlight = false;
   }
 }
 
@@ -121,4 +177,5 @@ export function cleanupAiDetection(): void {
   closeAudioContext();
   resultCache.clear();
   processingTracks.clear();
+  batchInFlight = false;
 }

@@ -36,7 +36,14 @@ const postcssPlugin: BunPlugin = {
 const externalGlobals: BunPlugin = {
   name: "external-globals",
   setup(build) {
-    const map: Record<string, string> = { react: "Spicetify.React", "react-dom": "Spicetify.ReactDOM" };
+    const map: Record<string, string> = {
+      react: "Spicetify.React",
+      "react-dom": "Spicetify.ReactDOM",
+    };
+    // Alias onnxruntime-web to wasm-only bundle (no dynamic imports at all)
+    build.onResolve({ filter: /^onnxruntime-web$/ }, () => ({
+      path: resolve("node_modules/onnxruntime-web/dist/ort.wasm.bundle.min.mjs"),
+    }));
     const filter = new RegExp(`^(${Object.keys(map).join("|")})$`);
     build.onResolve({ filter }, ({ path: p }) => ({ path: p, namespace: "ext" }));
     build.onLoad({ filter: /.*/, namespace: "ext" }, ({ path: p }) => ({
@@ -57,7 +64,7 @@ async function runBuild() {
     format: "esm",
     naming: `${NAME_ID}.[ext]`,
     minify: minifyMode,
-    define: { "import.meta.url": JSON.stringify("https://localhost") },
+    define: { "import.meta.url": "location.href" },
     plugins: [postcssPlugin, externalGlobals],
   });
 

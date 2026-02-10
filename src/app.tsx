@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
 import ReactDOM from "react-dom";
+import { AiDetectionWidget } from "./components/features/ai-detection-widget";
+import { AiTracklist } from "./components/features/injections/ai-tracklist";
 import { AutoAddRecommendations } from "./components/features/injections/auto-add-recommendations";
 import { TrashbinQueuelist } from "./components/features/injections/trashbin-queuelist";
 import { TrashbinTracklist } from "./components/features/injections/trashbin-tracklist";
@@ -98,8 +100,8 @@ function App() {
         <TrashbinQueuelist />
         <AutoAddRecommendations />
 
-        {/* <AiDetectionWidget />
-        <AiTracklist /> */}
+        <AiDetectionWidget />
+        <AiTracklist />
       </Providers>
     </>
   );

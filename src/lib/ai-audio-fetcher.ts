@@ -1,5 +1,7 @@
 import { SAMPLING_RATE, INPUT_LENGTH } from "./ai-infer-engine";
 
+const CORS_PROXY = "https://cors-proxy.spicetify.app";
+
 let audioContext: AudioContext | null = null;
 
 function getAudioContext(): AudioContext {
@@ -12,29 +14,53 @@ function getAudioContext(): AudioContext {
   return audioContext;
 }
 
+async function fetchEmbedPreviewUrl(id: string): Promise<string | null> {
+  try {
+    const res = await fetch(
+      `${CORS_PROXY}/https://open.spotify.com/embed/track/${id}`,
+    );
+    if (!res.ok) return null;
+
+    const html = await res.text();
+    const match = html.match(/"audioPreview":\s*\{\s*"url":\s*"([^"]+)"/);
+    return match?.[1] ?? null;
+  } catch {
+    return null;
+  }
+}
+
 export async function getPreviewUrl(
   trackUri: string,
 ): Promise<string | null> {
+  const id = trackUri.split(":")[2];
+  if (!id) return null;
+  return fetchEmbedPreviewUrl(id);
+}
+
+export async function getPreviewUrls(
+  trackUris: string[],
+): Promise<Map<string, string>> {
+  const result = new Map<string, string>();
   try {
-    const trackId = trackUri.split(":")[2];
-    if (!trackId) return null;
+    const promises = trackUris.map(async (uri) => {
+      const id = uri.split(":")[2];
+      if (!id) return;
 
-    const token = (await Spicetify.Platform.AuthorizationAPI.getState()).token
-      .accessToken;
+      const previewUrl = await fetchEmbedPreviewUrl(id);
+      if (previewUrl) {
+        result.set(uri, previewUrl);
+      }
+    });
 
-    const response = await fetch(
-      `https://api.spotify.com/v1/tracks/${trackId}`,
-      { headers: { Authorization: `Bearer ${token}` } },
+    await Promise.all(promises);
+
+    console.log(
+      `[trashbin+ AI] Got ${result.size}/${trackUris.length} preview URLs`,
     );
-
-    if (!response.ok) return null;
-
-    const data = await response.json();
-    return data.preview_url ?? null;
   } catch (error) {
-    console.error("[trashbin+ AI] Failed to get preview URL:", error);
-    return null;
+    console.error("[trashbin+ AI] Failed to get preview URLs:", error);
   }
+  return result;
 }
 
 export async function fetchAudioWaveform(
