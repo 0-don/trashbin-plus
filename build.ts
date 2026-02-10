@@ -57,6 +57,7 @@ async function runBuild() {
     format: "esm",
     naming: `${NAME_ID}.[ext]`,
     minify: minifyMode,
+    define: { "import.meta.url": JSON.stringify("https://localhost") },
     plugins: [postcssPlugin, externalGlobals],
   });
 

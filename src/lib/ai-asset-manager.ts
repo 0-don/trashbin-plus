@@ -2,8 +2,8 @@ const DB_NAME = "trashbin-ai";
 const STORE_NAME = "assets";
 const DB_VERSION = 1;
 const VERSION_STORAGE_KEY = "trashbin-ai-assets-version";
-const GITHUB_RELEASE_BASE =
-  "https://github.com/0-don/trashbin-plus/releases/download/ai-assets";
+const HF_BASE =
+  "https://huggingface.co/0don/trashbin-plus-ai/resolve/main";
 
 export const ASSET_NAMES = {
   MODEL: "sonics_model.onnx",
@@ -64,7 +64,8 @@ async function storeAsset(
 }
 
 async function downloadAsset(name: string): Promise<ArrayBuffer> {
-  const url = `${GITHUB_RELEASE_BASE}/${name}`;
+  const url = `${HF_BASE}/${name}`;
+  console.log(`[trashbin+ AI] Downloading ${name}: ${url}`);
   const response = await fetch(url);
   if (!response.ok) {
     throw new Error(`Failed to download ${name}: ${response.status}`);
@@ -74,12 +75,14 @@ async function downloadAsset(name: string): Promise<ArrayBuffer> {
 
 async function fetchRemoteVersion(): Promise<string | null> {
   try {
-    const url = `${GITHUB_RELEASE_BASE}/${ASSET_NAMES.VERSION}`;
+    const url = `${HF_BASE}/${ASSET_NAMES.VERSION}`;
+    console.log(`[trashbin+ AI] Fetching version: ${url}`);
     const response = await fetch(url);
     if (!response.ok) return null;
     const data = await response.json();
     return data.version ?? null;
-  } catch {
+  } catch (error) {
+    console.error("[trashbin+ AI] Failed to fetch remote version:", error);
     return null;
   }
 }
@@ -96,17 +99,21 @@ export async function ensureAssets(
   onProgress?: (message: string) => void,
 ): Promise<boolean> {
   try {
+    console.log("[trashbin+ AI] Fetching remote version...");
     const remoteVersion = await fetchRemoteVersion();
     if (!remoteVersion) {
       console.error("[trashbin+ AI] Could not fetch remote version");
       return false;
     }
+    console.log(`[trashbin+ AI] Remote version: ${remoteVersion}`);
 
     const localVersion = getStoredVersion();
+    console.log(`[trashbin+ AI] Local version: ${localVersion}`);
 
     // Check if all assets exist in IndexedDB
     const modelExists = await getAsset(ASSET_NAMES.MODEL);
     const wasmExists = await getAsset(ASSET_NAMES.WASM);
+    console.log(`[trashbin+ AI] IndexedDB - model: ${!!modelExists} (${modelExists?.byteLength ?? 0}B), wasm: ${!!wasmExists} (${wasmExists?.byteLength ?? 0}B)`);
 
     if (localVersion === remoteVersion && modelExists && wasmExists) {
       onProgress?.("Assets up to date");
@@ -115,11 +122,15 @@ export async function ensureAssets(
 
     // Download all required assets
     onProgress?.("Downloading WASM runtime...");
+    console.log(`[trashbin+ AI] Downloading ${ASSET_NAMES.WASM}...`);
     const wasmData = await downloadAsset(ASSET_NAMES.WASM);
+    console.log(`[trashbin+ AI] WASM downloaded: ${wasmData.byteLength} bytes`);
     await storeAsset(ASSET_NAMES.WASM, wasmData, remoteVersion);
 
     onProgress?.("Downloading AI model...");
+    console.log(`[trashbin+ AI] Downloading ${ASSET_NAMES.MODEL}...`);
     const modelData = await downloadAsset(ASSET_NAMES.MODEL);
+    console.log(`[trashbin+ AI] Model downloaded: ${modelData.byteLength} bytes`);
     await storeAsset(ASSET_NAMES.MODEL, modelData, remoteVersion);
 
     // Only update version after all assets are stored

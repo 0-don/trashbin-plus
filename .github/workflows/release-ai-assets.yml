@@ -4,16 +4,17 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
+    paths:
+      - "ai-converter/**"
+      - ".github/workflows/release-ai-assets.yml"
 
 concurrency:
-  group: ${{ github.ref }}
+  group: ai-assets-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
   build-and-release:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
 
     steps:
       - uses: actions/checkout@v6
@@ -30,7 +31,9 @@ jobs:
 
       - name: Convert SONICS model to ONNX
         working-directory: ai-converter
-        run: uv run python convert_to_onnx.py --output_path ../sonics_model.onnx
+        run: |
+          mkdir -p ../ai-assets
+          uv run python convert_to_onnx.py --output_path ../ai-assets/sonics_model.onnx
 
       - name: Set up Bun
         uses: oven-sh/setup-bun@v2
@@ -40,21 +43,24 @@ jobs:
           mkdir -p /tmp/ort && cd /tmp/ort
           bun init -y
           bun add onnxruntime-web@1.24.1
-          mkdir -p $GITHUB_WORKSPACE/ai-assets
           cp node_modules/onnxruntime-web/dist/ort-wasm-simd-threaded.wasm $GITHUB_WORKSPACE/ai-assets/
 
-      - name: Prepare release assets
+      - name: Create version file
         run: |
-          mv sonics_model.onnx ai-assets/
           echo "{\"version\":\"${{ github.sha }}\",\"date\":\"$(date -u +%Y-%m-%dT%H:%M:%SZ)\"}" > ai-assets/version.json
 
-      - name: Create or update release
+      - name: Upload to HuggingFace
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
-          gh release create ai-assets \
-            --title "AI Detection Assets" \
-            --notes "ONNX model and WebAssembly files for AI song detection" \
-            --latest=false \
-            2>/dev/null || true
-          gh release upload ai-assets ai-assets/* --clobber
+          pip install huggingface_hub
+          python -c "
+          from huggingface_hub import HfApi
+          api = HfApi()
+          api.upload_folder(
+              folder_path='ai-assets',
+              repo_id='0don/trashbin-plus-ai',
+              repo_type='model',
+              commit_message='Update AI assets (${{ github.sha }})',
+          )
+          "

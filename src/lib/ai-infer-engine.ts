@@ -12,9 +12,11 @@ export async function initEngine(
   wasmBuffer: ArrayBuffer,
 ): Promise<boolean> {
   try {
+    console.log(`[trashbin+ AI] initEngine: model=${modelBuffer.byteLength}B, wasm=${wasmBuffer.byteLength}B`);
     ort.env.wasm.numThreads = 1;
     (ort.env.wasm as any).wasmBinary = wasmBuffer;
 
+    console.log("[trashbin+ AI] Creating inference session...");
     session = await ort.InferenceSession.create(modelBuffer, {
       executionProviders: ["wasm"],
     });

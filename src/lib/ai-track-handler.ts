@@ -55,14 +55,20 @@ export async function classifyTrack(
   processingTracks.add(trackUri);
 
   try {
+    console.log(`[trashbin+ AI] Classifying ${trackUri}...`);
     const previewUrl = await getPreviewUrl(trackUri);
     if (!previewUrl) {
+      console.log(`[trashbin+ AI] No preview URL for ${trackUri}`);
       return null;
     }
+    console.log(`[trashbin+ AI] Preview URL: ${previewUrl}`);
 
     const waveform = await fetchAudioWaveform(previewUrl);
+    console.log(`[trashbin+ AI] Waveform: ${waveform.length} samples`);
     const chunk = extractMiddleChunk(waveform);
+    console.log(`[trashbin+ AI] Chunk: ${chunk.length} samples, running inference...`);
     const probability = await queueInference(chunk);
+    console.log(`[trashbin+ AI] Result for ${trackUri}: ${probability}`);
 
     if (probability !== null) {
       resultCache.set(trackUri, probability);
