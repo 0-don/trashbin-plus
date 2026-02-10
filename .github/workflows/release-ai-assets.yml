@@ -17,21 +17,16 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
-      - name: Set up Python
-        uses: actions/setup-python@v6
-        with:
-          python-version: "3.12"
-
-      - name: Install Poetry
-        run: pip install poetry
+      - name: Install uv
+        uses: astral-sh/setup-uv@v6
 
       - name: Install converter dependencies
         working-directory: ai-converter
-        run: poetry lock --no-cache && poetry install --no-root
+        run: uv sync
 
       - name: Convert SONICS model to ONNX
         working-directory: ai-converter
-        run: poetry run python convert_to_onnx.py --output_path ../sonics_model.onnx
+        run: uv run python convert_to_onnx.py --output_path ../sonics_model.onnx
 
       - name: Set up Bun
         uses: oven-sh/setup-bun@v2
