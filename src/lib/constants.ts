@@ -25,3 +25,11 @@ export const QUEUELIST_CONFIG = {
   moreButtonSelector: 'button[aria-haspopup="menu"]',
   buttonClassName: "trashbin-queue-btn",
 } as const;
+
+export const AUTO_ADD_CONFIG = {
+  gridSelector: '[aria-label^="Recommended based on"]',
+  rowSelector: '[role="row"]',
+  trashButtonSelector: ".trashbin-tracklist-btn",
+  addButtonSelector: 'button[data-testid="add-to-playlist-button"]',
+  autoAddButtonClassName: "trashbin-auto-add-btn",
+} as const;

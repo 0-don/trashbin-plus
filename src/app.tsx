@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import ReactDOM from "react-dom";
+import { AutoAddRecommendations } from "./components/features/injections/auto-add-recommendations";
 import { TrashbinQueuelist } from "./components/features/injections/trashbin-queuelist";
 import { TrashbinTracklist } from "./components/features/injections/trashbin-tracklist";
 import { TrashbinContextMenu } from "./components/features/trashbin-context-menu";
@@ -93,6 +94,7 @@ function App() {
 
         <TrashbinTracklist />
         <TrashbinQueuelist />
+        <AutoAddRecommendations />
       </Providers>
     </>
   );
