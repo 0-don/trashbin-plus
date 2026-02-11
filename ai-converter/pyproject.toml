@@ -9,5 +9,5 @@ dependencies = [
     "torchlibrosa>=0.1.0,<0.2.0",
     "onnx>=1.20.0,<2.0.0",
     "onnxscript>=0.2.0",
-    "transformers>=4.46.0",
+    "transformers>=5.1.0",
 ]
