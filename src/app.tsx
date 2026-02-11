@@ -4,6 +4,7 @@ import { AiDetectionWidget } from "./components/features/ai-detection-widget";
 import { AutoAddRecommendations } from "./components/features/injections/auto-add-recommendations";
 import { TrashbinQueuelist } from "./components/features/injections/trashbin-queuelist";
 import { TrashbinTracklist } from "./components/features/injections/trashbin-tracklist";
+import { PlaylistCleanupContextMenu } from "./components/features/playlist-cleanup-context-menu";
 import { TrashbinContextMenu } from "./components/features/trashbin-context-menu";
 import { TrashbinWidget } from "./components/features/trashbin-widget";
 import { Providers } from "./components/providers/providers";
@@ -92,6 +93,7 @@ function App() {
         <TrashbinSettings />
         <TrashedItemsModal />
         <TrashbinContextMenu />
+        <PlaylistCleanupContextMenu />
 
         <TrashbinTracklist />
         <TrashbinQueuelist />

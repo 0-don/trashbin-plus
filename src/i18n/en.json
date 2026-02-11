@@ -75,5 +75,9 @@
   "AI_TIER_PROBABLY_HUMAN": "Probably Human",
   "AI_TIER_UNCERTAIN": "Uncertain",
   "AI_TIER_PROBABLY_AI": "Probably AI",
-  "AI_TIER_LIKELY_AI": "Likely AI"
+  "AI_TIER_LIKELY_AI": "Likely AI",
+  "ACTION_REMOVE_TRASHED": "Remove trashed songs",
+  "CONFIRM_REMOVE_TRASHED": "Remove {{count}} trashed song(s) from this playlist? This cannot be undone.",
+  "MESSAGE_REMOVE_TRASHED_SUCCESS": "Removed {{count}} trashed song(s) from playlist",
+  "MESSAGE_NO_TRASHED_IN_PLAYLIST": "No trashed songs found in this playlist"
 }
