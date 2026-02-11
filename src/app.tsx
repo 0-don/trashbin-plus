@@ -89,6 +89,7 @@ function App() {
   return (
     <>
       <Providers>
+        <AiDetectionWidget />
         <TrashbinWidget />
         <TrashbinSettings />
         <TrashedItemsModal />
@@ -98,8 +99,6 @@ function App() {
         <TrashbinTracklist />
         <TrashbinQueuelist />
         <AutoAddRecommendations />
-
-        <AiDetectionWidget />
       </Providers>
     </>
   );
