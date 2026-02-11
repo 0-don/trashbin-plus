@@ -5,7 +5,7 @@ import {
   classifyTracks,
   getCachedResult,
   isProcessing,
-} from "../lib/ai-track-handler";
+} from "../lib/ai-classifier";
 import { extractTrackData } from "../lib/track-utils";
 import { useTrashbinStore } from "../store/trashbin-store";
 import { useMutationObserver } from "./use-mutation-observer";

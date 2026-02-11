@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { classifyTrack, getCachedResult } from "../../lib/ai-track-handler";
+import { classifyTrack, getCachedResult } from "../../lib/ai-classifier";
 import { useTrashbinStore } from "../../store/trashbin-store";
 import { AiProbabilityIndicator } from "./ai-probability-indicator";
 

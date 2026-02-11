@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import {
   cleanupAiDetection,
   initializeAiDetection,
-} from "../lib/ai-track-handler";
+} from "../lib/ai-classifier";
 import { useTrashbinStore } from "../store/trashbin-store";
 
 export const useAiDetection = () => {

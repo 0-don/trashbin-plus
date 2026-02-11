@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { HiOutlineQuestionMarkCircle } from "react-icons/hi2";
-import { MODELS } from "../../lib/ai-model-config";
+import { MODELS } from "../../lib/ai-engine";
 import { SELECTORS } from "../../lib/constants";
 import { cn } from "../../lib/utils";
 import { useTrashbinStore } from "../../store/trashbin-store";

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import ReactDOM from "react-dom";
 import { AiDetectionWidget } from "./components/features/ai-detection-widget";
-import { AiTracklist } from "./components/features/injections/ai-tracklist";
+import { useAiIndicatorInjection } from "./hooks/use-ai-indicator-injection";
 import { AutoAddRecommendations } from "./components/features/injections/auto-add-recommendations";
 import { TrashbinQueuelist } from "./components/features/injections/trashbin-queuelist";
 import { TrashbinTracklist } from "./components/features/injections/trashbin-tracklist";
@@ -34,6 +34,7 @@ function App() {
   useRemoteToggle();
   useRecommendationMonitor();
   useAiDetection();
+  useAiIndicatorInjection();
 
   useEffect(() => {
     trashbinStore.initializeFromStorage();
@@ -101,7 +102,6 @@ function App() {
         <AutoAddRecommendations />
 
         <AiDetectionWidget />
-        <AiTracklist />
       </Providers>
     </>
   );

@@ -1,0 +1,223 @@
+import * as ort from "onnxruntime-web";
+
+// --- Model Config ---
+
+export type ModelId = "sonics-5s" | "sonics-120s";
+export const DEFAULT_MODEL: ModelId = "sonics-5s";
+
+export const MODELS = {
+  "sonics-5s": {
+    label: "SONICS SpecTTTra 5s",
+    assetName: "sonics_5s.onnx",
+    inputLength: 220500,
+  },
+  "sonics-120s": {
+    label: "SONICS SpecTTTra 120s",
+    assetName: "sonics_120s.onnx",
+    inputLength: 5292000,
+  },
+} as const satisfies Record<
+  ModelId,
+  { label: string; assetName: string; inputLength: number }
+>;
+
+const SAMPLE_RATE = 44100;
+const INPUT_NAME = "audio";
+const OUTPUT_NAME = "prob";
+const WASM_NAME = "ort-wasm-simd-threaded.wasm";
+
+// --- IndexedDB Asset Storage ---
+
+const DB_NAME = "trashbin-ai";
+const STORE_NAME = "assets";
+const VERSION_KEY = "trashbin-ai-assets-version";
+const HF_BASE = "https://huggingface.co/0don/trashbin-plus-ai/resolve/main";
+
+let dbPromise: Promise<IDBDatabase> | null = null;
+
+function getDB(): Promise<IDBDatabase> {
+  if (!dbPromise) {
+    dbPromise = new Promise((resolve, reject) => {
+      const req = indexedDB.open(DB_NAME, 1);
+      req.onupgradeneeded = () => {
+        if (!req.result.objectStoreNames.contains(STORE_NAME))
+          req.result.createObjectStore(STORE_NAME, { keyPath: "name" });
+      };
+      req.onsuccess = () => {
+        req.result.onversionchange = () => {
+          req.result.close();
+          dbPromise = null;
+        };
+        resolve(req.result);
+      };
+      req.onerror = () => reject(req.error);
+    });
+  }
+  return dbPromise;
+}
+
+function idbGet(name: string): Promise<ArrayBuffer | null> {
+  return getDB().then(
+    (db) =>
+      new Promise((resolve, reject) => {
+        const req = db
+          .transaction(STORE_NAME, "readonly")
+          .objectStore(STORE_NAME)
+          .get(name);
+        req.onsuccess = () => resolve(req.result?.data ?? null);
+        req.onerror = () => reject(req.error);
+      }),
+  );
+}
+
+function idbPut(name: string, data: ArrayBuffer): Promise<void> {
+  return getDB().then(
+    (db) =>
+      new Promise((resolve, reject) => {
+        const req = db
+          .transaction(STORE_NAME, "readwrite")
+          .objectStore(STORE_NAME)
+          .put({ name, data });
+        req.onsuccess = () => resolve();
+        req.onerror = () => reject(req.error);
+      }),
+  );
+}
+
+async function downloadAsset(name: string): Promise<ArrayBuffer> {
+  const response = await fetch(`${HF_BASE}/${name}`);
+  if (!response.ok)
+    throw new Error(`Failed to download ${name}: ${response.status}`);
+  return response.arrayBuffer();
+}
+
+export async function getAsset(name: string): Promise<ArrayBuffer | null> {
+  return idbGet(name);
+}
+
+export async function ensureAssets(
+  modelId: ModelId,
+  onProgress?: (message: string) => void,
+): Promise<boolean> {
+  try {
+    const model = MODELS[modelId];
+
+    const versionRes = await fetch(`${HF_BASE}/version.json`);
+    if (!versionRes.ok) return false;
+    const remoteVersion: string = (await versionRes.json()).version;
+
+    const localVersion = Spicetify.LocalStorage.get(VERSION_KEY);
+    const versionMatch = localVersion === remoteVersion;
+
+    const [wasmExists, modelExists] = await Promise.all([
+      idbGet(WASM_NAME),
+      idbGet(model.assetName),
+    ]);
+
+    if (versionMatch && wasmExists && modelExists) {
+      onProgress?.("Assets up to date");
+      return true;
+    }
+
+    const downloads: Promise<void>[] = [];
+    if (!wasmExists || !versionMatch) {
+      onProgress?.("Downloading WASM runtime...");
+      downloads.push(
+        downloadAsset(WASM_NAME).then((d) => idbPut(WASM_NAME, d)),
+      );
+    }
+    if (!modelExists || !versionMatch) {
+      onProgress?.(`Downloading ${model.label}...`);
+      downloads.push(
+        downloadAsset(model.assetName).then((d) => idbPut(model.assetName, d)),
+      );
+    }
+    await Promise.all(downloads);
+
+    Spicetify.LocalStorage.set(VERSION_KEY, remoteVersion);
+    onProgress?.("Assets ready");
+    return true;
+  } catch (error) {
+    console.error("[trashbin+ AI] Failed to ensure assets:", error);
+    return false;
+  }
+}
+
+export async function deleteAssets(): Promise<void> {
+  try {
+    const db = await getDB();
+    const tx = db.transaction(STORE_NAME, "readwrite");
+    tx.objectStore(STORE_NAME).clear();
+    Spicetify.LocalStorage.remove(VERSION_KEY);
+  } catch (error) {
+    console.error("[trashbin+ AI] Failed to delete assets:", error);
+  }
+}
+
+// --- ONNX Inference Engine ---
+
+let session: ort.InferenceSession | null = null;
+let activeModelId: ModelId | null = null;
+let inferenceQueue = Promise.resolve<number | null>(null);
+
+export function getActiveModelId(): ModelId | null {
+  return activeModelId;
+}
+
+export async function initEngine(modelId: ModelId): Promise<boolean> {
+  try {
+    const model = MODELS[modelId];
+    const [modelBuffer, wasmBuffer] = await Promise.all([
+      idbGet(model.assetName),
+      idbGet(WASM_NAME),
+    ]);
+    if (!modelBuffer || !wasmBuffer) return false;
+
+    ort.env.wasm.numThreads = 1;
+    (ort.env.wasm as any).wasmBinary = wasmBuffer;
+
+    session = await ort.InferenceSession.create(modelBuffer, {
+      executionProviders: ["wasm"],
+    });
+    activeModelId = modelId;
+    return true;
+  } catch (error) {
+    console.error("[trashbin+ AI] Failed to init engine:", error);
+    return false;
+  }
+}
+
+async function infer(data: Float32Array): Promise<number | null> {
+  if (!session || !activeModelId) return null;
+  try {
+    const tensor = new ort.Tensor("float32", data, [1, data.length]);
+    const results = await session.run({ [INPUT_NAME]: tensor });
+    return (results[OUTPUT_NAME].data as Float32Array)[0];
+  } catch (error) {
+    console.error("[trashbin+ AI] Inference error:", error);
+    return null;
+  }
+}
+
+export function queueInference(data: Float32Array): Promise<number | null> {
+  const promise = inferenceQueue.then(
+    () => infer(data),
+    () => infer(data),
+  );
+  inferenceQueue = promise.then(
+    () => null,
+    () => null,
+  );
+  return promise;
+}
+
+export function disposeEngine(): void {
+  if (session) {
+    session.release();
+    session = null;
+  }
+  activeModelId = null;
+  inferenceQueue = Promise.resolve(null);
+}
+
+export { SAMPLE_RATE, WASM_NAME };

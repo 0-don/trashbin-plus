@@ -1,7 +1,6 @@
 import { create } from "zustand";
 import { i18n } from "../components/providers/providers";
-import type { ModelId } from "../lib/ai-model-config";
-import { DEFAULT_MODEL } from "../lib/ai-model-config";
+import { type ModelId, DEFAULT_MODEL } from "../lib/ai-engine";
 import { shouldSkipTrack } from "../lib/track-utils";
 
 export const STORAGE_KEYS = {
