@@ -85,5 +85,8 @@
   "AI_WIDGET_PERCENT": "{{pct}}% AI",
   "ACTION_CANCEL": "Cancel",
   "ACTION_REMOVE": "Remove",
-  "MESSAGE_REMOVE_TRASHED_FAILED": "Failed to remove trashed songs"
+  "MESSAGE_REMOVE_TRASHED_FAILED": "Failed to remove trashed songs",
+  "TOOLTIP_COPY_URI": "Click to copy URI",
+  "TOOLTIP_REMOVE_TRASHBIN": "Remove from trashbin",
+  "TOOLTIP_AUTO_ADD": "Auto-add recommendations"
 }

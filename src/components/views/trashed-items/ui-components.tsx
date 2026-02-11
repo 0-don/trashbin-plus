@@ -19,6 +19,7 @@ interface ItemRowProps {
 }
 
 export const ItemRow: React.FC<ItemRowProps> = ({ item, onUntrash }) => {
+  const { t } = useTranslation();
   const isArtist = "type" in item && item.type === "artist";
   const imageClass = isArtist ? "rounded-full" : "rounded";
   const Icon = isArtist ? BsPerson : BsMusicNote;
@@ -58,7 +59,7 @@ export const ItemRow: React.FC<ItemRowProps> = ({ item, onUntrash }) => {
       <button
         onClick={() => navigator.clipboard.writeText(item.uri)}
         className="trashbin-uri-btn shrink-0 cursor-pointer text-xs transition-colors"
-        title="Click to copy URI"
+        title={t("TOOLTIP_COPY_URI")}
       >
         {item.uri}
       </button>
@@ -69,7 +70,7 @@ export const ItemRow: React.FC<ItemRowProps> = ({ item, onUntrash }) => {
           onUntrash(item.uri);
         }}
         className="trashbin-remove-btn mx-2! cursor-pointer rounded-full p-2! transition-colors"
-        title="Remove from trashbin"
+        title={t("TOOLTIP_REMOVE_TRASHBIN")}
       >
         <IoClose className="h-5 w-5 transition-colors" />
       </button>

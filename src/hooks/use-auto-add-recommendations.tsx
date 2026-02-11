@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { PAUSE_ICON, PLAY_ICON } from "../components/icons";
 import { AUTO_ADD_CONFIG } from "../lib/constants";
 import { useTrashbinStore } from "../store/trashbin-store";
@@ -31,6 +32,7 @@ function findRefreshButton(): HTMLButtonElement | null {
 
 export const useAutoAddRecommendations = () => {
   const store = useTrashbinStore();
+  const { t } = useTranslation();
   const isRunningRef = useRef(false);
   const abortRef = useRef(false);
   const buttonRef = useRef<HTMLButtonElement | null>(null);
@@ -149,7 +151,7 @@ export const useAutoAddRecommendations = () => {
 
     const btn = document.createElement("button");
     btn.className = `${refreshBtn.className} ${AUTO_ADD_CONFIG.autoAddButtonClassName}`;
-    btn.title = "Auto-add recommendations";
+    btn.title = t("TOOLTIP_AUTO_ADD");
     btn.innerHTML = isRunningRef.current ? PAUSE_ICON() : PLAY_ICON();
     btn.setAttribute(
       "data-encore-id",
