@@ -1,3 +1,5 @@
+import { ParseKeys } from "i18next";
+
 export type TabType = "songs" | "artists";
 
 export interface TrackDisplayData {
@@ -16,3 +18,5 @@ export interface ArtistDisplayData {
 }
 
 export type ItemData = TrackDisplayData | ArtistDisplayData;
+
+export type TranslationKey = ParseKeys;

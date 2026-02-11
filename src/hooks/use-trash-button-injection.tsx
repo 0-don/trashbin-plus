@@ -1,5 +1,5 @@
-import { useEffect } from "react";
-import { createAiIndicatorHTML } from "../components/features/ai-probability-indicator";
+import React, { useEffect } from "react";
+import { AiIndicator } from "../components/features/ai-probability-indicator";
 import { TRASH_ICON } from "../components/icons";
 import { AI_INDICATOR_CLASS } from "../lib/constants";
 import { extractTrackData } from "../lib/track-utils";
@@ -97,17 +97,23 @@ export const useTrashButtonInjection = (
         for (const uri in next) {
           if (prev[uri] !== undefined) continue;
 
-          container.querySelectorAll(config.buttonSelector).forEach((trashBtn) => {
-            const wrapper = trashBtn.closest(`.${WRAPPER_CLASS}`);
-            if (!wrapper || wrapper.querySelector(`.${AI_INDICATOR_CLASS}`)) return;
+          container
+            .querySelectorAll(config.buttonSelector)
+            .forEach((trashBtn) => {
+              const wrapper = trashBtn.closest(`.${WRAPPER_CLASS}`);
+              if (!wrapper || wrapper.querySelector(`.${AI_INDICATOR_CLASS}`))
+                return;
 
-            const row = wrapper.closest(config.rowSelector);
-            if (!row) return;
+              const row = wrapper.closest(config.rowSelector);
+              if (!row) return;
 
-            if (extractTrackData(row).trackURI === uri) {
-              wrapper.insertBefore(createIndicatorElement(next[uri]), trashBtn);
-            }
-          });
+              if (extractTrackData(row).trackURI === uri) {
+                wrapper.insertBefore(
+                  createIndicatorElement(next[uri]),
+                  trashBtn,
+                );
+              }
+            });
         }
       }
       prev = next;
@@ -142,9 +148,10 @@ export const useTrashButtonInjection = (
 
 function createIndicatorElement(probability: number): HTMLSpanElement {
   const indicator = document.createElement("span");
-  indicator.innerHTML = createAiIndicatorHTML(probability, 16);
+  indicator.innerHTML = Spicetify.ReactDOMServer.renderToString(
+    <AiIndicator probability={probability} size={16} />,
+  );
   indicator.className = AI_INDICATOR_CLASS;
   indicator.style.pointerEvents = "auto";
   return indicator;
 }
-

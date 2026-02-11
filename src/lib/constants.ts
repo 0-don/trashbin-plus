@@ -1,3 +1,5 @@
+import { TranslationKey } from "./types";
+
 export const SELECTORS = {
   SKIP_BACK_BUTTON: ".main-skipBackButton-button",
   SKIP_BACK_BUTTON_ALT:
@@ -35,3 +37,6 @@ export const AUTO_ADD_CONFIG = {
 } as const;
 
 export const AI_INDICATOR_CLASS = "trashbin-ai-indicator";
+
+
+export const msg = (key: TranslationKey) => key;

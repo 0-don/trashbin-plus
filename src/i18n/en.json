@@ -79,5 +79,8 @@
   "ACTION_REMOVE_TRASHED": "Remove trashed songs",
   "CONFIRM_REMOVE_TRASHED": "Remove {{count}} trashed song(s) from this playlist? This cannot be undone.",
   "MESSAGE_REMOVE_TRASHED_SUCCESS": "Removed {{count}} trashed song(s) from playlist",
-  "MESSAGE_NO_TRASHED_IN_PLAYLIST": "No trashed songs found in this playlist"
+  "MESSAGE_NO_TRASHED_IN_PLAYLIST": "No trashed songs found in this playlist",
+  "AI_WIDGET_LABEL": "AI Detection",
+  "AI_WIDGET_ANALYZING": "Analyzing...",
+  "AI_WIDGET_PERCENT": "{{pct}}% AI"
 }

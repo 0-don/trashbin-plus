@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { useAiStore } from "../../store/ai-store";
 import { useTrashbinStore } from "../../store/trashbin-store";
+import { i18n } from "../providers/providers";
 import { AiIndicator } from "./ai-probability-indicator";
 
 const widgetIcon = (prob: number) =>
@@ -19,7 +20,7 @@ export const AiDetectionWidget: React.FC = () => {
     if (!enabled) return;
 
     const widget = new Spicetify.Playbar.Widget(
-      "AI Detection",
+      i18n.t("AI_WIDGET_LABEL"),
       widgetIcon(0.5),
       () => {},
       false,
@@ -32,17 +33,17 @@ export const AiDetectionWidget: React.FC = () => {
       const track = Spicetify.Player.data?.item;
       if (!track?.uri || !track.uri.startsWith("spotify:track:")) {
         widget.icon = widgetIcon(0.5);
-        widget.label = "AI Detection";
+        widget.label = i18n.t("AI_WIDGET_LABEL");
         return;
       }
 
       const prob = useAiStore.getState().results[track.uri];
       if (prob !== undefined) {
         widget.icon = widgetIcon(prob);
-        widget.label = `${Math.round(prob * 100)}% AI`;
+        widget.label = i18n.t("AI_WIDGET_PERCENT", { pct: Math.round(prob * 100) });
       } else {
         widget.icon = widgetIcon(0.5);
-        widget.label = "Analyzing...";
+        widget.label = i18n.t("AI_WIDGET_ANALYZING");
         useAiStore.getState().enqueue(track.uri);
       }
     };
