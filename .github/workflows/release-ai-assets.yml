@@ -44,12 +44,6 @@ jobs:
             --model_id awsaf49/sonics-spectttra-alpha-120s \
             --output_path ../ai-assets/sonics_120s.onnx
 
-      - name: Convert AST model to ONNX
-        working-directory: ai-converter
-        run: |
-          uv run python convert_ast_to_onnx.py \
-            --output_path ../ai-assets/ast_model.onnx
-
       - name: Set up Bun
         uses: oven-sh/setup-bun@v2
 

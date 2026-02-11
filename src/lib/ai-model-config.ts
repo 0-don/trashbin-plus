@@ -1,4 +1,4 @@
-export type ModelId = "sonics-5s" | "sonics-120s" | "ast";
+export type ModelId = "sonics-5s" | "sonics-120s";
 
 export interface ModelConfig {
   id: ModelId;
@@ -27,15 +27,6 @@ export const MODELS: Record<ModelId, ModelConfig> = {
     sampleRate: 44100,
     inputName: "audio",
     inputLength: 5292000, // 44100 * 120s
-    outputName: "prob",
-  },
-  ast: {
-    id: "ast",
-    label: "AST Music Detector",
-    assetName: "ast_model.onnx",
-    sampleRate: 16000,
-    inputName: "audio",
-    inputLength: 163840, // 16000 * 10.24s
     outputName: "prob",
   },
 };
