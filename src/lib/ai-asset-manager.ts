@@ -1,3 +1,5 @@
+import { MODELS, type ModelId } from "./ai-model-config";
+
 const DB_NAME = "trashbin-ai";
 const STORE_NAME = "assets";
 const DB_VERSION = 1;
@@ -6,8 +8,6 @@ const HF_BASE =
   "https://huggingface.co/0don/trashbin-plus-ai/resolve/main";
 
 export const ASSET_NAMES = {
-  SONICS_MODEL: "sonics_model.onnx",
-  FAKEPRINT_MODEL: "ai_music_detector.onnx",
   WASM: "ort-wasm-simd-threaded.wasm",
   VERSION: "version.json",
 } as const;
@@ -97,9 +97,16 @@ function setStoredVersion(version: string): void {
 }
 
 export async function ensureAssets(
+  modelId: ModelId,
   onProgress?: (message: string) => void,
 ): Promise<boolean> {
   try {
+    const config = MODELS[modelId];
+    if (!config) {
+      console.error(`[trashbin+ AI] Unknown model: ${modelId}`);
+      return false;
+    }
+
     console.log("[trashbin+ AI] Fetching remote version...");
     const remoteVersion = await fetchRemoteVersion();
     if (!remoteVersion) {
@@ -111,41 +118,36 @@ export async function ensureAssets(
     const localVersion = getStoredVersion();
     console.log(`[trashbin+ AI] Local version: ${localVersion}`);
 
-    // Check if all assets exist in IndexedDB
-    const sonicsExists = await getAsset(ASSET_NAMES.SONICS_MODEL);
-    const fakeprintExists = await getAsset(ASSET_NAMES.FAKEPRINT_MODEL);
     const wasmExists = await getAsset(ASSET_NAMES.WASM);
+    const modelExists = await getAsset(config.assetName);
     console.log(
-      `[trashbin+ AI] IndexedDB - sonics: ${!!sonicsExists} (${sonicsExists?.byteLength ?? 0}B), fakeprint: ${!!fakeprintExists} (${fakeprintExists?.byteLength ?? 0}B), wasm: ${!!wasmExists} (${wasmExists?.byteLength ?? 0}B)`,
+      `[trashbin+ AI] IndexedDB - wasm: ${!!wasmExists} (${wasmExists?.byteLength ?? 0}B), ${config.assetName}: ${!!modelExists} (${modelExists?.byteLength ?? 0}B)`,
     );
 
-    if (
-      localVersion === remoteVersion &&
-      sonicsExists &&
-      fakeprintExists &&
-      wasmExists
-    ) {
+    const versionMatch = localVersion === remoteVersion;
+    if (versionMatch && wasmExists && modelExists) {
       onProgress?.("Assets up to date");
       return true;
     }
 
-    // Download all required assets
-    onProgress?.("Downloading WASM runtime...");
-    const wasmData = await downloadAsset(ASSET_NAMES.WASM);
-    console.log(`[trashbin+ AI] WASM downloaded: ${wasmData.byteLength} bytes`);
-    await storeAsset(ASSET_NAMES.WASM, wasmData, remoteVersion);
+    if (!wasmExists || !versionMatch) {
+      onProgress?.("Downloading WASM runtime...");
+      const wasmData = await downloadAsset(ASSET_NAMES.WASM);
+      console.log(
+        `[trashbin+ AI] WASM downloaded: ${wasmData.byteLength} bytes`,
+      );
+      await storeAsset(ASSET_NAMES.WASM, wasmData, remoteVersion);
+    }
 
-    onProgress?.("Downloading SONICS model...");
-    const sonicsData = await downloadAsset(ASSET_NAMES.SONICS_MODEL);
-    console.log(`[trashbin+ AI] SONICS model downloaded: ${sonicsData.byteLength} bytes`);
-    await storeAsset(ASSET_NAMES.SONICS_MODEL, sonicsData, remoteVersion);
+    if (!modelExists || !versionMatch) {
+      onProgress?.(`Downloading ${config.label}...`);
+      const modelData = await downloadAsset(config.assetName);
+      console.log(
+        `[trashbin+ AI] ${config.label} downloaded: ${modelData.byteLength} bytes`,
+      );
+      await storeAsset(config.assetName, modelData, remoteVersion);
+    }
 
-    onProgress?.("Downloading Fakeprint model...");
-    const fakeprintData = await downloadAsset(ASSET_NAMES.FAKEPRINT_MODEL);
-    console.log(`[trashbin+ AI] Fakeprint model downloaded: ${fakeprintData.byteLength} bytes`);
-    await storeAsset(ASSET_NAMES.FAKEPRINT_MODEL, fakeprintData, remoteVersion);
-
-    // Only update version after all assets are stored
     setStoredVersion(remoteVersion);
     onProgress?.("Assets ready");
     return true;

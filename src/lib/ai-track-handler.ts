@@ -6,7 +6,6 @@ import {
   getPreviewUrl,
   getPreviewUrls,
 } from "./ai-audio-fetcher";
-import { extractFakeprint } from "./ai-fakeprint";
 import {
   disposeEngine,
   getActiveConfig,
@@ -83,14 +82,7 @@ async function classifyWithPreviewUrl(
   if (!config) return null;
 
   const waveform = await fetchAudioWaveform(previewUrl, config.sampleRate);
-
-  let inputData: Float32Array;
-  if (config.preprocess === "fakeprint") {
-    inputData = extractFakeprint(waveform);
-  } else {
-    inputData = extractMiddleChunk(waveform, config.inputLength);
-  }
-
+  const inputData = extractMiddleChunk(waveform, config.inputLength);
   const probability = await queueInference(inputData);
 
   if (probability !== null) {
@@ -171,7 +163,7 @@ export async function initializeAiDetection(
     }
 
     onProgress?.("Checking assets...");
-    const assetsReady = await ensureAssets(onProgress);
+    const assetsReady = await ensureAssets(modelId, onProgress);
     if (!assetsReady) return false;
 
     onProgress?.("Loading WASM runtime...");

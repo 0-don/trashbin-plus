@@ -29,16 +29,26 @@ jobs:
         working-directory: ai-converter
         run: uv sync
 
-      - name: Convert SONICS model to ONNX
+      - name: Convert SONICS 5s model to ONNX
         working-directory: ai-converter
         run: |
           mkdir -p ../ai-assets
-          uv run python convert_to_onnx.py --output_path ../ai-assets/sonics_model.onnx
+          uv run python convert_sonics_to_onnx.py \
+            --model_id awsaf49/sonics-spectttra-alpha-5s \
+            --output_path ../ai-assets/sonics_5s.onnx
 
-      - name: Download Fakeprint model from lofcz/ai-music-detector
+      - name: Convert SONICS 120s model to ONNX
+        working-directory: ai-converter
         run: |
-          curl -L -o ai-assets/ai_music_detector.onnx \
-            "https://huggingface.co/lofcz/ai-music-detector/resolve/main/ai_music_detector.onnx"
+          uv run python convert_sonics_to_onnx.py \
+            --model_id awsaf49/sonics-spectttra-alpha-120s \
+            --output_path ../ai-assets/sonics_120s.onnx
+
+      - name: Convert AST model to ONNX
+        working-directory: ai-converter
+        run: |
+          uv run python convert_ast_to_onnx.py \
+            --output_path ../ai-assets/ast_model.onnx
 
       - name: Set up Bun
         uses: oven-sh/setup-bun@v2

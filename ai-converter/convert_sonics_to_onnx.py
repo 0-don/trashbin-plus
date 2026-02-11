@@ -12,7 +12,7 @@ TARGET_SR = 16000
 
 def convert_to_onnx(
     model_id: str = "awsaf49/sonics-spectttra-alpha-5s",
-    output_path: str = "sonics_model.onnx",
+    output_path: str = "sonics_5s.onnx",
 ) -> None:
     print(f"Converting model {model_id}...")
     print(f"Downloading model from HuggingFace...")

@@ -1,7 +1,7 @@
 [project]
 name = "sonics-onnx-converter"
 version = "0.1.0"
-description = "Convert SONICS models to ONNX format"
+description = "Convert AI music detection models to ONNX format"
 requires-python = ">=3.12"
 dependencies = [
     "sonics @ git+https://github.com/awsaf49/sonics.git",
@@ -9,4 +9,5 @@ dependencies = [
     "torchlibrosa>=0.1.0,<0.2.0",
     "onnx>=1.20.0,<2.0.0",
     "onnxscript>=0.2.0",
+    "transformers>=4.46.0",
 ]
