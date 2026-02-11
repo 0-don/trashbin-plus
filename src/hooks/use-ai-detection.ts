@@ -14,9 +14,7 @@ export const useAiDetection = () => {
 
     const init = async () => {
       store.setAiAssetsDownloading(true);
-      const ready = await aiStore.initialize(DEFAULT_MODEL, (message) => {
-        console.log(`[trashbin+ AI] ${message}`);
-      });
+      const ready = await aiStore.initialize(DEFAULT_MODEL);
       if (!cancelled) {
         store.setAiAssetsReady(ready);
         store.setAiAssetsDownloading(false);

@@ -127,7 +127,7 @@ export const VirtualList: React.FC<VirtualListProps> = (props) => {
         return newCache;
       });
     } catch (error) {
-      console.error(`Failed to load ${props.activeTab} batch:`, error);
+      // batch load failed
     } finally {
       setLoadingBatches((prev) => {
         const newSet = new Set(prev);

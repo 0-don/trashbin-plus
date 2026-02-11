@@ -58,7 +58,7 @@ async function processNext(): Promise<void> {
       autoTrashIfNeeded(uri, probability);
     }
   } catch (error) {
-    console.error(`[trashbin+ AI] Failed to classify ${uri}:`, error);
+    // classify failed
   } finally {
     processing = false;
   }
@@ -118,7 +118,7 @@ export const useAiStore = create<AiState>(() => ({
       }
       return initialized;
     } catch (error) {
-      console.error("[trashbin+ AI] Initialization failed:", error);
+      // init failed
       return false;
     }
   },

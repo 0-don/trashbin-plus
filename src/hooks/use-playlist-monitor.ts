@@ -21,7 +21,7 @@ export function usePlaylistMonitor() {
         stateRef.current.currentPlaylistUri = parsedState.currentPlaylistUri;
       }
     } catch (error) {
-      console.error("usePlaylistMonitor: Failed to load state:", error);
+      // load failed
     }
   }, []);
 
@@ -34,7 +34,7 @@ export function usePlaylistMonitor() {
         }),
       );
     } catch (error) {
-      console.error("usePlaylistMonitor: Failed to save state:", error);
+      // save failed
     }
   }, []);
 
@@ -52,7 +52,7 @@ export function usePlaylistMonitor() {
     try {
       await Spicetify.Player.playUri(stateRef.current.currentPlaylistUri);
     } catch (error) {
-      console.error("usePlaylistMonitor: Failed to resume playlist:", error);
+      // resume failed
     }
   }, []);
 

@@ -203,7 +203,7 @@ export async function skipToNextAllowedTrack() {
           { skipTo: { uri: nextTrack.contextTrack.uri } },
         );
       } catch (err) {
-        console.error("Error skipping to next allowed track:", err);
+        // skip error silently
       }
     }
   }

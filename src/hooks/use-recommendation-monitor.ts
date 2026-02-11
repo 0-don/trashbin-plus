@@ -52,7 +52,7 @@ export const useRecommendationMonitor = () => {
             Spicetify.Player.next();
           }
         } catch (e) {
-          console.error("Remote trash failed:", e);
+          // remote trash failed
         }
         processing.current = false;
       }

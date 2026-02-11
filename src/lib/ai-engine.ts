@@ -119,7 +119,7 @@ export async function ensureAssets(
     onProgress?.("Assets ready");
     return true;
   } catch (error) {
-    console.error("[trashbin+ AI] Failed to ensure assets:", error);
+    // asset load failed
     return false;
   }
 }
@@ -146,7 +146,7 @@ export async function initEngine(modelId: ModelId): Promise<boolean> {
     activeModelId = modelId;
     return true;
   } catch (error) {
-    console.error("[trashbin+ AI] Failed to init engine:", error);
+    // init failed
     return false;
   }
 }
@@ -159,7 +159,7 @@ export function queueInference(data: Float32Array): Promise<number | null> {
       const results = await session.run({ audio: tensor });
       return (results["prob"].data as Float32Array)[0];
     } catch (error) {
-      console.error("[trashbin+ AI] Inference error:", error);
+      // inference failed
       return null;
     }
   };

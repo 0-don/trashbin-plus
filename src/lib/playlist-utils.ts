@@ -120,7 +120,7 @@ export async function removeTrashedFromPlaylist(
       t("MESSAGE_REMOVE_TRASHED_SUCCESS", { count: trashedItems.length }),
     );
   } catch (err) {
-    console.error("trashbin+: Failed to remove trashed songs:", err);
+    // remove failed
     Spicetify.showNotification(t("MESSAGE_REMOVE_TRASHED_FAILED"), true);
   }
 }
