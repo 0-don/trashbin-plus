@@ -40,6 +40,7 @@ Access via profile menu > **Trashbin+ Settings**.
 ## Screenshots
 
 ![Main interface](assets/preview.png)
+![Your trashed items](assets/trashed-items.png)
 ![Settings](assets/settings.png)
 
 ## Need help?
