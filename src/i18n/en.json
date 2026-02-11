@@ -82,5 +82,8 @@
   "MESSAGE_NO_TRASHED_IN_PLAYLIST": "No trashed songs found in this playlist",
   "AI_WIDGET_LABEL": "AI Detection",
   "AI_WIDGET_ANALYZING": "Analyzing...",
-  "AI_WIDGET_PERCENT": "{{pct}}% AI"
+  "AI_WIDGET_PERCENT": "{{pct}}% AI",
+  "ACTION_CANCEL": "Cancel",
+  "ACTION_REMOVE": "Remove",
+  "MESSAGE_REMOVE_TRASHED_FAILED": "Failed to remove trashed songs"
 }

@@ -1,4 +1,4 @@
-import { i18n } from "../components/providers/providers";
+import { TFunction } from "i18next";
 import { useTrashbinStore } from "../store/trashbin-store";
 
 interface PlaylistItem {
@@ -52,9 +52,8 @@ async function getPlaylistContents(
 
 export async function removeTrashedFromPlaylist(
   playlistUri: string,
+  t: TFunction,
 ): Promise<void> {
-  const t = i18n.t.bind(i18n);
-
   try {
     const items = await getPlaylistContents(playlistUri);
     const trashedItems = items.filter(isPlaylistItemTrashed);
@@ -84,7 +83,7 @@ export async function removeTrashedFromPlaylist(
           buttonRow.style.gap = "8px";
 
           const cancelBtn = document.createElement("button");
-          cancelBtn.textContent = "Cancel";
+          cancelBtn.textContent = t("ACTION_CANCEL");
           cancelBtn.style.cssText =
             "padding: 8px 16px; border-radius: 9999px; border: 1px solid #727272; background: transparent; color: var(--spice-text); cursor: pointer; font-weight: bold;";
           cancelBtn.onclick = () => {
@@ -93,7 +92,7 @@ export async function removeTrashedFromPlaylist(
           };
 
           const confirmBtn = document.createElement("button");
-          confirmBtn.textContent = "Remove";
+          confirmBtn.textContent = t("ACTION_REMOVE");
           confirmBtn.style.cssText =
             "padding: 8px 16px; border-radius: 9999px; border: none; background: #e74c3c; color: white; cursor: pointer; font-weight: bold;";
           confirmBtn.onclick = () => {
@@ -122,6 +121,6 @@ export async function removeTrashedFromPlaylist(
     );
   } catch (err) {
     console.error("trashbin+: Failed to remove trashed songs:", err);
-    Spicetify.showNotification("Failed to remove trashed songs", true);
+    Spicetify.showNotification(t("MESSAGE_REMOVE_TRASHED_FAILED"), true);
   }
 }

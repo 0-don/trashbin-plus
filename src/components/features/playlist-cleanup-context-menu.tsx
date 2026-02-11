@@ -16,7 +16,7 @@ export function PlaylistCleanupContextMenu() {
     };
 
     const onClick = (uris: string[]) => {
-      removeTrashedFromPlaylist(uris[0]);
+      removeTrashedFromPlaylist(uris[0], t);
     };
 
     const contextMenuItem = new Spicetify.ContextMenu.Item(

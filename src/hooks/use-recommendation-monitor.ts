@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { i18n } from "../components/providers/providers";
+import { useTranslation } from "react-i18next";
 import { useTrashbinStore } from "../store/trashbin-store";
 
 /**
@@ -7,6 +7,7 @@ import { useTrashbinStore } from "../store/trashbin-store";
  */
 export const useRecommendationMonitor = () => {
   const store = useTrashbinStore();
+  const { t } = useTranslation();
   const lastHeart = useRef(false);
   const lastUri = useRef<string | null>(null);
   const processing = useRef(false);
@@ -47,7 +48,7 @@ export const useRecommendationMonitor = () => {
 
           if (!store.getTrashStatus(track.uri).isTrashed) {
             store.toggleSongTrash(track.uri, false);
-            Spicetify.showNotification(i18n.t("MESSAGE_SONG_ADDED_REMOTE"));
+            Spicetify.showNotification(t("MESSAGE_SONG_ADDED_REMOTE"));
             Spicetify.Player.next();
           }
         } catch (e) {

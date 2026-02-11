@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { i18n } from "../components/providers/providers";
+import { useTranslation } from "react-i18next";
 import { useTrashbinStore } from "../store/trashbin-store";
 
 /**
@@ -7,6 +7,7 @@ import { useTrashbinStore } from "../store/trashbin-store";
  */
 export const useRemoteToggle = () => {
   const store = useTrashbinStore();
+  const { t } = useTranslation();
   const lastPause = useRef(0);
   const cooldown = useRef(false);
 
@@ -30,7 +31,7 @@ export const useRemoteToggle = () => {
         const wasEnabled = useTrashbinStore.getState().remoteSkippingEnabled;
         store.toggleRemoteSkipping();
         Spicetify.showNotification(
-          i18n.t(
+          t(
             wasEnabled
               ? "MESSAGE_REMOTE_SKIPPING_DISABLED"
               : "MESSAGE_REMOTE_SKIPPING_ENABLED",
