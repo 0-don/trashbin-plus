@@ -6,7 +6,7 @@ import { AiIndicator } from "./ai-probability-indicator";
 
 const widgetIcon = (prob: number) =>
   Spicetify.ReactDOMServer.renderToString(
-    <span style={{ marginLeft: 5 }}>
+    <span className="ml-1.25">
       <AiIndicator probability={prob} size={20} />
     </span>,
   );

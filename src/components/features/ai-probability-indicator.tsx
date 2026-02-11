@@ -57,12 +57,8 @@ export const AiIndicator: React.FC<AiIndicatorProps> = (props) => {
   return (
     <span
       title={`${pct}% AI — ${label}`}
-      style={{
-        cursor: "default",
-        color: tier.color,
-        lineHeight: 1,
-        display: "inline-flex",
-      }}
+      className="inline-flex cursor-default leading-none"
+      style={{ color: tier.color }}
     >
       <tier.Icon size={props.size ?? 14} />
     </span>

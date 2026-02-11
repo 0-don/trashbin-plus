@@ -32,7 +32,7 @@ export const ItemRow: React.FC<ItemRowProps> = ({ item, onUntrash }) => {
   const aiProbability = useAiStore((s) => !isArtist && aiEnabled ? s.results[item.uri] : undefined);
 
   return (
-    <div className="trashbin-item-row flex items-center justify-between rounded-md p-3 transition-colors">
+    <div className="flex items-center justify-between rounded-md bg-transparent! p-3 transition-colors hover:bg-white/5!">
       <div className="flex min-w-0 flex-1 items-center gap-3">
         {item.imageUrl ? (
           <img
@@ -42,23 +42,22 @@ export const ItemRow: React.FC<ItemRowProps> = ({ item, onUntrash }) => {
           />
         ) : (
           <div
-            className={`flex h-12 w-12 items-center justify-center ${imageClass}`}
-            style={{ backgroundColor: "rgba(255, 255, 255, 0.1)" }}
+            className={`flex h-12 w-12 items-center justify-center bg-white/10 ${imageClass}`}
           >
-            <Icon className="h-6 w-6" style={{ color: "rgba(255, 255, 255, 0.7)" }} />
+            <Icon className="h-6 w-6 text-white/70" />
           </div>
         )}
         <div className="min-w-0 flex-1">
-          <div className="flex items-center gap-1.5 truncate font-medium" style={{ color: "white" }}>
+          <div className="flex items-center gap-1.5 truncate font-medium text-white">
             {aiProbability !== undefined && <AiIndicator probability={aiProbability} size={14} />}
             {item.name}
           </div>
-          <div className="truncate text-sm" style={{ color: "rgba(255, 255, 255, 0.6)" }}>{secondaryText}</div>
+          <div className="truncate text-sm text-white/60">{secondaryText}</div>
         </div>
       </div>
       <button
         onClick={() => navigator.clipboard.writeText(item.uri)}
-        className="trashbin-uri-btn shrink-0 cursor-pointer text-xs transition-colors"
+        className="shrink-0 cursor-pointer border-none! bg-transparent! text-xs text-white/40! transition-colors hover:text-white/60!"
         title={t("TOOLTIP_COPY_URI")}
       >
         {item.uri}
@@ -69,7 +68,7 @@ export const ItemRow: React.FC<ItemRowProps> = ({ item, onUntrash }) => {
           e.preventDefault();
           onUntrash(item.uri);
         }}
-        className="trashbin-remove-btn mx-2! cursor-pointer rounded-full p-2! transition-colors"
+        className="mx-2! cursor-pointer rounded-full border-none! bg-transparent! p-2! transition-colors hover:bg-red-500/20! [&_svg]:text-white/70! [&:hover_svg]:text-red-400!"
         title={t("TOOLTIP_REMOVE_TRASHBIN")}
       >
         <IoClose className="h-5 w-5 transition-colors" />
@@ -88,15 +87,15 @@ export const EmptyState: React.FC<EmptyStateProps> = (props) => {
   return (
     <div className="p-8 text-center">
       <div className="flex flex-col items-center gap-6 py-12">
-        <BsTrash3 className="h-20 w-20" style={{ color: "rgba(255, 255, 255, 0.2)" }} />
+        <BsTrash3 className="h-20 w-20 text-white/20" />
         <div>
-          <h3 className="mb-2 text-xl font-semibold" style={{ color: "white" }}>
+          <h3 className="mb-2 text-xl font-semibold text-white">
             {props.type === "songs"
               ? t("ITEMS_EMPTY_SONGS_TITLE")
               : t("ITEMS_EMPTY_ARTISTS_TITLE")}
           </h3>
           <p
-            style={{ color: "rgba(255, 255, 255, 0.6)" }}
+            className="text-white/60"
             dangerouslySetInnerHTML={{
               __html:
                 props.type === "songs"
@@ -121,15 +120,15 @@ export const TabButton: React.FC<TabButtonProps> = (props) => (
   <button
     onClick={props.onClick}
     className={cn(
-      "trashbin-tab-btn relative px-4! py-2! text-lg font-medium transition-colors",
-      "border-b-2",
-      props.isActive && "trashbin-tab-btn--active",
+      "relative border-b-2 px-4! py-2! text-lg font-medium transition-colors",
+      "border-transparent! bg-transparent! text-white/60! hover:text-white/80!",
+      props.isActive && "text-white! border-green-500! hover:text-white!",
     )}
   >
     {props.label}
-    <span className="trashbin-tab-count mx-1! text-xs">({props.count})</span>
+    <span className="mx-1! text-xs text-white/60!">({props.count})</span>
     {props.isActive && (
-      <div className="trashbin-tab-indicator absolute right-0 bottom-0 left-0 h-0.5" />
+      <div className="absolute right-0 bottom-0 left-0 h-0.5 bg-green-500!" />
     )}
   </button>
 );

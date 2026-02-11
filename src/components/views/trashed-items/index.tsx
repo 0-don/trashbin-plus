@@ -1,6 +1,5 @@
 import React, { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { SELECTORS } from "../../../lib/constants";
 import { TabType } from "../../../lib/types";
 import { useTrashbinStore } from "../../../store/trashbin-store";
 import { EmptyState, TabButton } from "./ui-components";
@@ -51,82 +50,8 @@ export const TrashedItemsView: React.FC = () => {
 
   return (
     <>
-      <style>{`
-        ${SELECTORS.TRACK_CREDITS_MODAL} {overflow-y: hidden !important;}
-        .trashbin-search-input {
-          border-color: rgba(255, 255, 255, 0.1) !important;
-          background-color: rgba(0, 0, 0, 0.3) !important;
-          color: white !important;
-        }
-        .trashbin-search-input::placeholder {
-          color: rgba(255, 255, 255, 0.4) !important;
-        }
-        .trashbin-search-input:focus {
-          border-color: rgba(255, 255, 255, 0.3) !important;
-        }
-        .trashbin-list-container {
-          border-color: rgba(255, 255, 255, 0.1) !important;
-          background-color: rgba(0, 0, 0, 0.2) !important;
-        }
-        .trashbin-item-row {
-          background-color: transparent !important;
-        }
-        .trashbin-item-row:hover {
-          background-color: rgba(255, 255, 255, 0.05) !important;
-        }
-        .trashbin-uri-btn {
-          color: rgba(255, 255, 255, 0.4) !important;
-          background: transparent !important;
-          border: none !important;
-        }
-        .trashbin-uri-btn:hover {
-          color: rgba(255, 255, 255, 0.6) !important;
-        }
-        .trashbin-remove-btn {
-          background: transparent !important;
-          border: none !important;
-        }
-        .trashbin-remove-btn svg {
-          color: rgba(255, 255, 255, 0.7) !important;
-        }
-        .trashbin-remove-btn:hover {
-          background-color: rgba(239, 68, 68, 0.2) !important;
-        }
-        .trashbin-remove-btn:hover svg {
-          color: #f87171 !important;
-        }
-        .trashbin-spinner {
-          border-color: rgba(255, 255, 255, 0.2) !important;
-          border-top-color: rgba(255, 255, 255, 0.6) !important;
-        }
-        .trashbin-loaded-count {
-          color: rgba(255, 255, 255, 0.4) !important;
-        }
-        .trashbin-tab-btn {
-          color: rgba(255, 255, 255, 0.6) !important;
-          border-color: transparent !important;
-          background: transparent !important;
-        }
-        .trashbin-tab-btn:hover {
-          color: rgba(255, 255, 255, 0.8) !important;
-        }
-        .trashbin-tab-btn--active {
-          color: white !important;
-          border-color: #22c55e !important;
-        }
-        .trashbin-tab-btn--active:hover {
-          color: white !important;
-        }
-        .trashbin-tab-count {
-          color: rgba(255, 255, 255, 0.6) !important;
-        }
-        .trashbin-tab-indicator {
-          background-color: #22c55e !important;
-        }
-      `}</style>
-
       {/* Tab Navigation */}
-      <div className="mb-4! flex border-b" style={{ borderColor: "rgba(255, 255, 255, 0.1)" }}>
+      <div className="mb-4! flex border-b border-white/10">
         {tabs.map((tab) => (
           <TabButton
             key={tab.key}

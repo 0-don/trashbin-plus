@@ -175,25 +175,23 @@ export const VirtualList: React.FC<VirtualListProps> = (props) => {
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           placeholder={t("ITEMS_SEARCH_PLACEHOLDER")}
-          className="trashbin-search-input w-full rounded-lg border px-4 py-2 text-sm outline-none"
+          className="w-full rounded-lg border border-white/10! bg-black/30! px-4 py-2 text-sm text-white! outline-none placeholder:text-white/40! focus:border-white/30!"
         />
       </div>
       <div
         ref={containerRef}
         onScroll={handleScroll}
-        className="trashbin-list-container h-100 overflow-auto rounded-lg border"
+        className="h-100 overflow-auto rounded-lg border border-white/10! bg-black/20!"
       >
-        <div style={{ height: totalHeight, position: "relative" }}>
+        <div className="relative" style={{ height: totalHeight }}>
           {visibleItems.map((item) => {
             const data = itemCache.get(item.originalIndex);
             return (
               <div
                 key={item.uri}
+                className="absolute inset-x-0"
                 style={{
-                  position: "absolute",
                   top: item.virtualIndex * ITEM_HEIGHT,
-                  left: 0,
-                  right: 0,
                   height: ITEM_HEIGHT,
                 }}
               >
@@ -201,7 +199,7 @@ export const VirtualList: React.FC<VirtualListProps> = (props) => {
                   <ItemRow item={data} onUntrash={props.onUntrash} />
                 ) : (
                   <div className="flex h-full items-center justify-center">
-                    <div className="trashbin-spinner h-6 w-6 animate-spin rounded-full border-2" />
+                    <div className="h-6 w-6 animate-spin rounded-full border-2 border-white/20! border-t-white/60!" />
                   </div>
                 )}
               </div>
@@ -211,7 +209,7 @@ export const VirtualList: React.FC<VirtualListProps> = (props) => {
       </div>
 
       <div className="py-4! text-center">
-        <p className="trashbin-loaded-count text-sm">
+        <p className="text-sm text-white/40!">
           {t("ITEMS_LOADED_COUNT", {
             loaded: itemCache.size,
             total: props.items.length,
