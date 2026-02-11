@@ -3,10 +3,6 @@
 @import "tailwindcss/theme.css" layer(theme);
 @import "tailwindcss/utilities.css";
 
-.main-trackCreditsModal-mainSection {
-  overflow-y: hidden !important;
-}
-
 .main-trackCreditsModal-mainSection button,
 .main-addButton-button {
   background-color: transparent !important;

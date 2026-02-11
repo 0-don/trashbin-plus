@@ -54,14 +54,12 @@ Click purge
 -->
 
 <!-- ```bash
-spicetify config extensions trashbin-plus.js
-spicetify apply
+spicetify enable-devtools && spicetify apply
 
-spicetify enable-devtools
-spicetify apply
+## To install:
+spicetify config extensions trashbin-plus.js && spicetify apply
 
 ## To uninstall:
-spicetify config extensions trashbin-plus.js-
-spicetify apply
+spicetify config extensions trashbin-plus.js- && spicetify apply
 
 ``` -->

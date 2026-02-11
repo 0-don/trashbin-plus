@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { SELECTORS } from "../../../lib/constants";
 import { TabType } from "../../../lib/types";
 import { useTrashbinStore } from "../../../store/trashbin-store";
 import { EmptyState, TabButton } from "./ui-components";
@@ -50,6 +51,7 @@ export const TrashedItemsView: React.FC = () => {
 
   return (
     <>
+      <style>{`${SELECTORS.TRACK_CREDITS_MODAL} {overflow-y: hidden !important;}`}</style>
       {/* Tab Navigation */}
       <div className="mb-4! flex border-b border-white/10">
         {tabs.map((tab) => (
