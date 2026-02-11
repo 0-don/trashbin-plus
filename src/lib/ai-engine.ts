@@ -16,19 +16,10 @@ export const MODELS = {
     assetName: "sonics_120s.onnx",
     inputLength: 5292000,
   },
-} as const satisfies Record<
-  ModelId,
-  { label: string; assetName: string; inputLength: number }
->;
+};
 
 const SAMPLE_RATE = 44100;
-const INPUT_NAME = "audio";
-const OUTPUT_NAME = "prob";
 const WASM_NAME = "ort-wasm-simd-threaded.wasm";
-
-// --- IndexedDB Asset Storage ---
-
-const DB_NAME = "trashbin-ai";
 const STORE_NAME = "assets";
 const VERSION_KEY = "trashbin-ai-assets-version";
 const HF_BASE = "https://huggingface.co/0don/trashbin-plus-ai/resolve/main";
@@ -38,7 +29,7 @@ let dbPromise: Promise<IDBDatabase> | null = null;
 function getDB(): Promise<IDBDatabase> {
   if (!dbPromise) {
     dbPromise = new Promise((resolve, reject) => {
-      const req = indexedDB.open(DB_NAME, 1);
+      const req = indexedDB.open("trashbin-ai", 1);
       req.onupgradeneeded = () => {
         if (!req.result.objectStoreNames.contains(STORE_NAME))
           req.result.createObjectStore(STORE_NAME, { keyPath: "name" });
@@ -91,10 +82,6 @@ async function downloadAsset(name: string): Promise<ArrayBuffer> {
   return response.arrayBuffer();
 }
 
-export async function getAsset(name: string): Promise<ArrayBuffer | null> {
-  return idbGet(name);
-}
-
 export async function ensureAssets(
   modelId: ModelId,
   onProgress?: (message: string) => void,
@@ -143,17 +130,6 @@ export async function ensureAssets(
   }
 }
 
-export async function deleteAssets(): Promise<void> {
-  try {
-    const db = await getDB();
-    const tx = db.transaction(STORE_NAME, "readwrite");
-    tx.objectStore(STORE_NAME).clear();
-    Spicetify.LocalStorage.remove(VERSION_KEY);
-  } catch (error) {
-    console.error("[trashbin+ AI] Failed to delete assets:", error);
-  }
-}
-
 // --- ONNX Inference Engine ---
 
 let session: ort.InferenceSession | null = null;
@@ -191,8 +167,8 @@ async function infer(data: Float32Array): Promise<number | null> {
   if (!session || !activeModelId) return null;
   try {
     const tensor = new ort.Tensor("float32", data, [1, data.length]);
-    const results = await session.run({ [INPUT_NAME]: tensor });
-    return (results[OUTPUT_NAME].data as Float32Array)[0];
+    const results = await session.run({ audio: tensor });
+    return (results["prob"].data as Float32Array)[0];
   } catch (error) {
     console.error("[trashbin+ AI] Inference error:", error);
     return null;
@@ -220,4 +196,4 @@ export function disposeEngine(): void {
   inferenceQueue = Promise.resolve(null);
 }
 
-export { SAMPLE_RATE, WASM_NAME };
+export { SAMPLE_RATE };

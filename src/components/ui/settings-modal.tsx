@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { HiOutlineQuestionMarkCircle } from "react-icons/hi2";
-import { MODELS } from "../../lib/ai-engine";
 import { SELECTORS } from "../../lib/constants";
 import { cn } from "../../lib/utils";
 import { useTrashbinStore } from "../../store/trashbin-store";
@@ -283,34 +282,21 @@ const SettingsModal: React.FC = () => {
         onChange={store.setAiDetectionEnabled}
         description={t("DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED")}
       />
+      <Toggle
+        label={t("SETTINGS_TRASH_AI_SONGS")}
+        enabled={store.trashAiSongs}
+        onChange={store.setTrashAiSongs}
+        description={t("DESCRIPTION_SETTINGS_TRASH_AI_SONGS")}
+        disabled={!store.aiDetectionEnabled}
+      />
       {store.aiDetectionEnabled && (
-        <>
-          <div className="flex items-center gap-2 py-1!">
-            <span className="text-xs! text-[rgba(var(--spice-rgb-text),0.7)]!">
-              {t("AI_MODEL_LABEL")}
-            </span>
-            <select
-              value={store.aiModelId}
-              onChange={(e) =>
-                store.setAiModelId(e.target.value as any)
-              }
-              className="rounded-sm! border! border-[rgba(var(--spice-rgb-text),0.2)]! bg-(--spice-card)! px-2! py-0.5! text-xs! text-(--spice-text)!"
-            >
-              {Object.values(MODELS).map((m) => (
-                <option key={m.id} value={m.id}>
-                  {m.label}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className="py-1! text-xs! text-[rgba(var(--spice-rgb-text),0.5)]!">
-            {store.aiAssetsDownloading
-              ? t("AI_ASSETS_DOWNLOADING")
-              : store.aiAssetsReady
-                ? t("AI_ASSETS_READY")
-                : t("AI_ASSETS_NOT_READY")}
-          </div>
-        </>
+        <div className="py-1! text-xs! text-[rgba(var(--spice-rgb-text),0.5)]!">
+          {store.aiAssetsDownloading
+            ? t("AI_ASSETS_DOWNLOADING")
+            : store.aiAssetsReady
+              ? t("AI_ASSETS_READY")
+              : t("AI_ASSETS_NOT_READY")}
+        </div>
       )}
 
       <h2 className="my-2.5! text-lg font-bold text-(--spice-text) first-of-type:mt-0">

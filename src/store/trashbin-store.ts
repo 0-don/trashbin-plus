@@ -1,6 +1,5 @@
 import { create } from "zustand";
 import { i18n } from "../components/providers/providers";
-import { type ModelId, DEFAULT_MODEL } from "../lib/ai-engine";
 import { shouldSkipTrack } from "../lib/track-utils";
 
 export const STORAGE_KEYS = {
@@ -19,7 +18,7 @@ export const STORAGE_KEYS = {
   REMOTE_SKIPPING_ENABLED: "trashbin-remote-skipping-enabled",
   TRASH_VIA_LIKE: "trashbin-trash-via-like",
   AI_DETECTION: "trashbin-ai-detection",
-  AI_MODEL: "trashbin-ai-model",
+  TRASH_AI_SONGS: "trashbin-trash-ai-songs",
 } as const;
 
 interface TrashbinState {
@@ -42,9 +41,9 @@ interface TrashbinState {
 
   // AI Detection
   aiDetectionEnabled: boolean;
-  aiModelId: ModelId;
   aiAssetsReady: boolean;
   aiAssetsDownloading: boolean;
+  trashAiSongs: boolean;
 
   // Actions
   initializeFromStorage: () => void;
@@ -65,9 +64,9 @@ interface TrashbinState {
 
   // AI Detection actions
   setAiDetectionEnabled: (enabled: boolean) => void;
-  setAiModelId: (modelId: ModelId) => void;
   setAiAssetsReady: (ready: boolean) => void;
   setAiAssetsDownloading: (downloading: boolean) => void;
+  setTrashAiSongs: (enabled: boolean) => void;
 
   // Unified actions
   toggleSongTrash: (uri: string, showNotification?: boolean) => void;
@@ -113,9 +112,9 @@ export const useTrashbinStore = create<TrashbinState>((set, get) => ({
   remoteSkippingEnabled: false,
   trashViaLikeEnabled: false,
   aiDetectionEnabled: false,
-  aiModelId: DEFAULT_MODEL,
   aiAssetsReady: false,
   aiAssetsDownloading: false,
+  trashAiSongs: false,
 
   // Initialize from localStorage
   initializeFromStorage: () => {
@@ -141,7 +140,7 @@ export const useTrashbinStore = create<TrashbinState>((set, get) => ({
       ),
       trashViaLikeEnabled: initValue(STORAGE_KEYS.TRASH_VIA_LIKE, false),
       aiDetectionEnabled: initValue(STORAGE_KEYS.AI_DETECTION, false),
-      aiModelId: initValue(STORAGE_KEYS.AI_MODEL, DEFAULT_MODEL),
+      trashAiSongs: initValue(STORAGE_KEYS.TRASH_AI_SONGS, false),
     });
   },
 
@@ -255,18 +254,18 @@ export const useTrashbinStore = create<TrashbinState>((set, get) => ({
     );
   },
 
-  setAiModelId: (modelId: ModelId) => {
-    set({ aiModelId: modelId });
-    Spicetify.LocalStorage.set(
-      STORAGE_KEYS.AI_MODEL,
-      JSON.stringify(modelId),
-    );
-  },
-
   setAiAssetsReady: (ready: boolean) => set({ aiAssetsReady: ready }),
 
   setAiAssetsDownloading: (downloading: boolean) =>
     set({ aiAssetsDownloading: downloading }),
+
+  setTrashAiSongs: (enabled: boolean) => {
+    set({ trashAiSongs: enabled });
+    Spicetify.LocalStorage.set(
+      STORAGE_KEYS.TRASH_AI_SONGS,
+      JSON.stringify(enabled),
+    );
+  },
 
   toggleSongTrash: (uri: string, showNotification = true) => {
     const state = get();

@@ -68,5 +68,11 @@
   "AI_ASSETS_DOWNLOADING": "Downloading AI model...",
   "AI_ASSETS_READY": "AI model ready",
   "AI_ASSETS_NOT_READY": "AI model not available",
-  "AI_MODEL_LABEL": "Model"
+  "SETTINGS_TRASH_AI_SONGS": "Trash AI Songs",
+  "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "Automatically trash songs detected as AI-generated (probability ≥ 80%)",
+  "AI_TIER_LIKELY_HUMAN": "Likely Human",
+  "AI_TIER_PROBABLY_HUMAN": "Probably Human",
+  "AI_TIER_UNCERTAIN": "Uncertain",
+  "AI_TIER_PROBABLY_AI": "Probably AI",
+  "AI_TIER_LIKELY_AI": "Likely AI"
 }

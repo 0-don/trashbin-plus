@@ -1,52 +1,29 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
+import {
+  BsCpuFill,
+  BsPersonCheck,
+  BsPersonFill,
+  BsQuestionCircle,
+  BsRobot,
+} from "react-icons/bs";
+import { i18n } from "../providers/providers";
 
-interface AiProbabilityIndicatorProps {
-  probability: number;
+const TIERS = [
+  { max: 0.2, Icon: BsPersonCheck, color: "#22c55e", labelKey: "AI_TIER_LIKELY_HUMAN" as const },
+  { max: 0.4, Icon: BsPersonFill, color: "#4ade80", labelKey: "AI_TIER_PROBABLY_HUMAN" as const },
+  { max: 0.6, Icon: BsQuestionCircle, color: "#eab308", labelKey: "AI_TIER_UNCERTAIN" as const },
+  { max: 0.8, Icon: BsCpuFill, color: "#f97316", labelKey: "AI_TIER_PROBABLY_AI" as const },
+  { max: 1.0, Icon: BsRobot, color: "#ef4444", labelKey: "AI_TIER_LIKELY_AI" as const },
+];
+
+function getTier(probability: number) {
+  return TIERS.find((t) => probability <= t.max) ?? TIERS[TIERS.length - 1];
 }
 
-export const AiProbabilityIndicator: React.FC<AiProbabilityIndicatorProps> = (
-  props,
-) => {
-  const fillRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (fillRef.current) {
-        fillRef.current.style.width = `${props.probability * 100}%`;
-      }
-    }, 10);
-    return () => clearTimeout(timer);
-  }, [props.probability]);
-
-  return (
-    <span className="inline-flex! items-center! gap-0.5! whitespace-nowrap!">
-      <span className="text-xs!">🧑‍🎤</span>
-      <span
-        className="relative! inline-block! h-2! w-12! overflow-hidden! rounded-full!"
-        style={{ backgroundColor: "#22c55e" }}
-      >
-        <span
-          ref={fillRef}
-          className="absolute! right-0! h-full!"
-          style={{
-            backgroundColor: "#c53232",
-            transition: "width 0.5s ease-out",
-            width: "50%",
-          }}
-        />
-      </span>
-      <span className="text-xs!">🤖</span>
-    </span>
-  );
-};
-
 export function createAiIndicatorHTML(probability: number): string {
-  const fillWidth = `${probability * 100}%`;
-  return `<span style="display:inline-flex;align-items:center;gap:2px;white-space:nowrap" class="trashbin-ai-indicator">
-    <span style="font-size:12px">🧑‍🎤</span>
-    <span style="position:relative;display:inline-block;width:50px;height:8px;border-radius:9999px;background:#22c55e;overflow:hidden">
-      <span style="position:absolute;right:0;height:100%;width:${fillWidth};background:#c53232;transition:width 0.5s ease-out"></span>
-    </span>
-    <span style="font-size:12px">🤖</span>
-  </span>`;
+  const tier = getTier(probability);
+  const pct = Math.round(probability * 100);
+  const label = i18n.t(tier.labelKey);
+  const svg = Spicetify.ReactDOMServer.renderToString(<tier.Icon />);
+  return `<span title="${pct}% AI — ${label}" style="cursor:default;color:${tier.color};font-size:14px;line-height:1;display:inline-flex">${svg}</span>`;
 }

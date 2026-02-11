@@ -10,8 +10,9 @@ import {
 } from "./ai-engine";
 
 const CORS_PROXY = "https://cors-proxy.spicetify.app";
-const CACHE_MAX = 1000;
 const MAX_CONCURRENT = 3;
+const CACHE_KEY_PREFIX = "trashbin-ai-cache:";
+export const AI_TRASH_THRESHOLD = 0.8;
 
 // --- Audio ---
 
@@ -76,12 +77,29 @@ function extractMiddleChunk(
 
 // --- Cache & Classification ---
 
-const resultCache = new Map<string, number>();
 const processingTracks = new Set<string>();
 let batchInFlight = false;
+let cacheKey: string | null = null;
+
+function getCache(): Record<string, number> {
+  if (!cacheKey) return {};
+  try {
+    const raw = Spicetify.LocalStorage.get(cacheKey);
+    return raw ? JSON.parse(raw) : {};
+  } catch {
+    return {};
+  }
+}
+
+function setCacheEntry(trackUri: string, probability: number): void {
+  if (!cacheKey) return;
+  const cache = getCache();
+  cache[trackUri] = probability;
+  Spicetify.LocalStorage.set(cacheKey, JSON.stringify(cache));
+}
 
 export function getCachedResult(trackUri: string): number | undefined {
-  return resultCache.get(trackUri);
+  return getCache()[trackUri];
 }
 
 export function isProcessing(trackUri: string): boolean {
@@ -101,15 +119,13 @@ async function classify(
   const probability = await queueInference(input);
 
   if (probability !== null) {
-    if (resultCache.size >= CACHE_MAX)
-      resultCache.delete(resultCache.keys().next().value!);
-    resultCache.set(trackUri, probability);
+    setCacheEntry(trackUri, probability);
   }
   return probability;
 }
 
 export async function classifyTrack(trackUri: string): Promise<number | null> {
-  const cached = resultCache.get(trackUri);
+  const cached = getCachedResult(trackUri);
   if (cached !== undefined) return cached;
   if (processingTracks.has(trackUri)) return null;
 
@@ -132,8 +148,9 @@ export async function classifyTracks(
 ): Promise<void> {
   if (batchInFlight) return;
 
+  const cache = getCache();
   const toProcess = trackUris.filter(
-    (uri) => resultCache.get(uri) === undefined && !processingTracks.has(uri),
+    (uri) => cache[uri] === undefined && !processingTracks.has(uri),
   );
   if (toProcess.length === 0) return;
 
@@ -169,6 +186,8 @@ export async function initializeAiDetection(
   onProgress?: (message: string) => void,
 ): Promise<boolean> {
   try {
+    cacheKey = `${CACHE_KEY_PREFIX}${modelId}`;
+
     onProgress?.("Checking assets...");
     const ready = await ensureAssets(modelId, onProgress);
     if (!ready) return false;
@@ -189,7 +208,7 @@ export function cleanupAiDetection(): void {
     audioCtx.close();
     audioCtx = null;
   }
-  resultCache.clear();
+  cacheKey = null;
   processingTracks.clear();
   batchInFlight = false;
 }
