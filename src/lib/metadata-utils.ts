@@ -15,7 +15,7 @@ export interface ArtistDisplayData {
 
 const BASE62 = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-function toHex(id: string): string {
+export function toHex(id: string): string {
   let n = BigInt(0);
   for (const c of id) {
     const i = BASE62.indexOf(c);
@@ -26,7 +26,18 @@ function toHex(id: string): string {
   return n.toString(16).padStart(32, "0");
 }
 
-async function fetchMetadata(type: "track" | "artist", id: string) {
+export function hexToBase62(hex: string): string {
+  let n = BigInt("0x" + hex);
+  if (n === 0n) return "0".padStart(22, "0");
+  let result = "";
+  while (n > 0n) {
+    result = BASE62[Number(n % 62n)] + result;
+    n = n / 62n;
+  }
+  return result.padStart(22, "0");
+}
+
+export async function fetchMetadata(type: "track" | "artist", id: string) {
   const token = (await Spicetify.Platform.AuthorizationAPI.getState()).token
     .accessToken;
   const res = await fetch(

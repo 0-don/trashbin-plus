@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { disposeBlocklist, initBlocklist } from "../lib/ai-blocklist";
 import { classifyTrack, disposeClassifier, initClassifier } from "../lib/ai-classifier";
 import { type ModelId, MODELS } from "../lib/ai-engine";
 import { AI_INDICATOR_CLASS } from "../lib/constants";
@@ -101,6 +102,9 @@ export const useAiStore = create<AiState>(() => ({
 
   initialize: async (modelId: ModelId, onProgress?: (message: string) => void) => {
     try {
+      // Initialize SoulOverAI blocklist (lightweight, non-blocking)
+      initBlocklist();
+
       const lsKey = `${LS_KEY_PREFIX}${modelId}`;
       let results: Record<string, number> = {};
       try {
@@ -126,6 +130,7 @@ export const useAiStore = create<AiState>(() => ({
   cleanup: () => {
     stopQueue();
     disposeClassifier();
+    disposeBlocklist();
     useAiStore.setState({ results: {}, lsKey: null });
   },
 }));
