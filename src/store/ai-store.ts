@@ -57,9 +57,11 @@ async function processNext(): Promise<void> {
     if (probability !== null) {
       setResult(uri, probability);
       autoTrashIfNeeded(uri, probability);
+    } else {
+      setResult(uri, -1);
     }
   } catch (error) {
-    // classify failed
+    setResult(uri, -1);
   } finally {
     processing = false;
   }
@@ -122,7 +124,7 @@ export const useAiStore = create<AiState>(() => ({
       }
       return initialized;
     } catch (error) {
-      // init failed
+      console.error("[trashbin+] ai-store initialize failed:", error);
       return false;
     }
   },

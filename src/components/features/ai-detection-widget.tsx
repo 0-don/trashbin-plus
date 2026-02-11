@@ -47,8 +47,13 @@ export const AiDetectionWidget: React.FC = () => {
 
       const prob = useAiStore.getState().results[track.uri];
       if (prob !== undefined) {
-        widget.icon = widgetIcon(prob);
-        widget.label = i18n.t("AI_WIDGET_PERCENT", { pct: Math.round(prob * 100) });
+        if (prob >= 0) {
+          widget.icon = widgetIcon(prob);
+          widget.label = i18n.t("AI_WIDGET_PERCENT", { pct: Math.round(prob * 100) });
+        } else {
+          widget.icon = widgetIcon(0.5);
+          widget.label = i18n.t("AI_WIDGET_LABEL");
+        }
       } else {
         widget.icon = widgetSpinner();
         widget.label = i18n.t("AI_WIDGET_ANALYZING");

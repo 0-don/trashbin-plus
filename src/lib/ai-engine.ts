@@ -83,12 +83,18 @@ export async function ensureAssets(
   try {
     const model = MODELS[modelId];
 
-    const versionRes = await fetch(`${HF_BASE}/version.json`);
-    if (!versionRes.ok) return false;
-    const remoteVersion: string = (await versionRes.json()).version;
+    let remoteVersion: string | null = null;
+    try {
+      const versionRes = await fetch(`${HF_BASE}/version.json`);
+      if (versionRes.ok) {
+        remoteVersion = (await versionRes.json()).version;
+      }
+    } catch {
+      // version check failed, will try local assets
+    }
 
     const localVersion = Spicetify.LocalStorage.get(VERSION_KEY);
-    const versionMatch = localVersion === remoteVersion;
+    const versionMatch = remoteVersion !== null && localVersion === remoteVersion;
 
     const [wasmExists, modelExists] = await Promise.all([
       idbGet(WASM_NAME),
@@ -99,6 +105,15 @@ export async function ensureAssets(
       onProgress?.("Assets up to date");
       return true;
     }
+
+    // If version check failed but local assets exist, use them offline
+    if (remoteVersion === null && wasmExists && modelExists) {
+      onProgress?.("Using cached assets (offline)");
+      return true;
+    }
+
+    // Cannot download without version info
+    if (remoteVersion === null) return false;
 
     const downloads: Promise<void>[] = [];
     if (!wasmExists || !versionMatch) {
@@ -119,7 +134,7 @@ export async function ensureAssets(
     onProgress?.("Assets ready");
     return true;
   } catch (error) {
-    // asset load failed
+    console.error("[trashbin+] ensureAssets failed:", error);
     return false;
   }
 }
@@ -146,7 +161,7 @@ export async function initEngine(modelId: ModelId): Promise<boolean> {
     activeModelId = modelId;
     return true;
   } catch (error) {
-    // init failed
+    console.error("[trashbin+] initEngine failed:", error);
     return false;
   }
 }

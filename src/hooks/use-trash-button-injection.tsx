@@ -60,7 +60,7 @@ export const useTrashButtonInjection = (
         const aiState = useAiStore.getState();
         const stored = aiState.results[trackData.trackURI];
         if (stored !== undefined) {
-          wrapper.appendChild(createIndicatorElement(stored));
+          if (stored >= 0) wrapper.appendChild(createIndicatorElement(stored));
         } else {
           wrapper.appendChild(createSpinnerElement());
           aiState.enqueue(trackData.trackURI);
@@ -114,10 +114,12 @@ export const useTrashButtonInjection = (
                 const spinner = wrapper.querySelector(`.${AI_SPINNER_CLASS}`);
                 if (spinner) spinner.remove();
 
-                wrapper.insertBefore(
-                  createIndicatorElement(next[uri]),
-                  trashBtn,
-                );
+                if (next[uri] >= 0) {
+                  wrapper.insertBefore(
+                    createIndicatorElement(next[uri]),
+                    trashBtn,
+                  );
+                }
               }
             });
         }

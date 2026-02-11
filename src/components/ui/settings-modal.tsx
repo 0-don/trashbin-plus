@@ -290,7 +290,7 @@ const SettingsModal: React.FC = () => {
       )}
       <ActionButton
         label={t("ACTION_CLEAR_AI_STORAGE")}
-        description={t("DESCRIPTION_CLEAR_AI_STORAGE", { count: Object.keys(useAiStore.getState().results).length })}
+        description={t("DESCRIPTION_CLEAR_AI_STORAGE", { count: Object.values(useAiStore((s) => s.results)).filter((v) => v >= 0).length })}
         onClick={() => {
           useAiStore.getState().clearStorage();
           Spicetify.showNotification(t("MESSAGE_AI_STORAGE_CLEARED"));

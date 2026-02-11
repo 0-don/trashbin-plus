@@ -49,7 +49,7 @@ export const ItemRow: React.FC<ItemRowProps> = ({ item, onUntrash }) => {
         )}
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-1.5 truncate font-medium text-white">
-            {aiProbability !== undefined && <AiIndicator probability={aiProbability} size={14} />}
+            {aiProbability !== undefined && aiProbability >= 0 && <AiIndicator probability={aiProbability} size={14} />}
             {item.name}
           </div>
           <div className="truncate text-sm text-white/60">{secondaryText}</div>
