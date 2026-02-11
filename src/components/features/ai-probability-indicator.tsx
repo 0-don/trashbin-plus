@@ -20,10 +20,10 @@ function getTier(probability: number) {
   return TIERS.find((t) => probability <= t.max) ?? TIERS[TIERS.length - 1];
 }
 
-export function createAiIndicatorHTML(probability: number): string {
+export function createAiIndicatorHTML(probability: number, size = 14): string {
   const tier = getTier(probability);
   const pct = Math.round(probability * 100);
   const label = i18n.t(tier.labelKey);
-  const svg = Spicetify.ReactDOMServer.renderToString(<tier.Icon />);
-  return `<span title="${pct}% AI — ${label}" style="cursor:default;color:${tier.color};font-size:14px;line-height:1;display:inline-flex">${svg}</span>`;
+  const svg = Spicetify.ReactDOMServer.renderToString(<tier.Icon size={size} />);
+  return `<span title="${pct}% AI — ${label}" style="cursor:default;color:${tier.color};line-height:1;display:inline-flex">${svg}</span>`;
 }

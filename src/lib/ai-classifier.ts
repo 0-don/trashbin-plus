@@ -10,8 +10,8 @@ import {
 } from "./ai-engine";
 
 const CORS_PROXY = "https://cors-proxy.spicetify.app";
-const MAX_CONCURRENT = 3;
 const CACHE_KEY_PREFIX = "trashbin-ai-cache:";
+const POLL_INTERVAL = 2000;
 export const AI_TRASH_THRESHOLD = 0.8;
 
 // --- Audio ---
@@ -40,19 +40,6 @@ async function fetchPreviewUrl(trackUri: string): Promise<string | null> {
   }
 }
 
-async function fetchPreviewUrls(
-  trackUris: string[],
-): Promise<Map<string, string>> {
-  const result = new Map<string, string>();
-  await Promise.all(
-    trackUris.map(async (uri) => {
-      const url = await fetchPreviewUrl(uri);
-      if (url) result.set(uri, url);
-    }),
-  );
-  return result;
-}
-
 async function fetchAudioWaveform(url: string): Promise<Float32Array> {
   const response = await fetch(url);
   if (!response.ok)
@@ -75,10 +62,8 @@ function extractMiddleChunk(
   return waveform.slice(start, start + targetLength);
 }
 
-// --- Cache & Classification ---
+// --- Cache ---
 
-const processingTracks = new Set<string>();
-let batchInFlight = false;
 let cacheKey: string | null = null;
 
 function getCache(): Record<string, number> {
@@ -102,81 +87,69 @@ export function getCachedResult(trackUri: string): number | undefined {
   return getCache()[trackUri];
 }
 
-export function isProcessing(trackUri: string): boolean {
-  return processingTracks.has(trackUri);
+// --- Queue ---
+
+const queue = new Set<string>();
+let processing = false;
+let intervalId: ReturnType<typeof setInterval> | null = null;
+type ResultListener = (uri: string, probability: number) => void;
+const listeners = new Set<ResultListener>();
+
+export function enqueue(trackUri: string): void {
+  if (getCachedResult(trackUri) !== undefined) return;
+  queue.add(trackUri);
 }
 
-async function classify(
-  trackUri: string,
-  previewUrl: string,
-): Promise<number | null> {
-  const modelId = getActiveModelId();
-  if (!modelId) return null;
-
-  const model = MODELS[modelId];
-  const waveform = await fetchAudioWaveform(previewUrl);
-  const input = extractMiddleChunk(waveform, model.inputLength);
-  const probability = await queueInference(input);
-
-  if (probability !== null) {
-    setCacheEntry(trackUri, probability);
-  }
-  return probability;
+export function onResult(cb: ResultListener): () => void {
+  listeners.add(cb);
+  return () => listeners.delete(cb);
 }
 
-export async function classifyTrack(trackUri: string): Promise<number | null> {
-  const cached = getCachedResult(trackUri);
-  if (cached !== undefined) return cached;
-  if (processingTracks.has(trackUri)) return null;
+async function processNext(): Promise<void> {
+  if (processing || queue.size === 0) return;
 
-  processingTracks.add(trackUri);
+  const uri = queue.values().next().value!;
+  queue.delete(uri);
+
+  if (getCachedResult(uri) !== undefined) return;
+
+  processing = true;
   try {
-    const previewUrl = await fetchPreviewUrl(trackUri);
-    if (!previewUrl) return null;
-    return await classify(trackUri, previewUrl);
-  } catch (error) {
-    console.error(`[trashbin+ AI] Failed to classify ${trackUri}:`, error);
-    return null;
-  } finally {
-    processingTracks.delete(trackUri);
-  }
-}
+    const modelId = getActiveModelId();
+    if (!modelId) return;
 
-export async function classifyTracks(
-  trackUris: string[],
-  onResult?: (trackUri: string, probability: number) => void,
-): Promise<void> {
-  if (batchInFlight) return;
+    const previewUrl = await fetchPreviewUrl(uri);
+    if (!previewUrl) return;
 
-  const cache = getCache();
-  const toProcess = trackUris.filter(
-    (uri) => cache[uri] === undefined && !processingTracks.has(uri),
-  );
-  if (toProcess.length === 0) return;
+    const model = MODELS[modelId];
+    const waveform = await fetchAudioWaveform(previewUrl);
+    const input = extractMiddleChunk(waveform, model.inputLength);
+    const probability = await queueInference(input);
 
-  batchInFlight = true;
-  for (const uri of toProcess) processingTracks.add(uri);
-
-  try {
-    const previewUrls = await fetchPreviewUrls(toProcess);
-    const withPreview = toProcess.filter((uri) => previewUrls.has(uri));
-
-    const executing = new Set<Promise<void>>();
-    for (const uri of withPreview) {
-      const p = classify(uri, previewUrls.get(uri)!)
-        .then((prob) => {
-          if (prob !== null) onResult?.(uri, prob);
-        })
-        .catch(() => {})
-        .finally(() => executing.delete(p));
-      executing.add(p);
-      if (executing.size >= MAX_CONCURRENT) await Promise.race(executing);
+    if (probability !== null) {
+      setCacheEntry(uri, probability);
+      listeners.forEach((cb) => cb(uri, probability));
     }
-    await Promise.all(executing);
+  } catch (error) {
+    console.error(`[trashbin+ AI] Failed to classify ${uri}:`, error);
   } finally {
-    for (const uri of toProcess) processingTracks.delete(uri);
-    batchInFlight = false;
+    processing = false;
   }
+}
+
+function startQueue(): void {
+  if (intervalId) return;
+  intervalId = setInterval(processNext, POLL_INTERVAL);
+}
+
+function stopQueue(): void {
+  if (intervalId) {
+    clearInterval(intervalId);
+    intervalId = null;
+  }
+  queue.clear();
+  processing = false;
+  listeners.clear();
 }
 
 // --- Lifecycle ---
@@ -194,7 +167,10 @@ export async function initializeAiDetection(
 
     onProgress?.(`Initializing ${MODELS[modelId].label}...`);
     const initialized = await initEngine(modelId);
-    if (initialized) onProgress?.("Ready");
+    if (initialized) {
+      onProgress?.("Ready");
+      startQueue();
+    }
     return initialized;
   } catch (error) {
     console.error("[trashbin+ AI] Initialization failed:", error);
@@ -203,12 +179,11 @@ export async function initializeAiDetection(
 }
 
 export function cleanupAiDetection(): void {
+  stopQueue();
   disposeEngine();
   if (audioCtx && audioCtx.state !== "closed") {
     audioCtx.close();
     audioCtx = null;
   }
   cacheKey = null;
-  processingTracks.clear();
-  batchInFlight = false;
 }

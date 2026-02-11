@@ -20,7 +20,7 @@ export const TrashbinWidget = React.memo(() => {
     if (isTrack) {
       widget.active = isTrashed;
       widget.label = isTrashed ? t("ACTION_UNTHROW") : t("ACTION_THROW");
-      widget.icon = TRASH_ICON(18, isTrashed ? "fill-[#22c55e]" : "");
+      widget.icon = TRASH_ICON(20, isTrashed ? "fill-[#22c55e]" : "");
     } else {
       widget.deregister();
     }
@@ -29,7 +29,7 @@ export const TrashbinWidget = React.memo(() => {
   useEffect(() => {
     const widget = new Spicetify.Playbar.Widget(
       t("ACTION_THROW"),
-      TRASH_ICON(18),
+      TRASH_ICON(20),
       () => {
         const currentTrack = Spicetify.Player.data?.item;
         if (currentTrack) store.toggleSongTrash(currentTrack.uri);

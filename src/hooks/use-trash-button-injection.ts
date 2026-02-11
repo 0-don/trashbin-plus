@@ -3,15 +3,16 @@ import { TRASH_ICON } from "../components/icons";
 import { createAiIndicatorHTML } from "../components/features/ai-probability-indicator";
 import {
   AI_TRASH_THRESHOLD,
-  classifyTracks,
+  enqueue,
   getCachedResult,
-  isProcessing,
+  onResult,
 } from "../lib/ai-classifier";
 import { extractTrackData } from "../lib/track-utils";
 import { useTrashbinStore } from "../store/trashbin-store";
 import { useMutationObserver } from "./use-mutation-observer";
 
 const AI_INDICATOR_CLASS = "trashbin-ai-indicator";
+const WRAPPER_CLASS = "trashbin-injected-group";
 
 interface TrashButtonConfig {
   containerSelector: string;
@@ -29,11 +30,10 @@ export const useTrashButtonInjection = (
   const aiEnabled = store.aiDetectionEnabled && store.aiAssetsReady;
 
   const removeInjected = () => {
-    document
-      .querySelectorAll(config.buttonSelector)
-      .forEach((btn) => btn.remove());
-    document
-      .querySelectorAll(`.${AI_INDICATOR_CLASS}`)
+    const container = document.querySelector(config.containerSelector);
+    if (!container) return;
+    container
+      .querySelectorAll(`.${WRAPPER_CLASS}`)
       .forEach((el) => el.remove());
   };
 
@@ -45,8 +45,6 @@ export const useTrashButtonInjection = (
     const container = document.querySelector(config.containerSelector);
     if (!container) return;
 
-    const uncachedUris: string[] = [];
-
     container.querySelectorAll(config.moreButtonSelector).forEach((moreBtn) => {
       const row = moreBtn.closest(config.rowSelector);
       if (!row) return;
@@ -55,10 +53,29 @@ export const useTrashButtonInjection = (
       if (!trackData.trackURI || row.querySelector(config.buttonSelector))
         return;
 
+      // Wrapper for AI indicator + trash button
+      const wrapper = document.createElement("div");
+      wrapper.className = WRAPPER_CLASS;
+      wrapper.style.display = "inline-flex";
+      wrapper.style.alignItems = "center";
+      wrapper.style.gap = "0";
+      wrapper.style.margin = "0";
+
+      // AI indicator
+      if (aiEnabled) {
+        const cached = getCachedResult(trackData.trackURI);
+        if (cached !== undefined) {
+          const indicator = createIndicatorElement(cached);
+          wrapper.appendChild(indicator);
+        } else {
+          enqueue(trackData.trackURI);
+        }
+      }
+
       // Trash button
       const isTrashed = !!store.trashSongList[trackData.trackURI];
       const btn = document.createElement("button");
-      btn.className = `${config.buttonClassName} bg-transparent border-none p-2 opacity-70 cursor-pointer hover:opacity-100 transition-opacity`;
+      btn.className = `${config.buttonClassName} bg-transparent border-none p-2 opacity-70 cursor-pointer hover:opacity-100 transition-opacity m-0!`;
       btn.innerHTML = TRASH_ICON(16, isTrashed ? "fill-[#22c55e]" : "");
       btn.dataset.visuallyTrashed = isTrashed.toString();
 
@@ -70,34 +87,30 @@ export const useTrashButtonInjection = (
         store.toggleSongTrash(trackData.trackURI!);
       };
 
-      moreBtn.parentElement?.insertBefore(btn, moreBtn);
+      wrapper.appendChild(btn);
+      moreBtn.parentElement?.insertBefore(wrapper, moreBtn);
+    });
+  };
 
-      // AI indicator (next to trash button)
-      if (aiEnabled) {
-        const cached = getCachedResult(trackData.trackURI);
-        if (cached !== undefined) {
-          injectAiIndicator(btn, cached);
-        } else if (!isProcessing(trackData.trackURI)) {
-          uncachedUris.push(trackData.trackURI);
-        }
+  // When a classification result arrives, patch indicators into existing rows
+  useEffect(() => {
+    if (!aiEnabled) return;
+
+    const unsub = onResult((uri, prob) => {
+      updateIndicatorsForUri(config, uri, prob);
+
+      const state = useTrashbinStore.getState();
+      if (
+        state.trashAiSongs &&
+        prob >= AI_TRASH_THRESHOLD &&
+        !state.trashSongList[uri]
+      ) {
+        state.toggleSongTrash(uri, false);
       }
     });
 
-    // Batch classify uncached tracks, inject indicators as results arrive
-    if (aiEnabled && uncachedUris.length > 0) {
-      classifyTracks(uncachedUris, (uri, prob) => {
-        injectAiIndicatorsForCached(config);
-        const state = useTrashbinStore.getState();
-        if (
-          state.trashAiSongs &&
-          prob >= AI_TRASH_THRESHOLD &&
-          !state.trashSongList[uri]
-        ) {
-          state.toggleSongTrash(uri);
-        }
-      });
-    }
-  };
+    return unsub;
+  }, [aiEnabled]);
 
   useEffect(() => {
     if (!enabled || !store.trashbinEnabled) {
@@ -112,10 +125,10 @@ export const useTrashButtonInjection = (
       Array.from(mutation.addedNodes).some((node) => {
         if (node.nodeType !== Node.ELEMENT_NODE) return false;
         const element = node as Element;
+        if (element.classList?.contains(WRAPPER_CLASS)) return false;
         return (
-          (element.closest?.(config.containerSelector) ||
-            element.querySelector?.(config.containerSelector)) &&
-          !element.classList?.contains(config.buttonClassName.split(" ")[0])
+          element.closest?.(config.containerSelector) ||
+          element.querySelector?.(config.containerSelector)
         );
       }),
     );
@@ -125,34 +138,33 @@ export const useTrashButtonInjection = (
   });
 };
 
-function injectAiIndicator(trashBtn: Element, probability: number): void {
-  if (trashBtn.previousElementSibling?.classList.contains(AI_INDICATOR_CLASS))
-    return;
-
+function createIndicatorElement(probability: number): HTMLSpanElement {
   const indicator = document.createElement("span");
-  indicator.innerHTML = createAiIndicatorHTML(probability);
+  indicator.innerHTML = createAiIndicatorHTML(probability, 16);
   indicator.className = AI_INDICATOR_CLASS;
   indicator.style.pointerEvents = "auto";
-  trashBtn.parentElement?.insertBefore(indicator, trashBtn);
+  return indicator;
 }
 
-function injectAiIndicatorsForCached(config: TrashButtonConfig): void {
+function updateIndicatorsForUri(
+  config: TrashButtonConfig,
+  uri: string,
+  probability: number,
+): void {
   const container = document.querySelector(config.containerSelector);
   if (!container) return;
 
   container.querySelectorAll(config.buttonSelector).forEach((trashBtn) => {
-    if (trashBtn.previousElementSibling?.classList.contains(AI_INDICATOR_CLASS))
-      return;
+    const wrapper = trashBtn.closest(`.${WRAPPER_CLASS}`);
+    if (!wrapper || wrapper.querySelector(`.${AI_INDICATOR_CLASS}`)) return;
 
-    const row = trashBtn.closest(config.rowSelector);
+    const row = wrapper.closest(config.rowSelector);
     if (!row) return;
 
     const trackData = extractTrackData(row);
-    if (!trackData.trackURI) return;
-
-    const cached = getCachedResult(trackData.trackURI);
-    if (cached !== undefined) {
-      injectAiIndicator(trashBtn, cached);
+    if (trackData.trackURI === uri) {
+      const indicator = createIndicatorElement(probability);
+      wrapper.insertBefore(indicator, trashBtn);
     }
   });
 }

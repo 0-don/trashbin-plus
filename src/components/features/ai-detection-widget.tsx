@@ -1,7 +1,10 @@
 import React, { useEffect, useRef } from "react";
-import { AI_TRASH_THRESHOLD, classifyTrack, getCachedResult } from "../../lib/ai-classifier";
+import { AI_TRASH_THRESHOLD, enqueue, getCachedResult, onResult } from "../../lib/ai-classifier";
 import { useTrashbinStore } from "../../store/trashbin-store";
 import { createAiIndicatorHTML } from "./ai-probability-indicator";
+
+const widgetIcon = (prob: number) =>
+  `<span style="margin-left:4px">${createAiIndicatorHTML(prob, 20)}</span>`;
 
 export const AiDetectionWidget: React.FC = () => {
   const store = useTrashbinStore();
@@ -13,7 +16,7 @@ export const AiDetectionWidget: React.FC = () => {
 
     const widget = new Spicetify.Playbar.Widget(
       "AI Detection",
-      createAiIndicatorHTML(0.5),
+      widgetIcon(0.5),
       () => {},
       false,
       false,
@@ -21,34 +24,13 @@ export const AiDetectionWidget: React.FC = () => {
     );
     widgetRef.current = widget;
 
-    const update = async () => {
-      const track = Spicetify.Player.data?.item;
-      if (!track?.uri || !track.uri.startsWith("spotify:track:")) {
-        widget.icon = createAiIndicatorHTML(0.5);
-        widget.label = "AI Detection";
-        return;
-      }
-
-      const cached = getCachedResult(track.uri);
-      if (cached !== undefined) {
-        applyResult(widget, track.uri, cached);
-        return;
-      }
-
-      widget.icon = createAiIndicatorHTML(0.5);
-      widget.label = "Analyzing...";
-
-      const result = await classifyTrack(track.uri);
+    const applyResult = (uri: string, prob: number) => {
       const current = Spicetify.Player.data?.item;
-      if (current?.uri === track.uri && result !== null) {
-        applyResult(widget, track.uri, result);
-      }
-    };
+      if (current?.uri !== uri) return;
 
-    const applyResult = (w: Spicetify.Playbar.Widget, uri: string, prob: number) => {
       const pct = Math.round(prob * 100);
-      w.icon = createAiIndicatorHTML(prob);
-      w.label = `${pct}% AI`;
+      widget.icon = widgetIcon(prob);
+      widget.label = `${pct}% AI`;
 
       const state = useTrashbinStore.getState();
       if (
@@ -56,16 +38,37 @@ export const AiDetectionWidget: React.FC = () => {
         prob >= AI_TRASH_THRESHOLD &&
         !state.trashSongList[uri]
       ) {
-        state.toggleSongTrash(uri);
+        state.toggleSongTrash(uri, false);
       }
     };
 
+    const update = () => {
+      const track = Spicetify.Player.data?.item;
+      if (!track?.uri || !track.uri.startsWith("spotify:track:")) {
+        widget.icon = widgetIcon(0.5);
+        widget.label = "AI Detection";
+        return;
+      }
+
+      const cached = getCachedResult(track.uri);
+      if (cached !== undefined) {
+        applyResult(track.uri, cached);
+        return;
+      }
+
+      widget.icon = widgetIcon(0.5);
+      widget.label = "Analyzing...";
+      enqueue(track.uri);
+    };
+
+    const unsub = onResult(applyResult);
     update();
 
     const handleSongChange = () => update();
     Spicetify.Player.addEventListener("songchange", handleSongChange);
 
     return () => {
+      unsub();
       Spicetify.Player.removeEventListener("songchange", handleSongChange);
       widget.deregister();
       widgetRef.current = null;
