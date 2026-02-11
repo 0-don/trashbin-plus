@@ -20,7 +20,7 @@
   "SETTINGS_TITLE": "Prügikasti+ seaded",
   "SETTINGS_OPTIONS": "Valikud",
   "SETTINGS_FEATURES": "Omadused",
-  "SETTINGS_LOCAL_STORAGE": "Kohalik salvestus",
+  "SETTINGS_STORAGE": "Kohalik salvestus",
   "SETTINGS_ENABLED": "Lubatud",
   "SETTINGS_SHOW_WIDGET": "Kuva vidina ikoon",
   "SETTINGS_AUTOPLAY": "Automaatne esitus käivitamisel",

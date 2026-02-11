@@ -11,7 +11,7 @@ import {
 
 const CORS_PROXY = "https://cors-proxy.spicetify.app";
 const CACHE_KEY_PREFIX = "trashbin-ai-cache:";
-const POLL_INTERVAL = 2000;
+const POLL_INTERVAL = 500;
 export const AI_TRASH_THRESHOLD = 0.8;
 
 // --- Audio ---
@@ -85,6 +85,17 @@ function setCacheEntry(trackUri: string, probability: number): void {
 
 export function getCachedResult(trackUri: string): number | undefined {
   return getCache()[trackUri];
+}
+
+export function getAiCacheSize(): number {
+  return Object.keys(getCache()).length;
+}
+
+export function clearAiCache(): void {
+  if (!cacheKey) return;
+  Spicetify.LocalStorage.remove(cacheKey);
+  queue.clear();
+  document.querySelectorAll(".trashbin-ai-indicator").forEach((el) => el.remove());
 }
 
 // --- Queue ---

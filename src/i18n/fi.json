@@ -20,7 +20,7 @@
   "SETTINGS_TITLE": "Roskakori+ -asetukset",
   "SETTINGS_OPTIONS": "Asetukset",
   "SETTINGS_FEATURES": "Ominaisuudet",
-  "SETTINGS_LOCAL_STORAGE": "Paikallinen tallennus",
+  "SETTINGS_STORAGE": "Paikallinen tallennus",
   "SETTINGS_ENABLED": "Käytössä",
   "SETTINGS_SHOW_WIDGET": "Näytä widgetin kuvake",
   "SETTINGS_AUTOPLAY": "Käynnistä automaattitoisto käynnistyksessä",

@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { HiOutlineQuestionMarkCircle } from "react-icons/hi2";
+import { clearAiCache, getAiCacheSize } from "../../lib/ai-classifier";
 import { SELECTORS } from "../../lib/constants";
 import { cn } from "../../lib/utils";
 import { useTrashbinStore } from "../../store/trashbin-store";
@@ -298,9 +299,17 @@ const SettingsModal: React.FC = () => {
               : t("AI_ASSETS_NOT_READY")}
         </div>
       )}
+      <ActionButton
+        label={t("ACTION_CLEAR_AI_CACHE")}
+        description={t("DESCRIPTION_CLEAR_AI_CACHE", { count: getAiCacheSize() })}
+        onClick={() => {
+          clearAiCache();
+          Spicetify.showNotification(t("MESSAGE_AI_CACHE_CLEARED"));
+        }}
+      />
 
       <h2 className="my-2.5! text-lg font-bold text-(--spice-text) first-of-type:mt-0">
-        {t("SETTINGS_LOCAL_STORAGE")}
+        {t("SETTINGS_STORAGE")}
       </h2>
       <ActionButton
         label={t("ACTION_COPY")}

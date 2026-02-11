@@ -4,7 +4,7 @@ import { useTrashbinStore } from "../../store/trashbin-store";
 import { createAiIndicatorHTML } from "./ai-probability-indicator";
 
 const widgetIcon = (prob: number) =>
-  `<span style="margin-left:4px">${createAiIndicatorHTML(prob, 20)}</span>`;
+  `<span style="margin-left:5px">${createAiIndicatorHTML(prob, 20)}</span>`;
 
 export const AiDetectionWidget: React.FC = () => {
   const store = useTrashbinStore();

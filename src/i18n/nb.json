@@ -20,7 +20,7 @@
   "SETTINGS_TITLE": "Innstillinger for papirkurv+",
   "SETTINGS_OPTIONS": "Alternativer",
   "SETTINGS_FEATURES": "Funksjoner",
-  "SETTINGS_LOCAL_STORAGE": "Lokal lagring",
+  "SETTINGS_STORAGE": "Lokal lagring",
   "SETTINGS_ENABLED": "Aktivert",
   "SETTINGS_SHOW_WIDGET": "Vis miniprogram-ikon",
   "SETTINGS_AUTOPLAY": "Automatisk avspilling ved oppstart",

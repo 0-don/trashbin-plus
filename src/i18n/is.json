@@ -20,7 +20,7 @@
   "SETTINGS_TITLE": "Stillingar fyrir rusli+",
   "SETTINGS_OPTIONS": "Valkostir",
   "SETTINGS_FEATURES": "Eiginleikar",
-  "SETTINGS_LOCAL_STORAGE": "Staðbundin geymsla",
+  "SETTINGS_STORAGE": "Staðbundin geymsla",
   "SETTINGS_ENABLED": "Virkjað",
   "SETTINGS_SHOW_WIDGET": "Sýna hnappinn fyrir innrihluta",
   "SETTINGS_AUTOPLAY": "Sjálfvirk spilun við rynningu",

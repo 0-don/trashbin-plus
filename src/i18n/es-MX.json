@@ -20,7 +20,7 @@
   "SETTINGS_TITLE": "Configuración de Trashbin+",
   "SETTINGS_OPTIONS": "Opciones",
   "SETTINGS_FEATURES": "Características",
-  "SETTINGS_LOCAL_STORAGE": "Almacenamiento local",
+  "SETTINGS_STORAGE": "Almacenamiento local",
   "SETTINGS_ENABLED": "Habilitado",
   "SETTINGS_SHOW_WIDGET": "Mostrar icono del widget",
   "SETTINGS_AUTOPLAY": "Reproducción automática al iniciar",

@@ -20,7 +20,7 @@
   "SETTINGS_TITLE": "การตั้งค่า Trashbin+",
   "SETTINGS_OPTIONS": "ตัวเลือก",
   "SETTINGS_FEATURES": "คุณสมบัติ",
-  "SETTINGS_LOCAL_STORAGE": "พื้นที่จัดเก็บข้อมูลในเครื่อง",
+  "SETTINGS_STORAGE": "พื้นที่จัดเก็บข้อมูลในเครื่อง",
   "SETTINGS_ENABLED": "เปิดใช้งาน",
   "SETTINGS_SHOW_WIDGET": "แสดงไอคอนวิดเจ็ต",
   "SETTINGS_AUTOPLAY": "เปิดใช้งานการเล่นอัตโนมัติเมื่อเริ่มต้น",
