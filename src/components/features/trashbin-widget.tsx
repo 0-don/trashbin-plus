@@ -8,25 +8,26 @@ export const TrashbinWidget = React.memo(() => {
   const store = useTrashbinStore();
   const widgetRef = useRef<Spicetify.Playbar.Widget | null>(null);
 
-  const updateWidgetState = (widget: Spicetify.Playbar.Widget) => {
-    const currentTrack = Spicetify.Player.data?.item;
-    if (!currentTrack) return;
-
-    const isTrack =
-      Spicetify.URI.fromString(currentTrack.uri).type ===
-      Spicetify.URI.Type.TRACK;
-    const isTrashed = !!store.trashSongList[currentTrack.uri];
-
-    if (isTrack) {
-      widget.active = isTrashed;
-      widget.label = isTrashed ? t("ACTION_UNTHROW") : t("ACTION_THROW");
-      widget.icon = TRASH_ICON(20, isTrashed ? "fill-[#22c55e]" : "");
-    } else {
-      widget.deregister();
-    }
-  };
-
   useEffect(() => {
+    const updateWidgetState = (widget: Spicetify.Playbar.Widget) => {
+      const currentTrack = Spicetify.Player.data?.item;
+      if (!currentTrack) return;
+
+      const isTrack =
+        Spicetify.URI.fromString(currentTrack.uri).type ===
+        Spicetify.URI.Type.TRACK;
+      const isTrashed =
+        !!useTrashbinStore.getState().trashSongList[currentTrack.uri];
+
+      if (isTrack) {
+        widget.active = isTrashed;
+        widget.label = isTrashed ? t("ACTION_UNTHROW") : t("ACTION_THROW");
+        widget.icon = TRASH_ICON(20, isTrashed ? "fill-[#22c55e]" : "");
+      } else {
+        widget.deregister();
+      }
+    };
+
     const widget = new Spicetify.Playbar.Widget(
       t("ACTION_THROW"),
       TRASH_ICON(20),
@@ -45,11 +46,16 @@ export const TrashbinWidget = React.memo(() => {
     const handleSongChange = () => updateWidgetState(widget);
     Spicetify.Player.addEventListener("songchange", handleSongChange);
 
+    const unsubscribe = useTrashbinStore.subscribe(() =>
+      updateWidgetState(widget),
+    );
+
     return () => {
+      unsubscribe();
       Spicetify.Player.removeEventListener("songchange", handleSongChange);
       widget.deregister();
     };
-  }, [store.trashbinEnabled, store.widgetEnabled, store.trashSongList]);
+  }, [store.trashbinEnabled, store.widgetEnabled]);
 
   return null;
 });
