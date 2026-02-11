@@ -49,7 +49,7 @@ class ASTWrapper(nn.Module):
         # Normalize with AST defaults
         mel = (mel - AST_MEAN) / (AST_STD * 2)
 
-        logits = self.model(mel).logits  # [batch, 2]
+        logits = self.model(input_values=mel).logits  # [batch, 2]
         probs = torch.softmax(logits, dim=-1)
         return probs[:, 1:2]  # AI probability (class 1 = ai_generated)
 
