@@ -1,4 +1,4 @@
-import * as ort from "onnxruntime-web";
+import { ORT_CODE } from "virtual:ort-worker-ort";
 
 export type ModelId = "sonics-5s" | "sonics-120s";
 export const DEFAULT_MODEL: ModelId = "sonics-5s";
@@ -139,44 +139,169 @@ export async function ensureAssets(
   }
 }
 
-let session: ort.InferenceSession | null = null;
+// ── Worker management ──────────────────────────────────────────────
+
+const WORKER_LOGIC = `
+var STORE_NAME = "assets";
+var dbPromise = null;
+
+function getDB() {
+  if (!dbPromise) {
+    dbPromise = new Promise(function(resolve, reject) {
+      var req = indexedDB.open("trashbin-ai", 1);
+      req.onupgradeneeded = function() {
+        if (!req.result.objectStoreNames.contains(STORE_NAME))
+          req.result.createObjectStore(STORE_NAME, { keyPath: "name" });
+      };
+      req.onsuccess = function() { resolve(req.result); };
+      req.onerror = function() { reject(req.error); };
+    });
+  }
+  return dbPromise;
+}
+
+function idbGet(name) {
+  return getDB().then(function(db) {
+    return new Promise(function(resolve, reject) {
+      var req = db.transaction(STORE_NAME, "readonly").objectStore(STORE_NAME).get(name);
+      req.onsuccess = function() { resolve(req.result ? req.result.data : null); };
+      req.onerror = function() { reject(req.error); };
+    });
+  });
+}
+
+var session = null;
+
+self.onmessage = function(e) {
+  var msg = e.data;
+
+  if (msg.type === "init") {
+    Promise.all([idbGet(msg.modelAssetName), idbGet(msg.wasmName)])
+      .then(function(buffers) {
+        var modelBuffer = buffers[0];
+        var wasmBuffer = buffers[1];
+        if (!modelBuffer || !wasmBuffer) {
+          self.postMessage({ type: "init-error", error: "Assets not found in IndexedDB" });
+          return;
+        }
+        ort.env.wasm.numThreads = 1;
+        ort.env.wasm.wasmBinary = wasmBuffer;
+        return ort.InferenceSession.create(modelBuffer, {
+          executionProviders: ["wasm"],
+        }).then(function(s) {
+          session = s;
+          self.postMessage({ type: "init-done" });
+        });
+      })
+      .catch(function(err) {
+        self.postMessage({ type: "init-error", error: String(err) });
+      });
+  }
+
+  else if (msg.type === "infer") {
+    if (!session) {
+      self.postMessage({ type: "infer-done", id: msg.id, prob: null });
+      return;
+    }
+    var tensor = new ort.Tensor("float32", msg.data, [1, msg.data.length]);
+    session.run({ audio: tensor })
+      .then(function(results) {
+        self.postMessage({ type: "infer-done", id: msg.id, prob: results["prob"].data[0] });
+      })
+      .catch(function() {
+        self.postMessage({ type: "infer-done", id: msg.id, prob: null });
+      });
+  }
+
+  else if (msg.type === "dispose") {
+    if (session) { session.release(); session = null; }
+    self.close();
+  }
+};
+`;
+
+let worker: Worker | null = null;
+let workerBlobUrl: string | null = null;
 export let activeModelId: ModelId | null = null;
 let inferenceQueue = Promise.resolve<number | null>(null);
+let nextInferenceId = 0;
+const pendingInferences = new Map<number, (prob: number | null) => void>();
 
 export async function initEngine(modelId: ModelId): Promise<boolean> {
   try {
     const model = MODELS[modelId];
-    const [modelBuffer, wasmBuffer] = await Promise.all([
+
+    // Verify assets exist before creating worker
+    const [modelExists, wasmExists] = await Promise.all([
       idbGet(model.assetName),
       idbGet(WASM_NAME),
     ]);
-    if (!modelBuffer || !wasmBuffer) return false;
+    if (!modelExists || !wasmExists) return false;
 
-    ort.env.wasm.numThreads = 1;
-    (ort.env.wasm as any).wasmBinary = wasmBuffer;
+    // Create worker from Blob URL
+    const script = ORT_CODE + "\n" + WORKER_LOGIC;
+    const blob = new Blob([script], { type: "application/javascript" });
+    workerBlobUrl = URL.createObjectURL(blob);
+    worker = new Worker(workerBlobUrl);
 
-    session = await ort.InferenceSession.create(modelBuffer, {
-      executionProviders: ["wasm"],
+    // Handle inference responses and worker errors
+    worker.onmessage = (e: MessageEvent) => {
+      const msg = e.data;
+      if (msg.type === "infer-done") {
+        const resolve = pendingInferences.get(msg.id);
+        if (resolve) {
+          pendingInferences.delete(msg.id);
+          resolve(msg.prob);
+        }
+      }
+    };
+    worker.onerror = () => {
+      for (const resolve of pendingInferences.values()) resolve(null);
+      pendingInferences.clear();
+    };
+
+    // Wait for worker init
+    const initResult = await new Promise<boolean>((resolve) => {
+      const handler = (e: MessageEvent) => {
+        if (e.data.type === "init-done") {
+          worker!.removeEventListener("message", handler);
+          resolve(true);
+        } else if (e.data.type === "init-error") {
+          worker!.removeEventListener("message", handler);
+          resolve(false);
+        }
+      };
+      worker!.addEventListener("message", handler);
+      worker!.postMessage({
+        type: "init",
+        modelAssetName: model.assetName,
+        wasmName: WASM_NAME,
+      });
     });
-    activeModelId = modelId;
-    return true;
+
+    if (initResult) {
+      activeModelId = modelId;
+      return true;
+    }
+
+    disposeEngine();
+    return false;
   } catch (error) {
     console.error("[trashbin+] initEngine failed:", error);
+    disposeEngine();
     return false;
   }
 }
 
 export function queueInference(data: Float32Array): Promise<number | null> {
   const infer = async (): Promise<number | null> => {
-    if (!session || !activeModelId) return null;
-    try {
-      const tensor = new ort.Tensor("float32", data, [1, data.length]);
-      const results = await session.run({ audio: tensor });
-      return (results["prob"].data as Float32Array)[0];
-    } catch (error) {
-      // inference failed
-      return null;
-    }
+    if (!worker || !activeModelId) return null;
+    const id = nextInferenceId++;
+    return new Promise<number | null>((resolve) => {
+      pendingInferences.set(id, resolve);
+      const copy = new Float32Array(data);
+      worker!.postMessage({ type: "infer", id, data: copy }, [copy.buffer]);
+    });
   };
 
   const promise = inferenceQueue.then(infer, infer);
@@ -188,8 +313,18 @@ export function queueInference(data: Float32Array): Promise<number | null> {
 }
 
 export function disposeEngine(): void {
-  session?.release();
-  session = null;
+  if (worker) {
+    worker.postMessage({ type: "dispose" });
+    worker.terminate();
+    worker = null;
+  }
+  if (workerBlobUrl) {
+    URL.revokeObjectURL(workerBlobUrl);
+    workerBlobUrl = null;
+  }
   activeModelId = null;
   inferenceQueue = Promise.resolve(null);
+  for (const resolve of pendingInferences.values()) resolve(null);
+  pendingInferences.clear();
+  nextInferenceId = 0;
 }

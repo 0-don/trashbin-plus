@@ -40,16 +40,48 @@ const externalGlobals: BunPlugin = {
       react: "Spicetify.React",
       "react-dom": "Spicetify.ReactDOM",
     };
-    // Alias onnxruntime-web to wasm-only bundle (no dynamic imports at all)
-    build.onResolve({ filter: /^onnxruntime-web$/ }, () => ({
-      path: resolve("node_modules/onnxruntime-web/dist/ort.wasm.bundle.min.mjs"),
-    }));
     const filter = new RegExp(`^(${Object.keys(map).join("|")})$`);
     build.onResolve({ filter }, ({ path: p }) => ({ path: p, namespace: "ext" }));
     build.onLoad({ filter: /.*/, namespace: "ext" }, ({ path: p }) => ({
       contents: `module.exports = ${map[p]}`,
       loader: "js",
     }));
+  },
+};
+
+const ortWorkerString: BunPlugin = {
+  name: "ort-worker-string",
+  setup(build) {
+    build.onResolve({ filter: /^virtual:ort-worker-ort$/ }, () => ({
+      path: "virtual:ort-worker-ort",
+      namespace: "ort-worker",
+    }));
+    build.onLoad({ filter: /.*/, namespace: "ort-worker" }, () => {
+      const esmPath = resolve("node_modules/onnxruntime-web/dist/ort.wasm.bundle.min.mjs");
+      let code = readFileSync(esmPath, "utf-8");
+
+      // Blob URLs can't be a base for relative URL resolution, so new URL("file.wasm", blobUrl) throws.
+      // We provide wasmBinary directly so these file-resolution URLs are unused at runtime.
+      // Replace import.meta.url with self.location.href (blob: URL that passes ORT's same-origin check).
+      code = code.replace(/import\.meta\.url/g, "self.location.href");
+      // Patch the .wasm file URL patterns that would fail with blob: base
+      code = code.replace(/new URL\("ort-wasm-simd-threaded\.wasm",self\.location\.href\)\.href/g, '""');
+
+      // Convert ESM exports to self.ort assignment for classic worker context
+      const exportMatch = code.match(/export\{(.+?)\}/);
+      if (exportMatch) {
+        const mappings = exportMatch[1].split(",").map((part) => {
+          const m = part.trim().match(/^(.+?)\s+as\s+(.+)$/);
+          return m ? `${m[2]}:${m[1]}` : part.trim();
+        });
+        code = code.replace(/export\{.+?\}/, `self.ort={${mappings.join(",")}}`);
+      }
+
+      // Strip sourcemap (inaccessible from Blob URL)
+      code = code.replace(/\/\/# sourceMappingURL=.+/, "");
+
+      return { contents: `export const ORT_CODE = ${JSON.stringify(code)};`, loader: "js" };
+    });
   },
 };
 
@@ -65,7 +97,7 @@ async function runBuild() {
     naming: `${NAME_ID}.[ext]`,
     minify: minifyMode,
     define: { "import.meta.url": "location.href" },
-    plugins: [postcssPlugin, externalGlobals],
+    plugins: [postcssPlugin, externalGlobals, ortWorkerString],
   });
 
   if (!result.success) {
