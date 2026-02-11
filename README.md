@@ -53,24 +53,7 @@ Enter: https://cdn.jsdelivr.net/gh/0-don/trashbin-plus@main/dist/trashbin-plus.j
 Click purge
 -->
 
-<!-- ## Step 1:
-
-```bash
-git clone https://github.com/0-don/spicetify-creator.git
-cd spicetify-creator
-yarn install
-yarn run build
-yarn link
-
-```
-
-## Step 2:
-
-```bash
-cd /path/to/your/trashbin-plus
-yarn link "spicetify-creator"
-yarn install
-yarn build
+<!-- ```bash
 spicetify config extensions trashbin-plus.js
 spicetify apply
 
