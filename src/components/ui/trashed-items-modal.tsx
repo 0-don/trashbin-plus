@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { BsTrash3 } from "react-icons/bs";
 import { SELECTORS } from "../../lib/constants";
+import { TRASH_ICON } from "../icons";
 import { TrashedItemsView } from "../views/trashed-items";
 
 export function TrashedItemsModal() {
@@ -13,7 +13,7 @@ export function TrashedItemsModal() {
       t("ITEMS_TITLE"),
       false,
       () => setIsOpen(true),
-      Spicetify.ReactDOMServer.renderToString(<BsTrash3 size={15} />),
+      TRASH_ICON(15),
     );
     menuItem.register();
     return () => menuItem.deregister();

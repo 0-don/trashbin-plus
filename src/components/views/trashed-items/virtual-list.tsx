@@ -5,6 +5,8 @@ import {
   fetchTracksMetadata,
 } from "../../../lib/metadata-utils";
 import { ItemData, TabType } from "../../../lib/types";
+import { useAiStore } from "../../../store/ai-store";
+import { useTrashbinStore } from "../../../store/trashbin-store";
 import { ItemRow } from "./ui-components";
 
 const ITEM_HEIGHT = 60;
@@ -29,6 +31,7 @@ interface VirtualListProps {
 
 export const VirtualList: React.FC<VirtualListProps> = (props) => {
   const { t } = useTranslation();
+  const store = useTrashbinStore();
   const containerRef = useRef<HTMLDivElement>(null);
   const [scrollTop, setScrollTop] = useState(0);
   const [containerHeight, setContainerHeight] = useState(0);
@@ -36,6 +39,8 @@ export const VirtualList: React.FC<VirtualListProps> = (props) => {
   const [loadingBatches, setLoadingBatches] = useState<Set<string>>(new Set());
   const [searchQuery, setSearchQuery] = useState("");
   const debouncedSearch = useDebounce(searchQuery, 300);
+  const aiResults = useAiStore((s) => s.results);
+  const aiEnabled = store.aiDetectionEnabled && store.aiAssetsReady;
 
   const getFilteredItems = () => {
     if (!debouncedSearch.trim()) {
@@ -151,6 +156,16 @@ export const VirtualList: React.FC<VirtualListProps> = (props) => {
     setItemCache(new Map());
     setLoadingBatches(new Set());
   }, [props.activeTab, props.items]);
+
+  // Enqueue visible songs for AI classification
+  useEffect(() => {
+    if (!aiEnabled || props.activeTab !== "songs") return;
+    for (const item of visibleItems) {
+      if (aiResults[item.uri] === undefined) {
+        useAiStore.getState().enqueue(item.uri);
+      }
+    }
+  }, [aiEnabled, props.activeTab, startIndex, endIndex]);
 
   return (
     <>

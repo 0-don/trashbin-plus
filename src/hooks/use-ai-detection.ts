@@ -1,24 +1,20 @@
 import { useEffect } from "react";
-import {
-  cleanupAiDetection,
-  initializeAiDetection,
-} from "../lib/ai-classifier";
 import { DEFAULT_MODEL } from "../lib/ai-engine";
+import { useAiStore } from "../store/ai-store";
 import { useTrashbinStore } from "../store/trashbin-store";
 
 export const useAiDetection = () => {
   const store = useTrashbinStore();
 
   useEffect(() => {
-    if (!store.aiDetectionEnabled) {
-      return;
-    }
+    if (!store.aiDetectionEnabled) return;
 
     let cancelled = false;
+    const aiStore = useAiStore.getState();
 
     const init = async () => {
       store.setAiAssetsDownloading(true);
-      const ready = await initializeAiDetection(DEFAULT_MODEL, (message) => {
+      const ready = await aiStore.initialize(DEFAULT_MODEL, (message) => {
         console.log(`[trashbin+ AI] ${message}`);
       });
       if (!cancelled) {
@@ -31,7 +27,7 @@ export const useAiDetection = () => {
 
     return () => {
       cancelled = true;
-      cleanupAiDetection();
+      aiStore.cleanup();
     };
   }, [store.aiDetectionEnabled]);
 };

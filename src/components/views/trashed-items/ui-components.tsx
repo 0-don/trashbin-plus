@@ -9,6 +9,9 @@ import {
   TrackDisplayData,
 } from "../../../lib/types";
 import { cn } from "../../../lib/utils";
+import { useAiStore } from "../../../store/ai-store";
+import { useTrashbinStore } from "../../../store/trashbin-store";
+import { AiIndicator } from "../../features/ai-probability-indicator";
 
 interface ItemRowProps {
   item: ItemData;
@@ -22,6 +25,10 @@ export const ItemRow: React.FC<ItemRowProps> = ({ item, onUntrash }) => {
   const secondaryText = isArtist
     ? (item as ArtistDisplayData).secondaryText
     : (item as TrackDisplayData).artist;
+
+  const store = useTrashbinStore();
+  const aiEnabled = store.aiDetectionEnabled && store.aiAssetsReady;
+  const aiProbability = useAiStore((s) => !isArtist && aiEnabled ? s.results[item.uri] : undefined);
 
   return (
     <div className="trashbin-item-row flex items-center justify-between rounded-md p-3 transition-colors">
@@ -41,7 +48,10 @@ export const ItemRow: React.FC<ItemRowProps> = ({ item, onUntrash }) => {
           </div>
         )}
         <div className="min-w-0 flex-1">
-          <div className="truncate font-medium" style={{ color: "white" }}>{item.name}</div>
+          <div className="flex items-center gap-1.5 truncate font-medium" style={{ color: "white" }}>
+            {aiProbability !== undefined && <AiIndicator probability={aiProbability} size={14} />}
+            {item.name}
+          </div>
           <div className="truncate text-sm" style={{ color: "rgba(255, 255, 255, 0.6)" }}>{secondaryText}</div>
         </div>
       </div>

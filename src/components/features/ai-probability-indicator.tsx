@@ -16,10 +16,26 @@ const TIERS = [
   { max: 1.0, Icon: BsRobot, color: "#ef4444", labelKey: "AI_TIER_LIKELY_AI" as const },
 ];
 
-export function createAiIndicatorHTML(probability: number, size = 14): string {
-  const tier = TIERS.find((t) => probability <= t.max) ?? TIERS[TIERS.length - 1];
-  const pct = Math.round(probability * 100);
+interface AiIndicatorProps {
+  probability: number;
+  size?: number;
+}
+
+export const AiIndicator: React.FC<AiIndicatorProps> = (props) => {
+  const tier = TIERS.find((t) => props.probability <= t.max) ?? TIERS[TIERS.length - 1];
+  const pct = Math.round(props.probability * 100);
   const label = i18n.t(tier.labelKey);
-  const svg = Spicetify.ReactDOMServer.renderToString(<tier.Icon size={size} />);
-  return `<span title="${pct}% AI — ${label}" style="cursor:default;color:${tier.color};line-height:1;display:inline-flex">${svg}</span>`;
+
+  return (
+    <span
+      title={`${pct}% AI — ${label}`}
+      style={{ cursor: "default", color: tier.color, lineHeight: 1, display: "inline-flex" }}
+    >
+      <tier.Icon size={props.size ?? 14} />
+    </span>
+  );
+};
+
+export function createAiIndicatorHTML(probability: number, size = 14): string {
+  return Spicetify.ReactDOMServer.renderToString(<AiIndicator probability={probability} size={size} />);
 }

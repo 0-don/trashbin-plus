@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from "react";
-import { BsFillPauseFill, BsFillPlayFill } from "react-icons/bs";
+import { useEffect, useRef } from "react";
+import { PAUSE_ICON, PLAY_ICON } from "../components/icons";
 import { AUTO_ADD_CONFIG } from "../lib/constants";
 import { useTrashbinStore } from "../store/trashbin-store";
 
@@ -11,14 +11,6 @@ const INJECT_CHECK_INTERVAL = 2000;
 function wait(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
-
-const PLAY_ICON = Spicetify.ReactDOMServer.renderToString(
-  <BsFillPlayFill size={26} />,
-);
-
-const PAUSE_ICON = Spicetify.ReactDOMServer.renderToString(
-  <BsFillPauseFill size={26} />,
-);
 
 function findRefreshButton(): HTMLButtonElement | null {
   const grid = document.querySelector(AUTO_ADD_CONFIG.gridSelector);
@@ -46,8 +38,8 @@ export const useAutoAddRecommendations = () => {
   const updateButtonIcon = () => {
     if (buttonRef.current) {
       buttonRef.current.innerHTML = isRunningRef.current
-        ? PAUSE_ICON
-        : PLAY_ICON;
+        ? PAUSE_ICON()
+        : PLAY_ICON();
     }
   };
 
@@ -158,7 +150,7 @@ export const useAutoAddRecommendations = () => {
     const btn = document.createElement("button");
     btn.className = `${refreshBtn.className} ${AUTO_ADD_CONFIG.autoAddButtonClassName}`;
     btn.title = "Auto-add recommendations";
-    btn.innerHTML = isRunningRef.current ? PAUSE_ICON : PLAY_ICON;
+    btn.innerHTML = isRunningRef.current ? PAUSE_ICON() : PLAY_ICON();
     btn.setAttribute(
       "data-encore-id",
       refreshBtn.getAttribute("data-encore-id") || "buttonTertiary",

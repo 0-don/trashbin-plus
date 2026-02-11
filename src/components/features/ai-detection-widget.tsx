@@ -1,10 +1,14 @@
 import React, { useEffect, useRef } from "react";
-import { autoTrashIfNeeded, enqueue, getStoredResult, onResult } from "../../lib/ai-classifier";
+import { useAiStore } from "../../store/ai-store";
 import { useTrashbinStore } from "../../store/trashbin-store";
-import { createAiIndicatorHTML } from "./ai-probability-indicator";
+import { AiIndicator } from "./ai-probability-indicator";
 
 const widgetIcon = (prob: number) =>
-  `<span style="margin-left:5px">${createAiIndicatorHTML(prob, 20)}</span>`;
+  Spicetify.ReactDOMServer.renderToString(
+    <span style={{ marginLeft: 5 }}>
+      <AiIndicator probability={prob} size={20} />
+    </span>,
+  );
 
 export const AiDetectionWidget: React.FC = () => {
   const store = useTrashbinStore();
@@ -24,18 +28,7 @@ export const AiDetectionWidget: React.FC = () => {
     );
     widgetRef.current = widget;
 
-    const applyResult = (uri: string, prob: number) => {
-      const current = Spicetify.Player.data?.item;
-      if (current?.uri !== uri) return;
-
-      const pct = Math.round(prob * 100);
-      widget.icon = widgetIcon(prob);
-      widget.label = `${pct}% AI`;
-
-      autoTrashIfNeeded(uri, prob);
-    };
-
-    const update = () => {
+    const updateWidget = () => {
       const track = Spicetify.Player.data?.item;
       if (!track?.uri || !track.uri.startsWith("spotify:track:")) {
         widget.icon = widgetIcon(0.5);
@@ -43,25 +36,25 @@ export const AiDetectionWidget: React.FC = () => {
         return;
       }
 
-      const stored = getStoredResult(track.uri);
-      if (stored !== undefined) {
-        applyResult(track.uri, stored);
-        return;
+      const prob = useAiStore.getState().results[track.uri];
+      if (prob !== undefined) {
+        widget.icon = widgetIcon(prob);
+        widget.label = `${Math.round(prob * 100)}% AI`;
+      } else {
+        widget.icon = widgetIcon(0.5);
+        widget.label = "Analyzing...";
+        useAiStore.getState().enqueue(track.uri);
       }
-
-      widget.icon = widgetIcon(0.5);
-      widget.label = "Analyzing...";
-      enqueue(track.uri);
     };
 
-    const unsub = onResult(applyResult);
-    update();
+    const unsub = useAiStore.subscribe(updateWidget);
+    updateWidget();
 
-    Spicetify.Player.addEventListener("songchange", update);
+    Spicetify.Player.addEventListener("songchange", updateWidget);
 
     return () => {
       unsub();
-      Spicetify.Player.removeEventListener("songchange", update);
+      Spicetify.Player.removeEventListener("songchange", updateWidget);
       widget.deregister();
       widgetRef.current = null;
     };

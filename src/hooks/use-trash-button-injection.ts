@@ -1,14 +1,9 @@
 import { useEffect } from "react";
 import { createAiIndicatorHTML } from "../components/features/ai-probability-indicator";
 import { TRASH_ICON } from "../components/icons";
-import {
-  autoTrashIfNeeded,
-  enqueue,
-  getStoredResult,
-  onResult,
-} from "../lib/ai-classifier";
 import { AI_INDICATOR_CLASS } from "../lib/constants";
 import { extractTrackData } from "../lib/track-utils";
+import { useAiStore } from "../store/ai-store";
 import { useTrashbinStore } from "../store/trashbin-store";
 import { useMutationObserver } from "./use-mutation-observer";
 
@@ -61,12 +56,12 @@ export const useTrashButtonInjection = (
       wrapper.style.margin = "0";
 
       if (aiEnabled) {
-        const stored = getStoredResult(trackData.trackURI);
+        const aiState = useAiStore.getState();
+        const stored = aiState.results[trackData.trackURI];
         if (stored !== undefined) {
-          const indicator = createIndicatorElement(stored);
-          wrapper.appendChild(indicator);
+          wrapper.appendChild(createIndicatorElement(stored));
         } else {
-          enqueue(trackData.trackURI);
+          aiState.enqueue(trackData.trackURI);
         }
       }
 
@@ -92,12 +87,31 @@ export const useTrashButtonInjection = (
   useEffect(() => {
     if (!aiEnabled) return;
 
-    const unsub = onResult((uri, prob) => {
-      updateIndicatorsForUri(config, uri, prob);
-      autoTrashIfNeeded(uri, prob);
-    });
+    let prev = useAiStore.getState().results;
+    return useAiStore.subscribe((state) => {
+      const next = state.results;
+      if (next === prev) return;
 
-    return unsub;
+      const container = document.querySelector(config.containerSelector);
+      if (container) {
+        for (const uri in next) {
+          if (prev[uri] !== undefined) continue;
+
+          container.querySelectorAll(config.buttonSelector).forEach((trashBtn) => {
+            const wrapper = trashBtn.closest(`.${WRAPPER_CLASS}`);
+            if (!wrapper || wrapper.querySelector(`.${AI_INDICATOR_CLASS}`)) return;
+
+            const row = wrapper.closest(config.rowSelector);
+            if (!row) return;
+
+            if (extractTrackData(row).trackURI === uri) {
+              wrapper.insertBefore(createIndicatorElement(next[uri]), trashBtn);
+            }
+          });
+        }
+      }
+      prev = next;
+    });
   }, [aiEnabled]);
 
   useEffect(() => {
@@ -134,25 +148,3 @@ function createIndicatorElement(probability: number): HTMLSpanElement {
   return indicator;
 }
 
-function updateIndicatorsForUri(
-  config: TrashButtonConfig,
-  uri: string,
-  probability: number,
-): void {
-  const container = document.querySelector(config.containerSelector);
-  if (!container) return;
-
-  container.querySelectorAll(config.buttonSelector).forEach((trashBtn) => {
-    const wrapper = trashBtn.closest(`.${WRAPPER_CLASS}`);
-    if (!wrapper || wrapper.querySelector(`.${AI_INDICATOR_CLASS}`)) return;
-
-    const row = wrapper.closest(config.rowSelector);
-    if (!row) return;
-
-    const trackData = extractTrackData(row);
-    if (trackData.trackURI === uri) {
-      const indicator = createIndicatorElement(probability);
-      wrapper.insertBefore(indicator, trashBtn);
-    }
-  });
-}

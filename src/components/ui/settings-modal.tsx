@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { HiOutlineQuestionMarkCircle } from "react-icons/hi2";
-import { clearAiStorage, getAiStorageSize } from "../../lib/ai-classifier";
 import { SELECTORS } from "../../lib/constants";
+import { useAiStore } from "../../store/ai-store";
 import { cn } from "../../lib/utils";
 import { useTrashbinStore } from "../../store/trashbin-store";
 import { TRASH_ICON } from "../icons";
@@ -295,9 +295,9 @@ const SettingsModal: React.FC = () => {
       )}
       <ActionButton
         label={t("ACTION_CLEAR_AI_STORAGE")}
-        description={t("DESCRIPTION_CLEAR_AI_STORAGE", { count: getAiStorageSize() })}
+        description={t("DESCRIPTION_CLEAR_AI_STORAGE", { count: Object.keys(useAiStore.getState().results).length })}
         onClick={() => {
-          clearAiStorage();
+          useAiStore.getState().clearStorage();
           Spicetify.showNotification(t("MESSAGE_AI_STORAGE_CLEARED"));
         }}
       />
