@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+import { CgSpinner } from "react-icons/cg";
 import { useAiStore } from "../../store/ai-store";
 import { useTrashbinStore } from "../../store/trashbin-store";
 import { i18n } from "../providers/providers";
@@ -8,6 +9,13 @@ const widgetIcon = (prob: number) =>
   Spicetify.ReactDOMServer.renderToString(
     <span className="ml-1.25">
       <AiIndicator probability={prob} size={20} />
+    </span>,
+  );
+
+const widgetSpinner = () =>
+  Spicetify.ReactDOMServer.renderToString(
+    <span className="ml-1.25 inline-flex animate-spin" style={{ color: "rgba(255,255,255,0.6)" }}>
+      <CgSpinner size={20} />
     </span>,
   );
 
@@ -42,7 +50,7 @@ export const AiDetectionWidget: React.FC = () => {
         widget.icon = widgetIcon(prob);
         widget.label = i18n.t("AI_WIDGET_PERCENT", { pct: Math.round(prob * 100) });
       } else {
-        widget.icon = widgetIcon(0.5);
+        widget.icon = widgetSpinner();
         widget.label = i18n.t("AI_WIDGET_ANALYZING");
         useAiStore.getState().enqueue(track.uri);
       }

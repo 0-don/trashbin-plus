@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
+import { CgSpinner } from "react-icons/cg";
 import { AiIndicator } from "../components/features/ai-probability-indicator";
 import { TRASH_ICON } from "../components/icons";
-import { AI_INDICATOR_CLASS } from "../lib/constants";
+import { AI_INDICATOR_CLASS, AI_SPINNER_CLASS } from "../lib/constants";
 import { extractTrackData } from "../lib/track-utils";
 import { useAiStore } from "../store/ai-store";
 import { useTrashbinStore } from "../store/trashbin-store";
@@ -61,6 +62,7 @@ export const useTrashButtonInjection = (
         if (stored !== undefined) {
           wrapper.appendChild(createIndicatorElement(stored));
         } else {
+          wrapper.appendChild(createSpinnerElement());
           aiState.enqueue(trackData.trackURI);
         }
       }
@@ -108,6 +110,10 @@ export const useTrashButtonInjection = (
               if (!row) return;
 
               if (extractTrackData(row).trackURI === uri) {
+                // Remove spinner if present
+                const spinner = wrapper.querySelector(`.${AI_SPINNER_CLASS}`);
+                if (spinner) spinner.remove();
+
                 wrapper.insertBefore(
                   createIndicatorElement(next[uri]),
                   trashBtn,
@@ -145,6 +151,17 @@ export const useTrashButtonInjection = (
     enabled: store.trashbinEnabled && enabled,
   });
 };
+
+function createSpinnerElement(): HTMLSpanElement {
+  const spinner = document.createElement("span");
+  spinner.className = AI_SPINNER_CLASS;
+  spinner.innerHTML = Spicetify.ReactDOMServer.renderToString(
+    <span className="inline-flex animate-spin" style={{ color: "rgba(255,255,255,0.4)" }}>
+      <CgSpinner size={14} />
+    </span>,
+  );
+  return spinner;
+}
 
 function createIndicatorElement(probability: number): HTMLSpanElement {
   const indicator = document.createElement("span");

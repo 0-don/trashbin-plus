@@ -126,6 +126,8 @@ export async function classifyTrack(trackUri: string): Promise<number | null> {
 
   const probabilities: number[] = [];
   for (const chunk of chunks) {
+    // Yield to main thread between chunks
+    await new Promise((r) => setTimeout(r, 0));
     const prob = await queueInference(chunk);
     if (prob !== null) probabilities.push(prob);
   }

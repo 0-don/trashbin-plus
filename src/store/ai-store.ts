@@ -6,7 +6,7 @@ import { AI_INDICATOR_CLASS } from "../lib/constants";
 import { useTrashbinStore } from "./trashbin-store";
 
 const LS_KEY_PREFIX = "trashbin-ai-results:";
-const POLL_INTERVAL = 500;
+const POLL_INTERVAL = 2000;
 const AI_TRASH_THRESHOLD = 0.8;
 
 interface AiState {
