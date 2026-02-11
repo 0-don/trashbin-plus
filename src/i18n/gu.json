@@ -50,8 +50,6 @@
   "DESCRIPTION_SETTINGS_SKIP_TRASHED_TRACKS": "આપમેળે કચરો કરેલા ગીતોને છોડી દો અને પ્લેબેક દરમિયાન આગળની મંજૂર ટ્રેક શોધો",
   "SETTINGS_AUTO_CLEAN_QUEUE": "ઓટો ક્લીન કતાર",
   "DESCRIPTION_SETTINGS_AUTO_CLEAN_QUEUE": "તમારી સ્માર્ટ શફલ કતારમાંથી કચરો ગીતોને સ્વચાલિત રીતે દૂર કરો",
-  "SETTINGS_TRASH_ON_NEXT_HOTKEY": "નેક્સ્ટ હોટકી પર કચરો",
-  "DESCRIPTION_SETTINGS_TRASH_ON_NEXT_HOTKEY": "જ્યારે આગામી ટ્રેક પર જવા માટે Ctrl+Right કીબોર્ડ શોર્ટકટનો ઉપયોગ કરી રહ્યાં હોય ત્યારે વર્તમાન ગીતને સ્વચાલિત રીતે ત્યાજ્ય કરો",
   "SETTINGS_REMOTE_CONTROL": "રિમોટ કંટ્રોલ",
   "SETTINGS_REMOTE_TOGGLE": "રિમોટ ટૉગલ સક્ષમ કરો",
   "DESCRIPTION_SETTINGS_REMOTE_TOGGLE": "મોબાઇલ પરથી રિમોટ સ્કિપિંગ ચાલુ/બંધ કરવા માટે પ્લે/પૉઝ પર બમણો ટેપ કરો. ટ્રેક સ્કિપ ટૉગલની પુષ્ટિ કરે છે.",

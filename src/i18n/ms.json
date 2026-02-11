@@ -50,8 +50,6 @@
   "DESCRIPTION_SETTINGS_SKIP_TRASHED_TRACKS": "Langkau lagu yang dibuang secara automatik dan cari trek seterusnya yang dibenarkan semasa pemainan",
   "SETTINGS_AUTO_CLEAN_QUEUE": "Barisan Cuci Automatik",
   "DESCRIPTION_SETTINGS_AUTO_CLEAN_QUEUE": "Alih keluar secara automatik lagu yang dibuang dari barisan Smart Shuffle anda",
-  "SETTINGS_TRASH_ON_NEXT_HOTKEY": "Sampah pada Pintasan Berikutnya",
-  "DESCRIPTION_SETTINGS_TRASH_ON_NEXT_HOTKEY": "Buang lagu semasa secara automatik apabila menggunakan pintasan papan kekunci Ctrl+Kanan untuk melangkau ke trek seterusnya",
   "SETTINGS_REMOTE_CONTROL": "Kawalan Jauh",
   "SETTINGS_REMOTE_TOGGLE": "Dayakan Butang Jauh",
   "DESCRIPTION_SETTINGS_REMOTE_TOGGLE": "Tekan dua kali main/jeda dari peranti mudah alih untuk menukar fungsi lompat jauh hidup/mati. Lompat trek mengesahkan pertukaran tersebut.",

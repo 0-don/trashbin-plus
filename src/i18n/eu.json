@@ -50,8 +50,6 @@
   "DESCRIPTION_SETTINGS_SKIP_TRASHED_TRACKS": "Erreproduzitzean automatikoki saltatu ezabatutako abestiak eta bilatu ondorengo abestia",
   "SETTINGS_AUTO_CLEAN_QUEUE": "Auto garbitze ilara",
   "DESCRIPTION_SETTINGS_AUTO_CLEAN_QUEUE": "Kendu automatikoki zakarreratu diren abestiak zure ausazko iraultza-ilaratik",
-  "SETTINGS_TRASH_ON_NEXT_HOTKEY": "Hurrengo laster-tekla erabiliz zakarrontzira bidali",
-  "DESCRIPTION_SETTINGS_TRASH_ON_NEXT_HOTKEY": "Erabili Ctrl+Eskuina laster-tekla uneko abestia automatikoki zakarrontzira bidaltzeko hurrengo pista bat izateko",
   "SETTINGS_REMOTE_CONTROL": "Urruneko kontrola",
   "SETTINGS_REMOTE_TOGGLE": "Gaitu urruneko txandakatzea",
   "DESCRIPTION_SETTINGS_REMOTE_TOGGLE": "Ukitu bikoiztuta erreproduzitu/pausa mugikorrean urruneko saltaketa aktibatzeko/desaktibatzeko. Pista bat saltatzeak saltaketa aktibatzea berretzen du.",

@@ -50,8 +50,6 @@
   "DESCRIPTION_SETTINGS_SKIP_TRASHED_TRACKS": "به طور خودکار آهنگ‌های حذف‌شده را رد کنید و در هنگام پخش، قطعه بعدی مجاز را پیدا کنید",
   "SETTINGS_AUTO_CLEAN_QUEUE": "صف خالی سازی خودکار",
   "DESCRIPTION_SETTINGS_AUTO_CLEAN_QUEUE": "حذف خودکار آهنگ‌های سطل آشغال از صف پخش تصادفی هوشمند شما",
-  "SETTINGS_TRASH_ON_NEXT_HOTKEY": "زباله در کلید میانبر بعدی",
-  "DESCRIPTION_SETTINGS_TRASH_ON_NEXT_HOTKEY": "هنگام استفاده از میانبر کیبوردی Ctrl+راست برای پرش به قطعه بعدی، به‌صورت خودکار آهنگ فعلی را حذف کن",
   "SETTINGS_REMOTE_CONTROL": "کنترل از راه دور",
   "SETTINGS_REMOTE_TOGGLE": "فعال‌سازی تغییر از راه دور",
   "DESCRIPTION_SETTINGS_REMOTE_TOGGLE": "دو بار لمس کردن دکمه پخش/مکث از موبایل برای فعال یا غیرفعال کردن رد کردن از راه دور. رد شدن از یک قطعه، تغییر حالت را تأیید می‌کند.",

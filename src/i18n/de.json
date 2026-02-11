@@ -50,8 +50,6 @@
   "DESCRIPTION_SETTINGS_SKIP_TRASHED_TRACKS": "Überspringe automatisch gelöschte Songs und finde während der Wiedergabe den nächsten erlaubten Titel",
   "SETTINGS_AUTO_CLEAN_QUEUE": "Auto-Reinigungs-Warteschlange",
   "DESCRIPTION_SETTINGS_AUTO_CLEAN_QUEUE": "Entferne automatisch gelöschte Songs aus deiner Smart-Shuffle-Warteschlange",
-  "SETTINGS_TRASH_ON_NEXT_HOTKEY": "Papierkorb beim nächsten Hotkey",
-  "DESCRIPTION_SETTINGS_TRASH_ON_NEXT_HOTKEY": "Aktuellen Song automatisch in den Papierkorb verschieben, wenn mit der Tastenkombination Strg+Rechts zum nächsten Titel gesprungen wird",
   "SETTINGS_REMOTE_CONTROL": "Fernbedienung",
   "SETTINGS_REMOTE_TOGGLE": "Fernumschaltung aktivieren",
   "DESCRIPTION_SETTINGS_REMOTE_TOGGLE": "Doppeltes Antippen von Wiedergabe/Pause auf dem Mobilgerät, um das Überspringen per Fernbedienung ein- oder auszuschalten. Das Überspringen eines Titels bestätigt die Umschaltung.",

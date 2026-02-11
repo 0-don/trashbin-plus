@@ -50,8 +50,6 @@
   "DESCRIPTION_SETTINGS_SKIP_TRASHED_TRACKS": "Hoppa automatiskt över borttagna låtar och hitta nästa tillåtna spår under uppspelning",
   "SETTINGS_AUTO_CLEAN_QUEUE": "Automatisk rensning av kö",
   "DESCRIPTION_SETTINGS_AUTO_CLEAN_QUEUE": "Ta automatiskt bort papperskorgsmarkerade låtar från din Smarta Shuffle-kö",
-  "SETTINGS_TRASH_ON_NEXT_HOTKEY": "Papperskorg vid nästa snabbtangent",
-  "DESCRIPTION_SETTINGS_TRASH_ON_NEXT_HOTKEY": "Flytta automatiskt det aktuella låtet till papperskorgen när du använder kortkommandot Ctrl+Höger för att hoppa till nästa spår",
   "SETTINGS_REMOTE_CONTROL": "Fjärrkontroll",
   "SETTINGS_REMOTE_TOGGLE": "Aktivera fjärrväxling",
   "DESCRIPTION_SETTINGS_REMOTE_TOGGLE": "Dubbeltryck på play/paus från mobilen för att aktivera/avaktivera fjärrhoppning. Ett spårhopp bekräftar inställningen.",

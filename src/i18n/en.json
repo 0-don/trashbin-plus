@@ -50,8 +50,6 @@
   "DESCRIPTION_SETTINGS_SKIP_TRASHED_TRACKS": "Automatically skip trashed songs and find the next allowed track during playback",
   "SETTINGS_AUTO_CLEAN_QUEUE": "Auto Clean Queue",
   "DESCRIPTION_SETTINGS_AUTO_CLEAN_QUEUE": "Automatically remove trashed songs from your Smart Shuffle queue",
-  "SETTINGS_TRASH_ON_NEXT_HOTKEY": "Trash on Next Hotkey",
-  "DESCRIPTION_SETTINGS_TRASH_ON_NEXT_HOTKEY": "Automatically trash the current song when using Ctrl+Right keyboard shortcut to skip to next track",
   "SETTINGS_REMOTE_CONTROL": "Remote Control",
   "SETTINGS_REMOTE_TOGGLE": "Enable Remote Toggle",
   "DESCRIPTION_SETTINGS_REMOTE_TOGGLE": "Double-tap play/pause from mobile to toggle remote skipping on/off. A track skip confirms the toggle.",

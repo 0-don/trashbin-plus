@@ -50,8 +50,6 @@
   "DESCRIPTION_SETTINGS_SKIP_TRASHED_TRACKS": "Melewati secara otomatis lagu yang dihapus dan menemukan trek berikutnya yang diizinkan selama pemutaran",
   "SETTINGS_AUTO_CLEAN_QUEUE": "Antrian Pembersihan Otomatis",
   "DESCRIPTION_SETTINGS_AUTO_CLEAN_QUEUE": "Hapus secara otomatis lagu-lagu yang dihapus dari antrian Smart Shuffle Anda",
-  "SETTINGS_TRASH_ON_NEXT_HOTKEY": "Sampah pada Hotkey Berikutnya",
-  "DESCRIPTION_SETTINGS_TRASH_ON_NEXT_HOTKEY": "Hapus otomatis lagu saat ini saat menggunakan pintasan keyboard Ctrl+Kanan untuk melewati ke lagu berikutnya",
   "SETTINGS_REMOTE_CONTROL": "Kontrol Jarak Jauh",
   "SETTINGS_REMOTE_TOGGLE": "Aktifkan Sakelar Jarak Jauh",
   "DESCRIPTION_SETTINGS_REMOTE_TOGGLE": "Ketuk dua kali tombol putar/jeda dari perangkat seluler untuk mengaktifkan/menonaktifkan lompatan remote. Lompatan lagu mengonfirmasi pengaktifan.",

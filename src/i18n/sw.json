@@ -50,8 +50,6 @@
   "DESCRIPTION_SETTINGS_SKIP_TRASHED_TRACKS": "Rukushe otomatiki nyimbo zilizotupwa na kupata kipande kifuatacho kinachoruhusiwa wakati wa kucheza",
   "SETTINGS_AUTO_CLEAN_QUEUE": "Ondoa Safu ya Kiotomatiki",
   "DESCRIPTION_SETTINGS_AUTO_CLEAN_QUEUE": "Ondoa otomatiki nyimbo zilizotupwa kwenye safu yako ya Smart Shuffle",
-  "SETTINGS_TRASH_ON_NEXT_HOTKEY": "Taka kwenye Kitufe cha Joto Kichofu",
-  "DESCRIPTION_SETTINGS_TRASH_ON_NEXT_HOTKEY": "Weka otomatiki wimbo wa sasa kwenye kisima wakati wa kutumia快捷键 Ctrl+Right kupitia kwenye wimbo ujao",
   "SETTINGS_REMOTE_CONTROL": "Kudhibiti mbali",
   "SETTINGS_REMOTE_TOGGLE": "Washa Ubadilishaji wa Mbali",
   "DESCRIPTION_SETTINGS_REMOTE_TOGGLE": "Bonyeza mara mbili kucheza/kukataza kutoka kwa simu ili kugeuza kusonga mbele/nyuma. Kusonga mbele kwenye nyimbo hushtaki kugeuzwa.",

@@ -50,8 +50,6 @@
   "DESCRIPTION_SETTINGS_SKIP_TRASHED_TRACKS": "Ohita automaattisesti roskakoriin siirretyt kappaleet ja etsi seuraava sallittu kappale toistettaessa",
   "SETTINGS_AUTO_CLEAN_QUEUE": "Automaattinen siivousjono",
   "DESCRIPTION_SETTINGS_AUTO_CLEAN_QUEUE": "Poista roskakoriin siirretyt kappaleet automaattisesti Smart Shuffle -jonostasi",
-  "SETTINGS_TRASH_ON_NEXT_HOTKEY": "Roska seuraavalla pikakuvakkeella",
-  "DESCRIPTION_SETTINGS_TRASH_ON_NEXT_HOTKEY": "Siirry seuraavaan kappaleeseen ohittaen nykyinen kappale painamalla Ctrl+Oikea-näppäintä",
   "SETTINGS_REMOTE_CONTROL": "Kauko-ohjain",
   "SETTINGS_REMOTE_TOGGLE": "Ota etäkytkin käyttöön",
   "DESCRIPTION_SETTINGS_REMOTE_TOGGLE": "Kaksoisnapauta toisto/tauko matkapuhelimessa vaihtaaksesi etäohjauksen ohituksen päälle/pois. Kappaleen vaihto vahvistaa vaihdon.",

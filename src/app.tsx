@@ -11,7 +11,6 @@ import { TrashbinSettings } from "./components/ui/settings-modal";
 import { TrashedItemsModal } from "./components/ui/trashed-items-modal";
 import "./global.css";
 import { useAiDetection } from "./hooks/use-ai-detection";
-import { useHotkeyTrash } from "./hooks/use-hotkey-trash";
 import { usePlaylistMonitor } from "./hooks/use-playlist-monitor";
 import { useRecommendationMonitor } from "./hooks/use-recommendation-monitor";
 import { useRemoteToggle } from "./hooks/use-remote-toggle";
@@ -28,7 +27,6 @@ function App() {
 
   const trashbinStore = useTrashbinStore();
 
-  useHotkeyTrash();
   usePlaylistMonitor();
   useRemoteToggle();
   useRecommendationMonitor();

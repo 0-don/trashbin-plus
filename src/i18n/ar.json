@@ -50,8 +50,6 @@
   "DESCRIPTION_SETTINGS_SKIP_TRASHED_TRACKS": "تخطي الأغاني المحذوفة تلقائيًا والبحث عن المسار التالي المسموح به أثناء التشغيل",
   "SETTINGS_AUTO_CLEAN_QUEUE": "قائمة التنظيف التلقائي",
   "DESCRIPTION_SETTINGS_AUTO_CLEAN_QUEUE": "قم تلقائيًا بإزالة الأغاني المحذوفة من قائمة التشغيل العشوائية الذكية الخاصة بك",
-  "SETTINGS_TRASH_ON_NEXT_HOTKEY": "النفايات على المفتاح الساخن التالي",
-  "DESCRIPTION_SETTINGS_TRASH_ON_NEXT_HOTKEY": "حذف الأغنية الحالية تلقائيًا عند استخدام اختصار لوحة المفاتيح Ctrl+اليمين للانتقال إلى المسار التالي",
   "SETTINGS_REMOTE_CONTROL": "جهاز التحكم عن بعد",
   "SETTINGS_REMOTE_TOGGLE": "تمكين التبديل عن بُعد",
   "DESCRIPTION_SETTINGS_REMOTE_TOGGLE": "انقر مرتين على تشغيل/إيقاف من الهاتف لتغيير تخطي التحكم عن بُعد تشغيل/إيقاف. يؤكد تخطي المسار هذا التبديل.",

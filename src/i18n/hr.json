@@ -50,8 +50,6 @@
   "DESCRIPTION_SETTINGS_SKIP_TRASHED_TRACKS": "Automatski preskoči izbrisane pjesme i pronađi sljedeću dopuštenu pjesmu tijekom reprodukcije",
   "SETTINGS_AUTO_CLEAN_QUEUE": "Red za automatsko čišćenje",
   "DESCRIPTION_SETTINGS_AUTO_CLEAN_QUEUE": "Automatski uklonite pjesme u kantu za smeće iz svoje pametne redoslijedne liste",
-  "SETTINGS_TRASH_ON_NEXT_HOTKEY": "Smeće na sljedećem tipu za prečac",
-  "DESCRIPTION_SETTINGS_TRASH_ON_NEXT_HOTKEY": "Automatski premjesti trenutnu pjesmu u smeće kada koristite tipkovni prečac Ctrl+Desno za preskakanje na sljedeću pjesmu",
   "SETTINGS_REMOTE_CONTROL": "Dalekovodno upravljanje",
   "SETTINGS_REMOTE_TOGGLE": "Omogući daljinsko prebacivanje",
   "DESCRIPTION_SETTINGS_REMOTE_TOGGLE": "Dvaput dodirnite reprodukciju/pauzu s mobilnog uređaja da biste uključili/isključili preskakanje na daljinu. Preskakanje pjesme potvrđuje uključivanje/isključivanje.",

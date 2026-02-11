@@ -50,8 +50,6 @@
   "DESCRIPTION_SETTINGS_SKIP_TRASHED_TRACKS": "ਖ਼ਤਮ ਕੀਤੇ ਗੀਤਾਂ ਨੂੰ ਆਟੋਮੈਟਿਕ ਤੌਰ 'ਤੇ ਛੱਡ ਦਿਓ ਅਤੇ ਚਲ ਰਹੀ ਚਲਾਉਣ ਦੌਰਾਨ ਅਗਲੀ ਆਗਿਆ ਵਾਲੀ ਟਰੈਕ ਲੱਭੋ",
   "SETTINGS_AUTO_CLEAN_QUEUE": "ਆਟੋ ਸਾਫ਼ ਕਤਾਰ",
   "DESCRIPTION_SETTINGS_AUTO_CLEAN_QUEUE": "ਆਪਣੀ ਸਮਾਰਟ ਸ਼ਫਲ ਕਤਾਰ ਤੋਂ ਕੂੜੇਦਾਨ ਵਿੱਚ ਪਏ ਗੀਤ ਆਪਮੁਹਲੇ ਹਟਾਓ",
-  "SETTINGS_TRASH_ON_NEXT_HOTKEY": "ਅਗਲੇ ਹੌਟਕੀ 'ਤੇ ਕੂੜਾ",
-  "DESCRIPTION_SETTINGS_TRASH_ON_NEXT_HOTKEY": "ਮੌਜੂਦਾ ਗੀਤ ਨੂੰ ਆਟੋਮੈਟਿਕ ਤੌਰ 'ਤੇ ਤਬਦੀਲ ਕਰੋ ਜਦੋਂ ਅਗਲੇ ਟਰੈਕ ਵਿੱਚ ਜਾਣ ਲਈ Ctrl+Right ਕੀਬੋਰਡ ਸ਼ਾਰਟਕੱਟ ਦੀ ਵਰਤੋਂ ਕਰ ਰਹੇ ਹੋ",
   "SETTINGS_REMOTE_CONTROL": "ਰਿਮੋਟ ਕੰਟਰੋਲ",
   "SETTINGS_REMOTE_TOGGLE": "ਰਿਮੋਟ ਟੌਗਲ ਨੂੰ ਸਮਰੱਥ ਕਰੋ",
   "DESCRIPTION_SETTINGS_REMOTE_TOGGLE": "ਮੋਬਾਈਲ ਤੋਂ ਪਲੇ/ਰੋਕੋ ਨੂੰ ਟੋਗਲ ਕਰਨ ਲਈ ਡਬਲ-ਟੈਪ ਕਰੋ। ਟਰੈਕ ਸਕਿੱਪ ਕਰਨਾ ਟੋਗਲ ਨੂੰ ਪੁਸ਼ਟੀ ਕਰਦਾ ਹੈ।",

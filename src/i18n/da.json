@@ -50,8 +50,6 @@
   "DESCRIPTION_SETTINGS_SKIP_TRASHED_TRACKS": "Spring automatisk over slettede sange og find det næste tilladte nummer under afspilning",
   "SETTINGS_AUTO_CLEAN_QUEUE": "Automatisk rensning af kø",
   "DESCRIPTION_SETTINGS_AUTO_CLEAN_QUEUE": "Fjern automatisk slettede sange fra din Smart Shuffle-kø",
-  "SETTINGS_TRASH_ON_NEXT_HOTKEY": "Papirkurv ved næste genvejstast",
-  "DESCRIPTION_SETTINGS_TRASH_ON_NEXT_HOTKEY": "Slet automatisk det aktuelle nummer, når du bruger genvejen Ctrl+Højre til at springe til næste nummer",
   "SETTINGS_REMOTE_CONTROL": "Fjernbetjening",
   "SETTINGS_REMOTE_TOGGLE": "Aktivér fjernbetjeningstilstand",
   "DESCRIPTION_SETTINGS_REMOTE_TOGGLE": "Dobbelttryk på afspil/pause fra mobilen for at slå fjernhåndtering af spring til/fra. Et spring til næste nummer bekræfter ændringen.",

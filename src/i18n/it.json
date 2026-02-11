@@ -50,8 +50,6 @@
   "DESCRIPTION_SETTINGS_SKIP_TRASHED_TRACKS": "Salta automaticamente le canzoni eliminate e trova la traccia successiva consentita durante la riproduzione",
   "SETTINGS_AUTO_CLEAN_QUEUE": "Coda di pulizia automatica",
   "DESCRIPTION_SETTINGS_AUTO_CLEAN_QUEUE": "Rimuovi automaticamente le canzoni eliminate dalla tua coda di riproduzione casuale intelligente",
-  "SETTINGS_TRASH_ON_NEXT_HOTKEY": "Cestino sul prossimo tasto di scelta rapida",
-  "DESCRIPTION_SETTINGS_TRASH_ON_NEXT_HOTKEY": "Sposta automaticamente la canzone corrente nel cestino quando si utilizza la scorciatoia da tastiera Ctrl+Destra per passare alla traccia successiva",
   "SETTINGS_REMOTE_CONTROL": "Controllo remoto",
   "SETTINGS_REMOTE_TOGGLE": "Abilita commutazione remota",
   "DESCRIPTION_SETTINGS_REMOTE_TOGGLE": "Tocca due volte play/pausa dal dispositivo mobile per attivare/disattivare il salto remoto dei brani. Il salto di un brano conferma l'attivazione/disattivazione.",

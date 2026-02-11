@@ -50,8 +50,6 @@
   "DESCRIPTION_SETTINGS_SKIP_TRASHED_TRACKS": "削除された曲を自動的にスキップし、再生中に次に許可されたトラックを探します",
   "SETTINGS_AUTO_CLEAN_QUEUE": "自動クリーンキュー",
   "DESCRIPTION_SETTINGS_AUTO_CLEAN_QUEUE": "ゴミ箱に移動した曲をスマートシャッフルキューから自動的に削除します",
-  "SETTINGS_TRASH_ON_NEXT_HOTKEY": "次のホットキーでゴミ箱へ",
-  "DESCRIPTION_SETTINGS_TRASH_ON_NEXT_HOTKEY": "Ctrl+右キーのショートカットを使用して次のトラックにスキップする場合、現在の曲を自動的にゴミ箱に移動します",
   "SETTINGS_REMOTE_CONTROL": "リモートコントロール",
   "SETTINGS_REMOTE_TOGGLE": "リモートトグルを有効にする",
   "DESCRIPTION_SETTINGS_REMOTE_TOGGLE": "モバイル端末で再生/一時停止を2回タップして、リモートスキップのオン/オフを切り替えます。曲のスキップで切り替えが確定します。",

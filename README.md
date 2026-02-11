@@ -1,95 +1,53 @@
 # Trashbin+
 
-Skip songs and artists you don't like automatically! A modern upgrade to the classic Trashbin extension for Spotify.
+Auto-skip songs and artists you don't like. A modern Spicetify extension.
 
-## What it does
+## Features
 
-- **Block songs and artists** - Right-click any song or artist to add them to your trashbin
-- **Auto-skip** - Trashed songs get skipped automatically when they come up
-- **Easy management** - View and remove items from your trashbin anytime
-- **Works everywhere** - Trash buttons appear in playlists, queue, and search results
-- **Speaks your language** - Available in 70+ languages, automatically matches your Spotify language
-
-## How to use
-
-### Trash something you don't like
-
-1. Right-click on any song or artist
-2. Select "Place in Trashbin"
-3. That's it! It will be skipped automatically from now on
-
-### Remove from trashbin
-
-1. Right-click on a trashed item
-2. Select "Remove from Trashbin"
-3. It will play normally again
-
-### Manage your trashbin
-
-- Click your profile picture → "Trashbin+ Items" to see everything you've trashed
-- Export your list as backup or import from another device
-- Clear everything at once if needed
+- **Auto-skip** - Trashed songs and artists are skipped automatically during playback
+- **Context menu** - Right-click any song or artist to trash/untrash
+- **Trash buttons** - Inline trash icons in playlists, albums, and queue
+- **Playbar widget** - Quick trash button and AI probability indicator in the playback bar
+- **AI detection** - Detects AI-generated songs using SONICS SpecTTTra (~50MB model, runs locally via ONNX). Auto-trashes songs with >=80% AI confidence
+- **Remote control** - Double-tap play/pause from mobile to toggle skipping. Trash songs by liking them from your phone
+- **Playlist monitor** - Auto-recovers from Spotify playback glitches
+- **Auto clean queue** - Removes trashed songs from Smart Shuffle queue
+- **Trashed items manager** - Browse, search, import/export your trashed songs and artists
+- **70+ languages** - Automatically matches your Spotify language
 
 ## Settings
 
-Access settings through your profile menu → "Trashbin+ Settings":
+Access via profile menu > **Trashbin+ Settings**.
 
-**Options**
-
-- **Enabled** - Master toggle to enable or disable Trashbin+
-- **Show Widget Icon** - Display trash icon in playback bar for quick access
-
-**Features**
-
-- **Autoplay on Start** - Automatically start playing when Spotify opens
-- **Enable Queue Trashbin** - Add trash buttons next to songs in your queue
-- **Enable Tracklist Trashbin** - Add trash buttons in playlist and album views
-- **Skip Trashed Tracks** - Automatically find next good song instead of just skipping
-- **Auto Clean Queue** - Remove trashed songs from Smart Shuffle queue
-- **Playlist Monitor** - Auto-recover from Spotify playback glitches
+| Section            | Setting                        | Description                                           |
+| ------------------ | ------------------------------ | ----------------------------------------------------- |
+| **Options**        | Enabled                        | Master on/off toggle                                  |
+|                    | Show Widget Icon               | Trash icon in playbar                                 |
+| **Features**       | Autoplay on Start              | Auto-play when Spotify opens                          |
+|                    | Queue Trashbin                 | Trash buttons in queue panel                          |
+|                    | Tracklist Trashbin             | Trash buttons in playlists/albums                     |
+|                    | Skip Trashed Tracks            | Find next allowed track instead of just skipping once |
+|                    | Auto Clean Queue               | Remove trashed from Smart Shuffle                     |
+|                    | Playlist Monitor               | Auto-recover from playback glitches                   |
+| **Remote Control** | Remote Toggle                  | Double-tap play/pause from mobile to toggle           |
+|                    | Remote Skipping                | Allow trash-skipping from other devices               |
+|                    | Trash via Like                 | Like a song from mobile to trash it                   |
+| **AI Detection**   | AI Song Detection              | Detect AI songs with SONICS model (~50MB download)    |
+|                    | Trash AI Songs                 | Auto-trash songs with >=80% AI probability            |
+| **Storage**        | Copy / Export / Import / Clear | Backup and manage trashbin data                       |
+|                    | Clear AI Storage               | Remove cached AI classification results               |
 
 ## Screenshots
 
 ![Main interface](assets/preview.png)
-![Your trashed items](assets/trashed-items.png)
 ![Settings](assets/settings.png)
 
 ## Need help?
 
-[Report issues or ask questions here](https://github.com/0-don/trashbin-plus/issues)
+[Report issues or ask questions](https://github.com/0-don/trashbin-plus/issues)
 
 <!--
 Go to: https://www.jsdelivr.com/tools/purge
 Enter: https://cdn.jsdelivr.net/gh/0-don/trashbin-plus@main/dist/trashbin-plus.js
 Click purge
 -->
-
-<!-- ## Step 1:
-
-```bash
-git clone https://github.com/0-don/spicetify-creator.git
-cd spicetify-creator
-yarn install
-yarn run build
-yarn link
-
-```
-
-## Step 2:
-
-```bash
-cd /path/to/your/trashbin-plus
-yarn link "spicetify-creator"
-yarn install
-yarn build
-spicetify config extensions trashbin-plus.js
-spicetify apply
-
-spicetify enable-devtools
-spicetify apply
-
-## To uninstall:
-spicetify config extensions trashbin-plus.js-
-spicetify apply
-
-``` -->

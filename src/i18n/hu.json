@@ -50,8 +50,6 @@
   "DESCRIPTION_SETTINGS_SKIP_TRASHED_TRACKS": "A törölt számok automatikus kihagyása és a következő engedélyezett szám keresése lejátszás közben",
   "SETTINGS_AUTO_CLEAN_QUEUE": "Automatikus tisztítási sor",
   "DESCRIPTION_SETTINGS_AUTO_CLEAN_QUEUE": "A törölt számok automatikus eltávolítása az okos keverési sorból",
-  "SETTINGS_TRASH_ON_NEXT_HOTKEY": "Kuka a következő gyorsbillentyűn",
-  "DESCRIPTION_SETTINGS_TRASH_ON_NEXT_HOTKEY": "Az aktuális szám automatikus törlése a Ctrl+Jobbra billentyűkombináció használatakor a következő számra ugráshoz",
   "SETTINGS_REMOTE_CONTROL": "Távirányító",
   "SETTINGS_REMOTE_TOGGLE": "Távoli kapcsoló engedélyezése",
   "DESCRIPTION_SETTINGS_REMOTE_TOGGLE": "Kétszeres érintés a lejátszás/szünet gombra a mobilról a távoli átugrás be- és kikapcsolásához. Az átugrás megerősíti a beállítást.",

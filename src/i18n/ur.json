@@ -50,8 +50,6 @@
   "DESCRIPTION_SETTINGS_SKIP_TRASHED_TRACKS": "خود بخود حذف شدہ گانوں کو چھوڑ دیں اور چلنے کے دوران اگلی اجازت شدہ ٹریک تلاش کریں",
   "SETTINGS_AUTO_CLEAN_QUEUE": "خودکار صفائی کی قطار",
   "DESCRIPTION_SETTINGS_AUTO_CLEAN_QUEUE": "اپنی اسمارٹ شفل کی قطار سے فضلے کے گانے خود بخود ہٹا دیں",
-  "SETTINGS_TRASH_ON_NEXT_HOTKEY": "اگلی ہاٹ کی پر کوڑا کرکٹ",
-  "DESCRIPTION_SETTINGS_TRASH_ON_NEXT_HOTKEY": "موجودہ گانے کو خودکار طریقے سے تراش کریں جب اگلے ٹریک پر جانے کے لیے Ctrl+Right کی بورڈ شارٹ کٹ استعمال کی جائے",
   "SETTINGS_REMOTE_CONTROL": "دور دراز کنٹرول",
   "SETTINGS_REMOTE_TOGGLE": "دور دراز کنٹرول ٹوگل کریں",
   "DESCRIPTION_SETTINGS_REMOTE_TOGGLE": "موبائل سے ریموٹ چھلانگ لگانے کو آن/آف کرنے کے لیے دو بار ٹیپ کریں۔ ٹریک چھلانگ اس ٹوگل کی تصدیق کرتی ہے۔",

@@ -50,8 +50,6 @@
   "DESCRIPTION_SETTINGS_SKIP_TRASHED_TRACKS": "मिटाए गए गानों को स्वचालित रूप से छोड़ें और चल रही प्लेबैक के दौरान अगले अनुमत ट्रैक को ढूंढें",
   "SETTINGS_AUTO_CLEAN_QUEUE": "स्वचालित सफाई कतार",
   "DESCRIPTION_SETTINGS_AUTO_CLEAN_QUEUE": "अपने स्मार्ट शफल कतार से ट्रैश किए गए गाने स्वचालित रूप से हटा दें",
-  "SETTINGS_TRASH_ON_NEXT_HOTKEY": "अगले हॉटकी पर ट्रैश",
-  "DESCRIPTION_SETTINGS_TRASH_ON_NEXT_HOTKEY": "जब अगले ट्रैक पर जाने के लिए Ctrl+Right कीबोर्ड शॉर्टकट का उपयोग कर रहे हों तो वर्तमान गाने को स्वचालित रूप से ट्रैश करें",
   "SETTINGS_REMOTE_CONTROL": "रिमोट कंट्रोल",
   "SETTINGS_REMOTE_TOGGLE": "दूरस्थ टॉगल सक्षम करें",
   "DESCRIPTION_SETTINGS_REMOTE_TOGGLE": "मोबाइल से रिमोट स्किपिंग को चालू/बंद करने के लिए दो बार टैप करें। ट्रैक स्किप करने से टॉगल की पुष्टि होती है।",

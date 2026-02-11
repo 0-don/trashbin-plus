@@ -50,8 +50,6 @@
   "DESCRIPTION_SETTINGS_SKIP_TRASHED_TRACKS": "ข้ามเพลงที่ถูกลบโดยอัตโนมัติ และค้นหาแทร็กถัดไปที่อนุญาตระหว่างการเล่น",
   "SETTINGS_AUTO_CLEAN_QUEUE": "คิวทำความสะอาดอัตโนมัติ",
   "DESCRIPTION_SETTINGS_AUTO_CLEAN_QUEUE": "ลบเพลงที่ถังขยะออกจากคิวสุ่มอัจฉริยะของคุณโดยอัตโนมัติ",
-  "SETTINGS_TRASH_ON_NEXT_HOTKEY": "ขยะในปุ่มลัดถัดไป",
-  "DESCRIPTION_SETTINGS_TRASH_ON_NEXT_HOTKEY": "ย้ายเพลงปัจจุบันไปยังถังขยะโดยอัตโนมัติเมื่อใช้แป้นพิมพ์ลัด Ctrl+ขวา เพื่อข้ามไปยังแทร็กถัดไป",
   "SETTINGS_REMOTE_CONTROL": "รีโมทคอนโทรล",
   "SETTINGS_REMOTE_TOGGLE": "เปิดใช้งานการสลับระยะไกล",
   "DESCRIPTION_SETTINGS_REMOTE_TOGGLE": "แตะสองครั้งที่ปุ่มเล่น/หยุดจากมือถือเพื่อเปิดหรือปิดการข้ามแทร็กจากระยะไกล การข้ามแทร็กหนึ่งครั้งจะยืนยันการเปลี่ยนสถานะนี้",

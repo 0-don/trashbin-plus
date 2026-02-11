@@ -50,8 +50,6 @@
   "DESCRIPTION_SETTINGS_SKIP_TRASHED_TRACKS": "Pular automaticamente músicas excluídas e encontrar a próxima faixa permitida durante a reprodução",
   "SETTINGS_AUTO_CLEAN_QUEUE": "Fila de Limpeza Automática",
   "DESCRIPTION_SETTINGS_AUTO_CLEAN_QUEUE": "Remova automaticamente músicas excluídas da sua fila de reprodução aleatória inteligente",
-  "SETTINGS_TRASH_ON_NEXT_HOTKEY": "Lixeira na próxima tecla de atalho",
-  "DESCRIPTION_SETTINGS_TRASH_ON_NEXT_HOTKEY": "Mover automaticamente a música atual para a lixeira ao usar o atalho de teclado Ctrl+Direita para pular para a próxima faixa",
   "SETTINGS_REMOTE_CONTROL": "Controle Remoto",
   "SETTINGS_REMOTE_TOGGLE": "Habilitar Alternância Remota",
   "DESCRIPTION_SETTINGS_REMOTE_TOGGLE": "Toque duas vezes em reproduzir/pausar no celular para ativar/desativar o pulo remoto. Pular uma faixa confirma a alteração.",

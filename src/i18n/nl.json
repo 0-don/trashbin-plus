@@ -50,8 +50,6 @@
   "DESCRIPTION_SETTINGS_SKIP_TRASHED_TRACKS": "Sla automatisch verwijderde nummers over en zoek tijdens het afspelen het volgende toegestane nummer",
   "SETTINGS_AUTO_CLEAN_QUEUE": "Auto Schoonmaak Wachtrij",
   "DESCRIPTION_SETTINGS_AUTO_CLEAN_QUEUE": "Verwijder automatisch verwijderde nummers uit je Smart Shuffle-wachtrij",
-  "SETTINGS_TRASH_ON_NEXT_HOTKEY": "Prullenbak bij volgende sneltoets",
-  "DESCRIPTION_SETTINGS_TRASH_ON_NEXT_HOTKEY": "Verplaats automatisch het huidige nummer naar de prullenbak wanneer u de toetscombinatie Ctrl+Rechts gebruikt om over te schakelen naar het volgende nummer",
   "SETTINGS_REMOTE_CONTROL": "Afstandsbediening",
   "SETTINGS_REMOTE_TOGGLE": "Schakel externe schakelaar in",
   "DESCRIPTION_SETTINGS_REMOTE_TOGGLE": "Dubbelklik op afspelen/pauzeren vanaf de mobiele telefoon om overgaan op afstand in of uit te schakelen. Het overslaan van een nummer bevestigt de schakeling.",

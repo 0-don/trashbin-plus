@@ -50,8 +50,6 @@
   "DESCRIPTION_SETTINGS_SKIP_TRASHED_TRACKS": "Slaan outomaties verwyderde liedjies oor en vind die volgende toegelate liedjie tydens afspeling",
   "SETTINGS_AUTO_CLEAN_QUEUE": "Outomatiese Skoonmaakry",
   "DESCRIPTION_SETTINGS_AUTO_CLEAN_QUEUE": "Verwyder outomaties verwyderde liedjies uit jou Slim Aselecte volgorde",
-  "SETTINGS_TRASH_ON_NEXT_HOTKEY": "Afval op Volgende Sneltoets",
-  "DESCRIPTION_SETTINGS_TRASH_ON_NEXT_HOTKEY": "Verwyder outomaties die huidige liedjie wanneer Ctrl+Regs gebruik word om na die volgende snit oor te spring",
   "SETTINGS_REMOTE_CONTROL": "Afstandbeheer",
   "SETTINGS_REMOTE_TOGGLE": "Aktiveer Verre Wisselaar",
   "DESCRIPTION_SETTINGS_REMOTE_TOGGLE": "Tik twee keer op speel/pouse vanaf die selfoon om verwekte oorslaan aan of af te skakel. 'n Oorslaan van 'n liedjie bevestig die skakelaar.",

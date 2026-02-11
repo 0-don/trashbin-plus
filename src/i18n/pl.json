@@ -50,8 +50,6 @@
   "DESCRIPTION_SETTINGS_SKIP_TRASHED_TRACKS": "Automatycznie pomijaj usunięte utwory i znajdź następny dozwolony utwór podczas odtwarzania",
   "SETTINGS_AUTO_CLEAN_QUEUE": "Kolejka automatycznego czyszczenia",
   "DESCRIPTION_SETTINGS_AUTO_CLEAN_QUEUE": "Automatycznie usuwaj usunięte utwory z kolejki inteligentnego odtwarzania mieszанego",
-  "SETTINGS_TRASH_ON_NEXT_HOTKEY": "Śmieci przy następnym klawiszu szybkiego dostępu",
-  "DESCRIPTION_SETTINGS_TRASH_ON_NEXT_HOTKEY": "Automatycznie usuwaj aktualną piosenkę do kosza po użyciu skrótu klawiszowego Ctrl+Strzałka w prawo, aby przejść do następnego utworu",
   "SETTINGS_REMOTE_CONTROL": "Zdalne sterowanie",
   "SETTINGS_REMOTE_TOGGLE": "Włącz zdalne przełączanie",
   "DESCRIPTION_SETTINGS_REMOTE_TOGGLE": "Dotknij dwukrotnie odtwarzanie/pauza z urządzenia mobilnego, aby włączyć/wyłączyć zdalne pomijanie. Pominięcie utworu potwierdza przełączenie.",

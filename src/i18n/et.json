@@ -50,8 +50,6 @@
   "DESCRIPTION_SETTINGS_SKIP_TRASHED_TRACKS": "Jäta automaatselt vahele prügikasti saatud lood ja leia esitamise ajal järgmine lubatud loend.",
   "SETTINGS_AUTO_CLEAN_QUEUE": "Automaatne puhastusjärjekord",
   "DESCRIPTION_SETTINGS_AUTO_CLEAN_QUEUE": "Eemalda automaatselt prügikasti visatud lood oma nutikast juhuslikust esitusloendist",
-  "SETTINGS_TRASH_ON_NEXT_HOTKEY": "Prügi järgmisel kiirklahvil",
-  "DESCRIPTION_SETTINGS_TRASH_ON_NEXT_HOTKEY": "Kohe prügikasti saatmine, kui kasutada Ctrl+Paremale klaviatuuri otseteed järgmise loo juurde minekuks",
   "SETTINGS_REMOTE_CONTROL": "Kaugarvesti",
   "SETTINGS_REMOTE_TOGGLE": "Luba kauglülitus",
   "DESCRIPTION_SETTINGS_REMOTE_TOGGLE": "Topeltklõpsa mobiilseadmes esitamise/peatamise nuppu, et lülitada kaugelt jätmise sisse/välja. Loovi jätmine vahele kinnitab lüliti.",

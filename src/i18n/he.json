@@ -50,8 +50,6 @@
   "DESCRIPTION_SETTINGS_SKIP_TRASHED_TRACKS": "דילוג אוטומטי על שירים שנמחקו ומיקום הרצועה המותרת הבאה במהלך הנגינה",
   "SETTINGS_AUTO_CLEAN_QUEUE": "תור ניקוי אוטומטי",
   "DESCRIPTION_SETTINGS_AUTO_CLEAN_QUEUE": "הסרה אוטומטית של שירים שנמחקו מהתור של הסדר המעורבב החכם שלך",
-  "SETTINGS_TRASH_ON_NEXT_HOTKEY": "אשפה במקש החם הבא",
-  "DESCRIPTION_SETTINGS_TRASH_ON_NEXT_HOTKEY": "העברה אוטומטית של השיר הנוכחי לאשפה בעת שימוש בקיצור דרך Ctrl+ימין כדי לדלג לרצועה הבאה",
   "SETTINGS_REMOTE_CONTROL": "שלט רחוק",
   "SETTINGS_REMOTE_TOGGLE": "אפשר החלפה מרחוק",
   "DESCRIPTION_SETTINGS_REMOTE_TOGGLE": "הקשה פעמיים על lecture/השהיה מהטלפון הנייד כדי להפעיל או לכבות את דילוג מרחוק. דילוג על רצועה מאשר את ההחלפה.",

@@ -50,8 +50,6 @@
   "DESCRIPTION_SETTINGS_SKIP_TRASHED_TRACKS": "Awtomatikong laktawan ang mga itinapon na kanta at hanapin ang susunod na pinapayagang track habang nagpe-play",
   "SETTINGS_AUTO_CLEAN_QUEUE": "Awtomatikong Linisin ang Queue",
   "DESCRIPTION_SETTINGS_AUTO_CLEAN_QUEUE": "Awtomatikong alisin ang mga itinapon na kanta mula sa iyong Smart Shuffle na pila",
-  "SETTINGS_TRASH_ON_NEXT_HOTKEY": "Basura sa Susunod na Hotkey",
-  "DESCRIPTION_SETTINGS_TRASH_ON_NEXT_HOTKEY": "Awtomatikong itapon ang kasalukuyang kanta kapag gumagamit ng Ctrl+Right keyboard shortcut para laktawan sa susunod na track",
   "SETTINGS_REMOTE_CONTROL": "Remote Control",
   "SETTINGS_REMOTE_TOGGLE": "Paganahin ang Remote Toggle",
   "DESCRIPTION_SETTINGS_REMOTE_TOGGLE": "I-tap nang doulbe ang play/pause mula sa mobile para i-on/off ang remote skipping. Ang pag-skip ng isang track ay magco-confirm sa toggle.",

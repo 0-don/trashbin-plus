@@ -50,8 +50,6 @@
   "DESCRIPTION_SETTINGS_SKIP_TRASHED_TRACKS": "自動跳過已刪除的歌曲，並在播放期間尋找下一個允許的音軌",
   "SETTINGS_AUTO_CLEAN_QUEUE": "自動清除佇列",
   "DESCRIPTION_SETTINGS_AUTO_CLEAN_QUEUE": "自動從您的智慧隨機播放佇列中移除已刪除的歌曲",
-  "SETTINGS_TRASH_ON_NEXT_HOTKEY": "下一個快速鍵為垃圾桶",
-  "DESCRIPTION_SETTINGS_TRASH_ON_NEXT_HOTKEY": "使用 Ctrl+向右鍵盤快速鍵跳至下一首時，自動將目前歌曲移至垃圾桶",
   "SETTINGS_REMOTE_CONTROL": "遙控器",
   "SETTINGS_REMOTE_TOGGLE": "啟用遠端切換",
   "DESCRIPTION_SETTINGS_REMOTE_TOGGLE": "從手機上連按兩下播放/暫停以切換遠端跳過功能的開關。跳過一首歌曲即可確認切換。",

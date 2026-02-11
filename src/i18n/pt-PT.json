@@ -50,8 +50,6 @@
   "DESCRIPTION_SETTINGS_SKIP_TRASHED_TRACKS": "Ignorar automaticamente músicas eliminadas e encontrar a próxima faixa permitida durante a reprodução",
   "SETTINGS_AUTO_CLEAN_QUEUE": "Fila de Limpeza Automática",
   "DESCRIPTION_SETTINGS_AUTO_CLEAN_QUEUE": "Remover automaticamente músicas eliminadas da sua fila de reprodução aleatória inteligente",
-  "SETTINGS_TRASH_ON_NEXT_HOTKEY": "Lixeira na próxima tecla de atalho",
-  "DESCRIPTION_SETTINGS_TRASH_ON_NEXT_HOTKEY": "Colocar automaticamente a música atual na lixeira ao usar o atalho de teclado Ctrl+Direita para avançar para a faixa seguinte",
   "SETTINGS_REMOTE_CONTROL": "Controlo Remoto",
   "SETTINGS_REMOTE_TOGGLE": "Ativar Alternância Remota",
   "DESCRIPTION_SETTINGS_REMOTE_TOGGLE": "Toque duas vezes em reproduzir/pausa no dispositivo móvel para ativar/desativar a passagem de faixas remota. A passagem de uma faixa confirma a alteração.",

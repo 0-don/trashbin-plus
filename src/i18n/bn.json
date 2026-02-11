@@ -50,8 +50,6 @@
   "DESCRIPTION_SETTINGS_SKIP_TRASHED_TRACKS": "স্বয়ংক্রিয়ভাবে মুছে ফেলা গানগুলি এড়িয়ে যান এবং চলমান অবস্থায় পরবর্তী অনুমোদিত ট্র্যাকটি খুঁজে নিন",
   "SETTINGS_AUTO_CLEAN_QUEUE": "অটো ক্লিন কিউ",
   "DESCRIPTION_SETTINGS_AUTO_CLEAN_QUEUE": "আপনার স্মার্ট শাফল সারিতে থাকা আবর্জনা গানগুলি স্বয়ংক্রিয়ভাবে সরিয়ে ফেলুন",
-  "SETTINGS_TRASH_ON_NEXT_HOTKEY": "পরবর্তী হটকি-এ আবর্জনা",
-  "DESCRIPTION_SETTINGS_TRASH_ON_NEXT_HOTKEY": "Ctrl+Right কীবোর্ড শর্টকাট ব্যবহার করে পরবর্তী ট্র‍্যাকে যাওয়ার সময় বর্তমান গানটি স্বয়ংক্রিয়ভাবে ট্র্যাশ করুন",
   "SETTINGS_REMOTE_CONTROL": "দূরবর্তী নিয়ন্ত্রণ",
   "SETTINGS_REMOTE_TOGGLE": "দূরবর্তী টগল সক্ষম করুন",
   "DESCRIPTION_SETTINGS_REMOTE_TOGGLE": "মোবাইল থেকে রিমোট স্কিপিং চালু/বন্ধ করতে প্লে/বিরতির জন্য দ্বিগুণ ট্যাপ করুন। একটি ট্র্যাক স্কিপ টগল নিশ্চিত করে।",

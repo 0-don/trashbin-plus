@@ -50,8 +50,6 @@
   "DESCRIPTION_SETTINGS_SKIP_TRASHED_TRACKS": "삭제된 곡을 자동으로 건너뛰고 재생 중 다음에 허용된 곡을 찾습니다.",
   "SETTINGS_AUTO_CLEAN_QUEUE": "자동 정리 대기열",
   "DESCRIPTION_SETTINGS_AUTO_CLEAN_QUEUE": "휴지통에 있는 곡을 스마트 셔플 큐에서 자동으로 제거합니다",
-  "SETTINGS_TRASH_ON_NEXT_HOTKEY": "다음 단축키로 휴지통으로 이동",
-  "DESCRIPTION_SETTINGS_TRASH_ON_NEXT_HOTKEY": "Ctrl+오른쪽 키보드 단축키를 사용하여 다음 곡으로 건너뛸 때 현재 곡을 자동으로 휴지통으로 이동",
   "SETTINGS_REMOTE_CONTROL": "리모컨",
   "SETTINGS_REMOTE_TOGGLE": "원격 토글 사용 가능",
   "DESCRIPTION_SETTINGS_REMOTE_TOGGLE": "모바일에서 재생/일시정지를 두 번 탭하여 원격 건너뛰기 켜기/끄기 전환. 곡 건너뛰기로 전환이 확인됨.",

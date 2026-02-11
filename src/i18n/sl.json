@@ -50,8 +50,6 @@
   "DESCRIPTION_SETTINGS_SKIP_TRASHED_TRACKS": "Samodejno preskoči izbrisane pesmi in med predvajanjem poišči naslednjo dovoljeno skladbo",
   "SETTINGS_AUTO_CLEAN_QUEUE": "Čakalna vrsta za samodejno čiščenje",
   "DESCRIPTION_SETTINGS_AUTO_CLEAN_QUEUE": "Samodejno odstrani izbrisane pesmi iz čakalne vrste pametnega mešanja",
-  "SETTINGS_TRASH_ON_NEXT_HOTKEY": "Smeti na naslednji bližnjici",
-  "DESCRIPTION_SETTINGS_TRASH_ON_NEXT_HOTKEY": "Samodejno odstrani trenutno skladbo, ko uporabite tipkovno bližnjico Ctrl+Desno, da preskočite na naslednjo skladbo",
   "SETTINGS_REMOTE_CONTROL": "Daljinski krmilnik",
   "SETTINGS_REMOTE_TOGGLE": "Omogoči oddaljeno preklopno funkcijo",
   "DESCRIPTION_SETTINGS_REMOTE_TOGGLE": "Dvakrat tapnite predvajaj/pavza s telefona, da vklopite/izklopite oddaljeno preskakovnanje. Preskočitev skladbe potrdi preklop.",

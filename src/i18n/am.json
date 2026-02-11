@@ -50,8 +50,6 @@
   "DESCRIPTION_SETTINGS_SKIP_TRASHED_TRACKS": "ከራስ የተወረዱ ድግስቶችን ያስገድቡ እና በማስተላለፊያ ጊዜ የሚቀጥለውን የተፈቀደ መዝሙር ያግኙ",
   "SETTINGS_AUTO_CLEAN_QUEUE": "ራስ ብራስ የሚጽፈው የአንድ አንድ የሚደርስ ዋና መረብ",
   "DESCRIPTION_SETTINGS_AUTO_CLEAN_QUEUE": "ከ \"ስማርት ሾፉፍል\" የተወረዱ ድምፆችን ከራስ-በራስ ያስወግዱ",
-  "SETTINGS_TRASH_ON_NEXT_HOTKEY": "ዝናሮ ላይ ያለውን ምንጭ ወደ ጥቂት ጊዜ በኋላ የሚከፈት ቁልፍ",
-  "DESCRIPTION_SETTINGS_TRASH_ON_NEXT_HOTKEY": "አሁን ያለውን ድል በ Ctrl+ቀኝ የመስመራዊ ቁልፍ ማጉያ በመጠቀም ወደ ቀጣዩ መዝሙር ሲቀጥሉ አውቶማቲክ ያጥፉት",
   "SETTINGS_REMOTE_CONTROL": "ሪሞት ኮንትሮል",
   "SETTINGS_REMOTE_TOGGLE": "የራስ ማጥፊያ አቋርጥ/አስጀምር",
   "DESCRIPTION_SETTINGS_REMOTE_TOGGLE": "ከሞባይል ላይ ያለውን መጫን/ማቆም ሁለት ጊዜ ይጫኑ እንዲገላገል ለመቀየር የርቀት ማስቆም ይጠይቃል/ማይጠይቅ ነው። የመዝገብ ግለጹ መቀየሪያውን ያረጋግጣል።",

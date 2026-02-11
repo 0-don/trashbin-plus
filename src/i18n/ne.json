@@ -50,8 +50,6 @@
   "DESCRIPTION_SETTINGS_SKIP_TRASHED_TRACKS": "मेटिएका गीतहरूलाई स्वतः काटेर प्लेब्याकको समयमा अर्को अनुमति प्राप्त ट्र्याक खोज्नुहोस्।",
   "SETTINGS_AUTO_CLEAN_QUEUE": "स्वतः सफा कतार",
   "DESCRIPTION_SETTINGS_AUTO_CLEAN_QUEUE": "तपाईंको स्मार्ट शफल प्रतीक्षा कतारबाट स्वचालित रूपमा फालिएका गीतहरू हटाउनुहोस्",
-  "SETTINGS_TRASH_ON_NEXT_HOTKEY": "अर्को हटकीमा ट्र्यास",
-  "DESCRIPTION_SETTINGS_TRASH_ON_NEXT_HOTKEY": "अर्को ट्र्याकमा जानका लागि Ctrl+Right कीबोर्ड शर्टकट प्रयोग गर्दा हालको गीतलाई स्वत: ट्र्यासमा राख्नुहोस्",
   "SETTINGS_REMOTE_CONTROL": "रिमोट कन्ट्रोल",
   "SETTINGS_REMOTE_TOGGLE": "दूरस्थ टगल सक्षम पार्नुहोस्",
   "DESCRIPTION_SETTINGS_REMOTE_TOGGLE": "मोबाइलबाट प्ले/पज दोहोरो ट्याप गरेर रिमोट स्किपिङ स्विच गर्नुहोस्। ट्र्याक स्किपले स्विच गरेको पुष्टि गर्दछ।",

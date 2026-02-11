@@ -50,8 +50,6 @@
   "DESCRIPTION_SETTINGS_SKIP_TRASHED_TRACKS": "ସ୍ୱତଃ ଫୋପାଡ଼ି ଦିଆଯାଇଥିବା ଗୀତଗୁଡ଼ିକୁ ବାଦ୍ ଦିଅନ୍ତୁ ଏବଂ ପ୍ଲେବ୍ୟାକ୍ ଚାଲିଥିବା ସମୟରେ ପରବର୍ତ୍ତୀ ଅନୁମତି ପ୍ରାପ୍ତ ଟ୍ରାକ୍ ଖୋଜନ୍ତୁ",
   "SETTINGS_AUTO_CLEAN_QUEUE": "ସ୍ୱଚାଳିତ ସଫା ପାରିଶ୍ରମିକ",
   "DESCRIPTION_SETTINGS_AUTO_CLEAN_QUEUE": "ସ୍ୱଚାଳିତ ଭାବରେ ଆପଣଙ୍କ ସ୍ମାର୍ଟ ଶଫଲ୍ ପାଇଁ କଚଡା ଗୀତକୁ ଅପସାରଣ କରନ୍ତୁ",
-  "SETTINGS_TRASH_ON_NEXT_HOTKEY": "ପରବର୍ତ୍ତୀ ହଟକିର ଅପଶିଷ୍ଟ",
-  "DESCRIPTION_SETTINGS_TRASH_ON_NEXT_HOTKEY": "ପରବର୍ତ୍ତୀ ଟ୍ରାକକୁ ଯିବାକୁ Ctrl+Right କୀବୋର୍ଡ ଶର୍ଟକଟ ବ୍ୟବହାର କରିବା ସମୟରେ ସ୍ୱତଃ ବର୍ତ୍ତମାନ ଗୀତକୁ ଟ୍ରାସ୍ କରନ୍ତୁ",
   "SETTINGS_REMOTE_CONTROL": "ଦୂରବର୍ତ୍ତୀ ନିୟନ୍ତ୍ରଣ",
   "SETTINGS_REMOTE_TOGGLE": "ଦୂରବର୍ତ୍ତୀ ଟଗଲ୍ ସକ୍ଷମ କରନ୍ତୁ",
   "DESCRIPTION_SETTINGS_REMOTE_TOGGLE": "ମୋବାଇଲରୁ ରିମୋଟ ସ୍କିପିଂକୁ ଚାଲୁ କରିବା କିମ୍ବା ବନ୍ଦ କରିବା ପାଇଁ ପ୍ଲେ/ପଜ ଉପରେ ଦୁଇଥର ଟ୍ୟାପ୍ କରନ୍ତୁ। ଏକ ଟ୍ରାକ୍ ସ୍କିପ୍ ଟଗଲ୍ ପାଇଁ ନିଶ୍ଚିତ କରେ।",

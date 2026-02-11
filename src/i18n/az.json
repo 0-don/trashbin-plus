@@ -50,8 +50,6 @@
   "DESCRIPTION_SETTINGS_SKIP_TRASHED_TRACKS": "Oxudulma zamanı səsləri avtomatik olaraq tullamaq və növbəti icazə verilən treki tapmaq",
   "SETTINGS_AUTO_CLEAN_QUEUE": "Avtomatik təmizləmə növbəsi",
   "DESCRIPTION_SETTINGS_AUTO_CLEAN_QUEUE": "Ağıllı qarışıq növbənizdən avtomatik olaraq səsləri silin",
-  "SETTINGS_TRASH_ON_NEXT_HOTKEY": "Növbəti qaytarıcı düymədə Zibil",
-  "DESCRIPTION_SETTINGS_TRASH_ON_NEXT_HOTKEY": "Növbəti trekkə keçmək üçün Ctrl+Sağ düyməsini istifadə edərkən cari mahnını avtomatik olaraq səbətə atın",
   "SETTINGS_REMOTE_CONTROL": "Uzaqdan idarəetmə",
   "SETTINGS_REMOTE_TOGGLE": "Uzaqdan Keçid Rejimini Aktivləşdirin",
   "DESCRIPTION_SETTINGS_REMOTE_TOGGLE": "Obyektin keçidini aktivləşdirmək/deaktivləşdirmək üçün mobil cihazdan iki dəfə oynat/davam etdirmə düyməsinə toxunun. Mahnı keçid etmək aktivləşdirməni təsdiqləyir.",

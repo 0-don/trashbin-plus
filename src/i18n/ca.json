@@ -50,8 +50,6 @@
   "DESCRIPTION_SETTINGS_SKIP_TRASHED_TRACKS": "Omet automàticament les cançons esborrades i troba la següent pista permesa durant la reproducció",
   "SETTINGS_AUTO_CLEAN_QUEUE": "Cua de neteja automàtica",
   "DESCRIPTION_SETTINGS_AUTO_CLEAN_QUEUE": "Elimina automàticament les cançons esborrades de la teva cua de reproducció aleatòria intel·ligent",
-  "SETTINGS_TRASH_ON_NEXT_HOTKEY": "Paperera amb la següent drecera",
-  "DESCRIPTION_SETTINGS_TRASH_ON_NEXT_HOTKEY": "Elimina automàticament la cançó actual quan utilitzis la drecera de teclat Ctrl+Dreta per passar a la següent pista",
   "SETTINGS_REMOTE_CONTROL": "Control remot",
   "SETTINGS_REMOTE_TOGGLE": "Habilita l'activació remota",
   "DESCRIPTION_SETTINGS_REMOTE_TOGGLE": "Toca dues vegades reproduir/pausar des del mòbil per activar o desactivar el salt de pista remot. El salt d'una pista confirma l'activació o desactivació.",

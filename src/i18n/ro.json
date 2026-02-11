@@ -50,8 +50,6 @@
   "DESCRIPTION_SETTINGS_SKIP_TRASHED_TRACKS": "Sări automat peste piesele șterse și găsește următoarea piesă permisă în timpul redării",
   "SETTINGS_AUTO_CLEAN_QUEUE": "Coada de curățare automată",
   "DESCRIPTION_SETTINGS_AUTO_CLEAN_QUEUE": "Eliminați automat piesele șterse din coada dvs. Smart Shuffle",
-  "SETTINGS_TRASH_ON_NEXT_HOTKEY": "Gunoi la următoarea tastă rapidă",
-  "DESCRIPTION_SETTINGS_TRASH_ON_NEXT_HOTKEY": "Șterge automat piesa curentă când folosești combinația de taste Ctrl+Dreapta pentru a trece la următoarea piesă",
   "SETTINGS_REMOTE_CONTROL": "Control la distanță",
   "SETTINGS_REMOTE_TOGGLE": "Activați comutarea la distanță",
   "DESCRIPTION_SETTINGS_REMOTE_TOGGLE": "Apăsați de două ori pe redare/pauză de pe mobil pentru a activa/dezactiva săritul la distanță. Săritul peste o pistă confirmă comutarea.",

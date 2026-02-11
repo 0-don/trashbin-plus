@@ -50,8 +50,6 @@
   "DESCRIPTION_SETTINGS_SKIP_TRASHED_TRACKS": "Hopp automatisk over slettede sanger og finn neste tillatte spor under avspilling",
   "SETTINGS_AUTO_CLEAN_QUEUE": "Automatisk rens av kø",
   "DESCRIPTION_SETTINGS_AUTO_CLEAN_QUEUE": "Fjern automatisk slettede sanger fra din Smart Shuffle-kø",
-  "SETTINGS_TRASH_ON_NEXT_HOTKEY": "Papirkurv ved neste hurtigtast",
-  "DESCRIPTION_SETTINGS_TRASH_ON_NEXT_HOTKEY": "Legg automatisk gjeldende sang i papirkurven når du bruker Ctrl+Høyre-tastaturhurtigtast for å hoppe til neste spor",
   "SETTINGS_REMOTE_CONTROL": "Fjernkontroll",
   "SETTINGS_REMOTE_TOGGLE": "Aktiver fjernbetjening",
   "DESCRIPTION_SETTINGS_REMOTE_TOGGLE": "Dobbelttrykk på spill/pause fra mobil for å slå fjernhopp av/på. Hopping av spor bekrefter valget.",

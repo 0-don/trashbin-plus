@@ -50,8 +50,6 @@
   "DESCRIPTION_SETTINGS_SKIP_TRASHED_TRACKS": "Hhanya ngokuzenzakalelayo izindima ezithunyelwe kususini futhi uthole indima engavumelekile ekulandelweni",
   "SETTINGS_AUTO_CLEAN_QUEUE": "Gcina ugcino we-Queue",
   "DESCRIPTION_SETTINGS_AUTO_CLEAN_QUEUE": "Susa ngokuzenzekala izindima ezithunyelwe ku-Smart Shuffle queue yakho",
-  "SETTINGS_TRASH_ON_NEXT_HOTKEY": "Ukudoti ku-Next Hotkey",
-  "DESCRIPTION_SETTINGS_TRASH_ON_NEXT_HOTKEY": "Cindeza ngokuzenzakalelayo imibhalo yamanje xa usebenzisa u-Ctrl+Right ukuthi uphumelela kumusindo olandelayo",
   "SETTINGS_REMOTE_CONTROL": "Isivumelwano esingaphandle",
   "SETTINGS_REMOTE_TOGGLE": "Vula Ukuguquka Kude",
   "DESCRIPTION_SETTINGS_REMOTE_TOGGLE": "Cindeza kabili ukudlala/ukumisa ukumisa ukungena kwe-remote kumashtuli. Ukungena kumgwaqo kuthola ukuthi kucindezelwe.",

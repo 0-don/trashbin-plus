@@ -50,8 +50,6 @@
   "DESCRIPTION_SETTINGS_SKIP_TRASHED_TRACKS": "ప్లేబ్యాక్ సమయంలో తొలగించబడిన పాటలను స్వయంచాలకంగా దాటి, తదుపరి అనుమతించబడిన ట్రాక్‌ను కనుగొనండి",
   "SETTINGS_AUTO_CLEAN_QUEUE": "ఆటో క్లీన్ క్యూ",
   "DESCRIPTION_SETTINGS_AUTO_CLEAN_QUEUE": "మీ స్మార్ట్ షఫుల్ క్యూ నుండి పాడిన పాటలను స్వయంచాలకంగా తొలగించండి",
-  "SETTINGS_TRASH_ON_NEXT_HOTKEY": "తదుపరి హాట్‌కీపై చెత్త",
-  "DESCRIPTION_SETTINGS_TRASH_ON_NEXT_HOTKEY": "Ctrl+Right కీబోర్డ్ షార్ట్‌కట్ ఉపయోగించి తదుపరి ట్రాక్‌కు దూకడానికి ప్రస్తుత పాటను స్వయంచాలకంగా పారవేయండి",
   "SETTINGS_REMOTE_CONTROL": "రిమోట్ కంట్రోల్",
   "SETTINGS_REMOTE_TOGGLE": "రిమోట్ టాగుల్ ని సక్రియం చేయండి",
   "DESCRIPTION_SETTINGS_REMOTE_TOGGLE": "మొబైల్ నుండి రిమోట్ స్కిప్పింగ్‌ను ఆన్/ఆఫ్ చేయడానికి ప్లే/పాజ్ కు రెండుసార్లు నొక్కండి. ట్రాక్ స్కిప్ టాగుల్ ను నిర్ధారిస్తుంది.",

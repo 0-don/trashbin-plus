@@ -50,8 +50,6 @@
   "DESCRIPTION_SETTINGS_SKIP_TRASHED_TRACKS": "Saltar automaticamente as cancións eliminadas e atopar a seguinte pista permitida durante a reprodución",
   "SETTINGS_AUTO_CLEAN_QUEUE": "Cola de limpeza automática",
   "DESCRIPTION_SETTINGS_AUTO_CLEAN_QUEUE": "Elimina automaticamente as cancións eliminadas da cola de reproducción aleatoria intelixente",
-  "SETTINGS_TRASH_ON_NEXT_HOTKEY": "Lixo na seguinte tecla rápida",
-  "DESCRIPTION_SETTINGS_TRASH_ON_NEXT_HOTKEY": "Eliminar automaticamente a canción actual ao usar o atallo de teclado Ctrl+Dereita para pasar á seguinte pista",
   "SETTINGS_REMOTE_CONTROL": "Control remoto",
   "SETTINGS_REMOTE_TOGGLE": "Activar alternancia remota",
   "DESCRIPTION_SETTINGS_REMOTE_TOGGLE": "Toque dúas veces en reproducir/pausa desde o móbil para activar ou desactivar o salto remoto. Un salto de pista confirma a activación ou desactivación.",

@@ -13,7 +13,6 @@ export const STORAGE_KEYS = {
   SKIP_TRASHED_TRACKS: "trashbin-skip-trashed-tracks",
   AUTO_CLEAN_QUEUE: "trashbin-auto-clean-queue",
   PLAYLIST_MONITOR: "trashbin-playlist-monitor",
-  TRASH_ON_NEXT_HOTKEY: "trashbin-trash-on-next-hotkey",
   REMOTE_TOGGLE_ENABLED: "trashbin-remote-toggle-enabled",
   REMOTE_SKIPPING_ENABLED: "trashbin-remote-skipping-enabled",
   TRASH_VIA_LIKE: "trashbin-trash-via-like",
@@ -31,7 +30,6 @@ interface TrashbinState {
   skipTrashedTracks: boolean;
   autoCleanQueue: boolean;
   playlistMonitorEnabled: boolean;
-  trashOnNextHotkey: boolean;
   trashSongList: Record<string, boolean>;
   trashArtistList: Record<string, boolean>;
   userHitBack: boolean;
@@ -55,7 +53,6 @@ interface TrashbinState {
   setSkipTrashedTracks: (enabled: boolean) => void;
   setAutoCleanQueue: (enabled: boolean) => void;
   setPlaylistMonitorEnabled: (enabled: boolean) => void;
-  setTrashOnNextHotkey: (enabled: boolean) => void;
   setUserHitBack: (hitBack: boolean) => void;
   setRemoteToggleEnabled: (enabled: boolean) => void;
   setRemoteSkippingEnabled: (enabled: boolean) => void;
@@ -104,7 +101,6 @@ export const useTrashbinStore = create<TrashbinState>((set, get) => ({
   skipTrashedTracks: true,
   autoCleanQueue: false,
   playlistMonitorEnabled: true,
-  trashOnNextHotkey: false,
   trashSongList: {},
   trashArtistList: {},
   userHitBack: false,
@@ -132,7 +128,6 @@ export const useTrashbinStore = create<TrashbinState>((set, get) => ({
       skipTrashedTracks: initValue(STORAGE_KEYS.SKIP_TRASHED_TRACKS, true),
       autoCleanQueue: initValue(STORAGE_KEYS.AUTO_CLEAN_QUEUE, false),
       playlistMonitorEnabled: initValue(STORAGE_KEYS.PLAYLIST_MONITOR, true),
-      trashOnNextHotkey: initValue(STORAGE_KEYS.TRASH_ON_NEXT_HOTKEY, false),
       remoteToggleEnabled: initValue(STORAGE_KEYS.REMOTE_TOGGLE_ENABLED, false),
       remoteSkippingEnabled: initValue(
         STORAGE_KEYS.REMOTE_SKIPPING_ENABLED,
@@ -198,14 +193,6 @@ export const useTrashbinStore = create<TrashbinState>((set, get) => ({
     set({ playlistMonitorEnabled: enabled });
     Spicetify.LocalStorage.set(
       STORAGE_KEYS.PLAYLIST_MONITOR,
-      JSON.stringify(enabled),
-    );
-  },
-
-  setTrashOnNextHotkey: (enabled: boolean) => {
-    set({ trashOnNextHotkey: enabled });
-    Spicetify.LocalStorage.set(
-      STORAGE_KEYS.TRASH_ON_NEXT_HOTKEY,
       JSON.stringify(enabled),
     );
   },

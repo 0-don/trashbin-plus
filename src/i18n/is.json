@@ -50,8 +50,6 @@
   "DESCRIPTION_SETTINGS_SKIP_TRASHED_TRACKS": "Sleppa sjálfkrafa eyddum lögu og finna næsta leyfða lagalista í spilun",
   "SETTINGS_AUTO_CLEAN_QUEUE": "Hreinsunaraðgangur sjálfkrafa",
   "DESCRIPTION_SETTINGS_AUTO_CLEAN_QUEUE": "Fjarlægja lag sem varðað í ruslinu sjálfkrafa úr Smart Shuffle biðröðinni",
-  "SETTINGS_TRASH_ON_NEXT_HOTKEY": "Rusl við næsta flýtileið lyklaborðs",
-  "DESCRIPTION_SETTINGS_TRASH_ON_NEXT_HOTKEY": "Fleyg núverandi lagi sjálfkrafa þegar notað er Ctrl+Hægri sniðmát til að hoppa á næsta lag",
   "SETTINGS_REMOTE_CONTROL": "Fjartakki",
   "SETTINGS_REMOTE_TOGGLE": "Virkja fjarveika valmöguleika",
   "DESCRIPTION_SETTINGS_REMOTE_TOGGLE": "Tvísnertu á spilun/í bið á símanum til að kveikja/slökkva á fjarstýrtu umsprettingu. Spretting yfir lag staðfestir breytinguna.",

@@ -50,8 +50,6 @@
   "DESCRIPTION_SETTINGS_SKIP_TRASHED_TRACKS": "Automaticky přeskakovat smazané skladby a během přehrávání najít další povolenou skladbu",
   "SETTINGS_AUTO_CLEAN_QUEUE": "Fronta automatického čištění",
   "DESCRIPTION_SETTINGS_AUTO_CLEAN_QUEUE": "Automaticky odstraňuj smazané skladby ze své fronty chytrého přehrávání",
-  "SETTINGS_TRASH_ON_NEXT_HOTKEY": "Koš na další klávesové zkratce",
-  "DESCRIPTION_SETTINGS_TRASH_ON_NEXT_HOTKEY": "Automaticky odstranit aktuální skladbu do koše při použití klávesové zkratky Ctrl+šipka doprava pro přeskočení na další skladbu",
   "SETTINGS_REMOTE_CONTROL": "Dálkové ovládání",
   "SETTINGS_REMOTE_TOGGLE": "Povolit vzdálené přepínání",
   "DESCRIPTION_SETTINGS_REMOTE_TOGGLE": "Dvojitým klepnutím na přehrávání/pauzu z mobilního zařízení zapnete nebo vypnete vzdálené přeskakování. Přeskočení skladby potvrdí přepnutí.",

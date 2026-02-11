@@ -50,8 +50,6 @@
   "DESCRIPTION_SETTINGS_SKIP_TRASHED_TRACKS": "Automaticky preskočiť odstránené skladby a nájsť ďalšiu povolenú skladbu počas prehrávania",
   "SETTINGS_AUTO_CLEAN_QUEUE": "Fronta automatickej čistky",
   "DESCRIPTION_SETTINGS_AUTO_CLEAN_QUEUE": "Automaticky odstraňujte skladby v koši z fronty Smart Shuffle",
-  "SETTINGS_TRASH_ON_NEXT_HOTKEY": "Odpad na ďalšej klávesovej skratke",
-  "DESCRIPTION_SETTINGS_TRASH_ON_NEXT_HOTKEY": "Automaticky odstrániť aktuálnu skladbu, keď použijete klávesovú skratku Ctrl+Doprava na preskočenie na ďalšiu skladbu",
   "SETTINGS_REMOTE_CONTROL": "Diaľkové ovládanie",
   "SETTINGS_REMOTE_TOGGLE": "Povoliť vzdialené prepínanie",
   "DESCRIPTION_SETTINGS_REMOTE_TOGGLE": "Dvojitým klepnutím na prehrávanie/pauzu z mobilu zapnete alebo vypnete diaľkové preskakovanie. Preskočenie skladby potvrdí prepínanie.",

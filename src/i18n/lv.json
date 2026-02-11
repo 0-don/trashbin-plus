@@ -50,8 +50,6 @@
   "DESCRIPTION_SETTINGS_SKIP_TRASHED_TRACKS": "Automātiski izlaist dziesmas, kas pārvietotas atkritnēs, un atrast nākamo atļauto kompozīciju atskaņošanas laikā",
   "SETTINGS_AUTO_CLEAN_QUEUE": "Automātiskās tīrīšanas rinda",
   "DESCRIPTION_SETTINGS_AUTO_CLEAN_QUEUE": "Automātiski noņemt izdzēstās dziesmas no jūsu gudrās izjaukšanas rindas",
-  "SETTINGS_TRASH_ON_NEXT_HOTKEY": "Miskaste nākamajā karstajā taustiņā",
-  "DESCRIPTION_SETTINGS_TRASH_ON_NEXT_HOTKEY": "Automātiski izmest pašreizējo dziesmu, izmantojot taustiņu kombināciju Ctrl+pa labi, lai pārietu uz nākamo kompozīciju",
   "SETTINGS_REMOTE_CONTROL": "Tālvadības pulti",
   "SETTINGS_REMOTE_TOGGLE": "Iespējot attālo pārslēgšanu",
   "DESCRIPTION_SETTINGS_REMOTE_TOGGLE": "Dubultklikšķiniet, lai atskaņotu/pauzētu no mobilā tālrunī, lai ieslēgtu/izslēgtu attālo pārslēgšanu. Trases pārslēgšana apstiprina ieslēgšanu.",

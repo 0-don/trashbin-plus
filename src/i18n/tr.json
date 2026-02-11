@@ -50,8 +50,6 @@
   "DESCRIPTION_SETTINGS_SKIP_TRASHED_TRACKS": "Oynatma sırasında çöpe atılan şarkıları otomatik olarak atlayarak bir sonraki izin verilen parçayı bulun",
   "SETTINGS_AUTO_CLEAN_QUEUE": "Otomatik Temizleme Kuyruğu",
   "DESCRIPTION_SETTINGS_AUTO_CLEAN_QUEUE": "Çöpe atılan şarkıları Akıllı Karışık kuyruğunuzdan otomatik olarak kaldırın",
-  "SETTINGS_TRASH_ON_NEXT_HOTKEY": "Sonraki Kısayol Tuşu Çöpü",
-  "DESCRIPTION_SETTINGS_TRASH_ON_NEXT_HOTKEY": "Ctrl+Sağ klavye kısayolunu kullanarak bir sonraki parçaya geçerken geçerli şarkıyı otomatik olarak çöp kutusuna taşıyın",
   "SETTINGS_REMOTE_CONTROL": "Uzaktan kumanda",
   "SETTINGS_REMOTE_TOGGLE": "Uzaktan Geçişi Etkinleştir",
   "DESCRIPTION_SETTINGS_REMOTE_TOGGLE": "Mobil cihazdan oynat/duraklat'ı iki kez tıklayarak uzaktan atlama özelliğini aç/kapat. Bir parça atlaması, geçişin onaylandığını gösterir.",

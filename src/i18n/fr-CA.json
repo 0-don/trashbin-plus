@@ -50,8 +50,6 @@
   "DESCRIPTION_SETTINGS_SKIP_TRASHED_TRACKS": "Passer automatiquement les chansons supprimées et trouver la piste autorisée suivante pendant la lecture",
   "SETTINGS_AUTO_CLEAN_QUEUE": "File d'attente du nettoyage automatique",
   "DESCRIPTION_SETTINGS_AUTO_CLEAN_QUEUE": "Supprimer automatiquement les chansons supprimées de votre file d'attente Smart Shuffle",
-  "SETTINGS_TRASH_ON_NEXT_HOTKEY": "Corbeille avec la prochaine touche de raccourci",
-  "DESCRIPTION_SETTINGS_TRASH_ON_NEXT_HOTKEY": "Placer automatiquement la chanson actuelle dans la corbeille lors de l'utilisation du raccourci clavier Ctrl+Flèche droite pour passer au morceau suivant",
   "SETTINGS_REMOTE_CONTROL": "Télécommande",
   "SETTINGS_REMOTE_TOGGLE": "Activer la bascule à distance",
   "DESCRIPTION_SETTINGS_REMOTE_TOGGLE": "Appuyez deux fois sur lecture/pause depuis votre appareil mobile pour activer ou désactiver la fonction de saut de piste à distance. Le saut d'une piste confirme le changement d'état.",

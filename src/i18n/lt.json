@@ -50,8 +50,6 @@
   "DESCRIPTION_SETTINGS_SKIP_TRASHED_TRACKS": "Automatiškai praleisti ištrintas dainas ir grojant rasti kitą leistiną takelį",
   "SETTINGS_AUTO_CLEAN_QUEUE": "Automatinio valymo eilė",
   "DESCRIPTION_SETTINGS_AUTO_CLEAN_QUEUE": "Automatiškai šalinkite ištrintas dainas iš savo išmaniosios maišymo eilės",
-  "SETTINGS_TRASH_ON_NEXT_HOTKEY": "Šiukšlės kitam karščiajam klavišui",
-  "DESCRIPTION_SETTINGS_TRASH_ON_NEXT_HOTKEY": "Automatiškai ištrinti dabartinę dainą, naudojant Ctrl+dešinėn klavišų kombinaciją, kad pereitumėte prie kito takelio",
   "SETTINGS_REMOTE_CONTROL": "Nuotolinis valdymas",
   "SETTINGS_REMOTE_TOGGLE": "Įgalinti nuotolinį perjungimą",
   "DESCRIPTION_SETTINGS_REMOTE_TOGGLE": "Du kartus bakstelėkite paleidimą / pristabdymą iš mobilaus įrenginio, kad įjungtumėte / išjungtumėte nuotolinį praleidimą. Takelio praleidimas patvirtina perjungimą.",
