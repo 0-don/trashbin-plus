@@ -16,12 +16,8 @@ const TIERS = [
   { max: 1.0, Icon: BsRobot, color: "#ef4444", labelKey: "AI_TIER_LIKELY_AI" as const },
 ];
 
-function getTier(probability: number) {
-  return TIERS.find((t) => probability <= t.max) ?? TIERS[TIERS.length - 1];
-}
-
 export function createAiIndicatorHTML(probability: number, size = 14): string {
-  const tier = getTier(probability);
+  const tier = TIERS.find((t) => probability <= t.max) ?? TIERS[TIERS.length - 1];
   const pct = Math.round(probability * 100);
   const label = i18n.t(tier.labelKey);
   const svg = Spicetify.ReactDOMServer.renderToString(<tier.Icon size={size} />);

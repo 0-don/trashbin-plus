@@ -1,17 +1,17 @@
 import { useEffect } from "react";
-import { TRASH_ICON } from "../components/icons";
 import { createAiIndicatorHTML } from "../components/features/ai-probability-indicator";
+import { TRASH_ICON } from "../components/icons";
 import {
-  AI_TRASH_THRESHOLD,
+  autoTrashIfNeeded,
   enqueue,
-  getCachedResult,
+  getStoredResult,
   onResult,
 } from "../lib/ai-classifier";
+import { AI_INDICATOR_CLASS } from "../lib/constants";
 import { extractTrackData } from "../lib/track-utils";
 import { useTrashbinStore } from "../store/trashbin-store";
 import { useMutationObserver } from "./use-mutation-observer";
 
-const AI_INDICATOR_CLASS = "trashbin-ai-indicator";
 const WRAPPER_CLASS = "trashbin-injected-group";
 
 interface TrashButtonConfig {
@@ -53,7 +53,6 @@ export const useTrashButtonInjection = (
       if (!trackData.trackURI || row.querySelector(config.buttonSelector))
         return;
 
-      // Wrapper for AI indicator + trash button
       const wrapper = document.createElement("div");
       wrapper.className = WRAPPER_CLASS;
       wrapper.style.display = "inline-flex";
@@ -61,18 +60,16 @@ export const useTrashButtonInjection = (
       wrapper.style.gap = "0";
       wrapper.style.margin = "0";
 
-      // AI indicator
       if (aiEnabled) {
-        const cached = getCachedResult(trackData.trackURI);
-        if (cached !== undefined) {
-          const indicator = createIndicatorElement(cached);
+        const stored = getStoredResult(trackData.trackURI);
+        if (stored !== undefined) {
+          const indicator = createIndicatorElement(stored);
           wrapper.appendChild(indicator);
         } else {
           enqueue(trackData.trackURI);
         }
       }
 
-      // Trash button
       const isTrashed = !!store.trashSongList[trackData.trackURI];
       const btn = document.createElement("button");
       btn.className = `${config.buttonClassName} bg-transparent border-none p-2 opacity-70 cursor-pointer hover:opacity-100 transition-opacity m-0!`;
@@ -92,21 +89,12 @@ export const useTrashButtonInjection = (
     });
   };
 
-  // When a classification result arrives, patch indicators into existing rows
   useEffect(() => {
     if (!aiEnabled) return;
 
     const unsub = onResult((uri, prob) => {
       updateIndicatorsForUri(config, uri, prob);
-
-      const state = useTrashbinStore.getState();
-      if (
-        state.trashAiSongs &&
-        prob >= AI_TRASH_THRESHOLD &&
-        !state.trashSongList[uri]
-      ) {
-        state.toggleSongTrash(uri, false);
-      }
+      autoTrashIfNeeded(uri, prob);
     });
 
     return unsub;

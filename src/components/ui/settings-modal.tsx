@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { HiOutlineQuestionMarkCircle } from "react-icons/hi2";
-import { clearAiCache, getAiCacheSize } from "../../lib/ai-classifier";
+import { clearAiStorage, getAiStorageSize } from "../../lib/ai-classifier";
 import { SELECTORS } from "../../lib/constants";
 import { cn } from "../../lib/utils";
 import { useTrashbinStore } from "../../store/trashbin-store";
@@ -300,11 +300,11 @@ const SettingsModal: React.FC = () => {
         </div>
       )}
       <ActionButton
-        label={t("ACTION_CLEAR_AI_CACHE")}
-        description={t("DESCRIPTION_CLEAR_AI_CACHE", { count: getAiCacheSize() })}
+        label={t("ACTION_CLEAR_AI_STORAGE")}
+        description={t("DESCRIPTION_CLEAR_AI_STORAGE", { count: getAiStorageSize() })}
         onClick={() => {
-          clearAiCache();
-          Spicetify.showNotification(t("MESSAGE_AI_CACHE_CLEARED"));
+          clearAiStorage();
+          Spicetify.showNotification(t("MESSAGE_AI_STORAGE_CLEARED"));
         }}
       />
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { AI_TRASH_THRESHOLD, enqueue, getCachedResult, onResult } from "../../lib/ai-classifier";
+import { autoTrashIfNeeded, enqueue, getStoredResult, onResult } from "../../lib/ai-classifier";
 import { useTrashbinStore } from "../../store/trashbin-store";
 import { createAiIndicatorHTML } from "./ai-probability-indicator";
 
@@ -32,14 +32,7 @@ export const AiDetectionWidget: React.FC = () => {
       widget.icon = widgetIcon(prob);
       widget.label = `${pct}% AI`;
 
-      const state = useTrashbinStore.getState();
-      if (
-        state.trashAiSongs &&
-        prob >= AI_TRASH_THRESHOLD &&
-        !state.trashSongList[uri]
-      ) {
-        state.toggleSongTrash(uri, false);
-      }
+      autoTrashIfNeeded(uri, prob);
     };
 
     const update = () => {
@@ -50,9 +43,9 @@ export const AiDetectionWidget: React.FC = () => {
         return;
       }
 
-      const cached = getCachedResult(track.uri);
-      if (cached !== undefined) {
-        applyResult(track.uri, cached);
+      const stored = getStoredResult(track.uri);
+      if (stored !== undefined) {
+        applyResult(track.uri, stored);
         return;
       }
 
@@ -64,12 +57,11 @@ export const AiDetectionWidget: React.FC = () => {
     const unsub = onResult(applyResult);
     update();
 
-    const handleSongChange = () => update();
-    Spicetify.Player.addEventListener("songchange", handleSongChange);
+    Spicetify.Player.addEventListener("songchange", update);
 
     return () => {
       unsub();
-      Spicetify.Player.removeEventListener("songchange", handleSongChange);
+      Spicetify.Player.removeEventListener("songchange", update);
       widget.deregister();
       widgetRef.current = null;
     };

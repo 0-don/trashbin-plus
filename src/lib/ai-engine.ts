@@ -1,9 +1,8 @@
 import * as ort from "onnxruntime-web";
 
-// --- Model Config ---
-
 export type ModelId = "sonics-5s" | "sonics-120s";
 export const DEFAULT_MODEL: ModelId = "sonics-5s";
+export const SAMPLE_RATE = 44100;
 
 export const MODELS = {
   "sonics-5s": {
@@ -18,7 +17,6 @@ export const MODELS = {
   },
 };
 
-const SAMPLE_RATE = 44100;
 const WASM_NAME = "ort-wasm-simd-threaded.wasm";
 const STORE_NAME = "assets";
 const VERSION_KEY = "trashbin-ai-assets-version";
@@ -47,32 +45,28 @@ function getDB(): Promise<IDBDatabase> {
   return dbPromise;
 }
 
-function idbGet(name: string): Promise<ArrayBuffer | null> {
-  return getDB().then(
-    (db) =>
-      new Promise((resolve, reject) => {
-        const req = db
-          .transaction(STORE_NAME, "readonly")
-          .objectStore(STORE_NAME)
-          .get(name);
-        req.onsuccess = () => resolve(req.result?.data ?? null);
-        req.onerror = () => reject(req.error);
-      }),
-  );
+async function idbGet(name: string): Promise<ArrayBuffer | null> {
+  const db = await getDB();
+  return new Promise((resolve, reject) => {
+    const req = db
+      .transaction(STORE_NAME, "readonly")
+      .objectStore(STORE_NAME)
+      .get(name);
+    req.onsuccess = () => resolve(req.result?.data ?? null);
+    req.onerror = () => reject(req.error);
+  });
 }
 
-function idbPut(name: string, data: ArrayBuffer): Promise<void> {
-  return getDB().then(
-    (db) =>
-      new Promise((resolve, reject) => {
-        const req = db
-          .transaction(STORE_NAME, "readwrite")
-          .objectStore(STORE_NAME)
-          .put({ name, data });
-        req.onsuccess = () => resolve();
-        req.onerror = () => reject(req.error);
-      }),
-  );
+async function idbPut(name: string, data: ArrayBuffer): Promise<void> {
+  const db = await getDB();
+  return new Promise((resolve, reject) => {
+    const req = db
+      .transaction(STORE_NAME, "readwrite")
+      .objectStore(STORE_NAME)
+      .put({ name, data });
+    req.onsuccess = () => resolve();
+    req.onerror = () => reject(req.error);
+  });
 }
 
 async function downloadAsset(name: string): Promise<ArrayBuffer> {
@@ -130,15 +124,9 @@ export async function ensureAssets(
   }
 }
 
-// --- ONNX Inference Engine ---
-
 let session: ort.InferenceSession | null = null;
-let activeModelId: ModelId | null = null;
+export let activeModelId: ModelId | null = null;
 let inferenceQueue = Promise.resolve<number | null>(null);
-
-export function getActiveModelId(): ModelId | null {
-  return activeModelId;
-}
 
 export async function initEngine(modelId: ModelId): Promise<boolean> {
   try {
@@ -163,23 +151,20 @@ export async function initEngine(modelId: ModelId): Promise<boolean> {
   }
 }
 
-async function infer(data: Float32Array): Promise<number | null> {
-  if (!session || !activeModelId) return null;
-  try {
-    const tensor = new ort.Tensor("float32", data, [1, data.length]);
-    const results = await session.run({ audio: tensor });
-    return (results["prob"].data as Float32Array)[0];
-  } catch (error) {
-    console.error("[trashbin+ AI] Inference error:", error);
-    return null;
-  }
-}
-
 export function queueInference(data: Float32Array): Promise<number | null> {
-  const promise = inferenceQueue.then(
-    () => infer(data),
-    () => infer(data),
-  );
+  const infer = async (): Promise<number | null> => {
+    if (!session || !activeModelId) return null;
+    try {
+      const tensor = new ort.Tensor("float32", data, [1, data.length]);
+      const results = await session.run({ audio: tensor });
+      return (results["prob"].data as Float32Array)[0];
+    } catch (error) {
+      console.error("[trashbin+ AI] Inference error:", error);
+      return null;
+    }
+  };
+
+  const promise = inferenceQueue.then(infer, infer);
   inferenceQueue = promise.then(
     () => null,
     () => null,
@@ -188,12 +173,8 @@ export function queueInference(data: Float32Array): Promise<number | null> {
 }
 
 export function disposeEngine(): void {
-  if (session) {
-    session.release();
-    session = null;
-  }
+  session?.release();
+  session = null;
   activeModelId = null;
   inferenceQueue = Promise.resolve(null);
 }
-
-export { SAMPLE_RATE };

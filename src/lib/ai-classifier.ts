@@ -1,20 +1,20 @@
+import { useTrashbinStore } from "../store/trashbin-store";
 import {
   type ModelId,
   MODELS,
   SAMPLE_RATE,
+  activeModelId,
   disposeEngine,
   ensureAssets,
-  getActiveModelId,
   initEngine,
   queueInference,
 } from "./ai-engine";
+import { AI_INDICATOR_CLASS } from "./constants";
 
 const CORS_PROXY = "https://cors-proxy.spicetify.app";
-const CACHE_KEY_PREFIX = "trashbin-ai-cache:";
+const LS_KEY_PREFIX = "trashbin-ai-results:";
 const POLL_INTERVAL = 500;
 export const AI_TRASH_THRESHOLD = 0.8;
-
-// --- Audio ---
 
 let audioCtx: AudioContext | null = null;
 
@@ -62,43 +62,52 @@ function extractMiddleChunk(
   return waveform.slice(start, start + targetLength);
 }
 
-// --- Cache ---
+let lsKey: string | null = null;
 
-let cacheKey: string | null = null;
-
-function getCache(): Record<string, number> {
-  if (!cacheKey) return {};
+function getStoredResults(): Record<string, number> {
+  if (!lsKey) return {};
   try {
-    const raw = Spicetify.LocalStorage.get(cacheKey);
+    const raw = Spicetify.LocalStorage.get(lsKey);
     return raw ? JSON.parse(raw) : {};
   } catch {
     return {};
   }
 }
 
-function setCacheEntry(trackUri: string, probability: number): void {
-  if (!cacheKey) return;
-  const cache = getCache();
-  cache[trackUri] = probability;
-  Spicetify.LocalStorage.set(cacheKey, JSON.stringify(cache));
+function setStoredResult(trackUri: string, probability: number): void {
+  if (!lsKey) return;
+  const results = getStoredResults();
+  results[trackUri] = probability;
+  Spicetify.LocalStorage.set(lsKey, JSON.stringify(results));
 }
 
-export function getCachedResult(trackUri: string): number | undefined {
-  return getCache()[trackUri];
+export function getStoredResult(trackUri: string): number | undefined {
+  return getStoredResults()[trackUri];
 }
 
-export function getAiCacheSize(): number {
-  return Object.keys(getCache()).length;
+export function getAiStorageSize(): number {
+  return Object.keys(getStoredResults()).length;
 }
 
-export function clearAiCache(): void {
-  if (!cacheKey) return;
-  Spicetify.LocalStorage.remove(cacheKey);
+export function clearAiStorage(): void {
+  if (!lsKey) return;
+  Spicetify.LocalStorage.remove(lsKey);
   queue.clear();
-  document.querySelectorAll(".trashbin-ai-indicator").forEach((el) => el.remove());
+  document
+    .querySelectorAll(`.${AI_INDICATOR_CLASS}`)
+    .forEach((el) => el.remove());
 }
 
-// --- Queue ---
+export function autoTrashIfNeeded(uri: string, probability: number): void {
+  const state = useTrashbinStore.getState();
+  if (
+    state.trashAiSongs &&
+    probability >= AI_TRASH_THRESHOLD &&
+    !state.trashSongList[uri]
+  ) {
+    state.toggleSongTrash(uri, false);
+  }
+}
 
 const queue = new Set<string>();
 let processing = false;
@@ -107,7 +116,7 @@ type ResultListener = (uri: string, probability: number) => void;
 const listeners = new Set<ResultListener>();
 
 export function enqueue(trackUri: string): void {
-  if (getCachedResult(trackUri) !== undefined) return;
+  if (getStoredResult(trackUri) !== undefined) return;
   queue.add(trackUri);
 }
 
@@ -122,23 +131,22 @@ async function processNext(): Promise<void> {
   const uri = queue.values().next().value!;
   queue.delete(uri);
 
-  if (getCachedResult(uri) !== undefined) return;
+  if (getStoredResult(uri) !== undefined) return;
 
   processing = true;
   try {
-    const modelId = getActiveModelId();
-    if (!modelId) return;
+    if (!activeModelId) return;
 
     const previewUrl = await fetchPreviewUrl(uri);
     if (!previewUrl) return;
 
-    const model = MODELS[modelId];
+    const model = MODELS[activeModelId];
     const waveform = await fetchAudioWaveform(previewUrl);
     const input = extractMiddleChunk(waveform, model.inputLength);
     const probability = await queueInference(input);
 
     if (probability !== null) {
-      setCacheEntry(uri, probability);
+      setStoredResult(uri, probability);
       listeners.forEach((cb) => cb(uri, probability));
     }
   } catch (error) {
@@ -163,14 +171,12 @@ function stopQueue(): void {
   listeners.clear();
 }
 
-// --- Lifecycle ---
-
 export async function initializeAiDetection(
   modelId: ModelId,
   onProgress?: (message: string) => void,
 ): Promise<boolean> {
   try {
-    cacheKey = `${CACHE_KEY_PREFIX}${modelId}`;
+    lsKey = `${LS_KEY_PREFIX}${modelId}`;
 
     onProgress?.("Checking assets...");
     const ready = await ensureAssets(modelId, onProgress);
@@ -196,5 +202,5 @@ export function cleanupAiDetection(): void {
     audioCtx.close();
     audioCtx = null;
   }
-  cacheKey = null;
+  lsKey = null;
 }

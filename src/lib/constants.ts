@@ -33,3 +33,5 @@ export const AUTO_ADD_CONFIG = {
   addButtonSelector: 'button[data-testid="add-to-playlist-button"]',
   autoAddButtonClassName: "trashbin-auto-add-btn",
 } as const;
+
+export const AI_INDICATOR_CLASS = "trashbin-ai-indicator";
