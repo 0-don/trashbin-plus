@@ -19,7 +19,9 @@ interface AiState {
   cleanup: () => void;
 }
 
+const MAX_RETRIES = 2;
 const queue = new Set<string>();
+const retries = new Map<string, number>();
 let processing = false;
 let intervalId: ReturnType<typeof setInterval> | null = null;
 
@@ -38,8 +40,10 @@ function setResult(uri: string, probability: number): void {
   const state = useAiStore.getState();
   const results = { ...state.results, [uri]: probability };
   useAiStore.setState({ results });
-  if (state.lsKey) {
-    Spicetify.LocalStorage.set(state.lsKey, JSON.stringify(results));
+  if (state.lsKey && probability >= 0) {
+    Spicetify.LocalStorage.set(state.lsKey, JSON.stringify(
+      Object.fromEntries(Object.entries(results).filter(([, v]) => v >= 0)),
+    ));
   }
 }
 
@@ -62,11 +66,26 @@ async function processNext(): Promise<void> {
     if (probability !== null) {
       setResult(uri, probability);
       autoTrashIfNeeded(uri, probability);
+      retries.delete(uri);
     } else {
-      setResult(uri, -1);
+      const count = (retries.get(uri) ?? 0) + 1;
+      if (count < MAX_RETRIES) {
+        retries.set(uri, count);
+        queue.add(uri);
+      } else {
+        setResult(uri, -1);
+        retries.delete(uri);
+      }
     }
   } catch (error) {
-    setResult(uri, -1);
+    const count = (retries.get(uri) ?? 0) + 1;
+    if (count < MAX_RETRIES) {
+      retries.set(uri, count);
+      queue.add(uri);
+    } else {
+      setResult(uri, -1);
+      retries.delete(uri);
+    }
   } finally {
     processing = false;
   }
@@ -83,6 +102,7 @@ function stopQueue(): void {
     intervalId = null;
   }
   queue.clear();
+  retries.clear();
   processing = false;
 }
 

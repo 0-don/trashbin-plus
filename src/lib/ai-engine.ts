@@ -1,4 +1,4 @@
-import { ORT_CODE } from "virtual:ort-worker-ort";
+import { ORT_WASM_CODE } from "virtual:ort-worker-wasm";
 
 export type ModelId = "sonics-5s" | "sonics-120s";
 export const DEFAULT_MODEL: ModelId = "sonics-5s";
@@ -15,7 +15,7 @@ export const MODELS = {
   },
 };
 
-const WASM_NAME = "ort-wasm-simd-threaded.wasm";
+const WASM_BINARY = "ort-wasm-simd-threaded.wasm";
 const STORE_NAME = "assets";
 const VERSION_KEY = "trashbin-ai-assets-version";
 const HF_BASE = "https://huggingface.co/0don/trashbin-plus-ai/resolve/main";
@@ -80,6 +80,7 @@ export async function ensureAssets(
 ): Promise<boolean> {
   try {
     const model = MODELS[modelId];
+    const wasmName = WASM_BINARY;
 
     let remoteVersion: string | null = null;
     try {
@@ -95,7 +96,7 @@ export async function ensureAssets(
     const versionMatch = remoteVersion !== null && localVersion === remoteVersion;
 
     const [wasmExists, modelExists] = await Promise.all([
-      idbGet(WASM_NAME),
+      idbGet(wasmName),
       idbGet(model.assetName),
     ]);
 
@@ -104,20 +105,18 @@ export async function ensureAssets(
       return true;
     }
 
-    // If version check failed but local assets exist, use them offline
     if (remoteVersion === null && wasmExists && modelExists) {
       onProgress?.("Using cached assets (offline)");
       return true;
     }
 
-    // Cannot download without version info
     if (remoteVersion === null) return false;
 
     const downloads: Promise<void>[] = [];
     if (!wasmExists || !versionMatch) {
       onProgress?.("Downloading WASM runtime...");
       downloads.push(
-        downloadAsset(WASM_NAME).then((d) => idbPut(WASM_NAME, d)),
+        downloadAsset(wasmName).then((d) => idbPut(wasmName, d)),
       );
     }
     if (!modelExists || !versionMatch) {
@@ -168,15 +167,19 @@ function idbGet(name) {
   });
 }
 
+var MAX_CHUNKS = 3;
+
 function splitChunks(waveform, chunkLen) {
   var chunks = [];
-  var full = Math.floor(waveform.length / chunkLen);
+  var full = Math.min(Math.floor(waveform.length / chunkLen), MAX_CHUNKS);
   for (var i = 0; i < full; i++) chunks.push(waveform.slice(i * chunkLen, (i + 1) * chunkLen));
-  var rem = waveform.length % chunkLen;
-  if (rem > 0 && rem >= chunkLen / 2) {
-    var padded = new Float32Array(chunkLen);
-    padded.set(waveform.slice(full * chunkLen));
-    chunks.push(padded);
+  if (chunks.length < MAX_CHUNKS) {
+    var rem = waveform.length % chunkLen;
+    if (rem > 0 && rem >= chunkLen / 2) {
+      var padded = new Float32Array(chunkLen);
+      padded.set(waveform.slice(Math.floor(waveform.length / chunkLen) * chunkLen));
+      chunks.push(padded);
+    }
   }
   if (chunks.length === 0) {
     var p = new Float32Array(chunkLen);
@@ -194,6 +197,7 @@ self.onmessage = function(e) {
 
   if (msg.type === "init") {
     inputLength = msg.inputLength;
+    var ep = msg.executionProvider || "wasm";
     Promise.all([idbGet(msg.modelAssetName), idbGet(msg.wasmName)])
       .then(function(buffers) {
         if (!buffers[0] || !buffers[1]) {
@@ -203,16 +207,16 @@ self.onmessage = function(e) {
         ort.env.wasm.numThreads = 1;
         ort.env.wasm.wasmBinary = buffers[1];
         return ort.InferenceSession.create(buffers[0], {
-          executionProviders: ["wasm"],
+          executionProviders: [ep],
         }).then(function(s) {
           session = s;
-          console.log("[trashbin+] worker: ready");
-          self.postMessage({ type: "init-done" });
+          console.log("[trashbin+] worker: ready (" + ep + ")");
+          self.postMessage({ type: "init-done", ep: ep });
         });
       })
       .catch(function(err) {
-        console.error("[trashbin+] worker: init failed:", err);
-        self.postMessage({ type: "init-error", error: String(err) });
+        console.error("[trashbin+] worker: init failed (" + ep + "):", err);
+        self.postMessage({ type: "init-error", error: String(err), ep: ep });
       });
   }
 
@@ -264,56 +268,63 @@ const pending = new Map<number, (prob: number | null) => void>();
 
 window.addEventListener("beforeunload", () => disposeEngine());
 
+function createWorker(ortCode: string): Worker {
+  const script = ortCode + "\n" + WORKER_LOGIC;
+  const blob = new Blob([script], { type: "application/javascript" });
+  workerBlobUrl = URL.createObjectURL(blob);
+  return new Worker(workerBlobUrl);
+}
+
+function setupWorker(w: Worker): void {
+  w.onmessage = (e: MessageEvent) => {
+    const msg = e.data;
+    if (msg.type === "classify-done") {
+      const resolve = pending.get(msg.id);
+      if (resolve) {
+        pending.delete(msg.id);
+        resolve(msg.prob);
+      }
+    }
+  };
+  w.onerror = () => {
+    for (const resolve of pending.values()) resolve(null);
+    pending.clear();
+  };
+}
+
+function sendInit(w: Worker, model: typeof MODELS[ModelId], wasmName: string, ep: string): Promise<boolean> {
+  return new Promise<boolean>((resolve) => {
+    const handler = (e: MessageEvent) => {
+      if (e.data.type === "init-done" || e.data.type === "init-error") {
+        w.removeEventListener("message", handler);
+        resolve(e.data.type === "init-done");
+      }
+    };
+    w.addEventListener("message", handler);
+    w.postMessage({
+      type: "init",
+      modelAssetName: model.assetName,
+      wasmName,
+      inputLength: model.inputLength,
+      executionProvider: ep,
+    });
+  });
+}
+
 export async function initEngine(modelId: ModelId): Promise<boolean> {
   try {
     const model = MODELS[modelId];
 
     const [modelExists, wasmExists] = await Promise.all([
       idbGet(model.assetName),
-      idbGet(WASM_NAME),
+      idbGet(WASM_BINARY),
     ]);
     if (!modelExists || !wasmExists) return false;
 
-    const script = ORT_CODE + "\n" + WORKER_LOGIC;
-    const blob = new Blob([script], { type: "application/javascript" });
-    workerBlobUrl = URL.createObjectURL(blob);
-    worker = new Worker(workerBlobUrl);
-
-    worker.onmessage = (e: MessageEvent) => {
-      const msg = e.data;
-      if (msg.type === "classify-done") {
-        const resolve = pending.get(msg.id);
-        if (resolve) {
-          pending.delete(msg.id);
-          resolve(msg.prob);
-        }
-      }
-    };
-    worker.onerror = () => {
-      for (const resolve of pending.values()) resolve(null);
-      pending.clear();
-    };
-
-    const initResult = await new Promise<boolean>((resolve) => {
-      const handler = (e: MessageEvent) => {
-        if (e.data.type === "init-done") {
-          worker!.removeEventListener("message", handler);
-          resolve(true);
-        } else if (e.data.type === "init-error") {
-          worker!.removeEventListener("message", handler);
-          resolve(false);
-        }
-      };
-      worker!.addEventListener("message", handler);
-      worker!.postMessage({
-        type: "init",
-        modelAssetName: model.assetName,
-        wasmName: WASM_NAME,
-        inputLength: model.inputLength,
-      });
-    });
-
-    if (initResult) {
+    worker = createWorker(ORT_WASM_CODE);
+    setupWorker(worker);
+    const ok = await sendInit(worker, model, WASM_BINARY, "wasm");
+    if (ok) {
       activeModelId = modelId;
       return true;
     }

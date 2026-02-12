@@ -55,9 +55,13 @@ async function fetchPreviewUrl(trackUri: string): Promise<string | null> {
     const res = await fetch(
       `${CORS_PROXY}/https://open.spotify.com/embed/track/${id}`,
     );
-    if (!res.ok) return null;
+    if (!res.ok) {
+      console.log(`[trashbin+] ${id}: embed fetch ${res.status}`);
+      return null;
+    }
     const html = await res.text();
     const match = html.match(/"audioPreview":\s*\{\s*"url":\s*"([^"]+)"/);
+    if (!match) console.log(`[trashbin+] ${id}: no audioPreview in embed`);
     return match?.[1] ?? null;
   } catch {
     return null;

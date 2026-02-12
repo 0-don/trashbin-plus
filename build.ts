@@ -49,23 +49,31 @@ const externalGlobals: BunPlugin = {
   },
 };
 
-// Converts the ORT ESM bundle into a classic-worker-compatible string for Blob URL workers.
-// Three patches needed: ESM→global, import.meta.url→blob-safe, .wasm URL→noop (wasmBinary provided).
+// Converts ORT ESM bundles into classic-worker-compatible strings for Blob URL workers.
+// Patches: ESM→global, import.meta.url→blob-safe, .wasm URL→noop (wasmBinary provided).
+function patchOrtBundle(filename: string): string {
+  let code = readFileSync(resolve(`node_modules/onnxruntime-web/dist/${filename}`), "utf-8");
+  code = code.replace(/import\.meta\.url/g, "self.location.href");
+  code = code.replace(/new URL\("ort-wasm-simd-threaded[^"]*\.wasm",self\.location\.href\)\.href/g, '""');
+  code = code.replace(/export\{(.+?)\}/, (_, e: string) =>
+    `self.ort={${e.replace(/(\w+) as (\w+)/g, "$2:$1")}}`,
+  );
+  return code;
+}
+
 const ortWorkerString: BunPlugin = {
   name: "ort-worker-string",
   setup(build) {
-    build.onResolve({ filter: /^virtual:ort-worker-ort$/ }, () => ({
-      path: "virtual:ort-worker-ort",
+    build.onResolve({ filter: /^virtual:ort-worker-(wasm|webgpu)$/ }, ({ path: p }) => ({
+      path: p,
       namespace: "ort-worker",
     }));
-    build.onLoad({ filter: /.*/, namespace: "ort-worker" }, () => {
-      let code = readFileSync(resolve("node_modules/onnxruntime-web/dist/ort.wasm.bundle.min.mjs"), "utf-8");
-      code = code.replace(/import\.meta\.url/g, "self.location.href");
-      code = code.replace(/new URL\("ort-wasm-simd-threaded\.wasm",self\.location\.href\)\.href/g, '""');
-      code = code.replace(/export\{(.+?)\}/, (_, e) =>
-        `self.ort={${e.replace(/(\w+) as (\w+)/g, "$2:$1")}}`,
-      );
-      return { contents: `export const ORT_CODE = ${JSON.stringify(code)};`, loader: "js" };
+    build.onLoad({ filter: /.*/, namespace: "ort-worker" }, ({ path: p }) => {
+      const variant = p.endsWith("webgpu") ? "webgpu" : "wasm";
+      const filename = variant === "webgpu" ? "ort.webgpu.bundle.min.mjs" : "ort.wasm.bundle.min.mjs";
+      const code = patchOrtBundle(filename);
+      const exportName = variant === "webgpu" ? "ORT_WEBGPU_CODE" : "ORT_WASM_CODE";
+      return { contents: `export const ${exportName} = ${JSON.stringify(code)};`, loader: "js" };
     });
   },
 };
