@@ -1,4 +1,6 @@
 import { ORT_WASM_CODE } from "virtual:ort-worker-wasm";
+import { i18n } from "../components/providers/providers";
+import { useAiStore } from "../store/ai-store";
 import { fetchMetadata, hexToBase62 } from "./metadata-utils";
 
 const MODEL_ASSET = "sonics_5s.onnx";
@@ -69,9 +71,11 @@ async function downloadAsset(name: string): Promise<ArrayBuffer> {
   return response.arrayBuffer();
 }
 
-export async function ensureAssets(
-  onProgress?: (message: string) => void,
-): Promise<boolean> {
+function setProgress(message: string | null): void {
+  useAiStore.setState({ progress: message });
+}
+
+export async function ensureAssets(): Promise<boolean> {
   try {
     let remoteVersion: string | null = null;
     try {
@@ -84,7 +88,8 @@ export async function ensureAssets(
     }
 
     const localVersion = Spicetify.LocalStorage.get(VERSION_KEY);
-    const versionMatch = remoteVersion !== null && localVersion === remoteVersion;
+    const versionMatch =
+      remoteVersion !== null && localVersion === remoteVersion;
 
     const [wasmExists, modelExists] = await Promise.all([
       idbGet(WASM_BINARY),
@@ -92,12 +97,12 @@ export async function ensureAssets(
     ]);
 
     if (versionMatch && wasmExists && modelExists) {
-      onProgress?.("Assets up to date");
+      setProgress(i18n.t("AI_ASSETS_UP_TO_DATE"));
       return true;
     }
 
     if (remoteVersion === null && wasmExists && modelExists) {
-      onProgress?.("Using cached assets (offline)");
+      setProgress(i18n.t("AI_ASSETS_CACHED_OFFLINE"));
       return true;
     }
 
@@ -105,13 +110,15 @@ export async function ensureAssets(
 
     const downloads: Promise<void>[] = [];
     if (!wasmExists || !versionMatch) {
-      onProgress?.("Downloading WASM runtime...");
+      setProgress(i18n.t("AI_ASSETS_DOWNLOADING_WASM"));
       downloads.push(
         downloadAsset(WASM_BINARY).then((d) => idbPut(WASM_BINARY, d)),
       );
     }
     if (!modelExists || !versionMatch) {
-      onProgress?.(`Downloading ${MODEL_LABEL}...`);
+      setProgress(
+        i18n.t("AI_ASSETS_DOWNLOADING_MODEL", { model: MODEL_LABEL }),
+      );
       downloads.push(
         downloadAsset(MODEL_ASSET).then((d) => idbPut(MODEL_ASSET, d)),
       );
@@ -119,7 +126,7 @@ export async function ensureAssets(
     await Promise.all(downloads);
 
     Spicetify.LocalStorage.set(VERSION_KEY, remoteVersion);
-    onProgress?.("Assets ready");
+    setProgress(i18n.t("AI_ASSETS_READY"));
     return true;
   } catch (error) {
     console.error("[trashbin+] ensureAssets failed:", error);
@@ -316,13 +323,18 @@ export async function initEngine(): Promise<boolean> {
   }
 }
 
-function classifyAudio(waveform: Float32Array, trackId?: string): Promise<number | null> {
+function classifyAudio(
+  waveform: Float32Array,
+  trackId?: string,
+): Promise<number | null> {
   if (!worker || !engineReady) return Promise.resolve(null);
   const id = nextId++;
   const copy = new Float32Array(waveform);
   return new Promise<number | null>((resolve) => {
     pending.set(id, resolve);
-    worker!.postMessage({ type: "classify", id, waveform: copy, trackId }, [copy.buffer]);
+    worker!.postMessage({ type: "classify", id, waveform: copy, trackId }, [
+      copy.buffer,
+    ]);
   });
 }
 
@@ -356,7 +368,7 @@ function getAudioCtx(): AudioContext {
   return audioCtx;
 }
 
-async function getTrackArtistIds(trackUri: string): Promise<string[]> {
+export async function getTrackArtists(trackUri: string): Promise<string[]> {
   try {
     const currentTrack = Spicetify.Player.data?.item;
     if (currentTrack && currentTrack.uri === trackUri && currentTrack.artists) {
@@ -395,13 +407,14 @@ async function fetchPreviewUrl(trackUri: string): Promise<string | null> {
   return match?.[1] ?? null;
 }
 
-export async function getTrackArtists(trackUri: string): Promise<string[]> {
-  return getTrackArtistIds(trackUri);
-}
-
-export async function classifyTrack(trackUri: string, queuePos?: number, queueRemaining?: number): Promise<number | null> {
+export async function classifyTrack(
+  trackUri: string,
+  queuePos?: number,
+  queueRemaining?: number,
+): Promise<number | null> {
   const trackId = trackUri.split(":")[2] ?? trackUri;
-  const queueTag = queuePos != null ? `[${queuePos}/${queuePos + queueRemaining!}] ` : "";
+  const queueTag =
+    queuePos != null ? `[${queuePos}/${queuePos + queueRemaining!}] ` : "";
 
   if (!engineReady) return null;
 

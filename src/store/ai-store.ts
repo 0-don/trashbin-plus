@@ -7,6 +7,7 @@ import {
   initEngine,
 } from "../lib/ai-engine";
 import { AI_INDICATOR_CLASS } from "../lib/constants";
+import { i18n } from "../components/providers/providers";
 import { useTrashbinStore } from "./trashbin-store";
 
 const BLOCKLIST_URL =
@@ -258,13 +259,10 @@ export const useAiStore = create<AiState>((set, get) => ({
       }
       set({ results });
 
-      const setProgress = (message: string | null) =>
-        set({ progress: message });
-
-      const ready = await ensureAssets(setProgress);
+      const ready = await ensureAssets();
       if (!ready) return false;
 
-      setProgress("Initializing model...");
+      set({ progress: i18n.t("AI_ASSETS_INITIALIZING") });
       const initialized = await initEngine();
       if (initialized) {
         set({ progress: null, ready: true });
