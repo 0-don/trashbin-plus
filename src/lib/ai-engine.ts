@@ -2,8 +2,6 @@ import { ORT_CODE } from "virtual:ort-worker-ort";
 
 export type ModelId = "sonics-5s" | "sonics-120s";
 export const DEFAULT_MODEL: ModelId = "sonics-5s";
-const SAMPLE_RATE = 44100;
-
 export const MODELS = {
   "sonics-5s": {
     label: "SONICS SpecTTTra 5s",
@@ -170,13 +168,6 @@ function idbGet(name) {
   });
 }
 
-function decodeAudio(arrayBuffer, sampleRate) {
-  var ctx = new OfflineAudioContext(1, 1, sampleRate);
-  return ctx.decodeAudioData(arrayBuffer).then(function(decoded) {
-    return decoded.getChannelData(0);
-  });
-}
-
 function splitChunks(waveform, chunkLen) {
   var chunks = [];
   var full = Math.floor(waveform.length / chunkLen);
@@ -197,32 +188,30 @@ function splitChunks(waveform, chunkLen) {
 
 var session = null;
 var inputLength = 0;
-var sampleRate = 44100;
 
 self.onmessage = function(e) {
   var msg = e.data;
 
   if (msg.type === "init") {
     inputLength = msg.inputLength;
-    sampleRate = msg.sampleRate;
     Promise.all([idbGet(msg.modelAssetName), idbGet(msg.wasmName)])
       .then(function(buffers) {
-        var modelBuffer = buffers[0];
-        var wasmBuffer = buffers[1];
-        if (!modelBuffer || !wasmBuffer) {
+        if (!buffers[0] || !buffers[1]) {
           self.postMessage({ type: "init-error", error: "Assets not found in IndexedDB" });
           return;
         }
         ort.env.wasm.numThreads = 1;
-        ort.env.wasm.wasmBinary = wasmBuffer;
-        return ort.InferenceSession.create(modelBuffer, {
+        ort.env.wasm.wasmBinary = buffers[1];
+        return ort.InferenceSession.create(buffers[0], {
           executionProviders: ["wasm"],
         }).then(function(s) {
           session = s;
+          console.log("[trashbin+] worker: ready");
           self.postMessage({ type: "init-done" });
         });
       })
       .catch(function(err) {
+        console.error("[trashbin+] worker: init failed:", err);
         self.postMessage({ type: "init-error", error: String(err) });
       });
   }
@@ -232,34 +221,32 @@ self.onmessage = function(e) {
       self.postMessage({ type: "classify-done", id: msg.id, prob: null });
       return;
     }
-    fetch(msg.url)
-      .then(function(res) { return res.arrayBuffer(); })
-      .then(function(buf) { return decodeAudio(buf, sampleRate); })
-      .then(function(waveform) {
-        var chunks = splitChunks(waveform, inputLength);
-        var chain = Promise.resolve();
-        var probs = [];
-        chunks.forEach(function(chunk) {
-          chain = chain.then(function() {
-            var tensor = new ort.Tensor("float32", chunk, [1, chunk.length]);
-            return session.run({ audio: tensor }).then(function(r) {
-              probs.push(r["prob"].data[0]);
-            });
-          });
+    var t0 = performance.now();
+    var chunks = splitChunks(msg.waveform, inputLength);
+    var chain = Promise.resolve();
+    var probs = [];
+    chunks.forEach(function(chunk) {
+      chain = chain.then(function() {
+        var tensor = new ort.Tensor("float32", chunk, [1, chunk.length]);
+        return session.run({ audio: tensor }).then(function(r) {
+          probs.push(r["prob"].data[0]);
         });
-        return chain.then(function() {
-          if (probs.length === 0) return null;
-          var sum = 0;
-          for (var i = 0; i < probs.length; i++) sum += probs[i];
-          return sum / probs.length;
-        });
-      })
-      .then(function(prob) {
-        self.postMessage({ type: "classify-done", id: msg.id, prob: prob });
-      })
-      .catch(function() {
-        self.postMessage({ type: "classify-done", id: msg.id, prob: null });
       });
+    });
+    chain.then(function() {
+      if (probs.length === 0) return null;
+      var sum = 0;
+      for (var i = 0; i < probs.length; i++) sum += probs[i];
+      return sum / probs.length;
+    })
+    .then(function(prob) {
+      var ms = (performance.now() - t0).toFixed(0);
+      console.log("[trashbin+] " + (msg.trackId || "?") + ": " + chunks.length + " chunks, " + ms + "ms, prob=" + (prob !== null ? prob.toFixed(4) : "null"));
+      self.postMessage({ type: "classify-done", id: msg.id, prob: prob });
+    })
+    .catch(function() {
+      self.postMessage({ type: "classify-done", id: msg.id, prob: null });
+    });
   }
 
   else if (msg.type === "dispose") {
@@ -323,7 +310,6 @@ export async function initEngine(modelId: ModelId): Promise<boolean> {
         modelAssetName: model.assetName,
         wasmName: WASM_NAME,
         inputLength: model.inputLength,
-        sampleRate: SAMPLE_RATE,
       });
     });
 
@@ -341,12 +327,13 @@ export async function initEngine(modelId: ModelId): Promise<boolean> {
   }
 }
 
-export function classifyAudio(url: string): Promise<number | null> {
+export function classifyAudio(waveform: Float32Array, trackId?: string): Promise<number | null> {
   if (!worker || !activeModelId) return Promise.resolve(null);
   const id = nextId++;
+  const copy = new Float32Array(waveform);
   return new Promise<number | null>((resolve) => {
     pending.set(id, resolve);
-    worker!.postMessage({ type: "classify", id, url });
+    worker!.postMessage({ type: "classify", id, waveform: copy, trackId }, [copy.buffer]);
   });
 }
 

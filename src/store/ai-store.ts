@@ -43,6 +43,8 @@ function setResult(uri: string, probability: number): void {
   }
 }
 
+let processedCount = 0;
+
 async function processNext(): Promise<void> {
   if (processing || queue.size === 0) return;
 
@@ -52,8 +54,11 @@ async function processNext(): Promise<void> {
   if (useAiStore.getState().results[uri] !== undefined) return;
 
   processing = true;
+  processedCount++;
+  const pos = processedCount;
+  const remaining = queue.size;
   try {
-    const probability = await classifyTrack(uri);
+    const probability = await classifyTrack(uri, pos, remaining);
     if (probability !== null) {
       setResult(uri, probability);
       autoTrashIfNeeded(uri, probability);

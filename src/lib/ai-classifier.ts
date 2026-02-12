@@ -11,6 +11,15 @@ import { isBlocklistedArtist } from "./ai-blocklist";
 import { fetchMetadata, hexToBase62 } from "./metadata-utils";
 
 const CORS_PROXY = "https://cors-proxy.spicetify.app";
+const SAMPLE_RATE = 44100;
+
+let audioCtx: AudioContext | null = null;
+
+function getAudioCtx(): AudioContext {
+  if (!audioCtx || audioCtx.state === "closed")
+    audioCtx = new AudioContext({ sampleRate: SAMPLE_RATE });
+  return audioCtx;
+}
 
 async function getTrackArtistIds(trackUri: string): Promise<string[]> {
   try {
@@ -55,20 +64,34 @@ async function fetchPreviewUrl(trackUri: string): Promise<string | null> {
   }
 }
 
-export async function classifyTrack(trackUri: string): Promise<number | null> {
+export async function classifyTrack(trackUri: string, queuePos?: number, queueRemaining?: number): Promise<number | null> {
+  const trackId = trackUri.split(":")[2] ?? trackUri;
+  const queueTag = queuePos != null ? `[${queuePos}/${queuePos + queueRemaining!}] ` : "";
+
   // Primary: SoulOverAI blocklist check
   const artistIds = await getTrackArtistIds(trackUri);
   for (const artistId of artistIds) {
-    if (isBlocklistedArtist(artistId)) return 1.0;
+    if (isBlocklistedArtist(artistId)) {
+      console.log(`[trashbin+] ${queueTag}${trackId}: blocklisted`);
+      return 1.0;
+    }
   }
 
-  // Backup: ONNX ML inference (fetch + decode + infer all in worker)
+  // Backup: ONNX ML inference (decode on main thread, inference in worker)
   if (!activeModelId) return null;
 
   const previewUrl = await fetchPreviewUrl(trackUri);
-  if (!previewUrl) return null;
+  if (!previewUrl) {
+    console.log(`[trashbin+] ${queueTag}${trackId}: no preview`);
+    return null;
+  }
 
-  return classifyAudio(previewUrl);
+  const response = await fetch(previewUrl);
+  if (!response.ok) return null;
+  const buffer = await response.arrayBuffer();
+  const decoded = await getAudioCtx().decodeAudioData(buffer);
+  const waveform = decoded.getChannelData(0);
+  return classifyAudio(waveform, queueTag + trackId);
 }
 
 export async function initClassifier(
@@ -85,4 +108,8 @@ export async function initClassifier(
 
 export function disposeClassifier(): void {
   disposeEngine();
+  if (audioCtx && audioCtx.state !== "closed") {
+    audioCtx.close();
+    audioCtx = null;
+  }
 }
