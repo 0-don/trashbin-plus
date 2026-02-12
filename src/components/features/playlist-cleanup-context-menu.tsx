@@ -28,7 +28,33 @@ export function PlaylistCleanupContextMenu() {
 
     contextMenuItem.register();
 
-    return () => contextMenuItem.deregister();
+    // Reposition the menu item to appear near "Delete" instead of at the top
+    const observer = new MutationObserver(() => {
+      const menu = document.querySelector<HTMLElement>(
+        "[data-tippy-root] ul, #context-menu ul",
+      );
+      if (!menu) return;
+
+      const items = Array.from(menu.querySelectorAll<HTMLElement>(":scope > li"));
+      const label = t("ACTION_REMOVE_TRASHED");
+      const trashItem = items.find(
+        (li) => li.textContent?.trim() === label,
+      );
+      const deleteItem = items.find(
+        (li) => li.querySelector("button")?.textContent?.trim() === "Delete",
+      );
+
+      if (trashItem && deleteItem) {
+        deleteItem.after(trashItem);
+      }
+    });
+
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    return () => {
+      contextMenuItem.deregister();
+      observer.disconnect();
+    };
   }, [trashbinEnabled, t]);
 
   return null;

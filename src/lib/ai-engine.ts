@@ -2,7 +2,7 @@ import { ORT_CODE } from "virtual:ort-worker-ort";
 
 export type ModelId = "sonics-5s" | "sonics-120s";
 export const DEFAULT_MODEL: ModelId = "sonics-5s";
-export const SAMPLE_RATE = 44100;
+const SAMPLE_RATE = 44100;
 
 export const MODELS = {
   "sonics-5s": {
@@ -170,12 +170,41 @@ function idbGet(name) {
   });
 }
 
+function decodeAudio(arrayBuffer, sampleRate) {
+  var ctx = new OfflineAudioContext(1, 1, sampleRate);
+  return ctx.decodeAudioData(arrayBuffer).then(function(decoded) {
+    return decoded.getChannelData(0);
+  });
+}
+
+function splitChunks(waveform, chunkLen) {
+  var chunks = [];
+  var full = Math.floor(waveform.length / chunkLen);
+  for (var i = 0; i < full; i++) chunks.push(waveform.slice(i * chunkLen, (i + 1) * chunkLen));
+  var rem = waveform.length % chunkLen;
+  if (rem > 0 && rem >= chunkLen / 2) {
+    var padded = new Float32Array(chunkLen);
+    padded.set(waveform.slice(full * chunkLen));
+    chunks.push(padded);
+  }
+  if (chunks.length === 0) {
+    var p = new Float32Array(chunkLen);
+    p.set(waveform, Math.floor((chunkLen - waveform.length) / 2));
+    chunks.push(p);
+  }
+  return chunks;
+}
+
 var session = null;
+var inputLength = 0;
+var sampleRate = 44100;
 
 self.onmessage = function(e) {
   var msg = e.data;
 
   if (msg.type === "init") {
+    inputLength = msg.inputLength;
+    sampleRate = msg.sampleRate;
     Promise.all([idbGet(msg.modelAssetName), idbGet(msg.wasmName)])
       .then(function(buffers) {
         var modelBuffer = buffers[0];
@@ -198,18 +227,38 @@ self.onmessage = function(e) {
       });
   }
 
-  else if (msg.type === "infer") {
+  else if (msg.type === "classify") {
     if (!session) {
-      self.postMessage({ type: "infer-done", id: msg.id, prob: null });
+      self.postMessage({ type: "classify-done", id: msg.id, prob: null });
       return;
     }
-    var tensor = new ort.Tensor("float32", msg.data, [1, msg.data.length]);
-    session.run({ audio: tensor })
-      .then(function(results) {
-        self.postMessage({ type: "infer-done", id: msg.id, prob: results["prob"].data[0] });
+    fetch(msg.url)
+      .then(function(res) { return res.arrayBuffer(); })
+      .then(function(buf) { return decodeAudio(buf, sampleRate); })
+      .then(function(waveform) {
+        var chunks = splitChunks(waveform, inputLength);
+        var chain = Promise.resolve();
+        var probs = [];
+        chunks.forEach(function(chunk) {
+          chain = chain.then(function() {
+            var tensor = new ort.Tensor("float32", chunk, [1, chunk.length]);
+            return session.run({ audio: tensor }).then(function(r) {
+              probs.push(r["prob"].data[0]);
+            });
+          });
+        });
+        return chain.then(function() {
+          if (probs.length === 0) return null;
+          var sum = 0;
+          for (var i = 0; i < probs.length; i++) sum += probs[i];
+          return sum / probs.length;
+        });
+      })
+      .then(function(prob) {
+        self.postMessage({ type: "classify-done", id: msg.id, prob: prob });
       })
       .catch(function() {
-        self.postMessage({ type: "infer-done", id: msg.id, prob: null });
+        self.postMessage({ type: "classify-done", id: msg.id, prob: null });
       });
   }
 
@@ -223,44 +272,41 @@ self.onmessage = function(e) {
 let worker: Worker | null = null;
 let workerBlobUrl: string | null = null;
 export let activeModelId: ModelId | null = null;
-let inferenceQueue = Promise.resolve<number | null>(null);
-let nextInferenceId = 0;
-const pendingInferences = new Map<number, (prob: number | null) => void>();
+let nextId = 0;
+const pending = new Map<number, (prob: number | null) => void>();
+
+window.addEventListener("beforeunload", () => disposeEngine());
 
 export async function initEngine(modelId: ModelId): Promise<boolean> {
   try {
     const model = MODELS[modelId];
 
-    // Verify assets exist before creating worker
     const [modelExists, wasmExists] = await Promise.all([
       idbGet(model.assetName),
       idbGet(WASM_NAME),
     ]);
     if (!modelExists || !wasmExists) return false;
 
-    // Create worker from Blob URL
     const script = ORT_CODE + "\n" + WORKER_LOGIC;
     const blob = new Blob([script], { type: "application/javascript" });
     workerBlobUrl = URL.createObjectURL(blob);
     worker = new Worker(workerBlobUrl);
 
-    // Handle inference responses and worker errors
     worker.onmessage = (e: MessageEvent) => {
       const msg = e.data;
-      if (msg.type === "infer-done") {
-        const resolve = pendingInferences.get(msg.id);
+      if (msg.type === "classify-done") {
+        const resolve = pending.get(msg.id);
         if (resolve) {
-          pendingInferences.delete(msg.id);
+          pending.delete(msg.id);
           resolve(msg.prob);
         }
       }
     };
     worker.onerror = () => {
-      for (const resolve of pendingInferences.values()) resolve(null);
-      pendingInferences.clear();
+      for (const resolve of pending.values()) resolve(null);
+      pending.clear();
     };
 
-    // Wait for worker init
     const initResult = await new Promise<boolean>((resolve) => {
       const handler = (e: MessageEvent) => {
         if (e.data.type === "init-done") {
@@ -276,6 +322,8 @@ export async function initEngine(modelId: ModelId): Promise<boolean> {
         type: "init",
         modelAssetName: model.assetName,
         wasmName: WASM_NAME,
+        inputLength: model.inputLength,
+        sampleRate: SAMPLE_RATE,
       });
     });
 
@@ -293,23 +341,13 @@ export async function initEngine(modelId: ModelId): Promise<boolean> {
   }
 }
 
-export function queueInference(data: Float32Array): Promise<number | null> {
-  const infer = async (): Promise<number | null> => {
-    if (!worker || !activeModelId) return null;
-    const id = nextInferenceId++;
-    return new Promise<number | null>((resolve) => {
-      pendingInferences.set(id, resolve);
-      const copy = new Float32Array(data);
-      worker!.postMessage({ type: "infer", id, data: copy }, [copy.buffer]);
-    });
-  };
-
-  const promise = inferenceQueue.then(infer, infer);
-  inferenceQueue = promise.then(
-    () => null,
-    () => null,
-  );
-  return promise;
+export function classifyAudio(url: string): Promise<number | null> {
+  if (!worker || !activeModelId) return Promise.resolve(null);
+  const id = nextId++;
+  return new Promise<number | null>((resolve) => {
+    pending.set(id, resolve);
+    worker!.postMessage({ type: "classify", id, url });
+  });
 }
 
 export function disposeEngine(): void {
@@ -323,8 +361,7 @@ export function disposeEngine(): void {
     workerBlobUrl = null;
   }
   activeModelId = null;
-  inferenceQueue = Promise.resolve(null);
-  for (const resolve of pendingInferences.values()) resolve(null);
-  pendingInferences.clear();
-  nextInferenceId = 0;
+  for (const resolve of pending.values()) resolve(null);
+  pending.clear();
+  nextId = 0;
 }
