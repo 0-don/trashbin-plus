@@ -165,19 +165,15 @@ function idbGet(name) {
   });
 }
 
-var MAX_CHUNKS = 3;
-
 function splitChunks(waveform, chunkLen) {
   var chunks = [];
-  var full = Math.min(Math.floor(waveform.length / chunkLen), MAX_CHUNKS);
+  var full = Math.floor(waveform.length / chunkLen);
   for (var i = 0; i < full; i++) chunks.push(waveform.slice(i * chunkLen, (i + 1) * chunkLen));
-  if (chunks.length < MAX_CHUNKS) {
-    var rem = waveform.length % chunkLen;
-    if (rem > 0 && rem >= chunkLen / 2) {
-      var padded = new Float32Array(chunkLen);
-      padded.set(waveform.slice(Math.floor(waveform.length / chunkLen) * chunkLen));
-      chunks.push(padded);
-    }
+  var rem = waveform.length % chunkLen;
+  if (rem > 0 && rem >= chunkLen / 2) {
+    var padded = new Float32Array(chunkLen);
+    padded.set(waveform.slice(full * chunkLen));
+    chunks.push(padded);
   }
   if (chunks.length === 0) {
     var p = new Float32Array(chunkLen);
@@ -411,8 +407,10 @@ export async function classifyTrack(
   trackUri: string,
   queuePos?: number,
   queueRemaining?: number,
+  trackLabel?: string | null,
 ): Promise<number | null> {
   const trackId = trackUri.split(":")[2] ?? trackUri;
+  const displayName = trackLabel || trackId;
   const queueTag =
     queuePos != null ? `[${queuePos}/${queuePos + queueRemaining!}] ` : "";
 
@@ -420,7 +418,7 @@ export async function classifyTrack(
 
   const previewUrl = await fetchPreviewUrl(trackUri);
   if (!previewUrl) {
-    console.log(`[trashbin+] ${queueTag}${trackId}: no preview`);
+    console.log(`[trashbin+] ${queueTag}${displayName}: no preview`);
     return null;
   }
 
@@ -429,5 +427,5 @@ export async function classifyTrack(
   const buffer = await response.arrayBuffer();
   const decoded = await getAudioCtx().decodeAudioData(buffer);
   const waveform = decoded.getChannelData(0);
-  return classifyAudio(waveform, queueTag + trackId);
+  return classifyAudio(waveform, queueTag + displayName);
 }

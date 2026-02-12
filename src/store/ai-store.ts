@@ -17,6 +17,8 @@ const LS_BLOCKLIST_TS = "trashbin-ai-blocklist:ts";
 const BLOCKLIST_TTL = 86_400_000; // 24 hours
 
 const LS_KEY = "trashbin-ai-results";
+const LS_FAILED_TS = "trashbin-ai-failed-ts";
+const FAILED_RETRY_TTL = 86_400_000; // 24 hours
 const POLL_INTERVAL = 2000;
 const AI_TRASH_THRESHOLD = 0.8;
 const MAX_RETRIES = 2;
@@ -24,6 +26,27 @@ const MAX_RETRIES = 2;
 interface BlocklistEntry {
   spotify: string;
   [key: string]: unknown;
+}
+
+function resolveTrackLabel(trackUri: string): string | null {
+  const currentTrack = Spicetify.Player.data?.item;
+  if (currentTrack?.uri === trackUri) {
+    const title = currentTrack.name;
+    const artist = currentTrack.artists?.[0]?.name;
+    if (title) return artist ? `${artist} - ${title}` : title;
+  }
+  const allTracks = [
+    ...(Spicetify.Queue?.nextTracks || []),
+    ...(Spicetify.Queue?.prevTracks || []),
+  ];
+  for (const t of allTracks) {
+    if (t.contextTrack?.uri === trackUri && t.contextTrack.metadata) {
+      const title = t.contextTrack.metadata.title;
+      const artist = t.contextTrack.metadata.artistName;
+      if (title) return artist ? `${artist} - ${title}` : title;
+    }
+  }
+  return null;
 }
 
 function extractArtistId(value: string): string | null {
@@ -167,8 +190,9 @@ export const useAiStore = create<AiState>((set, get) => ({
 
     if (state.results[uri] !== undefined) return;
 
-    set({ processing: true, processedCount: state.processedCount + 1 });
-    const pos = state.processedCount + 1;
+    const count = get().processedCount + 1;
+    set({ processing: true, processedCount: count });
+    const pos = count;
     const remaining = state.queue.size;
 
     const setResult = (u: string, probability: number) => {
@@ -183,6 +207,15 @@ export const useAiStore = create<AiState>((set, get) => ({
             ),
           ),
         );
+      }
+      if (probability < 0) {
+        let failedTs: Record<string, number> = {};
+        try {
+          const raw = Spicetify.LocalStorage.get(LS_FAILED_TS);
+          if (raw) failedTs = JSON.parse(raw);
+        } catch { /* corrupt */ }
+        failedTs[u] = Date.now();
+        Spicetify.LocalStorage.set(LS_FAILED_TS, JSON.stringify(failedTs));
       }
     };
 
@@ -206,7 +239,8 @@ export const useAiStore = create<AiState>((set, get) => ({
         return;
       }
 
-      const probability = await classifyTrack(uri, pos, remaining);
+      const trackLabel = resolveTrackLabel(uri);
+      const probability = await classifyTrack(uri, pos, remaining, trackLabel);
       if (probability !== null) {
         setResult(uri, probability);
         autoTrash(uri, probability);
@@ -257,6 +291,26 @@ export const useAiStore = create<AiState>((set, get) => ({
       } catch {
         results = {};
       }
+
+      // Re-enqueue failed tracks older than 24h
+      let failedTs: Record<string, number> = {};
+      try {
+        const raw = Spicetify.LocalStorage.get(LS_FAILED_TS);
+        if (raw) failedTs = JSON.parse(raw);
+      } catch { /* corrupt */ }
+      const now = Date.now();
+      let failedChanged = false;
+      for (const [uri, ts] of Object.entries(failedTs)) {
+        if (now - ts >= FAILED_RETRY_TTL) {
+          delete results[uri];
+          delete failedTs[uri];
+          failedChanged = true;
+        }
+      }
+      if (failedChanged) {
+        Spicetify.LocalStorage.set(LS_FAILED_TS, JSON.stringify(failedTs));
+      }
+
       set({ results });
 
       const ready = await ensureAssets();
@@ -284,6 +338,7 @@ export const useAiStore = create<AiState>((set, get) => ({
 
   clearStorage: () => {
     Spicetify.LocalStorage.remove(LS_KEY);
+    Spicetify.LocalStorage.remove(LS_FAILED_TS);
     get().queue.clear();
     set({ results: {} });
     document
