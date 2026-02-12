@@ -1,40 +1,18 @@
 import { useEffect } from "react";
-import { disposeBlocklist, initBlocklist } from "../lib/ai-blocklist";
-import { DEFAULT_MODEL } from "../lib/ai-engine";
 import { useAiStore } from "../store/ai-store";
 import { useTrashbinStore } from "../store/trashbin-store";
 
 export const useAiDetection = () => {
-  const store = useTrashbinStore();
-
-  // Always initialize the SoulOverAI blocklist (lightweight, independent of ONNX)
-  useEffect(() => {
-    initBlocklist();
-    return () => {
-      disposeBlocklist();
-    };
-  }, []);
+  const aiDetectionEnabled = useTrashbinStore((s) => s.aiDetectionEnabled);
 
   useEffect(() => {
-    if (!store.aiDetectionEnabled) return;
+    if (!aiDetectionEnabled) return;
 
-    let cancelled = false;
     const aiStore = useAiStore.getState();
-
-    const init = async () => {
-      store.setAiAssetsDownloading(true);
-      const ready = await aiStore.initialize(DEFAULT_MODEL);
-      if (!cancelled) {
-        store.setAiAssetsReady(ready);
-        store.setAiAssetsDownloading(false);
-      }
-    };
-
-    init();
+    aiStore.initialize();
 
     return () => {
-      cancelled = true;
       aiStore.cleanup();
     };
-  }, [store.aiDetectionEnabled]);
+  }, [aiDetectionEnabled]);
 };

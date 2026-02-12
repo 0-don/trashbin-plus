@@ -20,9 +20,10 @@ const widgetSpinner = () =>
   );
 
 export const AiDetectionWidget: React.FC = () => {
-  const store = useTrashbinStore();
+  const aiDetectionEnabled = useTrashbinStore((s) => s.aiDetectionEnabled);
+  const aiReady = useAiStore((s) => s.ready);
   const widgetRef = useRef<Spicetify.Playbar.Widget | null>(null);
-  const enabled = store.aiDetectionEnabled && store.aiAssetsReady;
+  const enabled = aiDetectionEnabled && aiReady;
 
   useEffect(() => {
     if (!enabled) return;

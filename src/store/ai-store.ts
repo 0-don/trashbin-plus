@@ -1,151 +1,274 @@
 import { create } from "zustand";
-import { disposeBlocklist, initBlocklist } from "../lib/ai-blocklist";
-import { classifyTrack, disposeClassifier, initClassifier } from "../lib/ai-classifier";
-import { type ModelId, MODELS } from "../lib/ai-engine";
+import {
+  classifyTrack,
+  disposeEngine,
+  ensureAssets,
+  getTrackArtists,
+  initEngine,
+} from "../lib/ai-engine";
 import { AI_INDICATOR_CLASS } from "../lib/constants";
 import { useTrashbinStore } from "./trashbin-store";
 
-const LS_KEY_PREFIX = "trashbin-ai-results:";
+const BLOCKLIST_URL =
+  "https://raw.githubusercontent.com/xoundbyte/soul-over-ai/main/dist/artists.json";
+const LS_BLOCKLIST_DATA = "trashbin-ai-blocklist:data";
+const LS_BLOCKLIST_TS = "trashbin-ai-blocklist:ts";
+const BLOCKLIST_TTL = 86_400_000; // 24 hours
+
+const LS_KEY = "trashbin-ai-results";
 const POLL_INTERVAL = 2000;
 const AI_TRASH_THRESHOLD = 0.8;
+const MAX_RETRIES = 2;
+
+interface BlocklistEntry {
+  spotify: string;
+  [key: string]: unknown;
+}
+
+function extractArtistId(value: string): string | null {
+  const trimmed = value.trim();
+  const direct = trimmed.match(/^[a-zA-Z0-9]{22}$/);
+  if (direct) return direct[0];
+  const uri = trimmed.match(/artist[\/:]([a-zA-Z0-9]+)/);
+  return uri ? uri[1] : null;
+}
 
 interface AiState {
+  // State
   results: Record<string, number>;
-  lsKey: string | null;
+  progress: string | null;
+  ready: boolean;
+  blocklist: Set<string>;
+  blocklistInitialized: boolean;
+  queue: Set<string>;
+  retries: Map<string, number>;
+  processing: boolean;
+  processedCount: number;
+  intervalId: ReturnType<typeof setInterval> | null;
+  refreshTimer: ReturnType<typeof setInterval> | null;
 
+  // Blocklist
+  initBlocklist: () => Promise<void>;
+  disposeBlocklist: () => void;
+  isBlocklistedArtist: (artistId: string) => boolean;
+
+  // Queue
   enqueue: (trackUri: string) => void;
-  clearStorage: () => void;
-  initialize: (modelId: ModelId, onProgress?: (message: string) => void) => Promise<boolean>;
+  processNext: () => Promise<void>;
+  startQueue: () => void;
+  stopQueue: () => void;
+
+  // Lifecycle
+  initialize: () => Promise<boolean>;
   cleanup: () => void;
+  clearStorage: () => void;
 }
 
-const MAX_RETRIES = 2;
-const queue = new Set<string>();
-const retries = new Map<string, number>();
-let processing = false;
-let intervalId: ReturnType<typeof setInterval> | null = null;
+export const useAiStore = create<AiState>((set, get) => ({
+  // State
+  results: {},
+  progress: null,
+  ready: false,
+  blocklist: new Set<string>(),
+  blocklistInitialized: false,
+  queue: new Set<string>(),
+  retries: new Map<string, number>(),
+  processing: false,
+  processedCount: 0,
+  intervalId: null,
+  refreshTimer: null,
 
-function autoTrashIfNeeded(uri: string, probability: number): void {
-  const state = useTrashbinStore.getState();
-  if (
-    state.trashAiSongs &&
-    probability >= AI_TRASH_THRESHOLD &&
-    !state.trashSongList[uri]
-  ) {
-    state.toggleSongTrash(uri, false);
-  }
-}
+  // ── Blocklist ────────────────────────────────────────────────────
 
-function setResult(uri: string, probability: number): void {
-  const state = useAiStore.getState();
-  const results = { ...state.results, [uri]: probability };
-  useAiStore.setState({ results });
-  if (state.lsKey && probability >= 0) {
-    Spicetify.LocalStorage.set(state.lsKey, JSON.stringify(
-      Object.fromEntries(Object.entries(results).filter(([, v]) => v >= 0)),
-    ));
-  }
-}
+  initBlocklist: async () => {
+    if (get().blocklistInitialized) return;
+    set({ blocklistInitialized: true });
 
-let processedCount = 0;
+    const now = Date.now();
+    const lastFetch = parseInt(
+      Spicetify.LocalStorage.get(LS_BLOCKLIST_TS) ?? "0",
+    );
+    let data: BlocklistEntry[] = [];
 
-async function processNext(): Promise<void> {
-  if (processing || queue.size === 0) return;
+    try {
+      const cached = Spicetify.LocalStorage.get(LS_BLOCKLIST_DATA);
+      if (cached) data = JSON.parse(cached);
+    } catch {
+      /* corrupt cache */
+    }
 
-  const uri = queue.values().next().value!;
-  queue.delete(uri);
+    const blocklist = new Set<string>();
+    const build = (entries: BlocklistEntry[]) => {
+      blocklist.clear();
+      for (const entry of entries) {
+        if (typeof entry !== "object" || !entry.spotify) continue;
+        const id = extractArtistId(entry.spotify);
+        if (id) blocklist.add(id);
+      }
+      set({ blocklist: new Set(blocklist) });
+    };
 
-  if (useAiStore.getState().results[uri] !== undefined) return;
+    if (data.length > 0) build(data);
 
-  processing = true;
-  processedCount++;
-  const pos = processedCount;
-  const remaining = queue.size;
-  try {
-    const probability = await classifyTrack(uri, pos, remaining);
-    if (probability !== null) {
-      setResult(uri, probability);
-      autoTrashIfNeeded(uri, probability);
-      retries.delete(uri);
-    } else {
-      const count = (retries.get(uri) ?? 0) + 1;
-      if (count < MAX_RETRIES) {
-        retries.set(uri, count);
-        queue.add(uri);
-      } else {
-        setResult(uri, -1);
-        retries.delete(uri);
+    if (now - lastFetch > BLOCKLIST_TTL || data.length === 0) {
+      try {
+        const res = await fetch(BLOCKLIST_URL);
+        if (res.ok) {
+          const fetched = await res.json();
+          if (Array.isArray(fetched) && fetched.length > 0) {
+            data = fetched;
+            Spicetify.LocalStorage.set(LS_BLOCKLIST_DATA, JSON.stringify(data));
+            Spicetify.LocalStorage.set(LS_BLOCKLIST_TS, now.toString());
+            build(data);
+          }
+        }
+      } catch {
+        /* offline */
       }
     }
-  } catch (error) {
-    const count = (retries.get(uri) ?? 0) + 1;
-    if (count < MAX_RETRIES) {
-      retries.set(uri, count);
-      queue.add(uri);
-    } else {
-      setResult(uri, -1);
-      retries.delete(uri);
+
+    if (!get().refreshTimer) {
+      const timer = setInterval(() => {
+        set({ blocklistInitialized: false });
+        get().initBlocklist();
+      }, BLOCKLIST_TTL);
+      set({ refreshTimer: timer });
     }
-  } finally {
-    processing = false;
-  }
-}
+  },
 
-function startQueue(): void {
-  if (intervalId) return;
-  intervalId = setInterval(processNext, POLL_INTERVAL);
-}
+  disposeBlocklist: () => {
+    const state = get();
+    if (state.refreshTimer) {
+      clearInterval(state.refreshTimer);
+    }
+    set({
+      refreshTimer: null,
+      blocklist: new Set<string>(),
+      blocklistInitialized: false,
+    });
+  },
 
-function stopQueue(): void {
-  if (intervalId) {
-    clearInterval(intervalId);
-    intervalId = null;
-  }
-  queue.clear();
-  retries.clear();
-  processing = false;
-}
+  isBlocklistedArtist: (artistId: string) => get().blocklist.has(artistId),
 
-export const useAiStore = create<AiState>(() => ({
-  results: {},
-  lsKey: null,
+  // ── Queue ────────────────────────────────────────────────────────
 
   enqueue: (trackUri: string) => {
-    if (useAiStore.getState().results[trackUri] !== undefined) return;
-    queue.add(trackUri);
+    if (get().results[trackUri] !== undefined) return;
+    get().queue.add(trackUri);
   },
 
-  clearStorage: () => {
-    const state = useAiStore.getState();
-    if (state.lsKey) {
-      Spicetify.LocalStorage.remove(state.lsKey);
-    }
-    queue.clear();
-    useAiStore.setState({ results: {} });
-    document
-      .querySelectorAll(`.${AI_INDICATOR_CLASS}`)
-      .forEach((el) => el.remove());
-  },
+  processNext: async () => {
+    const state = get();
+    if (state.processing || state.queue.size === 0) return;
 
-  initialize: async (modelId: ModelId, onProgress?: (message: string) => void) => {
+    const uri = state.queue.values().next().value!;
+    state.queue.delete(uri);
+
+    if (state.results[uri] !== undefined) return;
+
+    set({ processing: true, processedCount: state.processedCount + 1 });
+    const pos = state.processedCount + 1;
+    const remaining = state.queue.size;
+
+    const setResult = (u: string, probability: number) => {
+      const results = { ...get().results, [u]: probability };
+      set({ results });
+      if (probability >= 0) {
+        Spicetify.LocalStorage.set(
+          LS_KEY,
+          JSON.stringify(
+            Object.fromEntries(
+              Object.entries(results).filter(([, v]) => v >= 0),
+            ),
+          ),
+        );
+      }
+    };
+
+    const autoTrash = (u: string, probability: number) => {
+      const ts = useTrashbinStore.getState();
+      if (
+        ts.trashAiSongs &&
+        probability >= AI_TRASH_THRESHOLD &&
+        !ts.trashSongList[u]
+      ) {
+        ts.toggleSongTrash(u, false);
+      }
+    };
+
     try {
-      // Initialize SoulOverAI blocklist (lightweight, non-blocking)
-      initBlocklist();
+      const artistIdList = await getTrackArtists(uri);
+      if (artistIdList.some((id) => get().blocklist.has(id))) {
+        setResult(uri, 1.0);
+        autoTrash(uri, 1.0);
+        state.retries.delete(uri);
+        return;
+      }
 
-      const lsKey = `${LS_KEY_PREFIX}${modelId}`;
+      const probability = await classifyTrack(uri, pos, remaining);
+      if (probability !== null) {
+        setResult(uri, probability);
+        autoTrash(uri, probability);
+      } else {
+        setResult(uri, -1);
+      }
+      state.retries.delete(uri);
+    } catch {
+      const count = (state.retries.get(uri) ?? 0) + 1;
+      if (count < MAX_RETRIES) {
+        state.retries.set(uri, count);
+        state.queue.add(uri);
+      } else {
+        setResult(uri, -1);
+        state.retries.delete(uri);
+      }
+    } finally {
+      set({ processing: false });
+    }
+  },
+
+  startQueue: () => {
+    if (get().intervalId) return;
+    const id = setInterval(() => get().processNext(), POLL_INTERVAL);
+    set({ intervalId: id });
+  },
+
+  stopQueue: () => {
+    const state = get();
+    if (state.intervalId) {
+      clearInterval(state.intervalId);
+    }
+    state.queue.clear();
+    state.retries.clear();
+    set({ intervalId: null, processing: false });
+  },
+
+  // ── Lifecycle ────────────────────────────────────────────────────
+
+  initialize: async () => {
+    try {
+      get().initBlocklist();
+
       let results: Record<string, number> = {};
       try {
-        const raw = Spicetify.LocalStorage.get(lsKey);
+        const raw = Spicetify.LocalStorage.get(LS_KEY);
         results = raw ? JSON.parse(raw) : {};
       } catch {
         results = {};
       }
-      useAiStore.setState({ lsKey, results });
+      set({ results });
 
-      const initialized = await initClassifier(modelId, onProgress);
+      const setProgress = (message: string | null) =>
+        set({ progress: message });
+
+      const ready = await ensureAssets(setProgress);
+      if (!ready) return false;
+
+      setProgress("Initializing model...");
+      const initialized = await initEngine();
       if (initialized) {
-        onProgress?.("Ready");
-        startQueue();
+        set({ progress: null, ready: true });
+        get().startQueue();
       }
       return initialized;
     } catch (error) {
@@ -155,9 +278,18 @@ export const useAiStore = create<AiState>(() => ({
   },
 
   cleanup: () => {
-    stopQueue();
-    disposeClassifier();
-    disposeBlocklist();
-    useAiStore.setState({ results: {}, lsKey: null });
+    get().stopQueue();
+    disposeEngine();
+    get().disposeBlocklist();
+    set({ results: {}, progress: null, ready: false });
+  },
+
+  clearStorage: () => {
+    Spicetify.LocalStorage.remove(LS_KEY);
+    get().queue.clear();
+    set({ results: {} });
+    document
+      .querySelectorAll(`.${AI_INDICATOR_CLASS}`)
+      .forEach((el) => el.remove());
   },
 }));

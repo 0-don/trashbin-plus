@@ -40,7 +40,8 @@ export const VirtualList: React.FC<VirtualListProps> = (props) => {
   const [searchQuery, setSearchQuery] = useState("");
   const debouncedSearch = useDebounce(searchQuery, 300);
   const aiResults = useAiStore((s) => s.results);
-  const aiEnabled = store.aiDetectionEnabled && store.aiAssetsReady;
+  const aiReady = useAiStore((s) => s.ready);
+  const aiEnabled = store.aiDetectionEnabled && aiReady;
 
   const getFilteredItems = () => {
     if (!debouncedSearch.trim()) {

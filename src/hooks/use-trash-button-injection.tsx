@@ -23,7 +23,8 @@ export const useTrashButtonInjection = (
   enabled: boolean = true,
 ) => {
   const store = useTrashbinStore();
-  const aiEnabled = store.aiDetectionEnabled && store.aiAssetsReady;
+  const aiReady = useAiStore((s) => s.ready);
+  const aiEnabled = store.aiDetectionEnabled && aiReady;
 
   const removeInjected = () => {
     const container = document.querySelector(config.containerSelector);

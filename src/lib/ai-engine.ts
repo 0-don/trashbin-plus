@@ -1,24 +1,17 @@
 import { ORT_WASM_CODE } from "virtual:ort-worker-wasm";
+import { fetchMetadata, hexToBase62 } from "./metadata-utils";
 
-export type ModelId = "sonics-5s" | "sonics-120s";
-export const DEFAULT_MODEL: ModelId = "sonics-5s";
-export const MODELS = {
-  "sonics-5s": {
-    label: "SONICS SpecTTTra 5s",
-    assetName: "sonics_5s.onnx",
-    inputLength: 220500,
-  },
-  "sonics-120s": {
-    label: "SONICS SpecTTTra 120s",
-    assetName: "sonics_120s.onnx",
-    inputLength: 5292000,
-  },
-};
-
+const MODEL_ASSET = "sonics_5s.onnx";
+const MODEL_INPUT_LENGTH = 220500;
+const MODEL_LABEL = "SONICS SpecTTTra 5s";
 const WASM_BINARY = "ort-wasm-simd-threaded.wasm";
 const STORE_NAME = "assets";
 const VERSION_KEY = "trashbin-ai-assets-version";
 const HF_BASE = "https://huggingface.co/0don/trashbin-plus-ai/resolve/main";
+const CORS_PROXY = "https://cors-proxy.spicetify.app";
+const SAMPLE_RATE = 44100;
+
+// ── IndexedDB helpers ─────────────────────────────────────────────
 
 let dbPromise: Promise<IDBDatabase> | null = null;
 
@@ -67,6 +60,8 @@ async function idbPut(name: string, data: ArrayBuffer): Promise<void> {
   });
 }
 
+// ── Asset management ──────────────────────────────────────────────
+
 async function downloadAsset(name: string): Promise<ArrayBuffer> {
   const response = await fetch(`${HF_BASE}/${name}`);
   if (!response.ok)
@@ -75,13 +70,9 @@ async function downloadAsset(name: string): Promise<ArrayBuffer> {
 }
 
 export async function ensureAssets(
-  modelId: ModelId,
   onProgress?: (message: string) => void,
 ): Promise<boolean> {
   try {
-    const model = MODELS[modelId];
-    const wasmName = WASM_BINARY;
-
     let remoteVersion: string | null = null;
     try {
       const versionRes = await fetch(`${HF_BASE}/version.json`);
@@ -96,8 +87,8 @@ export async function ensureAssets(
     const versionMatch = remoteVersion !== null && localVersion === remoteVersion;
 
     const [wasmExists, modelExists] = await Promise.all([
-      idbGet(wasmName),
-      idbGet(model.assetName),
+      idbGet(WASM_BINARY),
+      idbGet(MODEL_ASSET),
     ]);
 
     if (versionMatch && wasmExists && modelExists) {
@@ -116,13 +107,13 @@ export async function ensureAssets(
     if (!wasmExists || !versionMatch) {
       onProgress?.("Downloading WASM runtime...");
       downloads.push(
-        downloadAsset(wasmName).then((d) => idbPut(wasmName, d)),
+        downloadAsset(WASM_BINARY).then((d) => idbPut(WASM_BINARY, d)),
       );
     }
     if (!modelExists || !versionMatch) {
-      onProgress?.(`Downloading ${model.label}...`);
+      onProgress?.(`Downloading ${MODEL_LABEL}...`);
       downloads.push(
-        downloadAsset(model.assetName).then((d) => idbPut(model.assetName, d)),
+        downloadAsset(MODEL_ASSET).then((d) => idbPut(MODEL_ASSET, d)),
       );
     }
     await Promise.all(downloads);
@@ -197,7 +188,6 @@ self.onmessage = function(e) {
 
   if (msg.type === "init") {
     inputLength = msg.inputLength;
-    var ep = msg.executionProvider || "wasm";
     Promise.all([idbGet(msg.modelAssetName), idbGet(msg.wasmName)])
       .then(function(buffers) {
         if (!buffers[0] || !buffers[1]) {
@@ -207,16 +197,16 @@ self.onmessage = function(e) {
         ort.env.wasm.numThreads = 1;
         ort.env.wasm.wasmBinary = buffers[1];
         return ort.InferenceSession.create(buffers[0], {
-          executionProviders: [ep],
+          executionProviders: ["wasm"],
         }).then(function(s) {
           session = s;
-          console.log("[trashbin+] worker: ready (" + ep + ")");
-          self.postMessage({ type: "init-done", ep: ep });
+          console.log("[trashbin+] worker: ready");
+          self.postMessage({ type: "init-done" });
         });
       })
       .catch(function(err) {
-        console.error("[trashbin+] worker: init failed (" + ep + "):", err);
-        self.postMessage({ type: "init-error", error: String(err), ep: ep });
+        console.error("[trashbin+] worker: init failed:", err);
+        self.postMessage({ type: "init-error", error: String(err) });
       });
   }
 
@@ -262,70 +252,58 @@ self.onmessage = function(e) {
 
 let worker: Worker | null = null;
 let workerBlobUrl: string | null = null;
-export let activeModelId: ModelId | null = null;
+let engineReady = false;
 let nextId = 0;
 const pending = new Map<number, (prob: number | null) => void>();
 
 window.addEventListener("beforeunload", () => disposeEngine());
 
-function createWorker(ortCode: string): Worker {
-  const script = ortCode + "\n" + WORKER_LOGIC;
-  const blob = new Blob([script], { type: "application/javascript" });
-  workerBlobUrl = URL.createObjectURL(blob);
-  return new Worker(workerBlobUrl);
-}
-
-function setupWorker(w: Worker): void {
-  w.onmessage = (e: MessageEvent) => {
-    const msg = e.data;
-    if (msg.type === "classify-done") {
-      const resolve = pending.get(msg.id);
-      if (resolve) {
-        pending.delete(msg.id);
-        resolve(msg.prob);
-      }
-    }
-  };
-  w.onerror = () => {
-    for (const resolve of pending.values()) resolve(null);
-    pending.clear();
-  };
-}
-
-function sendInit(w: Worker, model: typeof MODELS[ModelId], wasmName: string, ep: string): Promise<boolean> {
-  return new Promise<boolean>((resolve) => {
-    const handler = (e: MessageEvent) => {
-      if (e.data.type === "init-done" || e.data.type === "init-error") {
-        w.removeEventListener("message", handler);
-        resolve(e.data.type === "init-done");
-      }
-    };
-    w.addEventListener("message", handler);
-    w.postMessage({
-      type: "init",
-      modelAssetName: model.assetName,
-      wasmName,
-      inputLength: model.inputLength,
-      executionProvider: ep,
-    });
-  });
-}
-
-export async function initEngine(modelId: ModelId): Promise<boolean> {
+export async function initEngine(): Promise<boolean> {
   try {
-    const model = MODELS[modelId];
-
     const [modelExists, wasmExists] = await Promise.all([
-      idbGet(model.assetName),
+      idbGet(MODEL_ASSET),
       idbGet(WASM_BINARY),
     ]);
     if (!modelExists || !wasmExists) return false;
 
-    worker = createWorker(ORT_WASM_CODE);
-    setupWorker(worker);
-    const ok = await sendInit(worker, model, WASM_BINARY, "wasm");
+    const script = ORT_WASM_CODE + "\n" + WORKER_LOGIC;
+    const blob = new Blob([script], { type: "application/javascript" });
+    workerBlobUrl = URL.createObjectURL(blob);
+    worker = new Worker(workerBlobUrl);
+
+    worker.onmessage = (e: MessageEvent) => {
+      const msg = e.data;
+      if (msg.type === "classify-done") {
+        const resolve = pending.get(msg.id);
+        if (resolve) {
+          pending.delete(msg.id);
+          resolve(msg.prob);
+        }
+      }
+    };
+    worker.onerror = () => {
+      for (const resolve of pending.values()) resolve(null);
+      pending.clear();
+    };
+
+    const ok = await new Promise<boolean>((resolve) => {
+      const handler = (e: MessageEvent) => {
+        if (e.data.type === "init-done" || e.data.type === "init-error") {
+          worker!.removeEventListener("message", handler);
+          resolve(e.data.type === "init-done");
+        }
+      };
+      worker!.addEventListener("message", handler);
+      worker!.postMessage({
+        type: "init",
+        modelAssetName: MODEL_ASSET,
+        wasmName: WASM_BINARY,
+        inputLength: MODEL_INPUT_LENGTH,
+      });
+    });
+
     if (ok) {
-      activeModelId = modelId;
+      engineReady = true;
       return true;
     }
 
@@ -338,8 +316,8 @@ export async function initEngine(modelId: ModelId): Promise<boolean> {
   }
 }
 
-export function classifyAudio(waveform: Float32Array, trackId?: string): Promise<number | null> {
-  if (!worker || !activeModelId) return Promise.resolve(null);
+function classifyAudio(waveform: Float32Array, trackId?: string): Promise<number | null> {
+  if (!worker || !engineReady) return Promise.resolve(null);
   const id = nextId++;
   const copy = new Float32Array(waveform);
   return new Promise<number | null>((resolve) => {
@@ -358,8 +336,85 @@ export function disposeEngine(): void {
     URL.revokeObjectURL(workerBlobUrl);
     workerBlobUrl = null;
   }
-  activeModelId = null;
+  engineReady = false;
   for (const resolve of pending.values()) resolve(null);
   pending.clear();
   nextId = 0;
+  if (audioCtx && audioCtx.state !== "closed") {
+    audioCtx.close();
+    audioCtx = null;
+  }
+}
+
+// ── Track classification ──────────────────────────────────────────
+
+let audioCtx: AudioContext | null = null;
+
+function getAudioCtx(): AudioContext {
+  if (!audioCtx || audioCtx.state === "closed")
+    audioCtx = new AudioContext({ sampleRate: SAMPLE_RATE });
+  return audioCtx;
+}
+
+async function getTrackArtistIds(trackUri: string): Promise<string[]> {
+  try {
+    const currentTrack = Spicetify.Player.data?.item;
+    if (currentTrack && currentTrack.uri === trackUri && currentTrack.artists) {
+      const ids: string[] = [];
+      for (const artist of currentTrack.artists) {
+        const artistId = (artist as any).uri?.split(":")[2];
+        if (artistId) ids.push(artistId);
+      }
+      if (ids.length > 0) return ids;
+    }
+
+    const trackId = trackUri.split(":")[2];
+    if (!trackId) return [];
+    const data = await fetchMetadata("track", trackId);
+    const ids: string[] = [];
+    if (Array.isArray(data.artist)) {
+      for (const a of data.artist) {
+        if (a.gid) ids.push(hexToBase62(a.gid));
+      }
+    }
+    return ids;
+  } catch {
+    return [];
+  }
+}
+
+async function fetchPreviewUrl(trackUri: string): Promise<string | null> {
+  const id = trackUri.split(":")[2];
+  if (!id) return null;
+  const res = await fetch(
+    `${CORS_PROXY}/https://open.spotify.com/embed/track/${id}`,
+  );
+  if (!res.ok) throw new Error(`embed fetch ${res.status}`);
+  const html = await res.text();
+  const match = html.match(/"audioPreview":\s*\{\s*"url":\s*"([^"]+)"/);
+  return match?.[1] ?? null;
+}
+
+export async function getTrackArtists(trackUri: string): Promise<string[]> {
+  return getTrackArtistIds(trackUri);
+}
+
+export async function classifyTrack(trackUri: string, queuePos?: number, queueRemaining?: number): Promise<number | null> {
+  const trackId = trackUri.split(":")[2] ?? trackUri;
+  const queueTag = queuePos != null ? `[${queuePos}/${queuePos + queueRemaining!}] ` : "";
+
+  if (!engineReady) return null;
+
+  const previewUrl = await fetchPreviewUrl(trackUri);
+  if (!previewUrl) {
+    console.log(`[trashbin+] ${queueTag}${trackId}: no preview`);
+    return null;
+  }
+
+  const response = await fetch(previewUrl);
+  if (!response.ok) throw new Error(`preview fetch ${response.status}`);
+  const buffer = await response.arrayBuffer();
+  const decoded = await getAudioCtx().decodeAudioData(buffer);
+  const waveform = decoded.getChannelData(0);
+  return classifyAudio(waveform, queueTag + trackId);
 }

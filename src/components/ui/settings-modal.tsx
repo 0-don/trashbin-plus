@@ -129,6 +129,18 @@ const ActionButton: React.FC<{
   </div>
 );
 
+const AiStatusText: React.FC = () => {
+  const { t } = useTranslation();
+  const progress = useAiStore((s) => s.progress);
+  const ready = useAiStore((s) => s.ready);
+
+  return (
+    <div className="py-1! text-xs! text-[rgba(var(--spice-rgb-text),0.5)]!">
+      {progress ?? (ready ? t("AI_ASSETS_READY") : t("AI_ASSETS_NOT_READY"))}
+    </div>
+  );
+};
+
 const SettingsModal: React.FC = () => {
   const { t } = useTranslation();
   const store = useTrashbinStore();
@@ -280,13 +292,7 @@ const SettingsModal: React.FC = () => {
         disabled={!store.aiDetectionEnabled}
       />
       {store.aiDetectionEnabled && (
-        <div className="py-1! text-xs! text-[rgba(var(--spice-rgb-text),0.5)]!">
-          {store.aiAssetsDownloading
-            ? t("AI_ASSETS_DOWNLOADING")
-            : store.aiAssetsReady
-              ? t("AI_ASSETS_READY")
-              : t("AI_ASSETS_NOT_READY")}
-        </div>
+        <AiStatusText />
       )}
       <ActionButton
         label={t("ACTION_CLEAR_AI_STORAGE")}

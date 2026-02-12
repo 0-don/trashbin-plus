@@ -28,7 +28,8 @@ export const ItemRow: React.FC<ItemRowProps> = ({ item, onUntrash }) => {
     : (item as TrackDisplayData).artist;
 
   const store = useTrashbinStore();
-  const aiEnabled = store.aiDetectionEnabled && store.aiAssetsReady;
+  const aiReady = useAiStore((s) => s.ready);
+  const aiEnabled = store.aiDetectionEnabled && aiReady;
   const aiProbability = useAiStore((s) => !isArtist && aiEnabled ? s.results[item.uri] : undefined);
 
   return (

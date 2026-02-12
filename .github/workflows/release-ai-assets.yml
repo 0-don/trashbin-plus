@@ -53,7 +53,6 @@ jobs:
           bun init -y
           bun add onnxruntime-web@1.24.1
           cp node_modules/onnxruntime-web/dist/ort-wasm-simd-threaded.wasm $GITHUB_WORKSPACE/ai-assets/
-          cp node_modules/onnxruntime-web/dist/ort-wasm-simd-threaded.asyncify.wasm $GITHUB_WORKSPACE/ai-assets/
 
       - name: Create version file
         run: |

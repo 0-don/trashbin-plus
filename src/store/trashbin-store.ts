@@ -39,8 +39,6 @@ interface TrashbinState {
 
   // AI Detection
   aiDetectionEnabled: boolean;
-  aiAssetsReady: boolean;
-  aiAssetsDownloading: boolean;
   trashAiSongs: boolean;
 
   // Actions
@@ -61,8 +59,6 @@ interface TrashbinState {
 
   // AI Detection actions
   setAiDetectionEnabled: (enabled: boolean) => void;
-  setAiAssetsReady: (ready: boolean) => void;
-  setAiAssetsDownloading: (downloading: boolean) => void;
   setTrashAiSongs: (enabled: boolean) => void;
 
   // Unified actions
@@ -108,8 +104,6 @@ export const useTrashbinStore = create<TrashbinState>((set, get) => ({
   remoteSkippingEnabled: false,
   trashViaLikeEnabled: false,
   aiDetectionEnabled: false,
-  aiAssetsReady: false,
-  aiAssetsDownloading: false,
   trashAiSongs: false,
 
   // Initialize from localStorage
@@ -240,11 +234,6 @@ export const useTrashbinStore = create<TrashbinState>((set, get) => ({
       JSON.stringify(enabled),
     );
   },
-
-  setAiAssetsReady: (ready: boolean) => set({ aiAssetsReady: ready }),
-
-  setAiAssetsDownloading: (downloading: boolean) =>
-    set({ aiAssetsDownloading: downloading }),
 
   setTrashAiSongs: (enabled: boolean) => {
     set({ trashAiSongs: enabled });
