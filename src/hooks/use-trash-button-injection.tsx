@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { BsTrash3 } from "react-icons/bs";
 import { CgSpinner } from "react-icons/cg";
 import { AiIndicator } from "../components/features/ai-probability-indicator";
 import { TRASH_ICON } from "../components/icons";
@@ -9,6 +10,7 @@ import { useTrashbinStore } from "../store/trashbin-store";
 import { useMutationObserver } from "./use-mutation-observer";
 
 const WRAPPER_CLASS = "trashbin-injected-group";
+const TRASH_BTN_DATA_ATTR = "data-trashbin-btn";
 
 interface TrashButtonConfig {
   containerSelector: string;
@@ -16,6 +18,44 @@ interface TrashButtonConfig {
   rowSelector: string;
   moreButtonSelector: string;
   buttonClassName: string;
+}
+
+function renderWrapper(opts: {
+  aiEnabled: boolean;
+  aiProbability: number | undefined;
+  enqueued: boolean;
+  isTrashed: boolean;
+  buttonClassName: string;
+}): string {
+  return Spicetify.ReactDOMServer.renderToString(
+    <div className={`${WRAPPER_CLASS} m-0 inline-flex items-center gap-0`}>
+      {opts.aiEnabled &&
+        opts.aiProbability !== undefined &&
+        opts.aiProbability >= 0 && (
+          <span className={`${AI_INDICATOR_CLASS} pointer-events-auto`}>
+            <AiIndicator probability={opts.aiProbability} size={16} />
+          </span>
+        )}
+      {opts.aiEnabled && opts.enqueued && (
+        <span
+          className={`${AI_SPINNER_CLASS} inline-flex animate-spin`}
+          style={{ color: "rgba(255,255,255,0.4)" }}
+        >
+          <CgSpinner size={14} />
+        </span>
+      )}
+      <button
+        data-trashbin-btn="true"
+        data-visually-trashed={opts.isTrashed.toString()}
+        className={`${opts.buttonClassName} m-0! cursor-pointer border-none bg-transparent p-2 opacity-70 transition-opacity hover:opacity-100`}
+      >
+        <BsTrash3
+          size={16}
+          className={opts.isTrashed ? "fill-[#22c55e]" : ""}
+        />
+      </button>
+    </div>,
+  );
 }
 
 export const useTrashButtonInjection = (
@@ -50,30 +90,35 @@ export const useTrashButtonInjection = (
       if (!trackData.trackURI || row.querySelector(config.buttonSelector))
         return;
 
-      const wrapper = document.createElement("div");
-      wrapper.className = WRAPPER_CLASS;
-      wrapper.style.display = "inline-flex";
-      wrapper.style.alignItems = "center";
-      wrapper.style.gap = "0";
-      wrapper.style.margin = "0";
+      let aiProbability: number | undefined;
+      let enqueued = false;
 
       if (aiEnabled) {
         const aiState = useAiStore.getState();
         const stored = aiState.results[trackData.trackURI];
         if (stored !== undefined) {
-          if (stored >= 0) wrapper.appendChild(createIndicatorElement(stored));
+          aiProbability = stored;
         } else {
-          wrapper.appendChild(createSpinnerElement());
+          enqueued = true;
           aiState.enqueue(trackData.trackURI);
         }
       }
 
       const isTrashed = !!store.trashSongList[trackData.trackURI];
-      const btn = document.createElement("button");
-      btn.className = `${config.buttonClassName} bg-transparent border-none p-2 opacity-70 cursor-pointer hover:opacity-100 transition-opacity m-0!`;
-      btn.innerHTML = TRASH_ICON(16, isTrashed ? "fill-[#22c55e]" : "");
-      btn.dataset.visuallyTrashed = isTrashed.toString();
 
+      const temp = document.createElement("div");
+      temp.innerHTML = renderWrapper({
+        aiEnabled,
+        aiProbability,
+        enqueued,
+        isTrashed,
+        buttonClassName: config.buttonClassName,
+      });
+      const wrapper = temp.firstElementChild as HTMLElement;
+
+      const btn = wrapper.querySelector(
+        `[${TRASH_BTN_DATA_ATTR}]`,
+      ) as HTMLButtonElement;
       btn.onclick = (e) => {
         e.stopPropagation();
         const newState = btn.dataset.visuallyTrashed !== "true";
@@ -82,7 +127,6 @@ export const useTrashButtonInjection = (
         store.toggleSongTrash(trackData.trackURI!);
       };
 
-      wrapper.appendChild(btn);
       moreBtn.parentElement?.insertBefore(wrapper, moreBtn);
     });
   };
@@ -111,15 +155,19 @@ export const useTrashButtonInjection = (
               if (!row) return;
 
               if (extractTrackData(row).trackURI === uri) {
-                // Remove spinner if present
                 const spinner = wrapper.querySelector(`.${AI_SPINNER_CLASS}`);
                 if (spinner) spinner.remove();
 
                 if (next[uri] >= 0) {
-                  wrapper.insertBefore(
-                    createIndicatorElement(next[uri]),
-                    trashBtn,
+                  const temp = document.createElement("div");
+                  temp.innerHTML = Spicetify.ReactDOMServer.renderToString(
+                    <span
+                      className={`${AI_INDICATOR_CLASS} pointer-events-auto`}
+                    >
+                      <AiIndicator probability={next[uri]} size={16} />
+                    </span>,
                   );
+                  wrapper.insertBefore(temp.firstElementChild!, trashBtn);
                 }
               }
             });
@@ -154,24 +202,3 @@ export const useTrashButtonInjection = (
     enabled: store.trashbinEnabled && enabled,
   });
 };
-
-function createSpinnerElement(): HTMLSpanElement {
-  const spinner = document.createElement("span");
-  spinner.className = AI_SPINNER_CLASS;
-  spinner.innerHTML = Spicetify.ReactDOMServer.renderToString(
-    <span className="inline-flex animate-spin" style={{ color: "rgba(255,255,255,0.4)" }}>
-      <CgSpinner size={14} />
-    </span>,
-  );
-  return spinner;
-}
-
-function createIndicatorElement(probability: number): HTMLSpanElement {
-  const indicator = document.createElement("span");
-  indicator.innerHTML = Spicetify.ReactDOMServer.renderToString(
-    <AiIndicator probability={probability} size={16} />,
-  );
-  indicator.className = AI_INDICATOR_CLASS;
-  indicator.style.pointerEvents = "auto";
-  return indicator;
-}

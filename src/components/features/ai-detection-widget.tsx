@@ -7,14 +7,17 @@ import { AiIndicator } from "./ai-probability-indicator";
 
 const widgetIcon = (prob: number) =>
   Spicetify.ReactDOMServer.renderToString(
-    <span className="ml-1.25">
+    <span className="ml-2">
       <AiIndicator probability={prob} size={20} />
     </span>,
   );
 
 const widgetSpinner = () =>
   Spicetify.ReactDOMServer.renderToString(
-    <span className="ml-1.25 inline-flex animate-spin" style={{ color: "rgba(255,255,255,0.6)" }}>
+    <span
+      className="ml-2 inline-flex animate-spin"
+      style={{ color: "rgba(255,255,255,0.6)" }}
+    >
       <CgSpinner size={20} />
     </span>,
   );
@@ -50,7 +53,9 @@ export const AiDetectionWidget: React.FC = () => {
       if (prob !== undefined) {
         if (prob >= 0) {
           widget.icon = widgetIcon(prob);
-          widget.label = i18n.t("AI_WIDGET_PERCENT", { pct: Math.round(prob * 100) });
+          widget.label = i18n.t("AI_WIDGET_PERCENT", {
+            pct: Math.round(prob * 100),
+          });
         } else {
           widget.icon = widgetIcon(0.5);
           widget.label = i18n.t("AI_WIDGET_LABEL");

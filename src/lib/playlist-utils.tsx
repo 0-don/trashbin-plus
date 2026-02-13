@@ -1,3 +1,4 @@
+import React from "react";
 import { TFunction } from "i18next";
 import { useTrashbinStore } from "../store/trashbin-store";
 
@@ -64,48 +65,44 @@ export async function removeTrashedFromPlaylist(
     }
 
     const confirmed = await new Promise<boolean>((resolve) => {
+      const onCancel = () => {
+        Spicetify.PopupModal.hide();
+        resolve(false);
+      };
+      const onConfirm = () => {
+        Spicetify.PopupModal.hide();
+        resolve(true);
+      };
+
+      const temp = document.createElement("div");
+      temp.innerHTML = Spicetify.ReactDOMServer.renderToString(
+        <div className="p-4">
+          <p className="mb-4">
+            {t("CONFIRM_REMOVE_TRASHED", { count: trashedItems.length })}
+          </p>
+          <div className="flex justify-end gap-2">
+            <button
+              data-action="cancel"
+              className="cursor-pointer rounded-full border border-[#727272] bg-transparent px-4 py-2 font-bold text-(--spice-text)"
+            >
+              {t("ACTION_CANCEL")}
+            </button>
+            <button
+              data-action="confirm"
+              className="cursor-pointer rounded-full border-none bg-[#e74c3c] px-4 py-2 font-bold text-white"
+            >
+              {t("ACTION_REMOVE")}
+            </button>
+          </div>
+        </div>,
+      );
+      const content = temp.firstElementChild as HTMLElement;
+      content.querySelector('[data-action="cancel"]')!.addEventListener("click", onCancel);
+      content.querySelector('[data-action="confirm"]')!.addEventListener("click", onConfirm);
+
       Spicetify.PopupModal.display({
         title: t("ACTION_REMOVE_TRASHED"),
-        content: (() => {
-          const container = document.createElement("div");
-          container.style.padding = "16px";
-
-          const message = document.createElement("p");
-          message.style.marginBottom = "16px";
-          message.textContent = t("CONFIRM_REMOVE_TRASHED", {
-            count: trashedItems.length,
-          });
-          container.appendChild(message);
-
-          const buttonRow = document.createElement("div");
-          buttonRow.style.display = "flex";
-          buttonRow.style.justifyContent = "flex-end";
-          buttonRow.style.gap = "8px";
-
-          const cancelBtn = document.createElement("button");
-          cancelBtn.textContent = t("ACTION_CANCEL");
-          cancelBtn.style.cssText =
-            "padding: 8px 16px; border-radius: 9999px; border: 1px solid #727272; background: transparent; color: var(--spice-text); cursor: pointer; font-weight: bold;";
-          cancelBtn.onclick = () => {
-            Spicetify.PopupModal.hide();
-            resolve(false);
-          };
-
-          const confirmBtn = document.createElement("button");
-          confirmBtn.textContent = t("ACTION_REMOVE");
-          confirmBtn.style.cssText =
-            "padding: 8px 16px; border-radius: 9999px; border: none; background: #e74c3c; color: white; cursor: pointer; font-weight: bold;";
-          confirmBtn.onclick = () => {
-            Spicetify.PopupModal.hide();
-            resolve(true);
-          };
-
-          buttonRow.appendChild(cancelBtn);
-          buttonRow.appendChild(confirmBtn);
-          container.appendChild(buttonRow);
-
-          return container;
-        })(),
+        content,
       });
     });
 

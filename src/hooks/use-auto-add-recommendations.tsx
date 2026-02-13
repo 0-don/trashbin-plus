@@ -1,4 +1,5 @@
-import { useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
+import { BsFillPauseFill, BsFillPlayFill } from "react-icons/bs";
 import { useTranslation } from "react-i18next";
 import { PAUSE_ICON, PLAY_ICON } from "../components/icons";
 import { AUTO_ADD_CONFIG } from "../lib/constants";
@@ -8,6 +9,9 @@ const DELAY_BETWEEN_ADDS = 800;
 const DELAY_AFTER_REFRESH = 3000;
 const DELAY_BETWEEN_CYCLES = 1500;
 const INJECT_CHECK_INTERVAL = 2000;
+
+const WRAPPER_CLASS = `${AUTO_ADD_CONFIG.autoAddButtonClassName}-wrapper`;
+const BTN_DATA_ATTR = "data-auto-add-btn";
 
 function wait(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -28,6 +32,28 @@ function findRefreshButton(): HTMLButtonElement | null {
     container = container.parentElement;
   }
   return null;
+}
+
+function renderAutoAddButton(opts: {
+  isRunning: boolean;
+  buttonClassName: string;
+  encoreId: string;
+  title: string;
+}): string {
+  return Spicetify.ReactDOMServer.renderToString(
+    <button
+      data-auto-add-btn="true"
+      data-encore-id={opts.encoreId}
+      className={`${opts.buttonClassName} ${AUTO_ADD_CONFIG.autoAddButtonClassName}`}
+      title={opts.title}
+    >
+      {opts.isRunning ? (
+        <BsFillPauseFill size={26} />
+      ) : (
+        <BsFillPlayFill size={26} />
+      )}
+    </button>,
+  );
 }
 
 export const useAutoAddRecommendations = () => {
@@ -69,9 +95,7 @@ export const useAutoAddRecommendations = () => {
           allHaveTrashButtons = false;
           continue;
         }
-        const isTrashed =
-          (trashBtn as HTMLElement).dataset.visuallyTrashed === "true";
-        if (!isTrashed) {
+        if ((trashBtn as HTMLElement).dataset.visuallyTrashed !== "true") {
           nonTrashedRows.push(row);
         }
       }
@@ -121,11 +145,8 @@ export const useAutoAddRecommendations = () => {
   };
 
   const cleanupButton = () => {
-    const wrapper = document.querySelector(
-      `.${AUTO_ADD_CONFIG.autoAddButtonClassName}-wrapper`,
-    );
+    const wrapper = document.querySelector(`.${WRAPPER_CLASS}`);
     if (wrapper) {
-      // Move Refresh button back to wrapper's parent before removing wrapper
       const refreshBtn = wrapper.querySelector(
         `button:not(.${AUTO_ADD_CONFIG.autoAddButtonClassName})`,
       );
@@ -143,20 +164,19 @@ export const useAutoAddRecommendations = () => {
       return;
     }
 
-    // If button is still in the DOM, nothing to do
     if (buttonRef.current?.isConnected) return;
 
     const refreshBtn = findRefreshButton();
     if (!refreshBtn) return;
 
-    const btn = document.createElement("button");
-    btn.className = `${refreshBtn.className} ${AUTO_ADD_CONFIG.autoAddButtonClassName}`;
-    btn.title = t("TOOLTIP_AUTO_ADD");
-    btn.innerHTML = isRunningRef.current ? PAUSE_ICON() : PLAY_ICON();
-    btn.setAttribute(
-      "data-encore-id",
-      refreshBtn.getAttribute("data-encore-id") || "buttonTertiary",
-    );
+    const temp = document.createElement("div");
+    temp.innerHTML = renderAutoAddButton({
+      isRunning: isRunningRef.current,
+      buttonClassName: refreshBtn.className,
+      encoreId: refreshBtn.getAttribute("data-encore-id") || "buttonTertiary",
+      title: t("TOOLTIP_AUTO_ADD"),
+    });
+    const btn = temp.querySelector(`[${BTN_DATA_ATTR}]`) as HTMLButtonElement;
 
     btn.onclick = (e) => {
       e.stopPropagation();
@@ -168,15 +188,14 @@ export const useAutoAddRecommendations = () => {
     };
 
     buttonRef.current = btn;
-    // Wrap Refresh + our button in a flex row so they sit side by side
+
     const wrapper = document.createElement("div");
-    wrapper.className = `${AUTO_ADD_CONFIG.autoAddButtonClassName}-wrapper flex items-center justify-between w-full`;
+    wrapper.className = `${WRAPPER_CLASS} flex w-full items-center justify-between`;
     refreshBtn.parentElement?.insertBefore(wrapper, refreshBtn);
     wrapper.appendChild(btn);
     wrapper.appendChild(refreshBtn);
   };
 
-  // Poll to inject button when recommendation section appears
   useEffect(() => {
     if (!store.trashbinEnabled) {
       abortRef.current = true;
@@ -193,7 +212,6 @@ export const useAutoAddRecommendations = () => {
     };
   }, [store.trashbinEnabled]);
 
-  // Cleanup on unmount
   useEffect(() => {
     return () => {
       abortRef.current = true;
