@@ -7,7 +7,7 @@ import { AiIndicator } from "./ai-probability-indicator";
 
 const widgetIcon = (prob: number) =>
   Spicetify.ReactDOMServer.renderToString(
-    <span className="ml-2">
+    <span className="ml-1.75">
       <AiIndicator probability={prob} size={20} />
     </span>,
   );
@@ -15,7 +15,7 @@ const widgetIcon = (prob: number) =>
 const widgetSpinner = () =>
   Spicetify.ReactDOMServer.renderToString(
     <span
-      className="ml-2 inline-flex animate-spin"
+      className="ml-1.75 inline-flex animate-spin"
       style={{ color: "rgba(255,255,255,0.6)" }}
     >
       <CgSpinner size={20} />
