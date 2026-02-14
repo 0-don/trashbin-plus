@@ -28,7 +28,7 @@ function renderWrapper(opts: {
   buttonClassName: string;
 }): string {
   return Spicetify.ReactDOMServer.renderToString(
-    <div className={`${WRAPPER_CLASS} m-0 inline-flex items-center gap-0`}>
+    <div className={`${WRAPPER_CLASS} m-0 inline-flex items-center gap-1`}>
       {opts.aiEnabled &&
         opts.aiProbability !== undefined &&
         opts.aiProbability >= 0 && (
@@ -47,7 +47,7 @@ function renderWrapper(opts: {
       <button
         data-trashbin-btn="true"
         data-visually-trashed={opts.isTrashed.toString()}
-        className={`${opts.buttonClassName} m-0! cursor-pointer border-none bg-transparent p-2 opacity-70 transition-opacity hover:opacity-100`}
+        className={`${opts.buttonClassName} m-0! cursor-pointer border-none bg-transparent opacity-70 transition-opacity hover:opacity-100`}
       >
         <BsTrash3
           size={16}
