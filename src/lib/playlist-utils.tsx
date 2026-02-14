@@ -47,7 +47,9 @@ async function getPlaylistContents(
   playlistUri: string,
 ): Promise<PlaylistItem[]> {
   const contents: PlaylistContents =
-    await Spicetify.Platform.PlaylistAPI.getContents(playlistUri);
+    await Spicetify.Platform.PlaylistAPI.getContents(playlistUri, {
+      limit: 9999999,
+    });
   return contents.items || [];
 }
 

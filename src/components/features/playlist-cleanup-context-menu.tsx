@@ -29,7 +29,10 @@ export function PlaylistCleanupContextMenu() {
     contextMenuItem.register();
 
     // Reposition the menu item to appear near "Delete" instead of at the top
+    let repositioning = false;
     const observer = new MutationObserver(() => {
+      if (repositioning) return;
+
       const menu = document.querySelector<HTMLElement>(
         "[data-tippy-root] ul, #context-menu ul",
       );
@@ -44,8 +47,10 @@ export function PlaylistCleanupContextMenu() {
         (li) => li.querySelector("button")?.textContent?.trim() === "Delete",
       );
 
-      if (trashItem && deleteItem) {
+      if (trashItem && deleteItem && deleteItem.nextElementSibling !== trashItem) {
+        repositioning = true;
         deleteItem.after(trashItem);
+        repositioning = false;
       }
     });
 
