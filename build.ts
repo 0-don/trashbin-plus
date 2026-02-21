@@ -17,7 +17,10 @@ const minifyMode = argv.includes("--minify");
 const outMatch = argv.match(/--out=(\S+)/);
 const outDir = outMatch
   ? resolve(outMatch[1])
-  : join(dirname(execSync("spicetify -c", { encoding: "utf-8" }).trim()), "Extensions");
+  : join(
+      dirname(execSync("spicetify -c", { encoding: "utf-8" }).trim()),
+      "Extensions",
+    );
 const outFile = join(outDir, `${NAME_ID}.js`);
 
 mkdirSync(outDir, { recursive: true });
@@ -27,7 +30,9 @@ const postcssPlugin: BunPlugin = {
   setup(build) {
     build.onLoad({ filter: /\.css$/ }, async ({ path: p }) => {
       const { plugins } = await postcssrc({}, dirname(p));
-      const result = await postcss(plugins).process(readFileSync(p, "utf-8"), { from: p });
+      const result = await postcss(plugins).process(readFileSync(p, "utf-8"), {
+        from: p,
+      });
       return { contents: result.css, loader: "css" };
     });
   },
@@ -41,7 +46,10 @@ const externalGlobals: BunPlugin = {
       "react-dom": "Spicetify.ReactDOM",
     };
     const filter = new RegExp(`^(${Object.keys(map).join("|")})$`);
-    build.onResolve({ filter }, ({ path: p }) => ({ path: p, namespace: "ext" }));
+    build.onResolve({ filter }, ({ path: p }) => ({
+      path: p,
+      namespace: "ext",
+    }));
     build.onLoad({ filter: /.*/, namespace: "ext" }, ({ path: p }) => ({
       contents: `module.exports = ${map[p]}`,
       loader: "js",
@@ -57,20 +65,35 @@ const ortWorkerString: BunPlugin = {
       namespace: "ort-worker",
     }));
     build.onLoad({ filter: /.*/, namespace: "ort-worker" }, () => {
-      let code = readFileSync(resolve("node_modules/onnxruntime-web/dist/ort.wasm.bundle.min.mjs"), "utf-8");
-      code = code.replace(/import\.meta\.url/g, "self.location.href");
-      code = code.replace(/new URL\("ort-wasm-simd-threaded[^"]*\.wasm",self\.location\.href\)\.href/g, '""');
-      code = code.replace(/export\{(.+?)\}/, (_, e: string) =>
-        `self.ort={${e.replace(/(\w+) as (\w+)/g, "$2:$1")}}`,
+      let code = readFileSync(
+        resolve("node_modules/onnxruntime-web/dist/ort.wasm.bundle.min.mjs"),
+        "utf-8",
       );
-      return { contents: `export const ORT_WASM_CODE = ${JSON.stringify(code)};`, loader: "js" };
+      code = code.replace(/import\.meta\.url/g, "self.location.href");
+      code = code.replace(
+        /new URL\("ort-wasm-simd-threaded[^"]*\.wasm",self\.location\.href\)\.href/g,
+        '""',
+      );
+      // Backport https://github.com/microsoft/onnxruntime/pull/27318
+      code = code.replace("o=on(oe)", "o=on(oe)||(u&&!a)");
+      code = code.replace(
+        /export\{(.+?)\}/,
+        (_, e: string) => `self.ort={${e.replace(/(\w+) as (\w+)/g, "$2:$1")}}`,
+      );
+      return {
+        contents: `export const ORT_WASM_CODE = ${JSON.stringify(code)};`,
+        loader: "js",
+      };
     });
   },
 };
 
 async function runBuild() {
   mkdirSync(TEMP, { recursive: true });
-  writeFileSync(TEMP_ENTRY, `import main from '${ENTRY.replace(/\\/g, "/")}';(async()=>{await main()})();`);
+  writeFileSync(
+    TEMP_ENTRY,
+    `import main from '${ENTRY.replace(/\\/g, "/")}';(async()=>{await main()})();`,
+  );
 
   const result = await Bun.build({
     entrypoints: [TEMP_ENTRY],
@@ -95,7 +118,10 @@ async function runBuild() {
     js += `\n;(()=>{if(!document.getElementById("${STYLE_ID}")){const s=document.createElement("style");s.id="${STYLE_ID}";s.textContent=String.raw\`${css}\`.trim();document.head.appendChild(s)}})()`;
   }
 
-  writeFileSync(outFile, `(async()=>{while(!Spicetify.React||!Spicetify.ReactDOM)await new Promise(r=>setTimeout(r,10));${js}})()`);
+  writeFileSync(
+    outFile,
+    `(async()=>{while(!Spicetify.React||!Spicetify.ReactDOM)await new Promise(r=>setTimeout(r,10));${js}})()`,
+  );
   console.log("Build succeeded.");
 }
 
@@ -107,6 +133,9 @@ if (watchMode) {
   watch("src", { recursive: true }, (_e, f) => {
     if (!f) return;
     if (t) clearTimeout(t);
-    t = setTimeout(async () => { console.log(`\n${f} changed`); await runBuild(); }, 200);
+    t = setTimeout(async () => {
+      console.log(`\n${f} changed`);
+      await runBuild();
+    }, 200);
   });
 }

@@ -49,9 +49,10 @@ jobs:
 
       - name: Collect WASM files from onnxruntime-web
         run: |
+          ORT_VERSION=$(node -e "console.log(require('./package.json').dependencies['onnxruntime-web'])")
           mkdir -p /tmp/ort && cd /tmp/ort
           bun init -y
-          bun add onnxruntime-web@1.24.1
+          bun add "onnxruntime-web@${ORT_VERSION}"
           cp node_modules/onnxruntime-web/dist/ort-wasm-simd-threaded.wasm $GITHUB_WORKSPACE/ai-assets/
 
       - name: Create version file
