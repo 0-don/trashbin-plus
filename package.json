@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc --noEmit && bun build.ts",
     "dev": "bun build.ts --watch",
-    "prettier": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json,css,md}\""
+    "prettier": "prettier --write ."
   },
   "dependencies": {
     "i18next": "25.8.13",

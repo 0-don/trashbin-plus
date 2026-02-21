@@ -39,5 +39,4 @@ export const AUTO_ADD_CONFIG = {
 export const AI_INDICATOR_CLASS = "trashbin-ai-indicator";
 export const AI_SPINNER_CLASS = "trashbin-ai-spinner";
 
-
 export const msg = (key: TranslationKey) => key;

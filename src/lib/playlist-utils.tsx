@@ -99,8 +99,12 @@ export async function removeTrashedFromPlaylist(
         </div>,
       );
       const content = temp.firstElementChild as HTMLElement;
-      content.querySelector('[data-action="cancel"]')!.addEventListener("click", onCancel);
-      content.querySelector('[data-action="confirm"]')!.addEventListener("click", onConfirm);
+      content
+        .querySelector('[data-action="cancel"]')!
+        .addEventListener("click", onCancel);
+      content
+        .querySelector('[data-action="confirm"]')!
+        .addEventListener("click", onConfirm);
 
       Spicetify.PopupModal.display({
         title: t("ACTION_REMOVE_TRASHED"),

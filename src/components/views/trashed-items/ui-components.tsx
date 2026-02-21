@@ -30,7 +30,9 @@ export const ItemRow: React.FC<ItemRowProps> = ({ item, onUntrash }) => {
   const store = useTrashbinStore();
   const aiReady = useAiStore((s) => s.ready);
   const aiEnabled = store.aiDetectionEnabled && aiReady;
-  const aiProbability = useAiStore((s) => !isArtist && aiEnabled ? s.results[item.uri] : undefined);
+  const aiProbability = useAiStore((s) =>
+    !isArtist && aiEnabled ? s.results[item.uri] : undefined,
+  );
 
   return (
     <div className="flex items-center justify-between rounded-md bg-transparent! p-3 transition-colors hover:bg-white/5!">
@@ -50,7 +52,9 @@ export const ItemRow: React.FC<ItemRowProps> = ({ item, onUntrash }) => {
         )}
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-1.5 truncate font-medium text-white">
-            {aiProbability !== undefined && aiProbability >= 0 && <AiIndicator probability={aiProbability} size={14} />}
+            {aiProbability !== undefined && aiProbability >= 0 && (
+              <AiIndicator probability={aiProbability} size={14} />
+            )}
             {item.name}
           </div>
           <div className="truncate text-sm text-white/60">{secondaryText}</div>
@@ -123,7 +127,7 @@ export const TabButton: React.FC<TabButtonProps> = (props) => (
     className={cn(
       "relative border-b-2 px-4! py-2! text-lg font-medium transition-colors",
       "border-transparent! bg-transparent! text-white/60! hover:text-white/80!",
-      props.isActive && "text-white! border-green-500! hover:text-white!",
+      props.isActive && "border-green-500! text-white! hover:text-white!",
     )}
   >
     {props.label}

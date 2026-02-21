@@ -42,7 +42,7 @@ const Tooltip: React.FC<{
       </span>
       {isVisible && (
         <div
-          className="pointer-events-none fixed z-50 -translate-x-1/2 -translate-y-full rounded bg-black px-2 py-1 text-xs text-white shadow-lg max-w-50 wrap-break-word"
+          className="pointer-events-none fixed z-50 max-w-50 -translate-x-1/2 -translate-y-full rounded bg-black px-2 py-1 text-xs wrap-break-word text-white shadow-lg"
           style={{
             left: position.x,
             top: position.y,
@@ -291,12 +291,14 @@ const SettingsModal: React.FC = () => {
         description={t("DESCRIPTION_SETTINGS_TRASH_AI_SONGS")}
         disabled={!store.aiDetectionEnabled}
       />
-      {store.aiDetectionEnabled && (
-        <AiStatusText />
-      )}
+      {store.aiDetectionEnabled && <AiStatusText />}
       <ActionButton
         label={t("ACTION_CLEAR_AI_STORAGE")}
-        description={t("DESCRIPTION_CLEAR_AI_STORAGE", { count: Object.values(useAiStore((s) => s.results)).filter((v) => v >= 0).length })}
+        description={t("DESCRIPTION_CLEAR_AI_STORAGE", {
+          count: Object.values(useAiStore((s) => s.results)).filter(
+            (v) => v >= 0,
+          ).length,
+        })}
         onClick={() => {
           useAiStore.getState().clearStorage();
           Spicetify.showNotification(t("MESSAGE_AI_STORAGE_CLEARED"));

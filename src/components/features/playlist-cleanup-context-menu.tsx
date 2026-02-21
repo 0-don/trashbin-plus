@@ -38,16 +38,20 @@ export function PlaylistCleanupContextMenu() {
       );
       if (!menu) return;
 
-      const items = Array.from(menu.querySelectorAll<HTMLElement>(":scope > li"));
-      const label = t("ACTION_REMOVE_TRASHED");
-      const trashItem = items.find(
-        (li) => li.textContent?.trim() === label,
+      const items = Array.from(
+        menu.querySelectorAll<HTMLElement>(":scope > li"),
       );
+      const label = t("ACTION_REMOVE_TRASHED");
+      const trashItem = items.find((li) => li.textContent?.trim() === label);
       const deleteItem = items.find(
         (li) => li.querySelector("button")?.textContent?.trim() === "Delete",
       );
 
-      if (trashItem && deleteItem && deleteItem.nextElementSibling !== trashItem) {
+      if (
+        trashItem &&
+        deleteItem &&
+        deleteItem.nextElementSibling !== trashItem
+      ) {
         repositioning = true;
         deleteItem.after(trashItem);
         repositioning = false;

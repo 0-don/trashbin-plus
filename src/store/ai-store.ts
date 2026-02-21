@@ -213,7 +213,9 @@ export const useAiStore = create<AiState>((set, get) => ({
         try {
           const raw = Spicetify.LocalStorage.get(LS_FAILED_TS);
           if (raw) failedTs = JSON.parse(raw);
-        } catch { /* corrupt */ }
+        } catch {
+          /* corrupt */
+        }
         failedTs[u] = Date.now();
         Spicetify.LocalStorage.set(LS_FAILED_TS, JSON.stringify(failedTs));
       }
@@ -297,7 +299,9 @@ export const useAiStore = create<AiState>((set, get) => ({
       try {
         const raw = Spicetify.LocalStorage.get(LS_FAILED_TS);
         if (raw) failedTs = JSON.parse(raw);
-      } catch { /* corrupt */ }
+      } catch {
+        /* corrupt */
+      }
       const now = Date.now();
       let failedChanged = false;
       for (const [uri, ts] of Object.entries(failedTs)) {
