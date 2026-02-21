@@ -1,5 +1,5 @@
 import type { BunPlugin } from "bun";
-import { execSync } from "child_process";
+import { execSync, spawn } from "child_process";
 import { existsSync, mkdirSync, readFileSync, watch, writeFileSync } from "fs";
 import { tmpdir } from "os";
 import { dirname, join, resolve } from "path";
@@ -13,17 +13,16 @@ const TEMP = join(tmpdir(), NAME_ID);
 const TEMP_ENTRY = join(TEMP, "entry.ts");
 const argv = Bun.argv.join(" ");
 const watchMode = argv.includes("--watch");
-const minifyMode = argv.includes("--minify");
-const outMatch = argv.match(/--out=(\S+)/);
-const outDir = outMatch
-  ? resolve(outMatch[1])
-  : join(
-      dirname(execSync("spicetify -c", { encoding: "utf-8" }).trim()),
-      "Extensions",
-    );
-const outFile = join(outDir, `${NAME_ID}.js`);
+const minifyMode = !watchMode;
+const spicetifyDir = join(
+  dirname(execSync("spicetify -c", { encoding: "utf-8" }).trim()),
+  "Extensions",
+);
+const distDir = resolve("dist");
+const outFile = join(spicetifyDir, `${NAME_ID}.js`);
 
-mkdirSync(outDir, { recursive: true });
+mkdirSync(spicetifyDir, { recursive: true });
+if (minifyMode) mkdirSync(distDir, { recursive: true });
 
 const postcssPlugin: BunPlugin = {
   name: "postcss",
@@ -118,10 +117,9 @@ async function runBuild() {
     js += `\n;(()=>{if(!document.getElementById("${STYLE_ID}")){const s=document.createElement("style");s.id="${STYLE_ID}";s.textContent=String.raw\`${css}\`.trim();document.head.appendChild(s)}})()`;
   }
 
-  writeFileSync(
-    outFile,
-    `(async()=>{while(!Spicetify.React||!Spicetify.ReactDOM)await new Promise(r=>setTimeout(r,10));${js}})()`,
-  );
+  const output = `(async()=>{while(!Spicetify.React||!Spicetify.ReactDOM)await new Promise(r=>setTimeout(r,10));${js}})()`;
+  writeFileSync(outFile, output);
+  if (minifyMode) writeFileSync(join(distDir, `${NAME_ID}.js`), output);
   console.log("Build succeeded.");
 }
 
@@ -138,4 +136,5 @@ if (watchMode) {
       await runBuild();
     }, 200);
   });
+  spawn("spicetify", ["watch", "-e"], { stdio: "inherit" });
 }
