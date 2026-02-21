@@ -137,6 +137,15 @@ export async function ensureAssets(): Promise<boolean> {
 // ── Worker management ──────────────────────────────────────────────
 
 const WORKER_LOGIC = `
+self.onerror = function(msg, src, line, col, err) {
+  console.error("[trashbin+] worker uncaught:", msg, "at", src + ":" + line + ":" + col, err && err.stack);
+  self.postMessage({ type: "init-error", error: "uncaught: " + msg });
+};
+self.onunhandledrejection = function(e) {
+  console.error("[trashbin+] worker unhandled rejection:", e.reason, e.reason && e.reason.stack);
+  self.postMessage({ type: "init-error", error: "unhandled: " + e.reason });
+};
+
 var STORE_NAME = "assets";
 var dbPromise = null;
 
@@ -208,7 +217,7 @@ self.onmessage = function(e) {
         });
       })
       .catch(function(err) {
-        console.error("[trashbin+] worker: init failed:", err);
+        console.error("[trashbin+] worker: init failed:", err, err && err.stack);
         self.postMessage({ type: "init-error", error: String(err) });
       });
   }
@@ -241,7 +250,8 @@ self.onmessage = function(e) {
       console.log("[trashbin+] " + (msg.trackId || "?") + ": " + chunks.length + " chunks, " + ms + "ms, prob=" + (prob !== null ? prob.toFixed(4) : "null"));
       self.postMessage({ type: "classify-done", id: msg.id, prob: prob });
     })
-    .catch(function() {
+    .catch(function(err) {
+      console.error("[trashbin+] worker: classify failed:", err, err && err.stack);
       self.postMessage({ type: "classify-done", id: msg.id, prob: null });
     });
   }
@@ -284,7 +294,8 @@ export async function initEngine(): Promise<boolean> {
         }
       }
     };
-    worker.onerror = () => {
+    worker.onerror = (e) => {
+      console.error("[trashbin+] worker error:", e.message, e.filename, e.lineno, e.colno);
       for (const resolve of pending.values()) resolve(null);
       pending.clear();
     };

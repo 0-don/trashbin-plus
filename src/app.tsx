@@ -24,7 +24,7 @@ import {
 import { useTrashbinStore } from "./store/trashbin-store";
 
 function App() {
-  console.log("trashbin+ loaded v1.1.8!");
+  console.log("trashbin+ loaded v1.1.26!");
 
   const trashbinStore = useTrashbinStore();
 
