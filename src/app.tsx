@@ -104,18 +104,11 @@ function App() {
   );
 }
 
-async function main() {
+(async () => {
   const appRoot = document.createElement("div");
   appRoot.id = "trashbin-plus-root";
   appRoot.className = "fixed top-0 left-0 z-50 pointer-events-none";
 
   document.body.appendChild(appRoot);
   ReactDOM.render(<App />, appRoot);
-
-  return () => {
-    ReactDOM.unmountComponentAtNode(appRoot);
-    appRoot.remove();
-  };
-}
-
-export default main;
+})();

@@ -1,25 +1,19 @@
 import type { BunPlugin } from "bun";
 import { execSync, spawn } from "child_process";
-import { existsSync, mkdirSync, readFileSync, watch, writeFileSync } from "fs";
-import { tmpdir } from "os";
+import { mkdirSync, readFileSync, watch, writeFileSync } from "fs";
 import { dirname, join, resolve } from "path";
 import postcss from "postcss";
 import postcssrc from "postcss-load-config";
+import { name as NAME_ID } from "./package.json";
 
-const NAME_ID = "trashbin-plus";
 const STYLE_ID = NAME_ID.replace(/-/g, "D");
-const ENTRY = resolve("src/app.tsx");
-const TEMP = join(tmpdir(), NAME_ID);
-const TEMP_ENTRY = join(TEMP, "entry.ts");
-const argv = Bun.argv.join(" ");
-const watchMode = argv.includes("--watch");
+const watchMode = Bun.argv.includes("--watch");
 const minifyMode = !watchMode;
 const spicetifyDir = join(
   dirname(execSync("spicetify -c", { encoding: "utf-8" }).trim()),
   "Extensions",
 );
 const distDir = resolve("dist");
-const outFile = join(spicetifyDir, `${NAME_ID}.js`);
 
 mkdirSync(spicetifyDir, { recursive: true });
 if (minifyMode) mkdirSync(distDir, { recursive: true });
@@ -73,8 +67,6 @@ const ortWorkerString: BunPlugin = {
         /new URL\("ort-wasm-simd-threaded[^"]*\.wasm",self\.location\.href\)\.href/g,
         '""',
       );
-      // Backport https://github.com/microsoft/onnxruntime/pull/27318
-      code = code.replace("o=on(oe)", "o=on(oe)||(u&&!a)");
       code = code.replace(
         /export\{(.+?)\}/,
         (_, e: string) => `self.ort={${e.replace(/(\w+) as (\w+)/g, "$2:$1")}}`,
@@ -88,20 +80,11 @@ const ortWorkerString: BunPlugin = {
 };
 
 async function runBuild() {
-  mkdirSync(TEMP, { recursive: true });
-  writeFileSync(
-    TEMP_ENTRY,
-    `import main from '${ENTRY.replace(/\\/g, "/")}';(async()=>{await main()})();`,
-  );
-
   const result = await Bun.build({
-    entrypoints: [TEMP_ENTRY],
-    outdir: TEMP,
+    entrypoints: [resolve("src/app.tsx")],
     target: "browser",
     format: "esm",
-    naming: `${NAME_ID}.[ext]`,
     minify: minifyMode,
-    define: { "import.meta.url": "location.href" },
     plugins: [postcssPlugin, externalGlobals, ortWorkerString],
   });
 
@@ -110,15 +93,15 @@ async function runBuild() {
     return;
   }
 
-  let js = readFileSync(join(TEMP, `${NAME_ID}.js`), "utf-8");
-  const cssPath = join(TEMP, `${NAME_ID}.css`);
-  if (existsSync(cssPath)) {
-    const css = readFileSync(cssPath, "utf-8");
+  let js = await result.outputs[0].text();
+  const cssOutput = result.outputs.find((o) => o.path.endsWith(".css"));
+  if (cssOutput) {
+    const css = await cssOutput.text();
     js += `\n;(()=>{if(!document.getElementById("${STYLE_ID}")){const s=document.createElement("style");s.id="${STYLE_ID}";s.textContent=String.raw\`${css}\`.trim();document.head.appendChild(s)}})()`;
   }
 
   const output = `(async()=>{while(!Spicetify.React||!Spicetify.ReactDOM)await new Promise(r=>setTimeout(r,10));${js}})()`;
-  writeFileSync(outFile, output);
+  writeFileSync(join(spicetifyDir, `${NAME_ID}.js`), output);
   if (minifyMode) writeFileSync(join(distDir, `${NAME_ID}.js`), output);
   console.log("Build succeeded.");
 }
