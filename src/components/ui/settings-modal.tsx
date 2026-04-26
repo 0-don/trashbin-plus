@@ -154,10 +154,10 @@ const SettingsModal: React.FC = () => {
       if (!file) return;
 
       const reader = new FileReader();
-      reader.onload = (e) => {
+      reader.onload = async (e) => {
         try {
           const data = JSON.parse(e.target?.result as string);
-          store.importTrashData(data.songs || {}, data.artists || {});
+          await store.importTrashData(data.songs || {}, data.artists || {});
           Spicetify.showNotification(t("BACKUP_RESTORE_SUCCESS"));
         } catch {
           Spicetify.showNotification(t("BACKUP_FILE_READ_FAILED"), true);
@@ -188,8 +188,8 @@ const SettingsModal: React.FC = () => {
     Spicetify.showNotification(t("MESSAGE_COPIED"));
   };
 
-  const handleClear = () => {
-    store.clearTrashbin();
+  const handleClear = async () => {
+    await store.clearTrashbin();
     Spicetify.showNotification(t("MESSAGE_CLEARED"));
   };
 

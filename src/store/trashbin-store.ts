@@ -1,12 +1,20 @@
 import { create } from "zustand";
 import { i18n } from "../components/providers/providers";
 import { shouldSkipTrack } from "../lib/track-utils";
+import {
+  bulkReplace,
+  clearAll,
+  deleteArtist,
+  deleteSong,
+  loadAll,
+  migrateFromLocalStorage,
+  putArtist,
+  putSong,
+} from "../lib/trash-storage";
 
 export const STORAGE_KEYS = {
   ENABLED: "trashbin-enabled",
   WIDGET: "TrashbinWidgetIcon",
-  SONGS: "TrashSongList",
-  ARTISTS: "TrashArtistList",
   AUTOPLAY_ON_START: "trashbin-autoplay-on-start",
   QUEUE_TRASHBIN: "trashbin-queue-enabled",
   TRACKLIST_TRASHBIN: "trashbin-tracklist-enabled",
@@ -42,7 +50,7 @@ interface TrashbinState {
   trashAiSongs: boolean;
 
   // Actions
-  initializeFromStorage: () => void;
+  initializeFromStorage: () => Promise<void>;
   setTrashbinEnabled: (enabled: boolean) => void;
   setWidgetEnabled: (enabled: boolean) => void;
   setAutoplayOnStart: (enabled: boolean) => void;
@@ -70,8 +78,8 @@ interface TrashbinState {
   importTrashData: (
     songs: Record<string, boolean>,
     artists: Record<string, boolean>,
-  ) => void;
-  clearTrashbin: () => void;
+  ) => Promise<void>;
+  clearTrashbin: () => Promise<void>;
   exportData: () => {
     songs: Record<string, boolean>;
     artists: Record<string, boolean>;
@@ -106,13 +114,10 @@ export const useTrashbinStore = create<TrashbinState>((set, get) => ({
   aiDetectionEnabled: false,
   trashAiSongs: false,
 
-  // Initialize from localStorage
-  initializeFromStorage: () => {
+  initializeFromStorage: async () => {
     set({
       trashbinEnabled: initValue(STORAGE_KEYS.ENABLED, true),
       widgetEnabled: initValue(STORAGE_KEYS.WIDGET, true),
-      trashSongList: initValue(STORAGE_KEYS.SONGS, {}),
-      trashArtistList: initValue(STORAGE_KEYS.ARTISTS, {}),
       autoplayOnStart: initValue(STORAGE_KEYS.AUTOPLAY_ON_START, false),
       queueTrashbinEnabled: initValue(STORAGE_KEYS.QUEUE_TRASHBIN, true),
       tracklistTrashbinEnabled: initValue(
@@ -131,6 +136,14 @@ export const useTrashbinStore = create<TrashbinState>((set, get) => ({
       aiDetectionEnabled: initValue(STORAGE_KEYS.AI_DETECTION, false),
       trashAiSongs: initValue(STORAGE_KEYS.TRASH_AI_SONGS, false),
     });
+
+    try {
+      await migrateFromLocalStorage();
+      const { songs, artists } = await loadAll();
+      set({ trashSongList: songs, trashArtistList: artists });
+    } catch (e) {
+      console.error("trashbin+ storage init failed", e);
+    }
   },
 
   setTrashbinEnabled: (enabled: boolean) => {
@@ -270,7 +283,9 @@ export const useTrashbinStore = create<TrashbinState>((set, get) => ({
     }
 
     set({ trashSongList: newList });
-    Spicetify.LocalStorage.set(STORAGE_KEYS.SONGS, JSON.stringify(newList));
+    (isTrashed ? deleteSong(uri) : putSong(uri)).catch((e) =>
+      console.error("trashbin+ song write failed", e),
+    );
   },
 
   toggleArtistTrash: (uri: string, showNotification = true) => {
@@ -300,7 +315,9 @@ export const useTrashbinStore = create<TrashbinState>((set, get) => ({
     }
 
     set({ trashArtistList: newList });
-    Spicetify.LocalStorage.set(STORAGE_KEYS.ARTISTS, JSON.stringify(newList));
+    (isTrashed ? deleteArtist(uri) : putArtist(uri)).catch((e) =>
+      console.error("trashbin+ artist write failed", e),
+    );
   },
 
   getTrashStatus: (uri: string) => {
@@ -314,20 +331,18 @@ export const useTrashbinStore = create<TrashbinState>((set, get) => ({
     return { isTrashed, type: uriObj.type };
   },
 
-  importTrashData: (
+  importTrashData: async (
     songs: Record<string, boolean>,
     artists: Record<string, boolean>,
   ) => {
+    await bulkReplace(songs, artists);
     set({ trashSongList: songs, trashArtistList: artists });
-    Spicetify.LocalStorage.set(STORAGE_KEYS.SONGS, JSON.stringify(songs));
-    Spicetify.LocalStorage.set(STORAGE_KEYS.ARTISTS, JSON.stringify(artists));
   },
 
-  clearTrashbin: () => {
+  clearTrashbin: async () => {
     const emptyList = {};
+    await clearAll();
     set({ trashSongList: emptyList, trashArtistList: emptyList });
-    Spicetify.LocalStorage.set(STORAGE_KEYS.SONGS, JSON.stringify(emptyList));
-    Spicetify.LocalStorage.set(STORAGE_KEYS.ARTISTS, JSON.stringify(emptyList));
   },
 
   exportData: () => {
