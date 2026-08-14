@@ -43,6 +43,21 @@ function isPlaylistItemTrashed(item: PlaylistItem): boolean {
   return false;
 }
 
+export async function getPlaylistTrashCounts(
+  playlistUri: string,
+): Promise<{ total: number; trashed: number; untrashed: number }> {
+  const tracks = (await getPlaylistContents(playlistUri)).filter((item) =>
+    item.uri?.startsWith("spotify:track:"),
+  );
+  const trashed = tracks.filter(isPlaylistItemTrashed).length;
+
+  return {
+    total: tracks.length,
+    trashed,
+    untrashed: tracks.length - trashed,
+  };
+}
+
 async function getPlaylistContents(
   playlistUri: string,
 ): Promise<PlaylistItem[]> {
@@ -51,6 +66,54 @@ async function getPlaylistContents(
       limit: 9999999,
     });
   return contents.items || [];
+}
+
+function confirmDialog(
+  t: TFunction,
+  title: string,
+  message: string,
+  confirmLabel: string,
+): Promise<boolean> {
+  return new Promise<boolean>((resolve) => {
+    const onCancel = () => {
+      Spicetify.PopupModal.hide();
+      resolve(false);
+    };
+    const onConfirm = () => {
+      Spicetify.PopupModal.hide();
+      resolve(true);
+    };
+
+    const temp = document.createElement("div");
+    temp.innerHTML = Spicetify.ReactDOMServer.renderToString(
+      <div className="p-4">
+        <p className="mb-4">{message}</p>
+        <div className="flex justify-end gap-2">
+          <button
+            data-action="cancel"
+            className="cursor-pointer rounded-full border border-[#727272] bg-transparent px-4 py-2 font-bold text-(--spice-text)"
+          >
+            {t("ACTION_CANCEL")}
+          </button>
+          <button
+            data-action="confirm"
+            className="cursor-pointer rounded-full border-none bg-[#e74c3c] px-4 py-2 font-bold text-white"
+          >
+            {confirmLabel}
+          </button>
+        </div>
+      </div>,
+    );
+    const content = temp.firstElementChild as HTMLElement;
+    content
+      .querySelector('[data-action="cancel"]')!
+      .addEventListener("click", onCancel);
+    content
+      .querySelector('[data-action="confirm"]')!
+      .addEventListener("click", onConfirm);
+
+    Spicetify.PopupModal.display({ title, content });
+  });
 }
 
 export async function removeTrashedFromPlaylist(
@@ -66,51 +129,12 @@ export async function removeTrashedFromPlaylist(
       return;
     }
 
-    const confirmed = await new Promise<boolean>((resolve) => {
-      const onCancel = () => {
-        Spicetify.PopupModal.hide();
-        resolve(false);
-      };
-      const onConfirm = () => {
-        Spicetify.PopupModal.hide();
-        resolve(true);
-      };
-
-      const temp = document.createElement("div");
-      temp.innerHTML = Spicetify.ReactDOMServer.renderToString(
-        <div className="p-4">
-          <p className="mb-4">
-            {t("CONFIRM_REMOVE_TRASHED", { count: trashedItems.length })}
-          </p>
-          <div className="flex justify-end gap-2">
-            <button
-              data-action="cancel"
-              className="cursor-pointer rounded-full border border-[#727272] bg-transparent px-4 py-2 font-bold text-(--spice-text)"
-            >
-              {t("ACTION_CANCEL")}
-            </button>
-            <button
-              data-action="confirm"
-              className="cursor-pointer rounded-full border-none bg-[#e74c3c] px-4 py-2 font-bold text-white"
-            >
-              {t("ACTION_REMOVE")}
-            </button>
-          </div>
-        </div>,
-      );
-      const content = temp.firstElementChild as HTMLElement;
-      content
-        .querySelector('[data-action="cancel"]')!
-        .addEventListener("click", onCancel);
-      content
-        .querySelector('[data-action="confirm"]')!
-        .addEventListener("click", onConfirm);
-
-      Spicetify.PopupModal.display({
-        title: t("ACTION_REMOVE_TRASHED"),
-        content,
-      });
-    });
+    const confirmed = await confirmDialog(
+      t,
+      t("ACTION_REMOVE_TRASHED"),
+      t("CONFIRM_REMOVE_TRASHED", { count: trashedItems.length }),
+      t("ACTION_REMOVE"),
+    );
 
     if (!confirmed) return;
 
@@ -125,5 +149,56 @@ export async function removeTrashedFromPlaylist(
   } catch (err) {
     // remove failed
     Spicetify.showNotification(t("MESSAGE_REMOVE_TRASHED_FAILED"), true);
+  }
+}
+
+export async function toggleTrashForPlaylist(
+  playlistUri: string,
+  t: TFunction,
+): Promise<void> {
+  try {
+    const tracks = (await getPlaylistContents(playlistUri)).filter((item) =>
+      item.uri?.startsWith("spotify:track:"),
+    );
+
+    if (tracks.length === 0) {
+      Spicetify.showNotification(t("MESSAGE_PLAYLIST_EMPTY"));
+      return;
+    }
+
+    const state = useTrashbinStore.getState();
+    const uris = Array.from(new Set(tracks.map((item) => item.uri)));
+    const untrashed = uris.filter((uri) => !state.trashSongList[uri]);
+    const trashAll = untrashed.length > 0;
+    const count = trashAll ? untrashed.length : uris.length;
+
+    const confirmed = await confirmDialog(
+      t,
+      trashAll ? t("ACTION_TRASH_ALL") : t("ACTION_RESTORE_ALL"),
+      trashAll
+        ? t("CONFIRM_TRASH_ALL", { count })
+        : t("CONFIRM_RESTORE_ALL", { count }),
+      trashAll ? t("ACTION_THROW") : t("ACTION_UNTHROW"),
+    );
+
+    if (!confirmed) return;
+
+    const songs = { ...useTrashbinStore.getState().trashSongList };
+    for (const uri of uris) {
+      if (trashAll) songs[uri] = true;
+      else delete songs[uri];
+    }
+
+    await useTrashbinStore
+      .getState()
+      .importTrashData(songs, useTrashbinStore.getState().trashArtistList);
+
+    Spicetify.showNotification(
+      trashAll
+        ? t("MESSAGE_TRASH_ALL_SUCCESS", { count })
+        : t("MESSAGE_RESTORE_ALL_SUCCESS", { count }),
+    );
+  } catch (err) {
+    Spicetify.showNotification(t("MESSAGE_TRASH_ALL_FAILED"), true);
   }
 }

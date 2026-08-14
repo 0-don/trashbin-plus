@@ -5,6 +5,7 @@ import { AutoAddRecommendations } from "./components/features/injections/auto-ad
 import { TrashbinQueuelist } from "./components/features/injections/trashbin-queuelist";
 import { TrashbinTracklist } from "./components/features/injections/trashbin-tracklist";
 import { PlaylistCleanupContextMenu } from "./components/features/playlist-cleanup-context-menu";
+import { PlaylistTrashAllContextMenu } from "./components/features/playlist-trash-all-context-menu";
 import { TrashbinContextMenu } from "./components/features/trashbin-context-menu";
 import { TrashbinWidget } from "./components/features/trashbin-widget";
 import { Providers } from "./components/providers/providers";
@@ -24,7 +25,7 @@ import {
 import { useTrashbinStore } from "./store/trashbin-store";
 
 function App() {
-  console.log("trashbin+ loaded v1.1.12!");
+  console.log("trashbin+ loaded v1.1.13!");
 
   const trashbinStore = useTrashbinStore();
 
@@ -95,6 +96,7 @@ function App() {
         <TrashedItemsModal />
         <TrashbinContextMenu />
         <PlaylistCleanupContextMenu />
+        <PlaylistTrashAllContextMenu />
 
         <TrashbinTracklist />
         <TrashbinQueuelist />
