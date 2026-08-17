@@ -62,4 +62,28 @@ spicetify config extensions trashbin-plus.js && spicetify apply
 ## To uninstall:
 spicetify config extensions trashbin-plus.js- && spicetify apply
 
+## Remote debugging (CDP) on port 9225
+## Brave uses 9223, Chrome 9224, so Spotify gets 9225.
+##
+## The flag must go in the spotify-launcher config, NOT spicetify's
+## spotify_launch_flags: this install is Arch spotify-launcher, which spawns
+## the real binary itself and only forwards args listed in extra_arguments.
+## `spotify-launcher -- --flag` is rejected as an unexpected argument.
+##
+## ~/.config/spotify-launcher.conf
+## [spotify]
+## extra_arguments = ["--skip-update", "--remote-debugging-port=9225", "--remote-allow-origins=*"]
+##
+## --remote-allow-origins=* is required since Chromium 111, otherwise the
+## WebSocket upgrade is closed right after the target list loads.
+
+## Relaunch, then verify (port needs ~10s after start to accept connections):
+pkill -x spotify; setsid spotify-launcher >/dev/null 2>&1 &
+curl -s http://127.0.0.1:9225/json/version
+curl -s http://127.0.0.1:9225/json    # xpui page target lives here
+
+## Spotify auto-updates wipe the spicetify patch, leaving vanilla xpui and an
+## undefined Spicetify global over CDP. Re-apply after any version bump:
+spicetify backup apply
+
 ``` -->
