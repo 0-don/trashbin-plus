@@ -4,6 +4,7 @@ import {
   BsFillPlayFill,
   BsTrash3,
   BsArrowCounterclockwise,
+  BsBroadcast,
 } from "react-icons/bs";
 
 export const TRASH_ICON = (size?: string | number, className?: string) =>
@@ -14,6 +15,11 @@ export const TRASH_ICON = (size?: string | number, className?: string) =>
 export const RESTORE_ICON = (size?: string | number, className?: string) =>
   Spicetify.ReactDOMServer.renderToString(
     <BsArrowCounterclockwise size={size} className={className} />,
+  );
+
+export const RADIO_ICON = (size?: string | number, className?: string) =>
+  Spicetify.ReactDOMServer.renderToString(
+    <BsBroadcast size={size} className={className} />,
   );
 
 export const PLAY_ICON = (size: number = 26) =>

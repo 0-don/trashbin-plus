@@ -3,6 +3,57 @@
 @import "tailwindcss/theme.css" layer(theme);
 @import "tailwindcss/utilities.css";
 
+/* Spotify 1.2.96 dropped the stylesheet backing Spicetify PopupModal's legacy
+   main-trackCreditsModal-* markup, leaving unstyled native elements. */
+.GenericModal > .main-trackCreditsModal-container {
+  width: min(90vw, 40rem);
+  padding: 24px 32px 32px;
+  border-radius: 8px;
+  background-color: var(--spice-card, #282828);
+  color: var(--spice-text, #fff);
+  box-shadow: 0 4px 24px rgb(0 0 0 / 0.5);
+}
+
+.main-trackCreditsModal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.main-trackCreditsModal-header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.main-trackCreditsModal-closeBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background-color: transparent;
+  color: var(--spice-subtext, #b3b3b3);
+  cursor: pointer;
+}
+
+.main-trackCreditsModal-closeBtn:hover {
+  background-color: rgb(255 255 255 / 0.1);
+  color: var(--spice-text, #fff);
+}
+
+.main-trackCreditsModal-closeBtn svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
 .main-trackCreditsModal-mainSection {
   max-height: 70vh !important;
   overflow-y: auto !important;

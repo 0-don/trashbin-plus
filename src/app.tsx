@@ -6,6 +6,8 @@ import { TrashbinQueuelist } from "./components/features/injections/trashbin-que
 import { TrashbinTracklist } from "./components/features/injections/trashbin-tracklist";
 import { PlaylistCleanupContextMenu } from "./components/features/playlist-cleanup-context-menu";
 import { PlaylistTrashAllContextMenu } from "./components/features/playlist-trash-all-context-menu";
+import { ContextMenuGrouper } from "./components/features/context-menu-grouper";
+import { RadioCollectContextMenu } from "./components/features/radio-collect-context-menu";
 import { TrashbinContextMenu } from "./components/features/trashbin-context-menu";
 import { TrashbinWidget } from "./components/features/trashbin-widget";
 import { Providers } from "./components/providers/providers";
@@ -25,7 +27,7 @@ import {
 import { useTrashbinStore } from "./store/trashbin-store";
 
 function App() {
-  console.log("trashbin+ loaded v1.1.13!");
+  console.log("trashbin+ loaded v1.1.14!");
 
   const trashbinStore = useTrashbinStore();
 
@@ -97,6 +99,8 @@ function App() {
         <TrashbinContextMenu />
         <PlaylistCleanupContextMenu />
         <PlaylistTrashAllContextMenu />
+        <RadioCollectContextMenu />
+        <ContextMenuGrouper />
 
         <TrashbinTracklist />
         <TrashbinQueuelist />
