@@ -8,6 +8,7 @@ dependencies = [
     "numpy>=2.5.3",
     "onnx>=1.23.0",
     "pyarrow>=25.0.1",
+    "python-dotenv>=1.2.3",
     "remotezip>=0.12.6",
     "scikit-learn>=1.9.1",
     "torch>=2.14.0",
