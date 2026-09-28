@@ -72,7 +72,8 @@ def load_pcm(clips):
     # Python 3.14 defaults to forkserver, which cannot start workers from a `python -c` caller
     with get_context("fork").Pool(max(1, (os.cpu_count() or 8) - 4)) as pool:
         paths = pool.map(decode, clips, chunksize=8)
-    return [(c, np.load(p)) for c, p in zip(clips, paths) if p]
+    # memory mapped: the decoded set (36GB) exceeds a pod container (31GB), only cropped windows get paged in
+    return [(c, np.load(p, mmap_mode="r")) for c, p in zip(clips, paths) if p]
 
 
 def windows(n):
