@@ -68,7 +68,7 @@
   "AI_ASSETS_NOT_READY": "Model AI tidak tersedia",
   "AI_ASSETS_INITIALIZING": "Memulakan model...",
   "SETTINGS_TRASH_AI_SONGS": "Lagu AI Sampah",
-  "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "Buang secara automatik lagu yang dikesan dijana oleh AI (kebarangkalian ≥ 80%)",
+  "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "Buang lagu AI ke tong sampah secara automatik: daripada 97% dengan sendirinya, daripada 80% apabila artis mempunyai 3 lagu yang ditanda. Keluaran sebelum 2023 tidak pernah ditanda.",
   "DESCRIPTION_CLEAR_AI_STORAGE": "Padamkan semua keputusan pengelasan AI yang disimpan ({{count}} lagu disimpan).",
   "ACTION_CLEAR_AI_STORAGE": "Jelas",
   "MESSAGE_AI_STORAGE_CLEARED": "Keputusan AI telah dibersihkan",

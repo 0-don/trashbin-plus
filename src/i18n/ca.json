@@ -68,7 +68,7 @@
   "AI_ASSETS_NOT_READY": "Model d'IA no disponible",
   "AI_ASSETS_INITIALIZING": "S'està inicialitzant el model...",
   "SETTINGS_TRASH_AI_SONGS": "Cançons d'IA de brossa",
-  "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "Elimina automàticament les cançons detectades com a generades per IA (probabilitat ≥ 80%)",
+  "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "Envia automàticament a la paperera les cançons d'IA: a partir del 97% per si soles, a partir del 80% quan l'artista ja té 3 cançons marcades. Els llançaments anteriors al 2023 no es marquen mai.",
   "DESCRIPTION_CLEAR_AI_STORAGE": "Neteja tots els resultats de classificació d'IA emmagatzemats ({{count}} cançons emmagatzemades).",
   "ACTION_CLEAR_AI_STORAGE": "Clar",
   "MESSAGE_AI_STORAGE_CLEARED": "Els resultats d'IA han estat esborrats",

@@ -3,7 +3,7 @@ import {
   classifyTrack,
   disposeEngine,
   ensureAssets,
-  getTrackArtists,
+  getTrackInfo,
   initEngine,
 } from "../lib/ai-engine";
 import { AI_INDICATOR_CLASS } from "../lib/constants";
@@ -16,12 +16,18 @@ const LS_BLOCKLIST_DATA = "trashbin-ai-blocklist:data";
 const LS_BLOCKLIST_TS = "trashbin-ai-blocklist:ts";
 const BLOCKLIST_TTL = 86_400_000; // 24 hours
 
-const LS_KEY = "trashbin-ai-results-v2";
-const LS_FAILED_TS = "trashbin-ai-failed-ts-v2";
-const LEGACY_LS_KEYS = ["trashbin-ai-results", "trashbin-ai-failed-ts"];
+const LS_KEY = "trashbin-ai-results-v3";
+const LS_FAILED_TS = "trashbin-ai-failed-ts-v3";
+const LEGACY_LS_KEYS = ["trashbin-ai-results", "trashbin-ai-failed-ts", "trashbin-ai-results-v2", "trashbin-ai-failed-ts-v2"];
 const FAILED_RETRY_TTL = 86_400_000; // 24 hours
 const POLL_INTERVAL = 2000;
 const AI_TRASH_THRESHOLD = 0.8;
+// trashed on its own only when this sure; between the two, the artist needs ARTIST_MIN_HITS flagged songs
+const AI_TRASH_CONFIDENT = 0.97;
+const ARTIST_MIN_HITS = 3;
+// Suno launched Dec 2023; older releases are scored human without analysis
+const AI_ERA_START_YEAR = 2023;
+const LS_ARTIST_HITS = "trashbin-ai-artist-hits";
 const MAX_RETRIES = 2;
 
 interface BlocklistEntry {
@@ -48,6 +54,14 @@ function resolveTrackLabel(trackUri: string): string | null {
     }
   }
   return null;
+}
+
+function readArtistHits(): Record<string, string[]> {
+  try {
+    return JSON.parse(Spicetify.LocalStorage.get(LS_ARTIST_HITS) ?? "{}");
+  } catch {
+    return {};
+  }
 }
 
 function extractArtistId(value: string): string | null {
@@ -222,31 +236,46 @@ export const useAiStore = create<AiState>((set, get) => ({
       }
     };
 
-    const autoTrash = (u: string, probability: number) => {
+    const trash = (u: string) => {
       const ts = useTrashbinStore.getState();
-      if (
-        ts.trashAiSongs &&
-        probability >= AI_TRASH_THRESHOLD &&
-        !ts.trashSongList[u]
-      ) {
-        ts.toggleSongTrash(u, false);
+      if (ts.trashAiSongs && !ts.trashSongList[u]) ts.toggleSongTrash(u, false);
+    };
+
+    // one borderline song never trashes alone: the artist must have ARTIST_MIN_HITS flagged songs,
+    // and reaching that count also trashes the artist's earlier flagged songs
+    const judge = (u: string, probability: number, artists: string[]) => {
+      if (probability >= AI_TRASH_CONFIDENT) trash(u);
+      if (probability < AI_TRASH_THRESHOLD) return;
+      const hits = readArtistHits();
+      for (const artist of artists) {
+        const songs = [...new Set([...(hits[artist] ?? []), u])];
+        hits[artist] = songs;
+        if (songs.length >= ARTIST_MIN_HITS) songs.forEach(trash);
       }
+      Spicetify.LocalStorage.set(LS_ARTIST_HITS, JSON.stringify(hits));
     };
 
     try {
-      const artistIdList = await getTrackArtists(uri);
-      if (artistIdList.some((id) => get().blocklist.has(id))) {
+      const info = await getTrackInfo(uri);
+      if (info.artists.some((id) => get().blocklist.has(id))) {
         setResult(uri, 1.0);
-        autoTrash(uri, 1.0);
+        trash(uri);
         state.retries.delete(uri);
         return;
       }
 
       const trackLabel = resolveTrackLabel(uri);
+      if (info.year !== null && info.year < AI_ERA_START_YEAR) {
+        console.log(`[trashbin+] ${trackLabel ?? uri}: released ${info.year}, before AI song generators`);
+        setResult(uri, 0);
+        state.retries.delete(uri);
+        return;
+      }
+
       const probability = await classifyTrack(uri, pos, remaining, trackLabel);
       if (probability !== null) {
         setResult(uri, probability);
-        autoTrash(uri, probability);
+        judge(uri, probability, info.artists);
       } else {
         setResult(uri, -1);
       }
@@ -345,6 +374,7 @@ export const useAiStore = create<AiState>((set, get) => ({
   clearStorage: () => {
     Spicetify.LocalStorage.remove(LS_KEY);
     Spicetify.LocalStorage.remove(LS_FAILED_TS);
+    Spicetify.LocalStorage.remove(LS_ARTIST_HITS);
     get().queue.clear();
     set({ results: {} });
     document

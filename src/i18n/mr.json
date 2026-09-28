@@ -68,7 +68,7 @@
   "AI_ASSETS_NOT_READY": "AI मॉडेल उपलब्ध नाही",
   "AI_ASSETS_INITIALIZING": "मॉडेल सुरू करीत आहे...",
   "SETTINGS_TRASH_AI_SONGS": "कचरा एआय गाणी",
-  "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "स्वयंचलितपणे एआय-निर्मित म्हणून ओळखल्या गेलेल्या गाण्यांची ट्रॅश करा (संभाव्यता ≥ 80%)",
+  "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "AI गाणी आपोआप कचरापेटीत टाका: एकटी असताना 97% पासून, कलाकाराची 3 चिन्हांकित गाणी झाल्यावर 80% पासून. 2023 पूर्वीची प्रकाशने कधीही चिन्हांकित होत नाहीत.",
   "DESCRIPTION_CLEAR_AI_STORAGE": "संग्रहित केलेली सर्व AI वर्गीकरण निकाल स्पष्ट करा ({{count}} गाणी संग्रहित केलेली).",
   "ACTION_CLEAR_AI_STORAGE": "स्पष्ट",
   "MESSAGE_AI_STORAGE_CLEARED": "AI निकाल स्पष्ट झाले",

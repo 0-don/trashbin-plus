@@ -68,7 +68,7 @@
   "AI_ASSETS_NOT_READY": "Kunsmatige intelligensiemodel nie beskikbaar nie",
   "AI_ASSETS_INITIALIZING": "Model word geïnisialiseer...",
   "SETTINGS_TRASH_AI_SONGS": "Afval AI-liewe",
-  "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "Verwyder outomaties liedjies wat as deur kunsmatige intelligensie gegenereer opgespoor word (waarskynlikheid ≥ 80%)",
+  "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "Gooi KI-liedjies outomaties weg: vanaf 97 % op hul eie, vanaf 80 % sodra die kunstenaar 3 gemerkte liedjies het. Vrystellings van voor 2023 word nooit gemerk nie.",
   "DESCRIPTION_CLEAR_AI_STORAGE": "Wis alle gestoorde KI-klassifikasieresultate ({{count}} liedjies gestoor) uit.",
   "ACTION_CLEAR_AI_STORAGE": "Duidelik",
   "MESSAGE_AI_STORAGE_CLEARED": "KI-resultate skoongemaak",

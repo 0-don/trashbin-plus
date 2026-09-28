@@ -68,7 +68,7 @@
   "AI_ASSETS_NOT_READY": "النموذج الاصطناعي مش متاح",
   "AI_ASSETS_INITIALIZING": "بيتم تهيئة النموذج...",
   "SETTINGS_TRASH_AI_SONGS": "أغانى ترَاش بالذكاء الاصطناعى",
-  "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "احذف تلقائيًا الأغاني اللي اتكتشفت إنها مُولّدة بالذكاء الاصطناعي (باحتمالية ≥ 80%)",
+  "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "ارمي أغاني الذكاء الاصطناعي في سلة المهملات تلقائيًا: من 97% لوحدها، ومن 80% لما يبقى للفنان 3 أغاني متعلّم عليها. الإصدارات اللي قبل 2023 عمرها ما بتتعلّم.",
   "DESCRIPTION_CLEAR_AI_STORAGE": "امسح كل نتائج التصنيف الاصطناعي المحفوظة ({{count}} أغانٍ محفوظة).",
   "ACTION_CLEAR_AI_STORAGE": "واضح",
   "MESSAGE_AI_STORAGE_CLEARED": "تمت إزالة نتائج الذكاء الاصطناعي",

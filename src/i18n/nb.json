@@ -68,7 +68,7 @@
   "AI_ASSETS_NOT_READY": "AI-modell ikke tilgjengelig",
   "AI_ASSETS_INITIALIZING": "Initialiserer modell...",
   "SETTINGS_TRASH_AI_SONGS": "Søppel AI-sanger",
-  "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "Automatisk slett sanger som er identifisert som AI-genererte (sannsynlighet ≥ 80 %)",
+  "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "Kast AI-sanger automatisk i papirkurven: fra 97 % alene, fra 80 % når artisten har 3 merkede sanger. Utgivelser fra før 2023 merkes aldri.",
   "DESCRIPTION_CLEAR_AI_STORAGE": "Tøm alle lagrede AI-klassifiseringsresultater ({{count}} sanger lagret).",
   "ACTION_CLEAR_AI_STORAGE": "Klar",
   "MESSAGE_AI_STORAGE_CLEARED": "AI-resultater godkjent",

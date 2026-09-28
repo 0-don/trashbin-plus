@@ -68,7 +68,7 @@
   "AI_ASSETS_NOT_READY": "AI-model niet beschikbaar",
   "AI_ASSETS_INITIALIZING": "Model initialiseren...",
   "SETTINGS_TRASH_AI_SONGS": "Trash AI-nummers",
-  "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "Verwijder automatisch nummers die zijn herkend als door AI gegenereerd (kans ≥ 80%)",
+  "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "Gooi AI-nummers automatisch in de prullenbak: vanaf 97% op zichzelf, vanaf 80% zodra de artiest 3 gemarkeerde nummers heeft. Releases van vóór 2023 worden nooit gemarkeerd.",
   "DESCRIPTION_CLEAR_AI_STORAGE": "Wis alle opgeslagen AI-classificatieresultaten ({{count}} nummers opgeslagen).",
   "ACTION_CLEAR_AI_STORAGE": "Duidelijk",
   "MESSAGE_AI_STORAGE_CLEARED": "AI-resultaten gewist",

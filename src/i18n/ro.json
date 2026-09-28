@@ -68,7 +68,7 @@
   "AI_ASSETS_NOT_READY": "Modelul AI nu este disponibil",
   "AI_ASSETS_INITIALIZING": "Inițializare model...",
   "SETTINGS_TRASH_AI_SONGS": "Cântece AI deșeurilor",
-  "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "Elimină automat piesele muzicale detectate ca fiind generate de AI (probabilitate ≥ 80%)",
+  "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "Mută automat în coș melodiile create cu IA: de la 97% singure, de la 80% când artistul are 3 melodii marcate. Lansările dinainte de 2023 nu sunt niciodată marcate.",
   "DESCRIPTION_CLEAR_AI_STORAGE": "Ștergeți toate rezultatele stocate ale clasificării AI ({{count}} melodii stocate).",
   "ACTION_CLEAR_AI_STORAGE": "Clar",
   "MESSAGE_AI_STORAGE_CLEARED": "Rezultatele AI au fost eliberate",

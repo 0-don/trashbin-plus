@@ -68,7 +68,7 @@
   "AI_ASSETS_NOT_READY": "AIモデルは利用できません",
   "AI_ASSETS_INITIALIZING": "モデルを初期化しています...",
   "SETTINGS_TRASH_AI_SONGS": "ゴミAIソング",
-  "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "AI生成と検出された曲を自動的にゴミ箱に移動（確率≥80％）",
+  "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "AI生成曲を自動でゴミ箱へ：単独では97％以上、アーティストに判定済みの曲が3曲あれば80％以上。2023年より前のリリースは判定しません。",
   "DESCRIPTION_CLEAR_AI_STORAGE": "保存されたすべてのAI分類結果を消去します（{{count}}曲が保存されています）。",
   "ACTION_CLEAR_AI_STORAGE": "クリア",
   "MESSAGE_AI_STORAGE_CLEARED": "AIの結果がクリアされました",

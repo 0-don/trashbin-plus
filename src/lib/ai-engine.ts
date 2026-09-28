@@ -211,30 +211,22 @@ function toMono(buffer: AudioBuffer): Float32Array {
   return mono;
 }
 
-export async function getTrackArtists(trackUri: string): Promise<string[]> {
-  try {
-    const currentTrack = Spicetify.Player.data?.item;
-    if (currentTrack && currentTrack.uri === trackUri && currentTrack.artists) {
-      const ids: string[] = [];
-      for (const artist of currentTrack.artists) {
-        const artistId = (artist as any).uri?.split(":")[2];
-        if (artistId) ids.push(artistId);
-      }
-      if (ids.length > 0) return ids;
-    }
+export interface TrackInfo {
+  artists: string[];
+  year: number | null;
+}
 
-    const trackId = trackUri.split(":")[2];
-    if (!trackId) return [];
+export async function getTrackInfo(trackUri: string): Promise<TrackInfo> {
+  const trackId = trackUri.split(":")[2];
+  if (!trackId) return { artists: [], year: null };
+  try {
     const data = await fetchMetadata("track", trackId);
-    const ids: string[] = [];
-    if (Array.isArray(data.artist)) {
-      for (const a of data.artist) {
-        if (a.gid) ids.push(hexToBase62(a.gid));
-      }
-    }
-    return ids;
+    const artists: string[] = Array.isArray(data.artist)
+      ? data.artist.filter((a: { gid?: string }) => a.gid).map((a: { gid: string }) => hexToBase62(a.gid))
+      : [];
+    return { artists, year: data.album?.date?.year ?? null };
   } catch {
-    return [];
+    return { artists: [], year: null };
   }
 }
 

@@ -68,7 +68,7 @@
   "AI_ASSETS_NOT_READY": "AI-modell inte tillgänglig",
   "AI_ASSETS_INITIALIZING": "Initierar modell...",
   "SETTINGS_TRASH_AI_SONGS": "Skräp-AI-låtar",
-  "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "Flytta automatiskt sånger som identifieras som AI-genererade (sannolikhet ≥ 80 %) till papperskorgen",
+  "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "Släng AI-låtar automatiskt i papperskorgen: från 97 % på egen hand, från 80 % när artisten har 3 flaggade låtar. Utgåvor från före 2023 flaggas aldrig.",
   "DESCRIPTION_CLEAR_AI_STORAGE": "Rensa alla lagrade AI-klassificeringsresultat ({{count}} låtar lagrade).",
   "ACTION_CLEAR_AI_STORAGE": "Klart",
   "MESSAGE_AI_STORAGE_CLEARED": "AI-resultat godkända",

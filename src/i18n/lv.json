@@ -68,7 +68,7 @@
   "AI_ASSETS_NOT_READY": "AI modelis nav pieejams",
   "AI_ASSETS_INITIALIZING": "Modelis tiek inicializēts...",
   "SETTINGS_TRASH_AI_SONGS": "Mēstības mākslīgā intelekta dziesmas",
-  "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "Automātiski izmest dziesmas, kas noteiktas kā ar mākslīgo intelektu ģenerētas (varbūtība ≥ 80 %)",
+  "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "Automātiski pārvieto MI dziesmas uz miskasti: atsevišķi no 97 %, no 80 %, kad izpildītājam ir 3 atzīmētas dziesmas. Pirms 2023. gada izdotās dziesmas nekad netiek atzīmētas.",
   "DESCRIPTION_CLEAR_AI_STORAGE": "Notīrīt visus saglabātos mākslīgā intelekta klasifikācijas rezultātus (saglabāti {{count}} dziesmu).",
   "ACTION_CLEAR_AI_STORAGE": "Skaidrs",
   "MESSAGE_AI_STORAGE_CLEARED": "AI rezultāti ir skaidri",

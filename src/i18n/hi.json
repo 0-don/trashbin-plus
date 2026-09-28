@@ -68,7 +68,7 @@
   "AI_ASSETS_NOT_READY": "एआई मॉडल उपलब्ध नहीं है",
   "AI_ASSETS_INITIALIZING": "मॉडल को आरंभ कर रहे हैं...",
   "SETTINGS_TRASH_AI_SONGS": "ट्रैश एआई गाने",
-  "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "स्वचालित रूप से उन गानों को ट्रैश करें जिन्हें एआई-उत्पन्न के रूप में पहचाना गया है (संभावना ≥ 80%)",
+  "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "AI गानों को अपने-आप ट्रैश में डालें: अकेले 97% से, और जब कलाकार के 3 चिह्नित गाने हों तो 80% से। 2023 से पहले के रिलीज़ कभी चिह्नित नहीं होते।",
   "DESCRIPTION_CLEAR_AI_STORAGE": "सभी संग्रहीत एआई वर्गीकरण परिणाम साफ़ करें ({{count}} गाने संग्रहीत हैं)।",
   "ACTION_CLEAR_AI_STORAGE": "स्पष्ट",
   "MESSAGE_AI_STORAGE_CLEARED": "एआई परिणाम साफ हो गए",
