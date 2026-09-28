@@ -45,7 +45,8 @@ def graphql(key: str, query: str, variables: dict | None = None) -> dict:
     req = urllib.request.Request(
         "https://api.runpod.io/graphql",
         data=json.dumps({"query": query, "variables": variables or {}}).encode(),
-        headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json"},
+        # Cloudflare in front of the API answers 403 to the default Python-urllib agent
+        headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json", "User-Agent": "Mozilla/5.0"},
     )
     with urllib.request.urlopen(req, timeout=60) as r:
         out = json.load(r)

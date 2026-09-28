@@ -75,8 +75,8 @@ TRAIN_ONLY = [
     ("echoes_ata", "diffrhythm", "diffrhythm_ata", 1),
     ("echoes_ata", "producer", "producer_ata", 1),
     ("echoes_ata", "songgen", "songgen_ata", 1),
-    ("fma", "0,100,200,300,400,500,600,700,800", "human_fma", 0),
-    ("mtg_tar", "0,20,40,60,80,100,120,140,160,180", "human_mtg_tar", 0),
+    ("fma", ",".join(str(i) for i in range(0, 900, 30)), "human_fma", 0),
+    ("mtg_tar", ",".join(str(i) for i in range(0, 199, 10)), "human_mtg_tar", 0),
     ("musiccaps", "train", "human_musiccaps", 0),
     ("fma_instrumental", "25,50,75,125,150,175,225,250,275,325,350,375,425,450,475,525,550,575,625,650", "human_fma_instrumental", 0),
 ]

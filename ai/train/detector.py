@@ -105,6 +105,19 @@ class Detector(nn.Module):
         return logits.reshape(-1)
 
 
+def random_eq(x):
+    # per clip EQ tilt, one bell and optional roll-offs, so polish or lo-fi character is not a shortcut
+    X = torch.fft.rfft(x)
+    b, bins = X.shape
+    dev = x.device
+    octave = torch.log2(torch.linspace(1e-3, 1, bins, device=dev) * (SR / 2) / 1000)
+    r = lambda lo, hi: torch.rand(b, 1, device=dev) * (hi - lo) + lo
+    db = r(-1.5, 1.5) * octave + r(-6, 6) * torch.exp(-(((octave - r(-3, 3.9)) / r(0.5, 2)) ** 2))
+    db = db - (torch.rand(b, 1, device=dev) < 0.3) * 24 * torch.relu(octave - torch.log2(r(4, 14)))
+    db = db - (torch.rand(b, 1, device=dev) < 0.3) * 24 * torch.relu(torch.log2(r(0.04, 0.3)) - octave)
+    return torch.fft.irfft(X * 10 ** (db / 20), n=x.shape[-1])
+
+
 @torch.no_grad()
 def score_clips(model, clips, device, batch=48):
     model.eval()
@@ -144,6 +157,7 @@ def main():
     ap.add_argument("--batch", type=int, default=48)
     ap.add_argument("--steps", type=int, default=600, help="optimizer steps per epoch")
     ap.add_argument("--holdout", default="")
+    ap.add_argument("--human-weight", type=float, default=1.5, help="share of human clips drawn relative to AI")
     ap.add_argument("--tag", default="")
     args = ap.parse_args()
     random.seed(0)
@@ -161,11 +175,11 @@ def main():
     val, train = train_all[:n_val], train_all[n_val:]
     print(f"train {len(train)} val {len(val)} eval {len(eval_clips)}", Counter(c["source"] for c, _ in train).most_common(8), flush=True)
 
-    # every AI source weighs the same, humans as a whole weigh as much as all AI
+    # every AI source weighs the same, every human source too, humans as a whole get human_weight x the AI share
     per_src = Counter(c["source"] for c, _ in train)
     n_ai_src = len({c["source"] for c, _ in train if c["label"]})
     n_hum_src = len({c["source"] for c, _ in train if not c["label"]})
-    w = np.array([(1 / n_ai_src if c["label"] else 1 / n_hum_src) / per_src[c["source"]] for c, _ in train])
+    w = np.array([(1 / n_ai_src if c["label"] else args.human_weight / n_hum_src) / per_src[c["source"]] for c, _ in train])
     w /= w.sum()
 
     model = Detector(args.arch).to(device)
@@ -185,7 +199,7 @@ def main():
                 gain = 10 ** (random.uniform(-12, 6) / 20)
                 xs.append(crop(pcm, start) * gain)
                 ys.append(c["label"])
-            x = torch.from_numpy(np.stack(xs)).to(device)
+            x = random_eq(torch.from_numpy(np.stack(xs)).to(device))
             y = torch.tensor(ys, dtype=torch.float32, device=device)
             opt.zero_grad()
             loss = loss_fn(model(x), y)
