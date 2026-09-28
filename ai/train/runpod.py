@@ -16,7 +16,7 @@ import urllib.request
 
 from dotenv import load_dotenv
 
-REPO_URL = "https://github.com/0-don/trashbin-.git"
+REPO_URL = "https://github.com/0-don/trashbin-plus.git"
 IMAGE = "runpod/pytorch:2.4.0-py3.11-cuda12.4.1-devel-ubuntu22.04"
 AI = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 load_dotenv(os.path.join(AI, ".env"), override=True)
