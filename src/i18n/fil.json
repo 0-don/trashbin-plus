@@ -62,11 +62,8 @@
   "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "Tulad ng isang kanta mula sa mobile na itinapon. Awtomatikong inu-unlike at lumilipat sa susunod na track.",
   "SETTINGS_AI_DETECTION": "Pagtuklas ng AI",
   "SETTINGS_AI_DETECTION_ENABLED": "Pagtuklas sa Kanta ng AI",
-  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Tuklasin ang mga awiting nabuo ng AI gamit ang modelo ng SONICS at ipakita ang tagapagpahiwatig ng posibilidad. I-download ang ~50MB na modelo sa unang paggamit.",
+  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Tuklasin ang mga kantang gawa ng AI sa iyong device at magpakita ng indicator ng probabilidad.",
   "AI_ASSETS_DOWNLOADING_WASM": "Nagdo-download ng WASM runtime...",
-  "AI_ASSETS_DOWNLOADING_MODEL": "Nagdo-download ng {{model}}...",
-  "AI_ASSETS_UP_TO_DATE": "Mga asset na na-update",
-  "AI_ASSETS_CACHED_OFFLINE": "Ginagamit ang naka-cache na mga asset (offline)",
   "AI_ASSETS_READY": "Handa na ang modelo ng AI",
   "AI_ASSETS_NOT_READY": "Hindi available ang AI model",
   "AI_ASSETS_INITIALIZING": "Ini-initialize ang modelo...",
@@ -108,5 +105,7 @@
   "RADIO_DONE": "Nagdagdag ng {{count}} bagong kanta sa {{name}}",
   "TOOLTIP_COPY_URI": "I-click para kopyahin ang URI",
   "TOOLTIP_REMOVE_TRASHBIN": "Alisin mula sa basurahan",
-  "TOOLTIP_AUTO_ADD": "Awtomatikong idagdag ang mga rekomendasyon"
+  "TOOLTIP_AUTO_ADD": "Awtomatikong idagdag ang mga rekomendasyon",
+  "MESSAGE_TRASHBIN_ENABLED": "Naka-on ang Trashbin+",
+  "MESSAGE_TRASHBIN_DISABLED": "Naka-off ang Trashbin+"
 }

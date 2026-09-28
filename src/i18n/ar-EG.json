@@ -62,11 +62,8 @@
   "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "زي أغنية من الموبايل تتحذف. تلغي الإعجاب تلقائيًا وتقفز للمسار التالي.",
   "SETTINGS_AI_DETECTION": "كشف الذكاء الاصطناعي",
   "SETTINGS_AI_DETECTION_ENABLED": "كشف أغنية الذكاء الاصطناعي",
-  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "اكتشف الأغاني اللي اتعملت بالذكاء الاصطناعي باستخدام نموذج SONICS واعرض مؤشر احتمالية. بيحمل النموذج بحجم حوالي 50 ميجابايت أول مرة يتم تفعيله.",
+  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "اكتشف الأغاني اللي اتعملت بالذكاء الاصطناعي على جهازك واعرض مؤشر احتمالية.",
   "AI_ASSETS_DOWNLOADING_WASM": "جارٍ تحميل بيئة التشغيل WASM...",
-  "AI_ASSETS_DOWNLOADING_MODEL": "جارٍ التحميل {{model}}...",
-  "AI_ASSETS_UP_TO_DATE": "الأصول محدثة لآخر إصدار",
-  "AI_ASSETS_CACHED_OFFLINE": "استخدام الأصول المخزنة مؤقتًا (غير متصل)",
   "AI_ASSETS_READY": "النماذج الاصطناعية جاهزة",
   "AI_ASSETS_NOT_READY": "النموذج الاصطناعي مش متاح",
   "AI_ASSETS_INITIALIZING": "بيتم تهيئة النموذج...",
@@ -108,5 +105,7 @@
   "RADIO_DONE": "اتضافت {{count}} أغنية جديدة لـ {{name}}",
   "TOOLTIP_COPY_URI": "اضغط علشان تنقّل الرابط",
   "TOOLTIP_REMOVE_TRASHBIN": "اخرج من سلة المهملات",
-  "TOOLTIP_AUTO_ADD": "إضافة التوصيات تلقائيًا"
+  "TOOLTIP_AUTO_ADD": "إضافة التوصيات تلقائيًا",
+  "MESSAGE_TRASHBIN_ENABLED": "Trashbin+ اتفعّل",
+  "MESSAGE_TRASHBIN_DISABLED": "Trashbin+ اتقفل"
 }

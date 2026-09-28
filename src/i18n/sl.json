@@ -62,11 +62,8 @@
   "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "Kot pesem z mobilnika v smeti. Samodejno odstrani všeček in preklopi na naslednjo skladbo.",
   "SETTINGS_AI_DETECTION": "Zaznavanje umetne inteligence",
   "SETTINGS_AI_DETECTION_ENABLED": "Zaznavanje pesmi z umetno inteligenco",
-  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Zaznaj pesmi, ustvarjene z umetno inteligenco, s pomočjo modela SONICS, in prikaži indikator verjetnosti. Ob prvem omogočanju prenese model velikosti približno 50 MB.",
+  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Zaznajte pesmi, ustvarjene z umetno inteligenco, na svoji napravi in prikažite kazalnik verjetnosti.",
   "AI_ASSETS_DOWNLOADING_WASM": "Prenašanje WASM izvajalnega okolja ...",
-  "AI_ASSETS_DOWNLOADING_MODEL": "Prenašam {{model}}...",
-  "AI_ASSETS_UP_TO_DATE": "Sredstva so posodobljena",
-  "AI_ASSETS_CACHED_OFFLINE": "Uporaba predpomnjenih sredstev (brez povezave)",
   "AI_ASSETS_READY": "AI model je pripravljen",
   "AI_ASSETS_NOT_READY": "Model AI ni na voljo",
   "AI_ASSETS_INITIALIZING": "Inicializacija modela ...",
@@ -108,5 +105,7 @@
   "RADIO_DONE": "V {{name}} je bilo dodanih {{count}} novih skladb",
   "TOOLTIP_COPY_URI": "Kliknite za kopiranje URI-ja",
   "TOOLTIP_REMOVE_TRASHBIN": "Odstrani iz koša",
-  "TOOLTIP_AUTO_ADD": "Samodejno dodaj priporočila"
+  "TOOLTIP_AUTO_ADD": "Samodejno dodaj priporočila",
+  "MESSAGE_TRASHBIN_ENABLED": "Trashbin+ vklopljen",
+  "MESSAGE_TRASHBIN_DISABLED": "Trashbin+ izklopljen"
 }

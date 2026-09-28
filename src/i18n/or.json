@@ -62,11 +62,8 @@
   "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "ଏକ ଗୀତ ପରି ମୋବାଇଲରୁ ଏହାକୁ ଫୋପାଡ଼ନ୍ତୁ। ସ୍ୱତଃ ଅଣଲାଇକ୍ କରି ପରବର୍ତ୍ତୀ ଟ୍ରାକକୁ ଯାଅ।",
   "SETTINGS_AI_DETECTION": "ଏଆଇ ଚିହ୍ନଟ କରିବା",
   "SETTINGS_AI_DETECTION_ENABLED": "AI ଗୀତ ଚିହ୍ନଟ କରିବା",
-  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "SONICS ମଡେଲ ବ୍ୟବହାର କରି AI-ଉତ୍ପାଦିତ ଗୀତକୁ ଚିହ୍ନଟ କରନ୍ତୁ ଏବଂ ଏକ ସମ୍ଭାବ୍ୟତା ସୂଚକ ଦର୍ଶାନ୍ତୁ। ପ୍ରଥମ ସକ୍ରିୟ କରିବା ସମୟରେ ~50MB ମଡେଲ ଡାଉନଲୋଡ କରନ୍ତୁ।",
+  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "ଆପଣଙ୍କ ଡିଭାଇସରେ AI ଦ୍ୱାରା ତିଆରି ଗୀତ ଚିହ୍ନଟ କରନ୍ତୁ ଏବଂ ସମ୍ଭାବନା ସୂଚକ ଦେଖାନ୍ତୁ।",
   "AI_ASSETS_DOWNLOADING_WASM": "WASM ରନଟାଇମ୍ ଡାଉନଲୋଡ୍ ହେଉଛି...",
-  "AI_ASSETS_DOWNLOADING_MODEL": "ଡାଉନଲୋଡ ହେଉଛି {{model}}...",
-  "AI_ASSETS_UP_TO_DATE": "ସମ୍ପତ୍ତି ଆଜିଯାଏଁ",
-  "AI_ASSETS_CACHED_OFFLINE": "କ୍ୟାଶ କରାଯାଇଥିବା ସମ୍ପଦଗୁଡ଼ିକ ବ୍ୟବହାର କରନ୍ତୁ (ଅଫଲାଇନ୍)",
   "AI_ASSETS_READY": "AI ମଡେଲ୍ ପ୍ରସ୍ତୁତ ଅଛି",
   "AI_ASSETS_NOT_READY": "ଏଆଇ ମଡେଲ୍ ଉପଲବ୍ଧ ନାହିଁ",
   "AI_ASSETS_INITIALIZING": "ମଡେଲ ଆରମ୍ଭ କରାଯାଉଛି ...",
@@ -108,5 +105,7 @@
   "RADIO_DONE": "{{name}} ରେ {{count}} ନୂଆ ଗୀତ ଯୋଡ଼ାଗଲା",
   "TOOLTIP_COPY_URI": "ଅନୁଲିପି ପାଇଁ URI ଉପରେ କ୍ଲିକ୍ କରନ୍ତୁ",
   "TOOLTIP_REMOVE_TRASHBIN": "ଅପସାରଣ କରନ୍ତୁ କଚରା ଡବାରୁ",
-  "TOOLTIP_AUTO_ADD": "ସ୍ୱତଃ-ଯୋଗ ଅନୁମାନଗୁଡ଼ିକ"
+  "TOOLTIP_AUTO_ADD": "ସ୍ୱତଃ-ଯୋଗ ଅନୁମାନଗୁଡ଼ିକ",
+  "MESSAGE_TRASHBIN_ENABLED": "Trashbin+ ସକ୍ରିୟ ହେଲା",
+  "MESSAGE_TRASHBIN_DISABLED": "Trashbin+ ନିଷ୍କ୍ରିୟ ହେଲା"
 }

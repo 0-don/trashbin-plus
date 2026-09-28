@@ -62,11 +62,8 @@
   "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "Як пісня з мобільного до кошика. Автоматично відміняє лайк і переходить до наступного треку.",
   "SETTINGS_AI_DETECTION": "Виявлення штучного інтелекту",
   "SETTINGS_AI_DETECTION_ENABLED": "Виявлення пісень за допомогою штучного інтелекту",
-  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Виявляйте пісні, створені штучним інтелектом, за допомогою моделі SONICS, та показуйте показник імовірності. Під час першого ввімкнення завантажується модель обсягом ~50 МБ.",
+  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Розпізнавайте пісні, створені ШІ, просто на вашому пристрої та показуйте індикатор імовірності.",
   "AI_ASSETS_DOWNLOADING_WASM": "Завантаження середовища виконання WASM...",
-  "AI_ASSETS_DOWNLOADING_MODEL": "Завантаження {{model}}...",
-  "AI_ASSETS_UP_TO_DATE": "Активи оновлено",
-  "AI_ASSETS_CACHED_OFFLINE": "Використання кешованих ресурсів (в автономному режимі)",
   "AI_ASSETS_READY": "Модель штучного інтелекту готова",
   "AI_ASSETS_NOT_READY": "Модель ШІ недоступна",
   "AI_ASSETS_INITIALIZING": "Ініціалізація моделі...",
@@ -108,5 +105,7 @@
   "RADIO_DONE": "До {{name}} додано {{count}} нових пісень",
   "TOOLTIP_COPY_URI": "Натисніть, щоб скопіювати URI",
   "TOOLTIP_REMOVE_TRASHBIN": "Видалити з кошика",
-  "TOOLTIP_AUTO_ADD": "Автоматичне додавання рекомендацій"
+  "TOOLTIP_AUTO_ADD": "Автоматичне додавання рекомендацій",
+  "MESSAGE_TRASHBIN_ENABLED": "Trashbin+ увімкнено",
+  "MESSAGE_TRASHBIN_DISABLED": "Trashbin+ вимкнено"
 }

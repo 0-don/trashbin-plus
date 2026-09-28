@@ -1,0 +1,26 @@
+[project]
+name = "trashbin-ai"
+version = "0.1.0"
+description = "Harvest per-generator AI music clips, train and evaluate the preview detector"
+requires-python = ">=3.12"
+dependencies = [
+    "huggingface_hub>=0.30",
+    "numpy>=2.5.3",
+    "onnx>=1.23.0",
+    "pyarrow>=18",
+    "remotezip>=0.12",
+    "scikit-learn>=1.8",
+    "torch>=2.14.0",
+    "torchaudio>=2.11.0",
+    "torchvision>=0.29.0",
+]
+
+[[tool.uv.index]]
+name = "pytorch-cu126"
+url = "https://download.pytorch.org/whl/cu126"
+explicit = true
+
+[tool.uv.sources]
+torch = { index = "pytorch-cu126" }
+torchaudio = { index = "pytorch-cu126" }
+torchvision = { index = "pytorch-cu126" }

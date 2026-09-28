@@ -62,11 +62,8 @@
   "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "மொபைலிலிருந்து ஒரு பாடலை தூக்கிப்போடுவது போல, தானாகவே லைக் நீக்கி அடுத்த பாடலுக்கு செல்கிறது.",
   "SETTINGS_AI_DETECTION": "AI கண்டறிதல்",
   "SETTINGS_AI_DETECTION_ENABLED": "AI பாடல் கண்டறிதல்",
-  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "SONICS மாதிரியைப் பயன்படுத்தி செயற்கை அறிவு உருவாக்கிய பாடல்களைக் கண்டறிந்து, நிகழ்தகவு குறியீட்டைக் காட்டவும். முதல் முறை இயக்கும்போது ~50MB மாதிரியை பதிவிறக்கம் செய்கிறது.",
+  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "உங்கள் சாதனத்தில் AI உருவாக்கிய பாடல்களைக் கண்டறிந்து நிகழ்தகவுக் காட்டியைக் காட்டுங்கள்.",
   "AI_ASSETS_DOWNLOADING_WASM": "WASM ரன்டைமை பதிவிறக்கம் செய்தல்...",
-  "AI_ASSETS_DOWNLOADING_MODEL": "{{model}} ஐ பதிவிறக்கம் செய்கிறது...",
-  "AI_ASSETS_UP_TO_DATE": "சம்பத்திகள் நவீனப்படுத்தப்பட்டுள்ளன",
-  "AI_ASSETS_CACHED_OFFLINE": "கேஷ் செய்யப்பட்ட சொத்துக்களைப் பயன்படுத்துதல் (ஆஃப்லைன்)",
   "AI_ASSETS_READY": "AI மாதிரி தயாராக உள்ளது",
   "AI_ASSETS_NOT_READY": "AI மாதிரி கிடைக்கவில்லை",
   "AI_ASSETS_INITIALIZING": "மாதிரியைத் தொடங்குகிறது...",
@@ -108,5 +105,7 @@
   "RADIO_DONE": "{{name}} இல் {{count}} புதிய பாடல்கள் சேர்க்கப்பட்டன",
   "TOOLTIP_COPY_URI": "URIயை நகலெடுக்க கிளிக் செய்க",
   "TOOLTIP_REMOVE_TRASHBIN": "குப்பைத் தொட்டியிலிருந்து நீக்கு",
-  "TOOLTIP_AUTO_ADD": "ஆட்டோ-சேர்க்க பரிந்துரைகள்"
+  "TOOLTIP_AUTO_ADD": "ஆட்டோ-சேர்க்க பரிந்துரைகள்",
+  "MESSAGE_TRASHBIN_ENABLED": "Trashbin+ இயக்கப்பட்டது",
+  "MESSAGE_TRASHBIN_DISABLED": "Trashbin+ முடக்கப்பட்டது"
 }

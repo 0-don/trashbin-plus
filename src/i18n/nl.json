@@ -62,11 +62,8 @@
   "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "Net als een nummer van mobiel naar prullenbak. Automatisch verwijderen van like en overslaan naar het volgende nummer.",
   "SETTINGS_AI_DETECTION": "AI-detectie",
   "SETTINGS_AI_DETECTION_ENABLED": "AI-nummerdetectie",
-  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Detecteer met de SONICS-modus AI-gegenereerde nummers en toon een kansindicator. Downloadt ~50MB model bij eerste inschakeling.",
+  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Detecteer door AI gegenereerde nummers op je apparaat en toon een waarschijnlijkheidsindicator.",
   "AI_ASSETS_DOWNLOADING_WASM": "WASM-runtime downloaden...",
-  "AI_ASSETS_DOWNLOADING_MODEL": "{{model}} downloaden...",
-  "AI_ASSETS_UP_TO_DATE": "Activa up-to-date",
-  "AI_ASSETS_CACHED_OFFLINE": "Gebruik gecachte assets (offline)",
   "AI_ASSETS_READY": "AI-model gereed",
   "AI_ASSETS_NOT_READY": "AI-model niet beschikbaar",
   "AI_ASSETS_INITIALIZING": "Model initialiseren...",
@@ -108,5 +105,7 @@
   "RADIO_DONE": "{{count}} nieuw(e) nummer(s) toegevoegd aan {{name}}",
   "TOOLTIP_COPY_URI": "Klik om URI te kopiëren",
   "TOOLTIP_REMOVE_TRASHBIN": "Verwijderen uit prullenbak",
-  "TOOLTIP_AUTO_ADD": "Automatisch aanbevelingen toevoegen"
+  "TOOLTIP_AUTO_ADD": "Automatisch aanbevelingen toevoegen",
+  "MESSAGE_TRASHBIN_ENABLED": "Trashbin+ ingeschakeld",
+  "MESSAGE_TRASHBIN_DISABLED": "Trashbin+ uitgeschakeld"
 }

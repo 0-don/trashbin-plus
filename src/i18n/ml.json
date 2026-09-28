@@ -62,11 +62,8 @@
   "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "മൊബൈലിൽ നിന്ന് ഒരു പാട്ട് ത്രാഷ് ചെയ്യുന്നതുപോലെ. സ്വയമേവ അൺലൈക്ക് ചെയ്ത് അടുത്ത ട്രാക്കിലേക്ക് ചാടുന്നു.",
   "SETTINGS_AI_DETECTION": "AI കണ്ടെത്തൽ",
   "SETTINGS_AI_DETECTION_ENABLED": "എഐ പാട്ട് കണ്ടെത്തൽ",
-  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "SONICS മാതൃക ഉപയോഗിച്ച് എഐ ഉത്പാദിത ഗാനങ്ങൾ കണ്ടെത്തുകയും സാധ്യതാ സൂചിക കാണിക്കുകയും ചെയ്യുക. ആദ്യത്തെ ഉപയോഗത്തിൽ ~50MB മാതൃക ഡൗൺലോഡ് ചെയ്യുന്നു.",
+  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "നിങ്ങളുടെ ഉപകരണത്തിൽ AI സൃഷ്ടിച്ച ഗാനങ്ങൾ കണ്ടെത്തി സാധ്യതാ സൂചകം കാണിക്കുക.",
   "AI_ASSETS_DOWNLOADING_WASM": "WASM റൺടൈം ഡൗൺലോഡ് ചെയ്യുന്നു...",
-  "AI_ASSETS_DOWNLOADING_MODEL": "ഡൗൺലോഡ് ചെയ്യുന്നു {{model}}...",
-  "AI_ASSETS_UP_TO_DATE": "അപ്ഡേറ്റ് ചെയ്ത ആസ്തികൾ",
-  "AI_ASSETS_CACHED_OFFLINE": "കാഷ്ചെയ്ത ആസറ്റുകൾ ഉപയോഗിക്കുന്നു (ഓഫ്ലൈൻ)",
   "AI_ASSETS_READY": "AI മോഡൽ തയ്യാറാണ്",
   "AI_ASSETS_NOT_READY": "ആർട്ടിഫിഷ്യൽ ഇന്റലിജൻസ് മോഡൽ ലഭ്യമല്ല",
   "AI_ASSETS_INITIALIZING": "മോഡൽ ആരംഭിക്കുന്നു...",
@@ -108,5 +105,7 @@
   "RADIO_DONE": "{{name}} എന്നതിലേക്ക് {{count}} പുതിയ പാട്ടുകൾ ചേർത്തു",
   "TOOLTIP_COPY_URI": "URI പകർപ്പാക്കാൻ ക്ലിക്കുചെയ്യുക",
   "TOOLTIP_REMOVE_TRASHBIN": "ചവറ്റുകൊട്ടയിൽ നിന്ന് നീക്കം ചെയ്യുക",
-  "TOOLTIP_AUTO_ADD": "സ്വയമേവ ശുപാര്‍ശകള്‍ ചേര്‍ക്കുക"
+  "TOOLTIP_AUTO_ADD": "സ്വയമേവ ശുപാര്‍ശകള്‍ ചേര്‍ക്കുക",
+  "MESSAGE_TRASHBIN_ENABLED": "Trashbin+ ഓണാക്കി",
+  "MESSAGE_TRASHBIN_DISABLED": "Trashbin+ ഓഫാക്കി"
 }

@@ -62,11 +62,8 @@
   "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "موبائل سے ٹریش تک ایک گانے کی طرح۔ خود بخود لائک ہٹا کر اگلے ٹریک پر چلے جاتا ہے۔",
   "SETTINGS_AI_DETECTION": "AI کا پتہ لگانا",
   "SETTINGS_AI_DETECTION_ENABLED": "AI گانے کا پتہ لگانا",
-  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "ایس او این آئی سی ایس ماڈل کا استعمال کرتے ہوئے اے آئی سے تیار کردہ گانوں کا پتہ لگائیں اور ایک احتمال کا اشاریہ دکھائیں۔ پہلی بار چالو کرنے پر تقریباً 50MB ماڈل ڈاؤن لوڈ ہوتا ہے۔",
+  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "اپنے آلے پر AI سے بنے گانوں کا پتہ لگائیں اور امکان کا اشاریہ دکھائیں۔",
   "AI_ASSETS_DOWNLOADING_WASM": "WASM رن ٹائم ڈاؤن لوڈ ہو رہا ہے...",
-  "AI_ASSETS_DOWNLOADING_MODEL": "ڈاؤن لوڈ ہو رہا ہے {{model}}...",
-  "AI_ASSETS_UP_TO_DATE": "اعلیٰ درجے کی تازہ ترین اثاثے",
-  "AI_ASSETS_CACHED_OFFLINE": "کیش شدہ اثاثوں کا استعمال (آف لائن)",
   "AI_ASSETS_READY": "AI ماڈل تیار ہے",
   "AI_ASSETS_NOT_READY": "AI ماڈل دستیاب نہیں ہے",
   "AI_ASSETS_INITIALIZING": "ماڈل کو شروع کرنا...",
@@ -108,5 +105,7 @@
   "RADIO_DONE": "{{name}} میں {{count}} نئے گانے شامل کیے گئے",
   "TOOLTIP_COPY_URI": "کاپی کرنے کے لیے URI پر کلک کریں",
   "TOOLTIP_REMOVE_TRASHBIN": "کوڑے دان سے ہٹائیں",
-  "TOOLTIP_AUTO_ADD": "خود بخود تجاویز شامل کریں"
+  "TOOLTIP_AUTO_ADD": "خود بخود تجاویز شامل کریں",
+  "MESSAGE_TRASHBIN_ENABLED": "Trashbin+ فعال کر دیا گیا",
+  "MESSAGE_TRASHBIN_DISABLED": "Trashbin+ غیر فعال کر دیا گیا"
 }

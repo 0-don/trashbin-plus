@@ -62,11 +62,8 @@
   "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "Kā dziesmu no mobilā, lai to izmestu. Automātiski atzīmē kā nepatīkamu un pāriet uz nākamo kompozīciju.",
   "SETTINGS_AI_DETECTION": "AI noteikšana",
   "SETTINGS_AI_DETECTION_ENABLED": "AI dziesmu noteikšana",
-  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Izmantojiet SONICS modeli, lai noteiktu ar mākslīgo intelektu ģenerētas dziesmas, un parādiet varbūtības indikatoru. Pirmās ieslēgšanas laikā tiek lejupielādēta aptuveni 50 MB liela modeļa datne.",
+  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Nosakiet mākslīgā intelekta radītas dziesmas savā ierīcē un rādiet varbūtības indikatoru.",
   "AI_ASSETS_DOWNLOADING_WASM": "Notiek WASM vidēs vides lejupielāde...",
-  "AI_ASSETS_DOWNLOADING_MODEL": "Notiek {{model}} lejupielāde...",
-  "AI_ASSETS_UP_TO_DATE": "Aktīvi ir atjaunināti",
-  "AI_ASSETS_CACHED_OFFLINE": "Izmanto kešatlas (bezsaistē)",
   "AI_ASSETS_READY": "AI modelis ir gatavs",
   "AI_ASSETS_NOT_READY": "AI modelis nav pieejams",
   "AI_ASSETS_INITIALIZING": "Modelis tiek inicializēts...",
@@ -108,5 +105,7 @@
   "RADIO_DONE": "Sarakstam {{name}} pievienotas {{count}} jaunas dziesmas",
   "TOOLTIP_COPY_URI": "Noklikšķiniet, lai kopētu URI",
   "TOOLTIP_REMOVE_TRASHBIN": "Izņemt no atkritnes",
-  "TOOLTIP_AUTO_ADD": "Automātiski pievienot ieteikumus"
+  "TOOLTIP_AUTO_ADD": "Automātiski pievienot ieteikumus",
+  "MESSAGE_TRASHBIN_ENABLED": "Trashbin+ ieslēgts",
+  "MESSAGE_TRASHBIN_DISABLED": "Trashbin+ izslēgts"
 }

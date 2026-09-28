@@ -62,11 +62,8 @@
   "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "Com una cançó del mòbil a la paperera. La desmara automàticament i passa a la següent pista.",
   "SETTINGS_AI_DETECTION": "Detecció d'IA",
   "SETTINGS_AI_DETECTION_ENABLED": "Detecció de cançons amb IA",
-  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Detecta cançons generades per IA utilitzant el model SONICS i mostra un indicador de probabilitat. Descarrega un model d'uns 50 MB en activar-se per primera vegada.",
+  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Detecta cançons generades per IA al teu dispositiu i mostra un indicador de probabilitat.",
   "AI_ASSETS_DOWNLOADING_WASM": "Descarregant el runtime WASM...",
-  "AI_ASSETS_DOWNLOADING_MODEL": "Descarregant {{model}}...",
-  "AI_ASSETS_UP_TO_DATE": "Actius actualitzats",
-  "AI_ASSETS_CACHED_OFFLINE": "Utilitzant recursos en memòria cau (fora de línia)",
   "AI_ASSETS_READY": "Model d'IA preparat",
   "AI_ASSETS_NOT_READY": "Model d'IA no disponible",
   "AI_ASSETS_INITIALIZING": "S'està inicialitzant el model...",
@@ -108,5 +105,7 @@
   "RADIO_DONE": "S'han afegit {{count}} cançons noves a {{name}}",
   "TOOLTIP_COPY_URI": "Clica per copiar l'URI",
   "TOOLTIP_REMOVE_TRASHBIN": "Eliminar de la paperera",
-  "TOOLTIP_AUTO_ADD": "Afegir automàticament recomanacions"
+  "TOOLTIP_AUTO_ADD": "Afegir automàticament recomanacions",
+  "MESSAGE_TRASHBIN_ENABLED": "Trashbin+ activat",
+  "MESSAGE_TRASHBIN_DISABLED": "Trashbin+ desactivat"
 }

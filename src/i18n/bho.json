@@ -62,11 +62,8 @@
   "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "मोबाइल से ट्रैश कें लेल गाना कें नापसंद करि दें। स्वचालित रूप सँ नापसंद करि दें आ अगला ट्रैक पर छोड़ दें।",
   "SETTINGS_AI_DETECTION": "एआई पता लगाएब",
   "SETTINGS_AI_DETECTION_ENABLED": "एआई गीत पता लगाएमु",
-  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "SONICS मॉडल कें उपयोग करि एआई-जनित गानाक पहचान बर आऊर एगो संभावना सूचक देखाबर। पहिला बार सक्षम करे पर लगभग 50MB मॉडल डाउनलोड होही।",
+  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "अपना डिवाइस पर AI से बनल गाना पहचानीं आ संभावना सूचक देखाईं।",
   "AI_ASSETS_DOWNLOADING_WASM": "WASM रनटाइम डाउनलोड हो रहल अछि...",
-  "AI_ASSETS_DOWNLOADING_MODEL": "{{model}} डाउनलोड हो रहल अछि...",
-  "AI_ASSETS_UP_TO_DATE": "संपत्ति अद्यतन तक",
-  "AI_ASSETS_CACHED_OFFLINE": "कैश कएल गेल संपत्ति कें उपयोग करैत छी (ऑफ़लाइन)",
   "AI_ASSETS_READY": "AI मॉडल तैयार हई",
   "AI_ASSETS_NOT_READY": "AI मॉडल उपलब्ध नई हई",
   "AI_ASSETS_INITIALIZING": "मॉडल के आरंभ करैत छलाम...",
@@ -108,5 +105,7 @@
   "RADIO_DONE": "{{name}} में {{count}} नया गाना जोड़ल गइल",
   "TOOLTIP_COPY_URI": "कॉपी URI ल लेल क्लिक करूं",
   "TOOLTIP_REMOVE_TRASHBIN": "कचरा डिब्बा लेले हटा दें",
-  "TOOLTIP_AUTO_ADD": "स्वतः जोड़े सुझाव"
+  "TOOLTIP_AUTO_ADD": "स्वतः जोड़े सुझाव",
+  "MESSAGE_TRASHBIN_ENABLED": "Trashbin+ चालू भइल",
+  "MESSAGE_TRASHBIN_DISABLED": "Trashbin+ बंद भइल"
 }

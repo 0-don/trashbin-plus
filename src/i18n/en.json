@@ -62,11 +62,8 @@
   "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "Like a song from mobile to trash it. Automatically unlikes and skips to next track.",
   "SETTINGS_AI_DETECTION": "AI Detection",
   "SETTINGS_AI_DETECTION_ENABLED": "AI Song Detection",
-  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Detect AI-generated songs using the SONICS model and show a probability indicator. Downloads ~50MB model on first enable.",
+  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Detect AI-generated songs on your device and show a probability indicator.",
   "AI_ASSETS_DOWNLOADING_WASM": "Downloading WASM runtime...",
-  "AI_ASSETS_DOWNLOADING_MODEL": "Downloading {{model}}...",
-  "AI_ASSETS_UP_TO_DATE": "Assets up to date",
-  "AI_ASSETS_CACHED_OFFLINE": "Using cached assets (offline)",
   "AI_ASSETS_READY": "AI model ready",
   "AI_ASSETS_NOT_READY": "AI model not available",
   "AI_ASSETS_INITIALIZING": "Initializing model...",
@@ -108,5 +105,7 @@
   "RADIO_DONE": "Added {{count}} new song(s) to {{name}}",
   "TOOLTIP_COPY_URI": "Click to copy URI",
   "TOOLTIP_REMOVE_TRASHBIN": "Remove from trashbin",
-  "TOOLTIP_AUTO_ADD": "Auto-add recommendations"
+  "TOOLTIP_AUTO_ADD": "Auto-add recommendations",
+  "MESSAGE_TRASHBIN_ENABLED": "Trashbin+ enabled",
+  "MESSAGE_TRASHBIN_DISABLED": "Trashbin+ disabled"
 }

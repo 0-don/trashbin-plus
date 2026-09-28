@@ -62,11 +62,8 @@
   "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "موبائل توں تراش دے ناچ گیت وانگ، خودکار طور تے ناپسند کر دے اتے اگلا ٹریک چلا دے۔",
   "SETTINGS_AI_DETECTION": "AI ڈیٹیکشن",
   "SETTINGS_AI_DETECTION_ENABLED": "AI گانا شناخت",
-  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "سونکس ماڈل دا استعمال کرکے اے آئی جنریٹ کیتے گیت پتہ لگاؤ اتے احتمال اشاریہ دکھاؤ۔ پہلی وار چالو کرن تے ~50MB ماڈل ڈاؤن لوڈ کرو۔",
+  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "اپنے ڈیوائس اُتے AI نال بنے گاݨیاں دا پتہ لاؤ تے امکان دا اشارہ وکھاؤ۔",
   "AI_ASSETS_DOWNLOADING_WASM": "WASM رن ٹائم ڈاؤن لوڈ ہو رہیا اے...",
-  "AI_ASSETS_DOWNLOADING_MODEL": "{{model}} ڈاؤن لوڈ ہو رہیا اے...",
-  "AI_ASSETS_UP_TO_DATE": "اپ ڈیٹ اثاثے",
-  "AI_ASSETS_CACHED_OFFLINE": "کیش کیتے ہوئے اثاثے استعمال کر رہے ہیں (آف لائن)",
   "AI_ASSETS_READY": "AI ماڈل تیار ہے",
   "AI_ASSETS_NOT_READY": "اي آئی ماڈل دستیاب نہیں ہے",
   "AI_ASSETS_INITIALIZING": "مڈل شروع کر رہیا اے...",
@@ -108,5 +105,7 @@
   "RADIO_DONE": "{{name}} وچ {{count}} نویں گیت جوڑے گئے",
   "TOOLTIP_COPY_URI": "نقل کرن لئی کلک کرو URI",
   "TOOLTIP_REMOVE_TRASHBIN": "کوڑا دان توں ہٹا دیو",
-  "TOOLTIP_AUTO_ADD": "خودکار طور تے سفارشات شامل کروؤ"
+  "TOOLTIP_AUTO_ADD": "خودکار طور تے سفارشات شامل کروؤ",
+  "MESSAGE_TRASHBIN_ENABLED": "Trashbin+ چالو کیتا",
+  "MESSAGE_TRASHBIN_DISABLED": "Trashbin+ بند کیتا"
 }

@@ -62,11 +62,8 @@
   "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "Как песня с мобильного в корзину. Автоматически убирает отметку \"Нравится\" и переходит к следующему треку.",
   "SETTINGS_AI_DETECTION": "Обнаружение ИИ",
   "SETTINGS_AI_DETECTION_ENABLED": "Обнаружение песен ИИ",
-  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Обнаружение песен, созданных с помощью ИИ, с использованием модели SONICS, и отображение индикатора вероятности. При первом включении загружается модель объемом ~50 МБ.",
+  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Распознавайте песни, созданные ИИ, прямо на вашем устройстве и показывайте индикатор вероятности.",
   "AI_ASSETS_DOWNLOADING_WASM": "Загрузка среды выполнения WASM...",
-  "AI_ASSETS_DOWNLOADING_MODEL": "Загрузка {{model}}...",
-  "AI_ASSETS_UP_TO_DATE": "Активы обновлены",
-  "AI_ASSETS_CACHED_OFFLINE": "Использование кэшированных ресурсов (в автономном режиме)",
   "AI_ASSETS_READY": "Модель ИИ готова",
   "AI_ASSETS_NOT_READY": "Модель ИИ недоступна",
   "AI_ASSETS_INITIALIZING": "Инициализация модели...",
@@ -108,5 +105,7 @@
   "RADIO_DONE": "В {{name}} добавлено {{count}} новых песен",
   "TOOLTIP_COPY_URI": "Нажмите, чтобы скопировать URI",
   "TOOLTIP_REMOVE_TRASHBIN": "Удалить из корзины",
-  "TOOLTIP_AUTO_ADD": "Автоматическое добавление рекомендаций"
+  "TOOLTIP_AUTO_ADD": "Автоматическое добавление рекомендаций",
+  "MESSAGE_TRASHBIN_ENABLED": "Trashbin+ включён",
+  "MESSAGE_TRASHBIN_DISABLED": "Trashbin+ выключен"
 }

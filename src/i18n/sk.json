@@ -62,11 +62,8 @@
   "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "Ako skladba z mobilu do koša. Automaticky odstráni lajk a preskočí na ďalšiu skladbu.",
   "SETTINGS_AI_DETECTION": "Detekcia umelej inteligencie",
   "SETTINGS_AI_DETECTION_ENABLED": "Detekcia piesne umelou inteligenciou",
-  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Detekujte piesne vygenerované umelou inteligenciou pomocou modelu SONICS a zobrazte indikátor pravdepodobnosti. Po prvom zapnutí sa stiahne model veľkosti približne 50 MB.",
+  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Rozpoznávajte skladby vytvorené umelou inteligenciou priamo vo svojom zariadení a zobrazujte ukazovateľ pravdepodobnosti.",
   "AI_ASSETS_DOWNLOADING_WASM": "Sťahovanie runtime WASM...",
-  "AI_ASSETS_DOWNLOADING_MODEL": "Sťahovanie {{model}}...",
-  "AI_ASSETS_UP_TO_DATE": "Aktíva sú aktuálne",
-  "AI_ASSETS_CACHED_OFFLINE": "Použitie medzipamäte aktív (offline)",
   "AI_ASSETS_READY": "AI model je pripravený",
   "AI_ASSETS_NOT_READY": "AI model nie je k dispozícii",
   "AI_ASSETS_INITIALIZING": "Inicializácia modelu...",
@@ -108,5 +105,7 @@
   "RADIO_DONE": "Do {{name}} bolo pridaných {{count}} nových skladieb",
   "TOOLTIP_COPY_URI": "Kliknutím skopírujete URI",
   "TOOLTIP_REMOVE_TRASHBIN": "Odstrániť z koša",
-  "TOOLTIP_AUTO_ADD": "Automatické pridávanie odporúčaní"
+  "TOOLTIP_AUTO_ADD": "Automatické pridávanie odporúčaní",
+  "MESSAGE_TRASHBIN_ENABLED": "Trashbin+ zapnutý",
+  "MESSAGE_TRASHBIN_DISABLED": "Trashbin+ vypnutý"
 }

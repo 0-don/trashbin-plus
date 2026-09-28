@@ -1,17 +1,16 @@
-import { ORT_WASM_CODE } from "virtual:ort-worker-wasm";
+import { AI_WORKER_CODE } from "virtual:ai-worker";
+import { ORT_VERSION, ORT_WASM_CODE } from "virtual:ort-worker-wasm";
 import { i18n } from "../components/providers/providers";
 import { useAiStore } from "../store/ai-store";
+import type { WorkerRequest, WorkerResponse } from "./ai-worker";
 import { fetchMetadata, hexToBase62 } from "./metadata-utils";
 
-const MODEL_ASSET = "sonics_5s.onnx";
-const MODEL_INPUT_LENGTH = 220500;
-const MODEL_LABEL = "SONICS SpecTTTra 5s";
-const WASM_BINARY = "ort-wasm-simd-threaded.wasm";
+const WASM_BINARY = `ort-wasm-simd-threaded-${ORT_VERSION}.wasm`;
+const WASM_URL = `https://cdn.jsdelivr.net/npm/onnxruntime-web@${ORT_VERSION}/dist/ort-wasm-simd-threaded.wasm`;
 const STORE_NAME = "assets";
-const VERSION_KEY = "trashbin-ai-assets-version";
-const HF_BASE = "https://huggingface.co/0don/trashbin-plus-ai/resolve/main";
+const LEGACY_VERSION_KEY = "trashbin-ai-assets-version";
 const CORS_PROXY = "https://cors-proxy.spicetify.app";
-const SAMPLE_RATE = 44100;
+const SAMPLE_RATE = 16000;
 
 // ── IndexedDB helpers ─────────────────────────────────────────────
 
@@ -62,14 +61,24 @@ async function idbPut(name: string, data: ArrayBuffer): Promise<void> {
   });
 }
 
-// ── Asset management ──────────────────────────────────────────────
-
-async function downloadAsset(name: string): Promise<ArrayBuffer> {
-  const response = await fetch(`${HF_BASE}/${name}`);
-  if (!response.ok)
-    throw new Error(`Failed to download ${name}: ${response.status}`);
-  return response.arrayBuffer();
+// Drops older ORT runtimes and the retired 85MB SONICS model
+async function deleteStaleAssets(): Promise<void> {
+  const db = await getDB();
+  const store = db
+    .transaction(STORE_NAME, "readwrite")
+    .objectStore(STORE_NAME);
+  const req = store.getAllKeys();
+  await new Promise<void>((resolve, reject) => {
+    req.onsuccess = () => {
+      for (const key of req.result) if (key !== WASM_BINARY) store.delete(key);
+      resolve();
+    };
+    req.onerror = () => reject(req.error);
+  });
+  Spicetify.LocalStorage.remove(LEGACY_VERSION_KEY);
 }
+
+// ── Asset management ──────────────────────────────────────────────
 
 function setProgress(message: string | null): void {
   useAiStore.setState({ progress: message });
@@ -77,56 +86,14 @@ function setProgress(message: string | null): void {
 
 export async function ensureAssets(): Promise<boolean> {
   try {
-    let remoteVersion: string | null = null;
-    try {
-      const versionRes = await fetch(`${HF_BASE}/version.json`);
-      if (versionRes.ok) {
-        remoteVersion = (await versionRes.json()).version;
-      }
-    } catch {
-      // version check failed, will try local assets
-    }
-
-    const localVersion = Spicetify.LocalStorage.get(VERSION_KEY);
-    const versionMatch =
-      remoteVersion !== null && localVersion === remoteVersion;
-
-    const [wasmExists, modelExists] = await Promise.all([
-      idbGet(WASM_BINARY),
-      idbGet(MODEL_ASSET),
-    ]);
-
-    if (versionMatch && wasmExists && modelExists) {
-      setProgress(i18n.t("AI_ASSETS_UP_TO_DATE"));
-      return true;
-    }
-
-    if (remoteVersion === null && wasmExists && modelExists) {
-      setProgress(i18n.t("AI_ASSETS_CACHED_OFFLINE"));
-      return true;
-    }
-
-    if (remoteVersion === null) return false;
-
-    const downloads: Promise<void>[] = [];
-    if (!wasmExists || !versionMatch) {
+    if (!(await idbGet(WASM_BINARY))) {
       setProgress(i18n.t("AI_ASSETS_DOWNLOADING_WASM"));
-      downloads.push(
-        downloadAsset(WASM_BINARY).then((d) => idbPut(WASM_BINARY, d)),
-      );
+      const response = await fetch(WASM_URL);
+      if (!response.ok)
+        throw new Error(`Failed to download ${WASM_URL}: ${response.status}`);
+      await idbPut(WASM_BINARY, await response.arrayBuffer());
     }
-    if (!modelExists || !versionMatch) {
-      setProgress(
-        i18n.t("AI_ASSETS_DOWNLOADING_MODEL", { model: MODEL_LABEL }),
-      );
-      downloads.push(
-        downloadAsset(MODEL_ASSET).then((d) => idbPut(MODEL_ASSET, d)),
-      );
-    }
-    await Promise.all(downloads);
-
-    Spicetify.LocalStorage.set(VERSION_KEY, remoteVersion);
-    setProgress(i18n.t("AI_ASSETS_READY"));
+    await deleteStaleAssets();
     return true;
   } catch (error) {
     console.error("[trashbin+] ensureAssets failed:", error);
@@ -136,130 +103,6 @@ export async function ensureAssets(): Promise<boolean> {
 
 // ── Worker management ──────────────────────────────────────────────
 
-const WORKER_LOGIC = `
-self.onerror = function(msg) {
-  self.postMessage({ type: "init-error", error: "uncaught: " + msg });
-};
-self.onunhandledrejection = function(e) {
-  self.postMessage({ type: "init-error", error: "unhandled: " + e.reason });
-};
-
-var STORE_NAME = "assets";
-var dbPromise = null;
-
-function getDB() {
-  if (!dbPromise) {
-    dbPromise = new Promise(function(resolve, reject) {
-      var req = indexedDB.open("trashbin-ai", 1);
-      req.onupgradeneeded = function() {
-        if (!req.result.objectStoreNames.contains(STORE_NAME))
-          req.result.createObjectStore(STORE_NAME, { keyPath: "name" });
-      };
-      req.onsuccess = function() { resolve(req.result); };
-      req.onerror = function() { reject(req.error); };
-    });
-  }
-  return dbPromise;
-}
-
-function idbGet(name) {
-  return getDB().then(function(db) {
-    return new Promise(function(resolve, reject) {
-      var req = db.transaction(STORE_NAME, "readonly").objectStore(STORE_NAME).get(name);
-      req.onsuccess = function() { resolve(req.result ? req.result.data : null); };
-      req.onerror = function() { reject(req.error); };
-    });
-  });
-}
-
-function splitChunks(waveform, chunkLen) {
-  var chunks = [];
-  var full = Math.floor(waveform.length / chunkLen);
-  for (var i = 0; i < full; i++) chunks.push(waveform.slice(i * chunkLen, (i + 1) * chunkLen));
-  var rem = waveform.length % chunkLen;
-  if (rem > 0 && rem >= chunkLen / 2) {
-    var padded = new Float32Array(chunkLen);
-    padded.set(waveform.slice(full * chunkLen));
-    chunks.push(padded);
-  }
-  if (chunks.length === 0) {
-    var p = new Float32Array(chunkLen);
-    p.set(waveform, Math.floor((chunkLen - waveform.length) / 2));
-    chunks.push(p);
-  }
-  return chunks;
-}
-
-var session = null;
-var inputLength = 0;
-
-self.onmessage = function(e) {
-  var msg = e.data;
-
-  if (msg.type === "init") {
-    inputLength = msg.inputLength;
-    Promise.all([idbGet(msg.modelAssetName), idbGet(msg.wasmName)])
-      .then(function(buffers) {
-        if (!buffers[0] || !buffers[1]) {
-          self.postMessage({ type: "init-error", error: "Assets not found in IndexedDB" });
-          return;
-        }
-        ort.env.wasm.numThreads = 1;
-        ort.env.wasm.wasmBinary = buffers[1];
-        return ort.InferenceSession.create(buffers[0], {
-          executionProviders: ["wasm"],
-        }).then(function(s) {
-          session = s;
-          console.log("[trashbin+] worker: ready");
-          self.postMessage({ type: "init-done" });
-        });
-      })
-      .catch(function(err) {
-        console.error("[trashbin+] worker: init failed:", err);
-        self.postMessage({ type: "init-error", error: String(err) });
-      });
-  }
-
-  else if (msg.type === "classify") {
-    if (!session) {
-      self.postMessage({ type: "classify-done", id: msg.id, prob: null });
-      return;
-    }
-    var t0 = performance.now();
-    var chunks = splitChunks(msg.waveform, inputLength);
-    var chain = Promise.resolve();
-    var probs = [];
-    chunks.forEach(function(chunk) {
-      chain = chain.then(function() {
-        var tensor = new ort.Tensor("float32", chunk, [1, chunk.length]);
-        return session.run({ audio: tensor }).then(function(r) {
-          probs.push(r["prob"].data[0]);
-        });
-      });
-    });
-    chain.then(function() {
-      if (probs.length === 0) return null;
-      var sum = 0;
-      for (var i = 0; i < probs.length; i++) sum += probs[i];
-      return sum / probs.length;
-    })
-    .then(function(prob) {
-      var ms = (performance.now() - t0).toFixed(0);
-      console.log("[trashbin+] " + (msg.trackId || "?") + ": " + chunks.length + " chunks, " + ms + "ms, prob=" + (prob !== null ? prob.toFixed(4) : "null"));
-      self.postMessage({ type: "classify-done", id: msg.id, prob: prob });
-    })
-    .catch(function() {
-      self.postMessage({ type: "classify-done", id: msg.id, prob: null });
-    });
-  }
-
-  else if (msg.type === "dispose") {
-    if (session) { session.release(); session = null; }
-    self.close();
-  }
-};
-`;
-
 let worker: Worker | null = null;
 let workerBlobUrl: string | null = null;
 let engineReady = false;
@@ -268,48 +111,37 @@ const pending = new Map<number, (prob: number | null) => void>();
 
 window.addEventListener("beforeunload", () => disposeEngine());
 
+function post(target: Worker, msg: WorkerRequest, transfer: Transferable[] = []) {
+  target.postMessage(msg, transfer);
+}
+
 export async function initEngine(): Promise<boolean> {
   try {
-    const [modelExists, wasmExists] = await Promise.all([
-      idbGet(MODEL_ASSET),
-      idbGet(WASM_BINARY),
-    ]);
-    if (!modelExists || !wasmExists) return false;
+    const wasm = await idbGet(WASM_BINARY);
+    if (!wasm) return false;
 
-    const script = ORT_WASM_CODE + "\n" + WORKER_LOGIC;
+    const script = ORT_WASM_CODE + "\n" + AI_WORKER_CODE;
     const blob = new Blob([script], { type: "application/javascript" });
     workerBlobUrl = URL.createObjectURL(blob);
-    worker = new Worker(workerBlobUrl);
+    const w = new Worker(workerBlobUrl);
+    worker = w;
 
-    worker.onmessage = (e: MessageEvent) => {
-      const msg = e.data;
-      if (msg.type === "classify-done") {
-        const resolve = pending.get(msg.id);
-        if (resolve) {
-          pending.delete(msg.id);
-          resolve(msg.prob);
-        }
-      }
-    };
-    worker.onerror = () => {
+    w.onerror = () => {
       for (const resolve of pending.values()) resolve(null);
       pending.clear();
     };
 
     const ok = await new Promise<boolean>((resolve) => {
-      const handler = (e: MessageEvent) => {
-        if (e.data.type === "init-done" || e.data.type === "init-error") {
-          worker!.removeEventListener("message", handler);
-          resolve(e.data.type === "init-done");
+      w.onmessage = (e: MessageEvent<WorkerResponse>) => {
+        const msg = e.data;
+        if (msg.type === "classify-done") {
+          pending.get(msg.id)?.(msg.prob);
+          pending.delete(msg.id);
+        } else {
+          resolve(msg.type === "init-done");
         }
       };
-      worker!.addEventListener("message", handler);
-      worker!.postMessage({
-        type: "init",
-        modelAssetName: MODEL_ASSET,
-        wasmName: WASM_BINARY,
-        inputLength: MODEL_INPUT_LENGTH,
-      });
+      post(w, { type: "init", wasm }, [wasm]);
     });
 
     if (ok) {
@@ -328,22 +160,20 @@ export async function initEngine(): Promise<boolean> {
 
 function classifyAudio(
   waveform: Float32Array,
-  trackId?: string,
+  label: string,
 ): Promise<number | null> {
-  if (!worker || !engineReady) return Promise.resolve(null);
+  const w = worker;
+  if (!w || !engineReady) return Promise.resolve(null);
   const id = nextId++;
-  const copy = new Float32Array(waveform);
   return new Promise<number | null>((resolve) => {
     pending.set(id, resolve);
-    worker!.postMessage({ type: "classify", id, waveform: copy, trackId }, [
-      copy.buffer,
-    ]);
+    post(w, { type: "classify", id, waveform, label }, [waveform.buffer]);
   });
 }
 
 export function disposeEngine(): void {
   if (worker) {
-    worker.postMessage({ type: "dispose" });
+    post(worker, { type: "dispose" });
     worker.terminate();
     worker = null;
   }
@@ -369,6 +199,16 @@ function getAudioCtx(): AudioContext {
   if (!audioCtx || audioCtx.state === "closed")
     audioCtx = new AudioContext({ sampleRate: SAMPLE_RATE });
   return audioCtx;
+}
+
+function toMono(buffer: AudioBuffer): Float32Array {
+  const mono = new Float32Array(buffer.length);
+  for (let c = 0; c < buffer.numberOfChannels; c++) {
+    const data = buffer.getChannelData(c);
+    for (let i = 0; i < mono.length; i++)
+      mono[i] += data[i] / buffer.numberOfChannels;
+  }
+  return mono;
 }
 
 export async function getTrackArtists(trackUri: string): Promise<string[]> {
@@ -433,6 +273,5 @@ export async function classifyTrack(
   if (!response.ok) throw new Error(`preview fetch ${response.status}`);
   const buffer = await response.arrayBuffer();
   const decoded = await getAudioCtx().decodeAudioData(buffer);
-  const waveform = decoded.getChannelData(0);
-  return classifyAudio(waveform, queueTag + displayName);
+  return classifyAudio(toMono(decoded), queueTag + displayName);
 }

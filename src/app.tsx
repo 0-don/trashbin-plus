@@ -19,6 +19,7 @@ import { usePlaylistMonitor } from "./hooks/use-playlist-monitor";
 import { useRecommendationMonitor } from "./hooks/use-recommendation-monitor";
 import { useRemoteToggle } from "./hooks/use-remote-toggle";
 import { SELECTORS } from "./lib/constants";
+import { registerRemoteApi } from "./lib/remote-api";
 import {
   isTrackEffectivelyTrashed,
   manageSmartShuffleQueue,
@@ -27,7 +28,7 @@ import {
 import { useTrashbinStore } from "./store/trashbin-store";
 
 function App() {
-  console.log("trashbin+ loaded v1.1.14!");
+  console.log("trashbin+ loaded v1.1.15!");
 
   const trashbinStore = useTrashbinStore();
 
@@ -117,4 +118,5 @@ function App() {
 
   document.body.appendChild(appRoot);
   ReactDOM.render(<App />, appRoot);
+  registerRemoteApi();
 })();

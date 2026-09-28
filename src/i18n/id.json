@@ -62,11 +62,8 @@
   "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "Seperti lagu dari ponsel untuk menghapusnya. Secara otomatis menghapus suka dan melompat ke lagu berikutnya.",
   "SETTINGS_AI_DETECTION": "Deteksi AI",
   "SETTINGS_AI_DETECTION_ENABLED": "Deteksi Lagu AI",
-  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Deteksi lagu yang dihasilkan oleh AI menggunakan model SONICS dan tampilkan indikator probabilitas. Mengunduh model ~50MB saat pertama kali diaktifkan.",
+  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Deteksi lagu buatan AI di perangkat Anda dan tampilkan indikator probabilitas.",
   "AI_ASSETS_DOWNLOADING_WASM": "Mengunduh runtime WASM...",
-  "AI_ASSETS_DOWNLOADING_MODEL": "Mengunduh {{model}}...",
-  "AI_ASSETS_UP_TO_DATE": "Aset terbaru",
-  "AI_ASSETS_CACHED_OFFLINE": "Menggunakan aset yang di-cache (offline)",
   "AI_ASSETS_READY": "Model AI siap",
   "AI_ASSETS_NOT_READY": "Model AI tidak tersedia",
   "AI_ASSETS_INITIALIZING": "Menginisialisasi model...",
@@ -108,5 +105,7 @@
   "RADIO_DONE": "Menambahkan {{count}} lagu baru ke {{name}}",
   "TOOLTIP_COPY_URI": "Klik untuk menyalin URI",
   "TOOLTIP_REMOVE_TRASHBIN": "Hapus dari tempat sampah",
-  "TOOLTIP_AUTO_ADD": "Rekomendasi penambahan otomatis"
+  "TOOLTIP_AUTO_ADD": "Rekomendasi penambahan otomatis",
+  "MESSAGE_TRASHBIN_ENABLED": "Trashbin+ diaktifkan",
+  "MESSAGE_TRASHBIN_DISABLED": "Trashbin+ dinonaktifkan"
 }

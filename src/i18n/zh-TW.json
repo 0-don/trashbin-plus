@@ -62,11 +62,8 @@
   "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "就像一首從手機傳送到垃圾桶的歌曲。自動取消喜歡並跳到下一首。",
   "SETTINGS_AI_DETECTION": "人工智慧偵測",
   "SETTINGS_AI_DETECTION_ENABLED": "AI 歌曲偵測",
-  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "使用 SONICS 模型偵測 AI 生成的歌曲，並顯示機率指標。首次啟用時會下載約 50MB 的模型。",
+  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "在您的裝置上偵測 AI 生成的歌曲，並顯示機率指標。",
   "AI_ASSETS_DOWNLOADING_WASM": "正在下載 WASM 執行環境...",
-  "AI_ASSETS_DOWNLOADING_MODEL": "正在下載 {{model}}...",
-  "AI_ASSETS_UP_TO_DATE": "資產已更新至最新狀態",
-  "AI_ASSETS_CACHED_OFFLINE": "使用快取的資源（離線）",
   "AI_ASSETS_READY": "AI 模型已準備就緒",
   "AI_ASSETS_NOT_READY": "AI 模型不可用",
   "AI_ASSETS_INITIALIZING": "正在初始化模型...",
@@ -108,5 +105,7 @@
   "RADIO_DONE": "已向 {{name}} 加入 {{count}} 首新歌曲",
   "TOOLTIP_COPY_URI": "按一下以複製 URI",
   "TOOLTIP_REMOVE_TRASHBIN": "從垃圾桶中移除",
-  "TOOLTIP_AUTO_ADD": "自動新增建議"
+  "TOOLTIP_AUTO_ADD": "自動新增建議",
+  "MESSAGE_TRASHBIN_ENABLED": "已啟用 Trashbin+",
+  "MESSAGE_TRASHBIN_DISABLED": "已停用 Trashbin+"
 }

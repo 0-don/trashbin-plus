@@ -62,11 +62,8 @@
   "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "Eins og lag frá spilara til að eyða því. Fjarlægir handhægt og hoppar á næsta lag.",
   "SETTINGS_AI_DETECTION": "Greining á AI",
   "SETTINGS_AI_DETECTION_ENABLED": "Greining á AI-lögum",
-  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Greindu hljóðfæri sem búið er til með Gervigreind, að nota SONICS líkanið, og sýndu líkurnar. Hleður niður ~50MB líkani við fyrstu virkjun.",
+  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Greindu lög sem gervigreind hefur búið til í tækinu þínu og sýndu líkindavísi.",
   "AI_ASSETS_DOWNLOADING_WASM": "Sæki WASM keyrsluumhverfi...",
-  "AI_ASSETS_DOWNLOADING_MODEL": "Að hala niður {{model}}...",
-  "AI_ASSETS_UP_TO_DATE": "Eignir uppfærðar til hundaðs",
-  "AI_ASSETS_CACHED_OFFLINE": "Notar skyndiminnisvör (óhjálp)",
   "AI_ASSETS_READY": "AI líkan tilbúið",
   "AI_ASSETS_NOT_READY": "AI líkan ekki tiltækt",
   "AI_ASSETS_INITIALIZING": "Byrja að frumstilla líkan...",
@@ -108,5 +105,7 @@
   "RADIO_DONE": "Bætti {{count}} nýjum lögum við {{name}}",
   "TOOLTIP_COPY_URI": "Smelltu til að afrita URI",
   "TOOLTIP_REMOVE_TRASHBIN": "Fjarlægja úr rusli",
-  "TOOLTIP_AUTO_ADD": "Sjálfvirk viðbót ráðlaga"
+  "TOOLTIP_AUTO_ADD": "Sjálfvirk viðbót ráðlaga",
+  "MESSAGE_TRASHBIN_ENABLED": "Kveikt á Trashbin+",
+  "MESSAGE_TRASHBIN_DISABLED": "Slökkt á Trashbin+"
 }

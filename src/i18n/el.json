@@ -62,11 +62,8 @@
   "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "Όπως ένα τραγούδι από το κινητό για να το πετάξεις. Αποδέχεται αυτόματα και πηδάει στο επόμενο κομμάτι.",
   "SETTINGS_AI_DETECTION": "Ανίχνευση Τεχνητής Νοημοσύνης",
   "SETTINGS_AI_DETECTION_ENABLED": "Ανίχνευση Τραγουδιών Τεχνητής Νοημοσύνης",
-  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Ανίχνευση τραγουδιών που δημιουργήθηκαν από τεχνητή νοημοσύνη χρησιμοποιώντας το μοντέλο SONICS και εμφάνιση δείκτη πιθανότητας. Λήψη μοντέλου ~50MB κατά την πρώτη ενεργοποίηση.",
+  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Εντοπίστε τραγούδια που δημιουργήθηκαν από τεχνητή νοημοσύνη στη συσκευή σας και εμφανίστε έναν δείκτη πιθανότητας.",
   "AI_ASSETS_DOWNLOADING_WASM": "Λήψη του WASM runtime...",
-  "AI_ASSETS_DOWNLOADING_MODEL": "Λήψη {{model}}...",
-  "AI_ASSETS_UP_TO_DATE": "Περιουσιακά στοιχεία ενημερωμένα",
-  "AI_ASSETS_CACHED_OFFLINE": "Χρήση προσωρινά αποθηκευμένων περιουσιακών στοιχείων (εκτός σύνδεσης)",
   "AI_ASSETS_READY": "Έτοιμο μοντέλο τεχνητής νοημοσύνης",
   "AI_ASSETS_NOT_READY": "Το μοντέλο AI δεν είναι διαθέσιμο",
   "AI_ASSETS_INITIALIZING": "Εκκίνηση μοντέλου...",
@@ -108,5 +105,7 @@
   "RADIO_DONE": "Προστέθηκαν {{count}} νέα τραγούδια στη λίστα {{name}}",
   "TOOLTIP_COPY_URI": "Κάντε κλικ για αντιγραφή URI",
   "TOOLTIP_REMOVE_TRASHBIN": "Αφαίρεση από τον κάδο απορριμμάτων",
-  "TOOLTIP_AUTO_ADD": "Αυτόματη προσθήκη προτάσεων"
+  "TOOLTIP_AUTO_ADD": "Αυτόματη προσθήκη προτάσεων",
+  "MESSAGE_TRASHBIN_ENABLED": "Το Trashbin+ ενεργοποιήθηκε",
+  "MESSAGE_TRASHBIN_DISABLED": "Το Trashbin+ απενεργοποιήθηκε"
 }

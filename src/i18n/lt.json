@@ -62,11 +62,8 @@
   "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "Kaip dainą iš mobiliojo į šiukšliadėžę. Automatiškai pašalina patiktuką ir pereina prie kito takelio.",
   "SETTINGS_AI_DETECTION": "Dirbtinio intelekto aptikimas",
   "SETTINGS_AI_DETECTION_ENABLED": "Dirbtinio intelekto dainų aptikimas",
-  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Nustatykite dirbtinio intelekto sukurtas dainas naudodami SONICS modelį ir rodykite tikimybės indikatorių. Pirmą kartą įjungus atsisiunčiamas ~50 MB dydžio modelis.",
+  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Aptikite dirbtinio intelekto sukurtas dainas savo įrenginyje ir rodykite tikimybės indikatorių.",
   "AI_ASSETS_DOWNLOADING_WASM": "Atsiunčiamas WASM vykdymo laikas...",
-  "AI_ASSETS_DOWNLOADING_MODEL": "Atsiunčiama {{model}}...",
-  "AI_ASSETS_UP_TO_DATE": "Turto atnaujinimas atlikta",
-  "AI_ASSETS_CACHED_OFFLINE": "Naudoti podėlyje esančius resursus (neprisijungus)",
   "AI_ASSETS_READY": "AI modelis paruoštas",
   "AI_ASSETS_NOT_READY": "AI modelis neprieinamas",
   "AI_ASSETS_INITIALIZING": "Inicijuojamas modelis...",
@@ -108,5 +105,7 @@
   "RADIO_DONE": "Į {{name}} pridėta {{count}} naujų dainų",
   "TOOLTIP_COPY_URI": "Spustelėkite, kad nukopijuotumėte URI",
   "TOOLTIP_REMOVE_TRASHBIN": "Pašalinti iš šiukšlinės",
-  "TOOLTIP_AUTO_ADD": "Automatiškai pridėti rekomendacijas"
+  "TOOLTIP_AUTO_ADD": "Automatiškai pridėti rekomendacijas",
+  "MESSAGE_TRASHBIN_ENABLED": "Trashbin+ įjungtas",
+  "MESSAGE_TRASHBIN_DISABLED": "Trashbin+ išjungtas"
 }

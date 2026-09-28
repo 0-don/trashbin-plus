@@ -1,6 +1,6 @@
 {
   "name": "trashbin-plus",
-  "version": "1.1.14",
+  "version": "1.1.15",
   "private": true,
   "license": "MIT",
   "scripts": {
@@ -11,7 +11,7 @@
   "dependencies": {
     "i18next": "26.4.2",
     "react-i18next": "17.0.15",
-    "onnxruntime-web": "1.24.2",
+    "onnxruntime-web": "1.30.0",
     "react-icons": "5.7.0",
     "zustand": "5.0.15"
   },

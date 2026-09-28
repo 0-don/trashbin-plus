@@ -62,11 +62,8 @@
   "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "Seperti lagu dari telefon bimbit ke tong sampah. Secara automatik batal suka dan terus ke trek seterusnya.",
   "SETTINGS_AI_DETECTION": "Pengesanan AI",
   "SETTINGS_AI_DETECTION_ENABLED": "Pengesanan Lagu AI",
-  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Mengesan lagu yang dijana oleh AI menggunakan model SONICS dan memaparkan penunjuk kebarangkalian. Muat turun model ~50MB pada kali pertama diaktifkan.",
+  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Kesan lagu yang dijana AI pada peranti anda dan paparkan penunjuk kebarangkalian.",
   "AI_ASSETS_DOWNLOADING_WASM": "Memuat turun runtime WASM...",
-  "AI_ASSETS_DOWNLOADING_MODEL": "Memuat turun {{model}}...",
-  "AI_ASSETS_UP_TO_DATE": "Aset terkini",
-  "AI_ASSETS_CACHED_OFFLINE": "Menggunakan aset tembak (mod tanpa talian)",
   "AI_ASSETS_READY": "Model AI sedia",
   "AI_ASSETS_NOT_READY": "Model AI tidak tersedia",
   "AI_ASSETS_INITIALIZING": "Memulakan model...",
@@ -108,5 +105,7 @@
   "RADIO_DONE": "Menambah {{count}} lagu baharu ke {{name}}",
   "TOOLTIP_COPY_URI": "Klik untuk menyalin URI",
   "TOOLTIP_REMOVE_TRASHBIN": "Alih keluar dari tong sampah",
-  "TOOLTIP_AUTO_ADD": "Tambah secara automatik cadangan"
+  "TOOLTIP_AUTO_ADD": "Tambah secara automatik cadangan",
+  "MESSAGE_TRASHBIN_ENABLED": "Trashbin+ didayakan",
+  "MESSAGE_TRASHBIN_DISABLED": "Trashbin+ dinyahdayakan"
 }

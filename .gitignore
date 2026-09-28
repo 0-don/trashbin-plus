@@ -148,4 +148,9 @@ yarn.lock
 bun.lock*
 trashbin.json
 .venv
-Spot-if-AI
+# ai
+ai/data
+ai/.venv
+ai/resources
+ai/train/efficientat
+__pycache__

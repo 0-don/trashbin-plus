@@ -62,11 +62,8 @@
   "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "Као песма са мобилног, баци је. Аутоматски престаје да се свиђа и прелази на следећу нумеру.",
   "SETTINGS_AI_DETECTION": "Откривање вештачке интелигенције",
   "SETTINGS_AI_DETECTION_ENABLED": "Откривање песама вештачком интелигенцијом",
-  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Откријте песме направљене вештачком интелигенцијом коришћењем SONICS модела и прикажите индикатор вероватноће. Преузима ~50MB модел при првом омогућавању.",
+  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Откријте песме генерисане вештачком интелигенцијом на свом уређају и прикажите индикатор вероватноће.",
   "AI_ASSETS_DOWNLOADING_WASM": "Преузимање WASM радног окружења...",
-  "AI_ASSETS_DOWNLOADING_MODEL": "Преузимање {{model}}...",
-  "AI_ASSETS_UP_TO_DATE": "Активе ажурне",
-  "AI_ASSETS_CACHED_OFFLINE": "Коришћење кешираних средстава (офлајн)",
   "AI_ASSETS_READY": "АИ модел је спреман",
   "AI_ASSETS_NOT_READY": "AI модел није доступан",
   "AI_ASSETS_INITIALIZING": "Иницијализација модела...",
@@ -108,5 +105,7 @@
   "RADIO_DONE": "Додато {{count}} нових песама у {{name}}",
   "TOOLTIP_COPY_URI": "Кликните да копирате URI",
   "TOOLTIP_REMOVE_TRASHBIN": "Уклони из корпе за смеће",
-  "TOOLTIP_AUTO_ADD": "Аутоматско додавање препорука"
+  "TOOLTIP_AUTO_ADD": "Аутоматско додавање препорука",
+  "MESSAGE_TRASHBIN_ENABLED": "Trashbin+ је укључен",
+  "MESSAGE_TRASHBIN_DISABLED": "Trashbin+ је искључен"
 }

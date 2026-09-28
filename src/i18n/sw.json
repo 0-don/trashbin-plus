@@ -62,11 +62,8 @@
   "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "Kama wimbo kutoka kwenye simu kuzuia. Inatua kama wimbo na kuzaa kwenye wimbo ujao kiotomatiki.",
   "SETTINGS_AI_DETECTION": "Onesha AI",
   "SETTINGS_AI_DETECTION_ENABLED": "Onesha Wimbo wa AI",
-  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Gundua nyimbo zilizotengenezwa kwa AI kwa kutumia mfumo wa SONICS na onyesha kitu cha kuonesha uwezekano. Pakua mfumo wa ~50MB mara ya kwanza unapotumia.",
+  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Tambua nyimbo zilizotengenezwa na AI kwenye kifaa chako na uonyeshe kiashiria cha uwezekano.",
   "AI_ASSETS_DOWNLOADING_WASM": "Inapakia mfumo wa WASM...",
-  "AI_ASSETS_DOWNLOADING_MODEL": "Inapakia {{model}}...",
-  "AI_ASSETS_UP_TO_DATE": "Mali imefafanuliwa",
-  "AI_ASSETS_CACHED_OFFLINE": "Kutumia rasilimali zilizohifadhiwa (bila mtandao)",
   "AI_ASSETS_READY": "Mfano wa AI unapotosha",
   "AI_ASSETS_NOT_READY": "Mfumo wa AI hautapatikani",
   "AI_ASSETS_INITIALIZING": "Kuanzisha mfano...",
@@ -108,5 +105,7 @@
   "RADIO_DONE": "Zimeongezwa nyimbo mpya {{count}} kwenye {{name}}",
   "TOOLTIP_COPY_URI": "Bonyeza kukopua URI",
   "TOOLTIP_REMOVE_TRASHBIN": "Ondoa kutoka kwenye kisanduku cha taka",
-  "TOOLTIP_AUTO_ADD": "Ongeza moja kwa moja mapendekezo"
+  "TOOLTIP_AUTO_ADD": "Ongeza moja kwa moja mapendekezo",
+  "MESSAGE_TRASHBIN_ENABLED": "Trashbin+ imewashwa",
+  "MESSAGE_TRASHBIN_DISABLED": "Trashbin+ imezimwa"
 }

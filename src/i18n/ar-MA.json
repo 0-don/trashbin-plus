@@ -62,11 +62,8 @@
   "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "بلاصة تغنية من الموبايل للسلة. يمسح الإعجاب تلقائياً ويتخطى للتغنية اللي بعدها.",
   "SETTINGS_AI_DETECTION": "الكشف بالذكاء الاصطناعي",
   "SETTINGS_AI_DETECTION_ENABLED": "كاشفيات الأغاني بالذكاء الاصطناعي",
-  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "كاشفي الأغاني المخلوقة بالذكاء الاصطناعي باستعمال نموذج الـSONICS وعرض مؤشر الاحتمالية. كاتحمل النموذج اللي حجمه تقريباً 50 ميغابايت فالمستخدم الأول.",
+  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "كاشف الأغاني اللي تصاوبات بالذكاء الاصطناعي فالجهاز ديالك وبيّن مؤشر الاحتمالية.",
   "AI_ASSETS_DOWNLOADING_WASM": "التحميل ديال الـWASM runtime...",
-  "AI_ASSETS_DOWNLOADING_MODEL": "التحميل {{model}}...",
-  "AI_ASSETS_UP_TO_DATE": "الماال دابا",
-  "AI_ASSETS_CACHED_OFFLINE": "خدام الصور المخزّنة (في وضع عدم الاتصال)",
   "AI_ASSETS_READY": "النماذج ديال الذكاء الاصطناعي جاهزة",
   "AI_ASSETS_NOT_READY": "النماذج ديال الذكاء الاصطناعي ماشي متاحة",
   "AI_ASSETS_INITIALIZING": "النماذج كيتم تهييئها...",
@@ -108,5 +105,7 @@
   "RADIO_DONE": "تزادو {{count}} أغنية جديدة ل {{name}}",
   "TOOLTIP_COPY_URI": "اضغط باش تنسوخ الـ URI",
   "TOOLTIP_REMOVE_TRASHBIN": "احذف من السلة",
-  "TOOLTIP_AUTO_ADD": "الزيادة التلقائية للتوصيات"
+  "TOOLTIP_AUTO_ADD": "الزيادة التلقائية للتوصيات",
+  "MESSAGE_TRASHBIN_ENABLED": "Trashbin+ تفعّل",
+  "MESSAGE_TRASHBIN_DISABLED": "Trashbin+ تطفى"
 }

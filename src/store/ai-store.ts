@@ -16,8 +16,9 @@ const LS_BLOCKLIST_DATA = "trashbin-ai-blocklist:data";
 const LS_BLOCKLIST_TS = "trashbin-ai-blocklist:ts";
 const BLOCKLIST_TTL = 86_400_000; // 24 hours
 
-const LS_KEY = "trashbin-ai-results";
-const LS_FAILED_TS = "trashbin-ai-failed-ts";
+const LS_KEY = "trashbin-ai-results-v2";
+const LS_FAILED_TS = "trashbin-ai-failed-ts-v2";
+const LEGACY_LS_KEYS = ["trashbin-ai-results", "trashbin-ai-failed-ts"];
 const FAILED_RETRY_TTL = 86_400_000; // 24 hours
 const POLL_INTERVAL = 2000;
 const AI_TRASH_THRESHOLD = 0.8;
@@ -285,6 +286,7 @@ export const useAiStore = create<AiState>((set, get) => ({
   initialize: async () => {
     try {
       get().initBlocklist();
+      for (const key of LEGACY_LS_KEYS) Spicetify.LocalStorage.remove(key);
 
       let results: Record<string, number> = {};
       try {

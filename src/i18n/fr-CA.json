@@ -62,11 +62,8 @@
   "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "Comme une chanson provenant d'un mobile à supprimer. Supprime automatiquement le « j'aime » et passe au morceau suivant.",
   "SETTINGS_AI_DETECTION": "Détection de l'IA",
   "SETTINGS_AI_DETECTION_ENABLED": "Détection de chansons par IA",
-  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Détectez les chansons générées par IA à l'aide du modèle SONICS et affichez un indicateur de probabilité. Télécharge un modèle d'environ 50 Mo lors du premier activation.",
+  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Détectez les chansons générées par IA sur votre appareil et affichez un indicateur de probabilité.",
   "AI_ASSETS_DOWNLOADING_WASM": "Téléchargement du runtime WASM...",
-  "AI_ASSETS_DOWNLOADING_MODEL": "Téléchargement de {{model}} en cours...",
-  "AI_ASSETS_UP_TO_DATE": "Actifs à jour",
-  "AI_ASSETS_CACHED_OFFLINE": "Utilisation des ressources mises en cache (hors ligne)",
   "AI_ASSETS_READY": "Modèle d'IA prêt",
   "AI_ASSETS_NOT_READY": "Modèle d'IA non disponible",
   "AI_ASSETS_INITIALIZING": "Initialisation du modèle...",
@@ -108,5 +105,7 @@
   "RADIO_DONE": "{{count}} nouvelle(s) chanson(s) ajoutée(s) à {{name}}",
   "TOOLTIP_COPY_URI": "Cliquez pour copier l'URI",
   "TOOLTIP_REMOVE_TRASHBIN": "Supprimer de la corbeille",
-  "TOOLTIP_AUTO_ADD": "Ajout automatique de recommandations"
+  "TOOLTIP_AUTO_ADD": "Ajout automatique de recommandations",
+  "MESSAGE_TRASHBIN_ENABLED": "Trashbin+ activé",
+  "MESSAGE_TRASHBIN_DISABLED": "Trashbin+ désactivé"
 }

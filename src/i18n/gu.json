@@ -62,11 +62,8 @@
   "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "મોબાઇલથી તેને ફેંકી દેવા માટેનું ગીત. આપમેળે અનલાઇક કરે અને આગલા ટ્રેક પર સ્કિપ કરે.",
   "SETTINGS_AI_DETECTION": "એઆઈ ડિટેક્શન",
   "SETTINGS_AI_DETECTION_ENABLED": "એઆઈ ગીત શોધ",
-  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "પ્રથમ સક્ષમ કરવા પર સોનિક્સ મોડેલનો ઉપયોગ કરીને એઆઇ-જનરેટેડ ગીતોની પ્રોબેબિલિટી ઇન્ડિકેટર બતાવો. ~50MB મોડેલ ડાઉનલોડ કરો.",
+  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "તમારા ઉપકરણ પર AI દ્વારા બનાવેલા ગીતો શોધો અને સંભાવના સૂચક બતાવો.",
   "AI_ASSETS_DOWNLOADING_WASM": "WASM રનટાઇમ ડાઉનલોડ થઈ રહ્યું છે...",
-  "AI_ASSETS_DOWNLOADING_MODEL": "ડાઉનલોડ થઈ રહ્યું છે {{model}}...",
-  "AI_ASSETS_UP_TO_DATE": "સંપત્તિ અપ ટુ ડેટ",
-  "AI_ASSETS_CACHED_OFFLINE": "કેશ કરેલ એસેટ્સનો ઉપયોગ (ઓફલાઇન)",
   "AI_ASSETS_READY": "એઆઈ મોડેલ તૈયાર",
   "AI_ASSETS_NOT_READY": "એઆઈ મોડેલ ઉપલબ્ધ નથી",
   "AI_ASSETS_INITIALIZING": "મોડેલને શરૂ કરી રહ્યા છીએ...",
@@ -108,5 +105,7 @@
   "RADIO_DONE": "{{name}} માં {{count}} નવાં ગીત ઉમેરાયાં",
   "TOOLTIP_COPY_URI": "કૉપિ કરવા માટે URI પર ક્લિક કરો",
   "TOOLTIP_REMOVE_TRASHBIN": "કચરાપેટીમાંથી દૂર કરો",
-  "TOOLTIP_AUTO_ADD": "સ્વચાલિત-ઉમેરો ભલામણો"
+  "TOOLTIP_AUTO_ADD": "સ્વચાલિત-ઉમેરો ભલામણો",
+  "MESSAGE_TRASHBIN_ENABLED": "Trashbin+ ચાલુ થયું",
+  "MESSAGE_TRASHBIN_DISABLED": "Trashbin+ બંધ થયું"
 }

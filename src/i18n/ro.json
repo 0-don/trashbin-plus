@@ -62,11 +62,8 @@
   "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "Ca un cântec de pe mobil la coșul de gunoi. Dezapreciază automat și trece la următorul titlu.",
   "SETTINGS_AI_DETECTION": "Detectarea AI",
   "SETTINGS_AI_DETECTION_ENABLED": "Detectarea cântecelor AI",
-  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Detectează piesele generate de AI folosind modelul SONICS și afișează un indicator de probabilitate. Descarcă un model de ~50 MB la prima activare.",
+  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Detectează melodiile generate de IA pe dispozitivul tău și afișează un indicator de probabilitate.",
   "AI_ASSETS_DOWNLOADING_WASM": "Se descarcă runtime-ul WASM...",
-  "AI_ASSETS_DOWNLOADING_MODEL": "Se descarcă {{model}}...",
-  "AI_ASSETS_UP_TO_DATE": "Active actualizate",
-  "AI_ASSETS_CACHED_OFFLINE": "Utilizarea resurselor din cache (offline)",
   "AI_ASSETS_READY": "Model de AI pregătit",
   "AI_ASSETS_NOT_READY": "Modelul AI nu este disponibil",
   "AI_ASSETS_INITIALIZING": "Inițializare model...",
@@ -108,5 +105,7 @@
   "RADIO_DONE": "S-au adăugat {{count}} melodii noi în {{name}}",
   "TOOLTIP_COPY_URI": "Click pentru a copia URI",
   "TOOLTIP_REMOVE_TRASHBIN": "Elimină din coșul de gunoi",
-  "TOOLTIP_AUTO_ADD": "Adăugare automată recomandări"
+  "TOOLTIP_AUTO_ADD": "Adăugare automată recomandări",
+  "MESSAGE_TRASHBIN_ENABLED": "Trashbin+ activat",
+  "MESSAGE_TRASHBIN_DISABLED": "Trashbin+ dezactivat"
 }

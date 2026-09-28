@@ -8,7 +8,7 @@ Auto-skip songs and artists you don't like. A modern Spicetify extension.
 - **Context menu** - Right-click any song or artist to trash/untrash
 - **Trash buttons** - Inline trash icons in playlists, albums, and queue
 - **Playbar widget** - Quick trash button and AI probability indicator in the playback bar
-- **AI detection** - Detects AI-generated songs using SONICS SpecTTTra (~50MB model, runs locally via ONNX). Auto-trashes songs with >=80% AI confidence
+- **AI detection** - Detects AI-generated songs locally via ONNX, combining a spectral fakeprint model and a CQT cepstrum CNN from [lofcz/ai-music-detector](https://github.com/lofcz/ai-music-detector) (MIT, 1.2MB, bundled). Auto-trashes songs with >=80% AI confidence
 - **Remote control** - Double-tap play/pause from mobile to toggle skipping. Trash songs by liking them from your phone
 - **Playlist monitor** - Auto-recovers from Spotify playback glitches
 - **Auto clean queue** - Removes trashed songs from Smart Shuffle queue
@@ -32,10 +32,36 @@ Access via profile menu > **Trashbin+ Settings**.
 | **Remote Control** | Remote Toggle                  | Double-tap play/pause from mobile to toggle           |
 |                    | Remote Skipping                | Allow trash-skipping from other devices               |
 |                    | Trash via Like                 | Like a song from mobile to trash it                   |
-| **AI Detection**   | AI Song Detection              | Detect AI songs with SONICS model (~50MB download)    |
+| **AI Detection**   | AI Song Detection              | Detect AI songs on device (models bundled)            |
 |                    | Trash AI Songs                 | Auto-trash songs with >=80% AI probability            |
 | **Storage**        | Copy / Export / Import / Clear | Backup and manage trashbin data                       |
 |                    | Clear AI Storage               | Remove cached AI classification results               |
+
+## Hotkeys
+
+Trashbin+ can be controlled from outside Spotify, for example from a global hotkey. Spotify has to run with remote debugging on port 9225:
+
+```
+--remote-debugging-port=9225 --remote-allow-origins=*
+```
+
+On Linux with `spotify-launcher`, put them in `~/.config/spotify-launcher.conf` as `extra_arguments = ["--remote-debugging-port=9225", "--remote-allow-origins=*"]`. Elsewhere, add them to the command or shortcut that starts Spotify.
+
+Then run [`scripts/trashbin.sh`](scripts/trashbin.sh) (Linux, macOS, needs `bash`) or [`scripts/trashbin.ps1`](scripts/trashbin.ps1) (Windows) with a command:
+
+| Command           | Action                                  |
+| ----------------- | --------------------------------------- |
+| `trash-song`      | Trash or untrash the current song       |
+| `trash-artist`    | Trash or untrash the current artist     |
+| `toggle-trashbin` | Turn Trashbin+ on or off                |
+| `next`            | Next song                               |
+| `previous`        | Previous song                           |
+| `play-pause`      | Play or pause                           |
+| `like-song`       | Like or unlike the current song         |
+| `volume-up`       | Volume up by 10%                        |
+| `volume-down`     | Volume down by 10%                      |
+
+`-e '<javascript>'` runs any JavaScript inside Spotify instead. Without arguments the scripts run `trash-song`, so they can be pasted as is into a hotkey tool such as [Clippy](https://github.com/0-don/clippy) commands (interpreter `bash` or `powershell`); change the default in the script for another action.
 
 ## Screenshots
 

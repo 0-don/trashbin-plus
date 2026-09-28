@@ -62,11 +62,8 @@
   "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "Soos 'n liedjie vanaf mobiel na asblik. Outomaties onlike en slaan oor na die volgende liedjie.",
   "SETTINGS_AI_DETECTION": "Kunsmatige Intelligensie-opsporing",
   "SETTINGS_AI_DETECTION_ENABLED": "AI-liedjie-opsporing",
-  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Vind outomatiese liedjies op met behulp van die SONICS-model en toon 'n waarskynlikheidsaanduider. Laai ~50MB-model af tydens eerste aktivering.",
+  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Spoor KI-gegenereerde liedjies op jou toestel op en wys 'n waarskynlikheidsaanwyser.",
   "AI_ASSETS_DOWNLOADING_WASM": "Laai WASM-ruglyn...",
-  "AI_ASSETS_DOWNLOADING_MODEL": "Aan die aflaai {{model}}...",
-  "AI_ASSETS_UP_TO_DATE": "Bates op datum",
-  "AI_ASSETS_CACHED_OFFLINE": "Gebruik tussengeleë bates (aflyn)",
   "AI_ASSETS_READY": "K.I.-model gereed",
   "AI_ASSETS_NOT_READY": "Kunsmatige intelligensiemodel nie beskikbaar nie",
   "AI_ASSETS_INITIALIZING": "Model word geïnisialiseer...",
@@ -108,5 +105,7 @@
   "RADIO_DONE": "{{count}} nuwe liedjie(s) by {{name}} gevoeg",
   "TOOLTIP_COPY_URI": "Klik om URI te kopieer",
   "TOOLTIP_REMOVE_TRASHBIN": "Verwyder uit asblik",
-  "TOOLTIP_AUTO_ADD": "Outomatiese byvoeg aanbevelings"
+  "TOOLTIP_AUTO_ADD": "Outomatiese byvoeg aanbevelings",
+  "MESSAGE_TRASHBIN_ENABLED": "Trashbin+ geaktiveer",
+  "MESSAGE_TRASHBIN_DISABLED": "Trashbin+ gedeaktiveer"
 }

@@ -62,11 +62,8 @@
   "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "Mobil dən çöpə kimi bir mahnı kimi. Avtomatik olaraq bəyənməz və növbəti mahnıya keçir.",
   "SETTINGS_AI_DETECTION": "İnsan zəkasının aşkarlanması",
   "SETTINGS_AI_DETECTION_ENABLED": "AI Mahnı Aşkarlama",
-  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "SONICS modelindən istifadə edərək AI tərəfindən yaradılmış mahnıları aşkar edin və ehtimal göstəricisini göstərin. Birinci dəfə aktiv edildikdə təxminən 50 MB model yükləyir.",
+  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Cihazınızda süni intellektlə yaradılmış mahnıları aşkar edin və ehtimal göstəricisini göstərin.",
   "AI_ASSETS_DOWNLOADING_WASM": "WASM runtime yüklənir...",
-  "AI_ASSETS_DOWNLOADING_MODEL": "Yüklənir {{model}}...",
-  "AI_ASSETS_UP_TO_DATE": "Ən son aktivlər",
-  "AI_ASSETS_CACHED_OFFLINE": "Keşləşdirilmiş aktivlərdən istifadə (oflayn)",
   "AI_ASSETS_READY": "İİ modeli hazırdır",
   "AI_ASSETS_NOT_READY": "AI modeli mövcud deyil",
   "AI_ASSETS_INITIALIZING": "Model işə salınır...",
@@ -108,5 +105,7 @@
   "RADIO_DONE": "{{name}} siyahısına {{count}} yeni mahnı əlavə edildi",
   "TOOLTIP_COPY_URI": "URI-ni kopyalamaq üçün klikləyin",
   "TOOLTIP_REMOVE_TRASHBIN": "Səbətdən çıxarın",
-  "TOOLTIP_AUTO_ADD": "Tövsiyələrin avtomatik əlavə edilməsi"
+  "TOOLTIP_AUTO_ADD": "Tövsiyələrin avtomatik əlavə edilməsi",
+  "MESSAGE_TRASHBIN_ENABLED": "Trashbin+ aktivləşdirildi",
+  "MESSAGE_TRASHBIN_DISABLED": "Trashbin+ deaktiv edildi"
 }

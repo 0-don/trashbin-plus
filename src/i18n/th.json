@@ -62,11 +62,8 @@
   "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "เหมือนเพลงที่ส่งจากมือถือไปยังถังขยะ โดยจะยกเลิกการถูกใจและข้ามไปยังแทร็กถัดไปโดยอัตโนมัติ",
   "SETTINGS_AI_DETECTION": "การตรวจจับปัญญาประดิษฐ์",
   "SETTINGS_AI_DETECTION_ENABLED": "การตรวจจับเพลงด้วยปัญญาประดิษฐ์",
-  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "ตรวจจับเพลงที่สร้างด้วยปัญญาประดิษฐ์โดยใช้โมเดล SONICS และแสดงตัวบ่งชี้ความน่าจะเป็น ดาวน์โหลดโมเดลขนาดประมาณ 50MB เมื่อเปิดใช้งานครั้งแรก",
+  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "ตรวจจับเพลงที่สร้างด้วย AI บนอุปกรณ์ของคุณและแสดงตัวบ่งชี้ความน่าจะเป็น",
   "AI_ASSETS_DOWNLOADING_WASM": "กำลังดาวน์โหลดรันไทม์ WASM...",
-  "AI_ASSETS_DOWNLOADING_MODEL": "กำลังดาวน์โหลด {{model}}...",
-  "AI_ASSETS_UP_TO_DATE": "สินทรัพย์อัปเดตเรียบร้อยแล้ว",
-  "AI_ASSETS_CACHED_OFFLINE": "ใช้สินทรัพย์ที่แคชไว้ (ออฟไลน์)",
   "AI_ASSETS_READY": "โมเดลปัญญาประดิษฐ์พร้อมใช้งาน",
   "AI_ASSETS_NOT_READY": "ไม่มีโมเดลปัญญาประดิษฐ์ใช้งานได้",
   "AI_ASSETS_INITIALIZING": "กำลังเริ่มต้นโมเดล...",
@@ -108,5 +105,7 @@
   "RADIO_DONE": "เพิ่มเพลงใหม่ {{count}} เพลงไปยัง {{name}} แล้ว",
   "TOOLTIP_COPY_URI": "คลิกเพื่อคัดลอก URI",
   "TOOLTIP_REMOVE_TRASHBIN": "ลบออกจากถังขยะ",
-  "TOOLTIP_AUTO_ADD": "เพิ่มคำแนะนำโดยอัตโนมัติ"
+  "TOOLTIP_AUTO_ADD": "เพิ่มคำแนะนำโดยอัตโนมัติ",
+  "MESSAGE_TRASHBIN_ENABLED": "เปิดใช้ Trashbin+ แล้ว",
+  "MESSAGE_TRASHBIN_DISABLED": "ปิดใช้ Trashbin+ แล้ว"
 }

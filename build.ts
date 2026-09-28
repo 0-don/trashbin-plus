@@ -71,21 +71,75 @@ const ortWorkerString: BunPlugin = {
         /export\{(.+?)\}/,
         (_, e: string) => `self.ort={${e.replace(/(\w+) as (\w+)/g, "$2:$1")}}`,
       );
+      const { version } = JSON.parse(
+        readFileSync(resolve("node_modules/onnxruntime-web/package.json"), "utf-8"),
+      );
       return {
-        contents: `export const ORT_WASM_CODE = ${JSON.stringify(code)};`,
+        contents: `export const ORT_WASM_CODE = ${JSON.stringify(code)};\nexport const ORT_VERSION = ${JSON.stringify(version)};`,
         loader: "js",
       };
     });
   },
 };
 
+const aiModels: BunPlugin = {
+  name: "ai-models",
+  setup(build) {
+    build.onResolve({ filter: /^virtual:ai-models$/ }, ({ path: p }) => ({
+      path: p,
+      namespace: "ai-models",
+    }));
+    build.onLoad({ filter: /.*/, namespace: "ai-models" }, () => {
+      const b64 = (f: string) =>
+        JSON.stringify(readFileSync(resolve("models", f)).toString("base64"));
+      return {
+        contents: `export const FAKEPRINT_MODEL = ${b64("fakeprint-lr.onnx")};\nexport const CQT_CNN_MODEL = ${b64("cqt-cnn.onnx")};`,
+        loader: "js",
+      };
+    });
+  },
+};
+
+async function buildAiWorker(): Promise<string> {
+  const result = await Bun.build({
+    entrypoints: [resolve("src/lib/ai-worker.ts")],
+    target: "browser",
+    format: "iife",
+    minify: minifyMode,
+    plugins: [aiModels],
+  });
+  if (!result.success)
+    throw new AggregateError(result.logs, "ai-worker build failed");
+  return result.outputs[0].text();
+}
+
+const aiWorkerString = (code: string): BunPlugin => ({
+  name: "ai-worker-string",
+  setup(build) {
+    build.onResolve({ filter: /^virtual:ai-worker$/ }, ({ path: p }) => ({
+      path: p,
+      namespace: "ai-worker",
+    }));
+    build.onLoad({ filter: /.*/, namespace: "ai-worker" }, () => ({
+      contents: `export const AI_WORKER_CODE = ${JSON.stringify(code)};`,
+      loader: "js",
+    }));
+  },
+});
+
 async function runBuild() {
+  const workerCode = await buildAiWorker();
   const result = await Bun.build({
     entrypoints: [resolve("src/app.tsx")],
     target: "browser",
     format: "esm",
     minify: minifyMode,
-    plugins: [postcssPlugin, externalGlobals, ortWorkerString],
+    plugins: [
+      postcssPlugin,
+      externalGlobals,
+      ortWorkerString,
+      aiWorkerString(workerCode),
+    ],
   });
 
   if (!result.success) {

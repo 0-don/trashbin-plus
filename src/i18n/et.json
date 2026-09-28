@@ -62,11 +62,8 @@
   "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "Nagu laul mobiilist prügikasti. Eemaldab meeldimise automaatselt ja liigub järgmisele loole.",
   "SETTINGS_AI_DETECTION": "AI tuvastamine",
   "SETTINGS_AI_DETECTION_ENABLED": "AI laulude tuvastamine",
-  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Tuva AI-generaadud laulud SONICS-mudeli abil ja näita tõenäosuse näitajat. Esimesel sisselülitamisel allalaadimine ~50 MB suurune mudel.",
+  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Tuvasta tehisintellekti loodud lood otse oma seadmes ja kuva tõenäosuse näidik.",
   "AI_ASSETS_DOWNLOADING_WASM": "WASM käitusaja allalaadimine...",
-  "AI_ASSETS_DOWNLOADING_MODEL": "Laen alla {{model}}...",
-  "AI_ASSETS_UP_TO_DATE": "Varad ajakohastatud",
-  "AI_ASSETS_CACHED_OFFLINE": "Kasutatakse vahemälu varusid (võrguühenduseta)",
   "AI_ASSETS_READY": "AI mudel on valmis",
   "AI_ASSETS_NOT_READY": "AI mudel pole saadaval",
   "AI_ASSETS_INITIALIZING": "Mudeli lähtestamine...",
@@ -108,5 +105,7 @@
   "RADIO_DONE": "Esitusloendisse {{name}} lisati {{count}} uut laulu",
   "TOOLTIP_COPY_URI": "Klõpsa, et kopeerida URI",
   "TOOLTIP_REMOVE_TRASHBIN": "Eemalda prügikastist",
-  "TOOLTIP_AUTO_ADD": "Automaatne soovituste lisamine"
+  "TOOLTIP_AUTO_ADD": "Automaatne soovituste lisamine",
+  "MESSAGE_TRASHBIN_ENABLED": "Trashbin+ on sisse lülitatud",
+  "MESSAGE_TRASHBIN_DISABLED": "Trashbin+ on välja lülitatud"
 }

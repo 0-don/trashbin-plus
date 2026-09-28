@@ -62,11 +62,8 @@
   "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "मोबाइलबाट ट्र्यासमा यसलाई एउटा गीतको रूपमा। स्वचालित रूपमा अनलाइक गर्दछ र अर्को ट्र्याकमा जान्छ।",
   "SETTINGS_AI_DETECTION": "कृत्रिम बुद्धिमत्ता पत्ता लगाउने",
   "SETTINGS_AI_DETECTION_ENABLED": "कृत्रिम बुद्धिमत्ता गीत पत्ता लगाउने",
-  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "SONICS मोडेल प्रयोग गरेर एआई-उत्पादित गीतहरूको पत्ता लगाउनुहोस् र सम्भावना सूचक देखाउनुहोस्। पहिलो पटक सक्षम गर्दा ~५०MB मोडेल डाउनलोड गर्नुहोस्।",
+  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "आफ्नो उपकरणमा AI ले बनाएका गीतहरू पत्ता लगाउनुहोस् र सम्भाव्यता सूचक देखाउनुहोस्।",
   "AI_ASSETS_DOWNLOADING_WASM": "WASM रनटाइम डाउनलोड गर्दै ...",
-  "AI_ASSETS_DOWNLOADING_MODEL": "{{model}} डाउनलोड गर्दै ...",
-  "AI_ASSETS_UP_TO_DATE": "अद्यावधिक सम्पत्तिहरू",
-  "AI_ASSETS_CACHED_OFFLINE": "क्यास गरिएका सम्पत्तिहरू प्रयोग गर्दै (अफलाइन)",
   "AI_ASSETS_READY": "एआई मोडेल तयार छ",
   "AI_ASSETS_NOT_READY": "उपलब्ध एआई मोडेल छैन",
   "AI_ASSETS_INITIALIZING": "मोडेल सुरु गर्दै ...",
@@ -108,5 +105,7 @@
   "RADIO_DONE": "{{name}} मा {{count}} नयाँ गीत थपियो",
   "TOOLTIP_COPY_URI": "प्रतिलिपि गर्न URI मा क्लिक गर्नुहोस्",
   "TOOLTIP_REMOVE_TRASHBIN": "ट्र्यासबिनबाट हटाउनुहोस्",
-  "TOOLTIP_AUTO_ADD": "स्वतः-थप सिफारिसहरू"
+  "TOOLTIP_AUTO_ADD": "स्वतः-थप सिफारिसहरू",
+  "MESSAGE_TRASHBIN_ENABLED": "Trashbin+ सक्रिय गरियो",
+  "MESSAGE_TRASHBIN_DISABLED": "Trashbin+ निष्क्रिय गरियो"
 }

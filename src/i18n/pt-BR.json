@@ -62,11 +62,8 @@
   "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "Como uma música do celular para descartá-la. Automaticamente remove o like e pula para a próxima faixa.",
   "SETTINGS_AI_DETECTION": "Detecção de IA",
   "SETTINGS_AI_DETECTION_ENABLED": "Detecção de Música por IA",
-  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Detecte músicas geradas por IA usando o modelo SONICS e mostre um indicador de probabilidade. Faz o download de um modelo de ~50MB na primeira ativação.",
+  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Detecte músicas geradas por IA no seu dispositivo e mostre um indicador de probabilidade.",
   "AI_ASSETS_DOWNLOADING_WASM": "Baixando o runtime WASM...",
-  "AI_ASSETS_DOWNLOADING_MODEL": "Baixando {{model}}...",
-  "AI_ASSETS_UP_TO_DATE": "Ativos atualizados",
-  "AI_ASSETS_CACHED_OFFLINE": "Usando recursos armazenados em cache (modo offline)",
   "AI_ASSETS_READY": "Modelo de IA pronto",
   "AI_ASSETS_NOT_READY": "Modelo de IA não disponível",
   "AI_ASSETS_INITIALIZING": "Inicializando modelo...",
@@ -108,5 +105,7 @@
   "RADIO_DONE": "{{count}} nova(s) música(s) adicionada(s) a {{name}}",
   "TOOLTIP_COPY_URI": "Clique para copiar o URI",
   "TOOLTIP_REMOVE_TRASHBIN": "Remover da lixeira",
-  "TOOLTIP_AUTO_ADD": "Adicionar automaticamente recomendações"
+  "TOOLTIP_AUTO_ADD": "Adicionar automaticamente recomendações",
+  "MESSAGE_TRASHBIN_ENABLED": "Trashbin+ ativado",
+  "MESSAGE_TRASHBIN_DISABLED": "Trashbin+ desativado"
 }

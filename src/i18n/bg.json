@@ -62,11 +62,8 @@
   "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "Като песен от мобилно, за да я изтриеш. Автоматично премахва харесването и превърта към следващата песен.",
   "SETTINGS_AI_DETECTION": "Засичане на изкуствен интелект",
   "SETTINGS_AI_DETECTION_ENABLED": "Засичане на песни с изкуствен интелект",
-  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Откриване на генерирани от изкуствен интелект песни с помощта на модела SONICS и показване на индикатор за вероятността. При първо включване се изтегля модел от около 50 МВ.",
+  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Откривайте песни, генерирани с ИИ, на вашето устройство и показвайте индикатор за вероятност.",
   "AI_ASSETS_DOWNLOADING_WASM": "Изтегляне на WASM средата за изпълнение...",
-  "AI_ASSETS_DOWNLOADING_MODEL": "Изтегляне на {{model}}...",
-  "AI_ASSETS_UP_TO_DATE": "Активи актуални",
-  "AI_ASSETS_CACHED_OFFLINE": "Използване на кеширани ресурси (офлайн)",
   "AI_ASSETS_READY": "AI моделът е готов",
   "AI_ASSETS_NOT_READY": "AI моделът не е наличен",
   "AI_ASSETS_INITIALIZING": "Инициализиране на модела...",
@@ -108,5 +105,7 @@
   "RADIO_DONE": "Добавени са {{count}} нови песни към {{name}}",
   "TOOLTIP_COPY_URI": "Кликнете, за да копирате URI",
   "TOOLTIP_REMOVE_TRASHBIN": "Премахни от кошчето",
-  "TOOLTIP_AUTO_ADD": "Автоматично добавяне на препоръки"
+  "TOOLTIP_AUTO_ADD": "Автоматично добавяне на препоръки",
+  "MESSAGE_TRASHBIN_ENABLED": "Trashbin+ е включен",
+  "MESSAGE_TRASHBIN_DISABLED": "Trashbin+ е изключен"
 }

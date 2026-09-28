@@ -62,11 +62,8 @@
   "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "مثل یک آهنگ از موبایل به سطل زباله. به طور خودکار دیسلایک می‌کند و به موسیقی بعدی می‌رود.",
   "SETTINGS_AI_DETECTION": "تشخیص هوش مصنوعی",
   "SETTINGS_AI_DETECTION_ENABLED": "تشخیص آهنگ هوش مصنوعی",
-  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "تشخیص آهنگ‌های تولیدشده توسط هوش مصنوعی با استفاده از مدل SONICS و نمایش نشانگر احتمال. در اولین بار فعال‌سازی، مدلی حدود ۵۰ مگابایت دانلود می‌شود.",
+  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "آهنگ‌های ساخته‌شده با هوش مصنوعی را روی دستگاه خود شناسایی کنید و نشانگر احتمال را نمایش دهید.",
   "AI_ASSETS_DOWNLOADING_WASM": "در حال دانلود ران‌تایم WASM...",
-  "AI_ASSETS_DOWNLOADING_MODEL": "در حال دانلود {{model}}...",
-  "AI_ASSETS_UP_TO_DATE": "دارایی‌ها به‌روز",
-  "AI_ASSETS_CACHED_OFFLINE": "استفاده از منابع ذخیره‌شده در حالت آفلاین",
   "AI_ASSETS_READY": "مدل هوش مصنوعی آماده است",
   "AI_ASSETS_NOT_READY": "مدل هوش مصنوعی موجود نیست",
   "AI_ASSETS_INITIALIZING": "در حال مقداردهی اولیه مدل...",
@@ -108,5 +105,7 @@
   "RADIO_DONE": "{{count}} آهنگ جدید به {{name}} افزوده شد",
   "TOOLTIP_COPY_URI": "کلیک کنید تا URI کپی شود",
   "TOOLTIP_REMOVE_TRASHBIN": "حذف از سطل زباله",
-  "TOOLTIP_AUTO_ADD": "افزودن خودکار پیشنهادات"
+  "TOOLTIP_AUTO_ADD": "افزودن خودکار پیشنهادات",
+  "MESSAGE_TRASHBIN_ENABLED": "Trashbin+ فعال شد",
+  "MESSAGE_TRASHBIN_DISABLED": "Trashbin+ غیرفعال شد"
 }

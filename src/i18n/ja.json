@@ -62,11 +62,8 @@
   "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "携帯からゴミ箱に捨てるような曲。自動で「いいね」を解除し、次の曲にスキップします。",
   "SETTINGS_AI_DETECTION": "AI検出",
   "SETTINGS_AI_DETECTION_ENABLED": "AIによる楽曲検出",
-  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "SONICSモデルを使用してAI生成の楽曲を検出し、確率インジケーターを表示します。初回有効化時に約50MBのモデルをダウンロードします。",
+  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "お使いのデバイス上でAI生成の楽曲を検出し、確率インジケーターを表示します。",
   "AI_ASSETS_DOWNLOADING_WASM": "WASMランタイムをダウンロード中...",
-  "AI_ASSETS_DOWNLOADING_MODEL": "{{model}}をダウンロード中...",
-  "AI_ASSETS_UP_TO_DATE": "資産は最新の状態です",
-  "AI_ASSETS_CACHED_OFFLINE": "キャッシュされたアセットを使用中（オフライン）",
   "AI_ASSETS_READY": "AIモデル準備完了",
   "AI_ASSETS_NOT_READY": "AIモデルは利用できません",
   "AI_ASSETS_INITIALIZING": "モデルを初期化しています...",
@@ -108,5 +105,7 @@
   "RADIO_DONE": "{{name}}に{{count}}曲の新しい曲を追加しました",
   "TOOLTIP_COPY_URI": "URIをコピーするにはクリックしてください",
   "TOOLTIP_REMOVE_TRASHBIN": "ゴミ箱から削除",
-  "TOOLTIP_AUTO_ADD": "おすすめを自動追加"
+  "TOOLTIP_AUTO_ADD": "おすすめを自動追加",
+  "MESSAGE_TRASHBIN_ENABLED": "Trashbin+ を有効にしました",
+  "MESSAGE_TRASHBIN_DISABLED": "Trashbin+ を無効にしました"
 }

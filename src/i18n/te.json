@@ -62,11 +62,8 @@
   "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "మొబైల్ నుండి ట్రాష్ కు ఒక పాట లాగా. స్వయంచాలకంగా డిస్లైక్ చేసి తదుపరి ట్రాక్ కు దూకుతుంది.",
   "SETTINGS_AI_DETECTION": "AI డిటెక్షన్",
   "SETTINGS_AI_DETECTION_ENABLED": "AI పాట గుర్తింపు",
-  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "SONICS మోడల్‌ను ఉపయోగించి ఎఐ ద్వారా సృష్టించబడిన పాటలను గుర్తించండి మరియు సంభావ్యత సూచికను చూపండి. మొదటిసారి ప్రారంభించినప్పుడు ~50MB మోడల్‌ను డౌన్‌లోడ్ చేస్తుంది.",
+  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "మీ పరికరంలో AI రూపొందించిన పాటలను గుర్తించి సంభావ్యత సూచికను చూపండి.",
   "AI_ASSETS_DOWNLOADING_WASM": "WASM రన్‌టైమ్ డౌన్‌లోడ్ చేస్తోంది...",
-  "AI_ASSETS_DOWNLOADING_MODEL": "{{model}} డౌన్‌లోడ్ చేస్తోంది...",
-  "AI_ASSETS_UP_TO_DATE": "ఆస్తులు తాజాగా ఉన్నాయి",
-  "AI_ASSETS_CACHED_OFFLINE": "క్యాష్ చేసిన ఆస్తులను ఉపయోగించడం (ఆఫ్‌లైన్)",
   "AI_ASSETS_READY": "AI మోడల్ సిద్ధంగా ఉంది",
   "AI_ASSETS_NOT_READY": "ఎఐ మాడల్ అందుబాటులో లేదు",
   "AI_ASSETS_INITIALIZING": "మోడల్‌ని ప్రారంభిస్తోంది...",
@@ -108,5 +105,7 @@
   "RADIO_DONE": "{{name}} కు {{count}} కొత్త పాటలు చేర్చబడ్డాయి",
   "TOOLTIP_COPY_URI": "URI కాపీ చేయడానికి క్లిక్ చేయండి",
   "TOOLTIP_REMOVE_TRASHBIN": "చెత్తబుట్ట నుండి తొలగించు",
-  "TOOLTIP_AUTO_ADD": "స్వయచ్ఛగా సిఫారసులను జోడించండి"
+  "TOOLTIP_AUTO_ADD": "స్వయచ్ఛగా సిఫారసులను జోడించండి",
+  "MESSAGE_TRASHBIN_ENABLED": "Trashbin+ ప్రారంభించబడింది",
+  "MESSAGE_TRASHBIN_DISABLED": "Trashbin+ నిలిపివేయబడింది"
 }

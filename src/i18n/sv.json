@@ -62,11 +62,8 @@
   "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "Som en låt från mobil till papperskorg. Tar automatiskt bort gillandet och hoppar till nästa spår.",
   "SETTINGS_AI_DETECTION": "AI-detektering",
   "SETTINGS_AI_DETECTION_ENABLED": "AI-låtdetektering",
-  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Identifiera AI-genererade låtar med SONICS-modellen och visa en sannolikhetsindikator. Laddar ner ~50 MB modell vid första aktiveringen.",
+  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Upptäck AI-genererade låtar på din enhet och visa en sannolikhetsindikator.",
   "AI_ASSETS_DOWNLOADING_WASM": "Laddar ner WASM-körning...",
-  "AI_ASSETS_DOWNLOADING_MODEL": "Laddar ner {{model}}...",
-  "AI_ASSETS_UP_TO_DATE": "Tillgångar uppdaterade",
-  "AI_ASSETS_CACHED_OFFLINE": "Använder cachelagrade tillgångar (offline)",
   "AI_ASSETS_READY": "AI-modell redo",
   "AI_ASSETS_NOT_READY": "AI-modell inte tillgänglig",
   "AI_ASSETS_INITIALIZING": "Initierar modell...",
@@ -108,5 +105,7 @@
   "RADIO_DONE": "Lade till {{count}} nya låt(ar) i {{name}}",
   "TOOLTIP_COPY_URI": "Klicka för att kopiera URI",
   "TOOLTIP_REMOVE_TRASHBIN": "Ta bort från papperskorgen",
-  "TOOLTIP_AUTO_ADD": "Automatiskt lägg till rekommendationer"
+  "TOOLTIP_AUTO_ADD": "Automatiskt lägg till rekommendationer",
+  "MESSAGE_TRASHBIN_ENABLED": "Trashbin+ aktiverat",
+  "MESSAGE_TRASHBIN_DISABLED": "Trashbin+ inaktiverat"
 }

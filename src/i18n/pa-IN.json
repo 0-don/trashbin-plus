@@ -62,11 +62,8 @@
   "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "ਮੋਬਾਈਲ ਤੋਂ ਟਰੈਸ਼ ਕਰਨ ਲਈ ਇੱਕ ਗੀਤ ਵਰਗਾ। ਆਪਣੇ ਆਪ ਅਣਲਾਈਕ ਕਰਦਾ ਹੈ ਅਤੇ ਅਗਲੇ ਟਰੈਕ ਤੇ ਛਾਲ ਮਾਰਦਾ ਹੈ।",
   "SETTINGS_AI_DETECTION": "ਐਆਈ ਪਤਾ ਲਗਾਉਣਾ",
   "SETTINGS_AI_DETECTION_ENABLED": "ਐਆਈ ਗੀਤ ਪਛਾਣ",
-  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "ਐਸ.ਓ.ਐਨ.ਆਈ.ਸੀ.ਐਸ. ਮਾਡਲ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਏ.ਆਈ. ਨਾਲ ਬਣੀਆਂ ਗੀਤਾਂ ਨੂੰ ਪਛਾਣੋ ਅਤੇ ਇੱਕ ਸੰਭਾਵਨਾ ਸੂਚਕ ਦਿਖਾਓ। ਪਹਿਲੀ ਵਾਰ ਚਾਲੂ ਕਰਨ 'ਤੇ ~50MB ਮਾਡਲ ਡਾਊਨਲੋਡ ਕਰਦਾ ਹੈ।",
+  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "ਆਪਣੇ ਡਿਵਾਈਸ 'ਤੇ AI ਨਾਲ ਬਣੇ ਗੀਤਾਂ ਦਾ ਪਤਾ ਲਗਾਓ ਅਤੇ ਸੰਭਾਵਨਾ ਸੂਚਕ ਦਿਖਾਓ।",
   "AI_ASSETS_DOWNLOADING_WASM": "WASM ਰਨਟਾਈਮ ਡਾਊਨਲੋਡ ਹੋ ਰਿਹਾ ਹੈ...",
-  "AI_ASSETS_DOWNLOADING_MODEL": "{{model}} ਡਾਊਨਲੋਡ ਹੋ ਰਿਹਾ ਹੈ...",
-  "AI_ASSETS_UP_TO_DATE": "ਸੰਪੱਤੀਆਂ ਅੱਪ ਟੂ ਡੇਟ",
-  "AI_ASSETS_CACHED_OFFLINE": "ਕੈਸ਼ ਕੀਤੇ ਗਏ ਸੰਪੱਤੀਆਂ ਦੀ ਵਰਤੋਂ (ਆਫਲਾਈਨ)",
   "AI_ASSETS_READY": "AI ਮਾਡਲ ਤਿਆਰ ਹੈ",
   "AI_ASSETS_NOT_READY": "AI ਮਾਡਲ ਉਪਲਬਧ ਨਹੀਂ ਹੈ",
   "AI_ASSETS_INITIALIZING": "ਮਾਡਲ ਸ਼ੁਰੂ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ...",
@@ -108,5 +105,7 @@
   "RADIO_DONE": "{{name}} ਵਿੱਚ {{count}} ਨਵੇਂ ਗੀਤ ਜੋੜੇ ਗਏ",
   "TOOLTIP_COPY_URI": "ਯੂਆਰਆਈ ਕਾਪੀ ਕਰਨ ਲਈ ਕਲਿੱਕ ਕਰੋ",
   "TOOLTIP_REMOVE_TRASHBIN": "ਕੂੜੇਦਾਨ ਤੋਂ ਹਟਾਓ",
-  "TOOLTIP_AUTO_ADD": "ਆਟੋ-ਐਡ ਸਿਫਾਰਸ਼ਾਂ"
+  "TOOLTIP_AUTO_ADD": "ਆਟੋ-ਐਡ ਸਿਫਾਰਸ਼ਾਂ",
+  "MESSAGE_TRASHBIN_ENABLED": "Trashbin+ ਚਾਲੂ ਕੀਤਾ",
+  "MESSAGE_TRASHBIN_DISABLED": "Trashbin+ ਬੰਦ ਕੀਤਾ"
 }

@@ -62,11 +62,8 @@
   "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "Cihazdan çöpe atmak gibi bir şey. Otomatik olarak beğenisini geri alır ve bir sonraki parçaya geçer.",
   "SETTINGS_AI_DETECTION": "Yapay Zeka Tespiti",
   "SETTINGS_AI_DETECTION_ENABLED": "Yapay Zeka Şarkı Tespiti",
-  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "SONICS modelini kullanarak yapay zeka tarafından üretilen şarkıları tespit edin ve bir olasılık göstergesi gösterin. İlk etkinleştirme sırasında yaklaşık 50 MB'lık modeli indirir.",
+  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Cihazınızda yapay zekâ ile oluşturulmuş şarkıları algılayın ve bir olasılık göstergesi gösterin.",
   "AI_ASSETS_DOWNLOADING_WASM": "WASM çalışma zamanı indiriliyor...",
-  "AI_ASSETS_DOWNLOADING_MODEL": "{{model}} indiriliyor...",
-  "AI_ASSETS_UP_TO_DATE": "Varlıklar güncel",
-  "AI_ASSETS_CACHED_OFFLINE": "Önbelleğe alınmış varlıkları kullanma (çevrimdışı)",
   "AI_ASSETS_READY": "AI modeli hazır",
   "AI_ASSETS_NOT_READY": "AI modeli mevcut değil",
   "AI_ASSETS_INITIALIZING": "Model başlatılıyor...",
@@ -108,5 +105,7 @@
   "RADIO_DONE": "{{name}} listesine {{count}} yeni şarkı eklendi",
   "TOOLTIP_COPY_URI": "Kopyalamak için URI'ye tıklayın",
   "TOOLTIP_REMOVE_TRASHBIN": "Çöp kutusundan kaldır",
-  "TOOLTIP_AUTO_ADD": "Otomatik ekle önerileri"
+  "TOOLTIP_AUTO_ADD": "Otomatik ekle önerileri",
+  "MESSAGE_TRASHBIN_ENABLED": "Trashbin+ etkinleştirildi",
+  "MESSAGE_TRASHBIN_DISABLED": "Trashbin+ devre dışı bırakıldı"
 }

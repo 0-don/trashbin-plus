@@ -62,11 +62,8 @@
   "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "Jak utwór z telefonu do kosza. Automatycznie usuwa polubienie i przechodzi do następnego utworu.",
   "SETTINGS_AI_DETECTION": "Wykrywanie sztucznej inteligencji",
   "SETTINGS_AI_DETECTION_ENABLED": "Wykrywanie piosenek AI",
-  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Wykrywaj piosenki wygenerowane przez AI za pomocą modelu SONICS i wyświetlaj wskaźnik prawdopodobieństwa. Przy pierwszym włączeniu pobiera model (~50 MB).",
+  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Wykrywaj utwory wygenerowane przez AI na swoim urządzeniu i wyświetlaj wskaźnik prawdopodobieństwa.",
   "AI_ASSETS_DOWNLOADING_WASM": "Pobieranie środowiska uruchomieniowego WASM...",
-  "AI_ASSETS_DOWNLOADING_MODEL": "Pobieranie {{model}}...",
-  "AI_ASSETS_UP_TO_DATE": "Aktywa aktualne",
-  "AI_ASSETS_CACHED_OFFLINE": "Korzystanie z zasobów z pamięci podręcznej (w trybie offline)",
   "AI_ASSETS_READY": "Model AI gotowy",
   "AI_ASSETS_NOT_READY": "Model AI niedostępny",
   "AI_ASSETS_INITIALIZING": "Inicjalizowanie modelu...",
@@ -108,5 +105,7 @@
   "RADIO_DONE": "Dodano {{count}} nowych utworów do {{name}}",
   "TOOLTIP_COPY_URI": "Kliknij, aby skopiować URI",
   "TOOLTIP_REMOVE_TRASHBIN": "Usuń z kosza",
-  "TOOLTIP_AUTO_ADD": "Automatyczne dodawanie rekomendacji"
+  "TOOLTIP_AUTO_ADD": "Automatyczne dodawanie rekomendacji",
+  "MESSAGE_TRASHBIN_ENABLED": "Trashbin+ włączony",
+  "MESSAGE_TRASHBIN_DISABLED": "Trashbin+ wyłączony"
 }

@@ -62,11 +62,8 @@
   "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "মোবাইল থেকে ট্র্যাশে এটি একটি গানের মতো। স্বয়ংক্রিয়ভাবে আনলাইক করে এবং পরবর্তী ট্র্যাকে চলে যায়।",
   "SETTINGS_AI_DETECTION": "এআই সনাক্তকরণ",
   "SETTINGS_AI_DETECTION_ENABLED": "এআই গান শনাক্তকরণ",
-  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "SONICS মডেল ব্যবহার করে এআই-জেনারেটেড গান শনাক্ত করুন এবং একটি সম্ভাব্যতা সূচক দেখান। প্রথমবার সক্রিয় করার সময় ~৫০ এমবি মডেল ডাউনলোড করে।",
+  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "আপনার ডিভাইসে AI-নির্মিত গান শনাক্ত করুন এবং সম্ভাবনার সূচক দেখান।",
   "AI_ASSETS_DOWNLOADING_WASM": "WASM রানটাইম ডাউনলোড করা হচ্ছে...",
-  "AI_ASSETS_DOWNLOADING_MODEL": "{{model}} ডাউনলোড করা হচ্ছে...",
-  "AI_ASSETS_UP_TO_DATE": "সম্পদ আপ টু ডেট",
-  "AI_ASSETS_CACHED_OFFLINE": "ক্যাশে করা অ্যাসেট ব্যবহার করা হচ্ছে (অফলাইন)",
   "AI_ASSETS_READY": "AI মডেল প্রস্তুত",
   "AI_ASSETS_NOT_READY": "AI মডেল পাওয়া যাচ্ছে না",
   "AI_ASSETS_INITIALIZING": "মডেল চালু করা হচ্ছে...",
@@ -108,5 +105,7 @@
   "RADIO_DONE": "{{name}}-এ {{count}}টি নতুন গান যোগ করা হয়েছে",
   "TOOLTIP_COPY_URI": "URI কপি করতে ক্লিক করুন",
   "TOOLTIP_REMOVE_TRASHBIN": "ট্র্যাশবিন থেকে সরান",
-  "TOOLTIP_AUTO_ADD": "স্বয়ংক্রিয়ভাবে সুপারিশ যোগ করুন"
+  "TOOLTIP_AUTO_ADD": "স্বয়ংক্রিয়ভাবে সুপারিশ যোগ করুন",
+  "MESSAGE_TRASHBIN_ENABLED": "Trashbin+ চালু হয়েছে",
+  "MESSAGE_TRASHBIN_DISABLED": "Trashbin+ বন্ধ হয়েছে"
 }

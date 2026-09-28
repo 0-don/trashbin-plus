@@ -62,11 +62,8 @@
   "DESCRIPTION_SETTINGS_TRASH_VIA_LIKE": "እንደ ሞባይል የተላለፈ መዝሙር እንዲወረድ ያደርጋል። በራሱ የማይወድ ሲሆን ወደ የሚቀጥለው መዝሙር ይዝዋል።",
   "SETTINGS_AI_DETECTION": "የአይ.አይ መለየት",
   "SETTINGS_AI_DETECTION_ENABLED": "አይአይ የሶንግ መለየት",
-  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "የሶኒክስ ሞዴል በመጠቀም ከአአ የተፈጠሩ ድግቶችን ያሳያ እና የአዝማሚያ ጠቋሚ ያሳይ። ለመጀመሪያ ጊዜ ሲፈጠር የተገኘው ሞዴል በ50 ሚ.ባ ይውረድ።",
+  "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "በመሣሪያዎ ላይ በAI የተፈጠሩ ዘፈኖችን ይለዩ እና የዕድል አመልካች ያሳዩ።",
   "AI_ASSETS_DOWNLOADING_WASM": "የWASM ሮታ ማውረድ...",
-  "AI_ASSETS_DOWNLOADING_MODEL": "ማውረጃ {{model}}...",
-  "AI_ASSETS_UP_TO_DATE": "ንብረቶች እስከ ዛሬ ድረስ",
-  "AI_ASSETS_CACHED_OFFLINE": "የማስታወቂያ አወቃቀሞችን በመጠቀም ( ያው ላይን)",
   "AI_ASSETS_READY": "የአይ ሞዴል ዝግጁ ነው",
   "AI_ASSETS_NOT_READY": "የአይ ሞዴል የለም",
   "AI_ASSETS_INITIALIZING": "ማዕረ መፍጠሪያ...",
@@ -108,5 +105,7 @@
   "RADIO_DONE": "{{count}} አዲስ ዘፈን(ኖች) ወደ {{name}} ተጨምረዋል",
   "TOOLTIP_COPY_URI": "ለማስቀመጥ ላይ ጠቅ ያድርጉ URI",
   "TOOLTIP_REMOVE_TRASHBIN": "ከዝተቀመጠው ሳጥን ያስወግዱ",
-  "TOOLTIP_AUTO_ADD": "አውቶ መጨመር ማመልከቻዎች"
+  "TOOLTIP_AUTO_ADD": "አውቶ መጨመር ማመልከቻዎች",
+  "MESSAGE_TRASHBIN_ENABLED": "Trashbin+ ነቅቷል",
+  "MESSAGE_TRASHBIN_DISABLED": "Trashbin+ ተሰናክሏል"
 }

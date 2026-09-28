@@ -1,5 +1,8 @@
+import type { remoteApi } from "../remote-api";
+
 declare global {
   interface Window {
+    trashbinPlus?: typeof remoteApi;
     showSaveFilePicker?: (options?: {
       suggestedName?: string;
       types?: Array<{
