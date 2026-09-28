@@ -13,7 +13,7 @@ import random
 import subprocess
 import sys
 from collections import Counter, defaultdict
-from multiprocessing import Pool
+from multiprocessing import get_context
 
 import numpy as np
 import torch
@@ -69,7 +69,8 @@ def decode(clip):
 
 def load_pcm(clips):
     os.makedirs(PCM, exist_ok=True)
-    with Pool(max(1, (os.cpu_count() or 8) - 4)) as pool:
+    # Python 3.14 defaults to forkserver, which cannot start workers from a `python -c` caller
+    with get_context("fork").Pool(max(1, (os.cpu_count() or 8) - 4)) as pool:
         paths = pool.map(decode, clips, chunksize=8)
     return [(c, np.load(p)) for c, p in zip(clips, paths) if p]
 

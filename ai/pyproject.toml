@@ -2,14 +2,14 @@
 name = "trashbin-ai"
 version = "0.1.0"
 description = "Harvest per-generator AI music clips, train and evaluate the preview detector"
-requires-python = ">=3.12"
+requires-python = ">=3.14"
 dependencies = [
-    "huggingface_hub>=0.30",
+    "huggingface_hub>=2.0.0",
     "numpy>=2.5.3",
     "onnx>=1.23.0",
-    "pyarrow>=18",
-    "remotezip>=0.12",
-    "scikit-learn>=1.8",
+    "pyarrow>=25.0.1",
+    "remotezip>=0.12.6",
+    "scikit-learn>=1.9.1",
     "torch>=2.14.0",
     "torchaudio>=2.11.0",
     "torchvision>=0.29.0",
