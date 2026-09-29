@@ -69,7 +69,7 @@
   "AI_ASSETS_NOT_READY": "የአይ ሞዴል የለም",
   "AI_ASSETS_INITIALIZING": "ማዕረ መፍጠሪያ...",
   "SETTINGS_TRASH_AI_SONGS": "የጭው ኤአይ ጸሐይ ጸሐይ ጸሐይ",
-  "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "በAI የተፈጠሩ ዘፈኖችን በራስ-ሰር ወደ ቆሻሻ ይላኩ፦ ከ97% በላይ ለብቻቸው፣ አርቲስቱ 3 ምልክት የተደረገባቸው ዘፈኖች ሲኖሩት ከ80% ጀምሮ። ከ2023 በፊት የተለቀቁ ዘፈኖች በፍጹም ምልክት አይደረግባቸውም።",
+  "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "በAI የተፈጠሩ ዘፈኖችን በራስ-ሰር ወደ ቆሻሻ ይላኩ፦ ከ97% በላይ ለብቻቸው፣ አርቲስቱ 3 ምልክት የተደረገባቸው ዘፈኖች ሲኖሩት ከ80% ጀምሮ። ከ2023 በፊት የተለቀቁ ዘፈኖች፣ ወይም ከ2023 በፊት ሙዚቃ ያወጡ አርቲስቶች ዘፈኖች በፍጹም ምልክት አይደረግባቸውም።",
   "DESCRIPTION_CLEAR_AI_STORAGE": "ሁሉንም የተቀመጡ የአይ ኢ የመደባች ውጤቶች ያጥፉ ({{count}} የተቀመጡ ግጥሞች)።",
   "ACTION_CLEAR_AI_STORAGE": "ጠቃሚ",
   "MESSAGE_AI_STORAGE_CLEARED": "የአይአይ ውጤቶች ተሰርተዋል",

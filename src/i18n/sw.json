@@ -69,7 +69,7 @@
   "AI_ASSETS_NOT_READY": "Mfumo wa AI hautapatikani",
   "AI_ASSETS_INITIALIZING": "Kuanzisha mfano...",
   "SETTINGS_TRASH_AI_SONGS": "Nyimbo za AI za Taka",
-  "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "Tupa nyimbo za AI kwenye tupio kiotomatiki: kuanzia 97% zenyewe, kuanzia 80% msanii akiwa na nyimbo 3 zilizowekwa alama. Matoleo ya kabla ya 2023 hayawekwi alama kamwe.",
+  "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "Tupa nyimbo za AI kwenye tupio kiotomatiki: kuanzia 97% zenyewe, kuanzia 80% msanii akiwa na nyimbo 3 zilizowekwa alama. Nyimbo zilizotolewa kabla ya 2023, au za wasanii waliotoa muziki kabla ya 2023, hazitiwi alama kamwe.",
   "DESCRIPTION_CLEAR_AI_STORAGE": "Futa vitambulisho vyote vya AI vilivyoohifadhiwa (nyimbo {{count}} zimehifadhiwa).",
   "ACTION_CLEAR_AI_STORAGE": "Wazi",
   "MESSAGE_AI_STORAGE_CLEARED": "Matokeo ya AI yamefutwa",

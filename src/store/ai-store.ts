@@ -3,7 +3,9 @@ import {
   classifyTrack,
   disposeEngine,
   ensureAssets,
+  getArtistDebutYear,
   getTrackInfo,
+  LS_ARTIST_DEBUT,
   initEngine,
 } from "../lib/ai-engine";
 import { AI_INDICATOR_CLASS } from "../lib/constants";
@@ -16,9 +18,9 @@ const LS_BLOCKLIST_DATA = "trashbin-ai-blocklist:data";
 const LS_BLOCKLIST_TS = "trashbin-ai-blocklist:ts";
 const BLOCKLIST_TTL = 86_400_000; // 24 hours
 
-const LS_KEY = "trashbin-ai-results-v4";
-const LS_FAILED_TS = "trashbin-ai-failed-ts-v4";
-const LEGACY_LS_KEYS = ["trashbin-ai-results", "trashbin-ai-failed-ts", "trashbin-ai-results-v2", "trashbin-ai-failed-ts-v2", "trashbin-ai-results-v3", "trashbin-ai-failed-ts-v3"];
+const LS_KEY = "trashbin-ai-results-v6";
+const LS_FAILED_TS = "trashbin-ai-failed-ts-v6";
+const LEGACY_LS_KEYS = ["trashbin-ai-results", "trashbin-ai-failed-ts", "trashbin-ai-results-v2", "trashbin-ai-failed-ts-v2", "trashbin-ai-results-v3", "trashbin-ai-failed-ts-v3", "trashbin-ai-results-v4", "trashbin-ai-failed-ts-v4", "trashbin-ai-artist-hits", "trashbin-ai-results-v5", "trashbin-ai-failed-ts-v5"];
 const FAILED_RETRY_TTL = 86_400_000; // 24 hours
 const POLL_INTERVAL = 2000;
 const AI_TRASH_THRESHOLD = 0.8;
@@ -27,8 +29,8 @@ const AI_TRASH_CONFIDENT = 0.97;
 const ARTIST_MIN_HITS = 3;
 // Suno launched Dec 2023; older releases are scored human without analysis
 const AI_ERA_START_YEAR = 2023;
-const LS_ARTIST_HITS = "trashbin-ai-artist-hits";
-const MAX_RETRIES = 2;
+const LS_ARTIST_HITS = "trashbin-ai-artist-hits-v2";
+const MAX_RETRIES = 4;
 
 interface BlocklistEntry {
   spotify: string;
@@ -272,6 +274,15 @@ export const useAiStore = create<AiState>((set, get) => ({
         return;
       }
 
+      // an artist with releases from before AI song generators is an established human act
+      const debut = info.artists[0] ? await getArtistDebutYear(info.artists[0]) : null;
+      if (debut !== null && debut < AI_ERA_START_YEAR) {
+        console.log(`[trashbin+] ${trackLabel ?? uri}: artist releasing since ${debut}`);
+        setResult(uri, 0);
+        state.retries.delete(uri);
+        return;
+      }
+
       const probability = await classifyTrack(uri, pos, remaining, trackLabel);
       if (probability !== null) {
         setResult(uri, probability);
@@ -375,6 +386,7 @@ export const useAiStore = create<AiState>((set, get) => ({
     Spicetify.LocalStorage.remove(LS_KEY);
     Spicetify.LocalStorage.remove(LS_FAILED_TS);
     Spicetify.LocalStorage.remove(LS_ARTIST_HITS);
+    Spicetify.LocalStorage.remove(LS_ARTIST_DEBUT);
     get().queue.clear();
     set({ results: {} });
     document

@@ -69,7 +69,7 @@
   "AI_ASSETS_NOT_READY": "Tekoälymallia ei ole saatavilla",
   "AI_ASSETS_INITIALIZING": "Alustetaan mallia...",
   "SETTINGS_TRASH_AI_SONGS": "Roska-AI-kappaleet",
-  "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "Siirrä tekoälykappaleet automaattisesti roskakoriin: yksinään 97 %:sta alkaen, 80 %:sta alkaen, kun artistilla on 3 merkittyä kappaletta. Ennen vuotta 2023 julkaistuja ei merkitä koskaan.",
+  "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "Siirrä tekoälykappaleet automaattisesti roskakoriin: yksinään 97 %:sta alkaen, 80 %:sta alkaen, kun artistilla on 3 merkittyä kappaletta. Ennen vuotta 2023 julkaistuja kappaleita tai artisteja, jotka julkaisivat musiikkia jo ennen vuotta 2023, ei merkitä koskaan.",
   "DESCRIPTION_CLEAR_AI_STORAGE": "Poista kaikki tallennetut tekoälyluokittelutulokset ({{count}} kappaletta tallennettuna).",
   "ACTION_CLEAR_AI_STORAGE": "Selkeä",
   "MESSAGE_AI_STORAGE_CLEARED": "Tekoälytulokset selvitettiin",

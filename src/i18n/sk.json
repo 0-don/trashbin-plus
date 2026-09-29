@@ -69,7 +69,7 @@
   "AI_ASSETS_NOT_READY": "AI model nie je k dispozícii",
   "AI_ASSETS_INITIALIZING": "Inicializácia modelu...",
   "SETTINGS_TRASH_AI_SONGS": "Skladby umelého odpadu",
-  "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "Automaticky presúvaj skladby vytvorené AI do koša: samostatne od 97 %, od 80 %, keď má interpret 3 označené skladby. Vydania pred rokom 2023 sa nikdy neoznačujú.",
+  "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "Automaticky presúvaj skladby vytvorené AI do koša: samostatne od 97 %, od 80 %, keď má interpret 3 označené skladby. Skladby vydané pred rokom 2023 alebo od interpretov, ktorí vydávali hudbu už pred rokom 2023, sa nikdy neoznačujú.",
   "DESCRIPTION_CLEAR_AI_STORAGE": "Vymazať všetky uložené výsledky klasifikácie umelou inteligenciou (uložené {{count}} skladby).",
   "ACTION_CLEAR_AI_STORAGE": "Jasné",
   "MESSAGE_AI_STORAGE_CLEARED": "Výsledky AI boli vyčistené",

@@ -69,7 +69,7 @@
   "AI_ASSETS_NOT_READY": "AI 模型不可用",
   "AI_ASSETS_INITIALIZING": "正在初始化模型...",
   "SETTINGS_TRASH_AI_SONGS": "垃圾AI歌曲",
-  "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "自动将AI歌曲移入回收站：单首概率≥97%时直接移入；同一艺人已有3首被标记时，≥80%即移入。2023年之前发行的歌曲从不标记。",
+  "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "自动将AI歌曲移入回收站：单首概率≥97%时直接移入；同一艺人已有3首被标记时，≥80%即移入。2023年之前发行的歌曲，或2023年之前就已发行音乐的艺人的歌曲，从不标记。",
   "DESCRIPTION_CLEAR_AI_STORAGE": "清除所有已存储的AI分类结果（已存储{{count}}首歌曲）。",
   "ACTION_CLEAR_AI_STORAGE": "清晰",
   "MESSAGE_AI_STORAGE_CLEARED": "AI结果已清除",

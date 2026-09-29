@@ -69,7 +69,7 @@
   "AI_ASSETS_NOT_READY": "Model AI tidak tersedia",
   "AI_ASSETS_INITIALIZING": "Menginisialisasi model...",
   "SETTINGS_TRASH_AI_SONGS": "Lagu AI Sampah",
-  "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "Buang lagu AI ke tempat sampah secara otomatis: mulai 97% dengan sendirinya, mulai 80% setelah artis punya 3 lagu yang ditandai. Rilisan sebelum 2023 tidak pernah ditandai.",
+  "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "Buang lagu AI ke tempat sampah secara otomatis: mulai 97% dengan sendirinya, mulai 80% setelah artis punya 3 lagu yang ditandai. Lagu yang dirilis sebelum 2023, atau dari artis yang sudah merilis musik sebelum 2023, tidak pernah ditandai.",
   "DESCRIPTION_CLEAR_AI_STORAGE": "Hapus semua hasil klasifikasi AI yang tersimpan ({{count}} lagu tersimpan).",
   "ACTION_CLEAR_AI_STORAGE": "Jelas",
   "MESSAGE_AI_STORAGE_CLEARED": "Hasil AI telah dibersihkan",

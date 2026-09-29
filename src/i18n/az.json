@@ -69,7 +69,7 @@
   "AI_ASSETS_NOT_READY": "AI modeli mövcud deyil",
   "AI_ASSETS_INITIALIZING": "Model işə salınır...",
   "SETTINGS_TRASH_AI_SONGS": "Zibil İİ Mahnıları",
-  "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "Süni intellekt mahnılarını avtomatik zibil qutusuna at: təkbaşına 97%-dən, sənətçinin 3 işarələnmiş mahnısı olduqda 80%-dən. 2023-dən əvvəlki buraxılışlar heç vaxt işarələnmir.",
+  "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "Süni intellekt mahnılarını avtomatik zibil qutusuna at: təkbaşına 97%-dən, sənətçinin 3 işarələnmiş mahnısı olduqda 80%-dən. 2023-dən əvvəl çıxan mahnılar və ya 2023-dən əvvəl musiqi buraxmış sənətçilərin mahnıları heç vaxt işarələnmir.",
   "DESCRIPTION_CLEAR_AI_STORAGE": "Yadda saxlanılan bütün İA təsnifatı nəticələrini silin ({{count}} mahnı yadda saxlanılıb).",
   "ACTION_CLEAR_AI_STORAGE": "Açıq",
   "MESSAGE_AI_STORAGE_CLEARED": "İnsanlar üçün nəticələr təmizlənib",

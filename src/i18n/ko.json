@@ -69,7 +69,7 @@
   "AI_ASSETS_NOT_READY": "사용 가능한 AI 모델이 없습니다",
   "AI_ASSETS_INITIALIZING": "모델 초기화 중...",
   "SETTINGS_TRASH_AI_SONGS": "쓰레기 AI 노래",
-  "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "AI 생성 곡을 자동으로 휴지통으로 이동: 단독으로는 97% 이상, 아티스트에게 표시된 곡이 3곡 있으면 80% 이상. 2023년 이전 발매곡은 표시하지 않습니다.",
+  "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "AI 생성 곡을 자동으로 휴지통으로 이동: 단독으로는 97% 이상, 아티스트에게 표시된 곡이 3곡 있으면 80% 이상. 2023년 이전에 발매된 곡이나 2023년 이전부터 음악을 발표해 온 아티스트의 곡은 표시하지 않습니다.",
   "DESCRIPTION_CLEAR_AI_STORAGE": "저장된 모든 AI 분류 결과 지우기 ({{count}}개의 곡 저장됨).",
   "ACTION_CLEAR_AI_STORAGE": "명확함",
   "MESSAGE_AI_STORAGE_CLEARED": "AI 결과 확인됨",

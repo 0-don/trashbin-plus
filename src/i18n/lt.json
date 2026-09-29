@@ -69,7 +69,7 @@
   "AI_ASSETS_NOT_READY": "AI modelis neprieinamas",
   "AI_ASSETS_INITIALIZING": "Inicijuojamas modelis...",
   "SETTINGS_TRASH_AI_SONGS": "Šiukšlių AI dainos",
-  "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "Automatiškai perkelk DI dainas į šiukšlinę: pavienes nuo 97 %, nuo 80 %, kai atlikėjas turi 3 pažymėtas dainas. Iki 2023 m. išleistos dainos niekada nežymimos.",
+  "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "Automatiškai perkelk DI dainas į šiukšlinę: pavienes nuo 97 %, nuo 80 %, kai atlikėjas turi 3 pažymėtas dainas. Iki 2023 m. išleistos dainos arba atlikėjų, leidusių muziką dar iki 2023 m., dainos niekada nežymimos.",
   "DESCRIPTION_CLEAR_AI_STORAGE": "Išvalyti visus išsaugotus dirbtinio intelekto klasifikavimo rezultatus (išsaugota {{count}} dainų).",
   "ACTION_CLEAR_AI_STORAGE": "Aišku",
   "MESSAGE_AI_STORAGE_CLEARED": "AI rezultatai išvalyti",

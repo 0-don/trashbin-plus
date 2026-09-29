@@ -37,7 +37,7 @@ export function hexToBase62(hex: string): string {
   return result.padStart(22, "0");
 }
 
-export async function fetchMetadata(type: "track" | "artist", id: string) {
+export async function fetchMetadata(type: "track" | "artist" | "album", id: string) {
   const token = (await Spicetify.Platform.AuthorizationAPI.getState()).token
     .accessToken;
   const res = await fetch(
@@ -46,6 +46,7 @@ export async function fetchMetadata(type: "track" | "artist", id: string) {
       headers: { Accept: "application/json", Authorization: `Bearer ${token}` },
     },
   );
+  if (!res.ok) throw new Error(`metadata ${type} ${id}: ${res.status}`);
   return res.json();
 }
 

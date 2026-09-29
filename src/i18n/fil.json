@@ -69,7 +69,7 @@
   "AI_ASSETS_NOT_READY": "Hindi available ang AI model",
   "AI_ASSETS_INITIALIZING": "Ini-initialize ang modelo...",
   "SETTINGS_TRASH_AI_SONGS": "Mga Awit ng Basurang AI",
-  "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "Awtomatikong itapon ang mga kantang gawa ng AI: mula 97% nang mag-isa, mula 80% kapag may 3 na-flag na kanta ang artist. Hindi kailanman na-flag ang mga release bago ang 2023.",
+  "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "Awtomatikong itapon ang mga kantang gawa ng AI: mula 97% nang mag-isa, mula 80% kapag may 3 na-flag na kanta ang artist. Hindi kailanman na-flag ang mga kantang inilabas bago 2023, o ng mga artist na naglalabas na ng musika bago 2023.",
   "DESCRIPTION_CLEAR_AI_STORAGE": "I-clear ang lahat ng naka-imbak na resulta ng AI classification ({{count}} mga kanta ang naka-imbak).",
   "ACTION_CLEAR_AI_STORAGE": "Malinaw",
   "MESSAGE_AI_STORAGE_CLEARED": "Na-clear na ang mga resulta ng AI",

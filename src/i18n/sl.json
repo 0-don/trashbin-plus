@@ -69,7 +69,7 @@
   "AI_ASSETS_NOT_READY": "Model AI ni na voljo",
   "AI_ASSETS_INITIALIZING": "Inicializacija modela ...",
   "SETTINGS_TRASH_AI_SONGS": "Pesmi umetne neumnosti o smeteh",
-  "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "Samodejno premakni pesmi, ustvarjene z UI, v koš: samostojno od 97 %, od 80 %, ko ima izvajalec 3 označene pesmi. Izdaje pred letom 2023 se nikoli ne označijo.",
+  "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "Samodejno premakni pesmi, ustvarjene z UI, v koš: samostojno od 97 %, od 80 %, ko ima izvajalec 3 označene pesmi. Pesmi, izdane pred letom 2023, ali pesmi izvajalcev, ki so glasbo izdajali že pred letom 2023, se nikoli ne označijo.",
   "DESCRIPTION_CLEAR_AI_STORAGE": "Počisti vse shranjene rezultate razvrščanja z umetno inteligenco (shranjeno {{count}} pesmi).",
   "ACTION_CLEAR_AI_STORAGE": "Jasno",
   "MESSAGE_AI_STORAGE_CLEARED": "Rezultati umetne inteligence so bili izbrisani",
