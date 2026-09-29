@@ -40,6 +40,6 @@ Secrets live in `ai/.env` (gitignored, loaded with override by sync.py and runpo
 - Loudly MANTA is Mureka underneath, VEGA is Loudly's own (loop based). Udio audio is DRM protected, not collectable. The Suno based wrappers (TopMediai, Musicful, MusicWave, Tad AI) are Suno.
 - License status: ArtifactBench, HAIM, SONICS are CC BY-NC; scraped audio (Spotify, Deezer, Suno, ElevenLabs, Lyria, MusicGPT, Boomy) stays private.
 
-## Current best (v4, 2026-09-28)
+## Current best (v5, 2026-09-29)
 
-mn10_v4: eval AUC 0.991, 38 of 48 AI sources caught at >= 90% (threshold 0.8), Spotify humans 1% flagged. Weak: AIVA 60%, Loudly releases 53%, Boomy 73%, current Udio 76%. Open problem: 17 to 20% of FMA/Jamendo humans flagged, needs more indie human training data. Not shipped yet; the extension still runs the lofcz fakeprint + CQT CNN pair.
+mn10_v5 (`data/runs/mn10_v5.pt`, on HF): eval AUC 0.994. At threshold 0.8: Spotify humans 0%, FMA 3%, Jamendo 10%, MTG and MusicCaps 0%; Spotify AI-list songs 95%, every neural generator (Suno v2 to v6, Lyria 3/3.5, ElevenLabs v1/v2, Mureka, MiniMax, MusicGPT, Stable Audio, MusicGen, ACE-Step) 87 to 100%. Weak: AIVA 40%, Loudly releases 53%, Mubert (Echoes) 67%, Boomy 70%, current Udio 71% (loop based and MIDI rendered generators are near their ceiling). v5 changes over v4: 4x FMA and 3x MTG-Jamendo human clips, `random_eq` augmentation, human weight 1.5, mn10 batch 64 for 20 x 1000 steps. A run costs about $1.25 on a 4090. Not shipped yet; the extension still runs the lofcz fakeprint + CQT CNN pair.
