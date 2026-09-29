@@ -1,11 +1,14 @@
-// bun ai/collect/spotify.ts [train] : real Spotify previews via the client's CDP port (9225).
+// bun ai/collect/spotify.ts [train|modern] : real Spotify previews via the client's CDP port (9225).
 // Humans: related artists of well known acts, tracks released before 2022. AI: artists on the soul-over-ai list.
 // The train split goes wider (genre seeds, two hops, all remaining AI artists) and never reuses eval tracks.
+// modern: 2023+ releases by artists who already released before 2023, i.e. human music with current production.
+// Its eval artists (human_spotify_modern in spotify.json) never appear in any training file.
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "fs";
 import { join, relative } from "path";
 
 const DATA = join(import.meta.dir, "..", "data");
-const TRAIN = process.argv[2] === "train";
+const MODE = process.argv[2] ?? "eval";
+const TRAIN = MODE === "train";
 const OUT = join(DATA, TRAIN ? "spotify_train.json" : "spotify.json");
 const CLIPS = join(DATA, TRAIN ? "train" : "clips", "spotify");
 const HUMAN_SEEDS = [
@@ -29,6 +32,15 @@ const TRAIN_SEEDS = [
   "1nIUhcKHnK6iyumRyoV68C", "3dRfiJ2650SZu7GbydcHNb", "7nzSoJISlVJsn7O0yTeMOB", "47zz7sob9NUcODy0BTDvKx",
   "6liAMWkVf5LH7YR9yfFy1Y", "6FXMGgJwohJLUSr5nVlf9X", "0dmPX6ovclgOy8WWJaFEUU", "6UUrUCIZtQeOf8tC0WuzRy",
 ];
+// Current electronic, EDM, trance, phonk, trap and pop acts: the productions v5 mistook for AI
+const MODERN_SEEDS = [
+  "6ySxYu68zTsO5ghsThpGtS", "76Fca9THLWsK7026NauEUj", "1IvuqaKdjkwwTzepomiQSM", "06cVODXXiHCj0c0YrRt4vz",
+  "0SfsnGyD8FpIN4U4WCkBZ5", "60d24wfXkVzDSfLS6hyCjZ", "7vk5e3vY1uw9plTHJAMwjN", "1bj5GrcLom5gZFF5t949Xl",
+  "45eNHdiiabvmbp4erw26rg", "1Cs0zKBU1kc0i8ypK3B9ai", "69GGBxA162lTqCwzJG5jLp", "4tuJ0bMpJh08gYxL8mrNt4",
+  "7CajNmpbOovFoOoasH2HaY", "0NGAZxHanS9e0iNHpR8f2W", "5K4W6rqBFWDnAN6FQUkS6x", "0Y5tJX1MQlPlqiwlOH1tJY",
+  "4O15NlyKLIASxsJ0PrXPfz", "1URnnhqYAYcrqrcwql10ft", "6M2wZ9GZgrQXHCFfjv46we", "66CXWjxzNUsdJxJ2JdwvnR",
+];
+const MODERN_EVAL = 300;
 const AI_ARTISTS = TRAIN ? 2000 : 300;
 const HOPS = TRAIN ? 2 : 1;
 const PER_ARTIST = TRAIN ? 2 : 1;
@@ -57,6 +69,7 @@ function evaluate<T>(expression: string): Promise<T> {
 await evaluate(`(()=>{const B="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";const hex=id=>{let n=0n;for(const c of id)n=n*62n+BigInt(B.indexOf(c));return n.toString(16).padStart(32,"0")};
 window.__year=async id=>{const tok=(await Spicetify.Platform.AuthorizationAPI.getState()).token.accessToken;const r=await fetch("https://spclient.wg.spotify.com/metadata/4/track/"+hex(id)+"?market=from_token",{headers:{Accept:"application/json",Authorization:"Bearer "+tok}});return (await r.json()).album?.date?.year??null};
 window.__top=async(id,k)=>{try{const r=await Spicetify.GraphQL.Request(Spicetify.GraphQL.Definitions.queryArtistOverview,{uri:"spotify:artist:"+id,locale:"",includePrerelease:false});const a=r.data.artistUnion;const out=[];for(const x of a.discography.topTracks.items.slice(0,k)){const tid=x.track.uri.split(":")[2];out.push({id:tid,name:x.track.name,year:await window.__year(tid)})}return {artist:a.profile.name,tracks:out}}catch{return null}};
+window.__debut=async id=>{const tok=(await Spicetify.Platform.AuthorizationAPI.getState()).token.accessToken;const g=async(t,h)=>(await fetch("https://spclient.wg.spotify.com/metadata/4/"+t+"/"+h+"?market=from_token",{headers:{Accept:"application/json",Authorization:"Bearer "+tok}})).json();try{const a=await g("artist",hex(id));const ys=[];for(const k of ["album_group","single_group","compilation_group"]){const gid=a[k]?.at(-1)?.album?.[0]?.gid;if(gid){const y=(await g("album",gid)).date?.year;if(y)ys.push(y)}}return ys.length?Math.min(...ys):null}catch{return null}};
 window.__rel=async id=>{try{const r=await Spicetify.GraphQL.Request(Spicetify.GraphQL.Definitions.queryArtistRelated,{uri:"spotify:artist:"+id,locale:""});return r.data.artistUnion.relatedContent.relatedArtists.items.map(x=>x.uri.split(":")[2])}catch{return []}};return 1})()`);
 
 interface Top { artist: string; tracks: { id: string; name: string; year: number | null }[] }
@@ -71,8 +84,9 @@ const evalSet: Entry[] = TRAIN && existsSync(join(DATA, "spotify.json")) ? JSON.
 const have = new Set([...entries, ...evalSet].map((e) => e.id));
 const evalArtists = new Set(evalSet.map((e) => e.artist));
 
-async function preview(trackId: string): Promise<string | null> {
-  const file = join(CLIPS, `${trackId}.mp3`);
+async function preview(trackId: string, dir = CLIPS): Promise<string | null> {
+  mkdirSync(dir, { recursive: true });
+  const file = join(dir, `${trackId}.mp3`);
   if (existsSync(file)) return file;
   for (let attempt = 0; attempt < 4; attempt++) {
     const html = await (await fetch(`https://open.spotify.com/embed/track/${trackId}`, { headers: UA })).text();
@@ -99,20 +113,60 @@ async function take(artistId: string, label: number, source: string, keep: (t: T
   if (entries.length % 50 === 0) writeFileSync(OUT, JSON.stringify(entries, null, 1));
 }
 
-mkdirSync(CLIPS, { recursive: true });
-const artists = new Set(TRAIN ? [...HUMAN_SEEDS, ...TRAIN_SEEDS] : HUMAN_SEEDS);
-let frontier = [...artists];
-for (let hop = 0; hop < HOPS; hop++) {
-  const next: string[] = [];
-  for (const a of frontier)
-    for (const r of (await evaluate<string[]>(`window.__rel("${a}")`)).slice(0, 10))
-      if (!aiIds.has(r) && !artists.has(r)) {
-        artists.add(r);
-        next.push(r);
-      }
-  frontier = next;
+async function expand(seeds: string[], hops: number): Promise<Set<string>> {
+  const artists = new Set(seeds);
+  let frontier = [...artists];
+  for (let hop = 0; hop < hops; hop++) {
+    const next: string[] = [];
+    for (const a of frontier)
+      for (const r of (await evaluate<string[]>(`window.__rel("${a}")`)).slice(0, 10))
+        if (!aiIds.has(r) && !artists.has(r)) {
+          artists.add(r);
+          next.push(r);
+        }
+    frontier = next;
+  }
+  console.error(`${artists.size} human artists`);
+  return artists;
 }
-console.error(`${artists.size} human artists`);
+
+if (MODE === "modern") {
+  const files = { eval: join(DATA, "spotify.json"), train: join(DATA, "spotify_train.json") };
+  const sets: Record<"eval" | "train", Entry[]> = {
+    eval: JSON.parse(readFileSync(files.eval, "utf8")),
+    train: JSON.parse(readFileSync(files.train, "utf8")),
+  };
+  const seen = new Set([...sets.eval, ...sets.train].map((e) => e.id));
+  const trainArtists = new Set(sets.train.map((e) => e.artist));
+  let evalCount = sets.eval.filter((e) => e.source === "human_spotify_modern").length;
+  const save = () => (["eval", "train"] as const).forEach((k) => writeFileSync(files[k], JSON.stringify(sets[k], null, 1)));
+  for (const a of await expand([...HUMAN_SEEDS, ...TRAIN_SEEDS, ...MODERN_SEEDS], 2)) {
+    const debut = await evaluate<number | null>(`window.__debut("${a}")`);
+    if (debut === null || debut >= 2023) continue;
+    const top = await evaluate<Top | null>(`window.__top("${a}",10)`);
+    if (!top) continue;
+    // split by artist: roughly one in eight artists not already in training goes to eval, capped
+    const hash = [...a].reduce((h, c) => h + c.charCodeAt(0), 0);
+    const split = !trainArtists.has(top.artist) && evalCount < MODERN_EVAL && hash % 8 === 0 ? "eval" : "train";
+    const fresh = top.tracks.filter((t) => t.year !== null && t.year >= 2023 && !seen.has(t.id));
+    for (const t of fresh.slice(0, split === "eval" ? 1 : 3)) {
+      const file = await preview(t.id, join(DATA, split === "eval" ? "clips" : "train", "spotify"));
+      if (!file) continue;
+      sets[split].push({ id: t.id, source: "human_spotify_modern", label: 0, file: relative(DATA, file), artist: top.artist, name: t.name, year: t.year });
+      seen.add(t.id);
+      if (split === "eval") evalCount++;
+      else trainArtists.add(top.artist);
+    }
+    if (seen.size % 25 === 0) save();
+  }
+  save();
+  const n = (k: "eval" | "train") => sets[k].filter((e) => e.source === "human_spotify_modern").length;
+  console.log(`human_spotify_modern: ${n("eval")} eval, ${n("train")} train`);
+  process.exit(0);
+}
+
+mkdirSync(CLIPS, { recursive: true });
+const artists = await expand(TRAIN ? [...HUMAN_SEEDS, ...TRAIN_SEEDS] : HUMAN_SEEDS, HOPS);
 for (const a of artists) await take(a, 0, "human_spotify", (t) => t.year !== null && t.year < 2022);
 const pool = aiList.filter((a) => !a.removed && a.spotify).map((a) => a.spotify!);
 for (const a of pool.sort(() => Math.random() - 0.5).slice(0, AI_ARTISTS)) await take(a, 1, "ai_spotify_list", () => true);
