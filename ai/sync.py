@@ -19,7 +19,7 @@ from huggingface_hub import HfApi, snapshot_download
 REPO = "0don/trashbin-ai-eval-data"
 DATA = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data")
 load_dotenv(os.path.join(os.path.dirname(DATA), ".env"), override=True)
-IGNORE = ["pcm32/**", "features/**", "*account*.json", "*.token", "*.key", "**/.cache/**"]
+IGNORE = ["pcm32/**", "features/**", "*account*.json", "*.token", "*.key", ".cache/**", "**/.cache/**"]
 TRAINING = ["clips/**", "train/**", "*.json"]
 
 api = HfApi(token=os.environ["HF_TOKEN"])
