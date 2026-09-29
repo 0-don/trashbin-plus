@@ -69,7 +69,7 @@
   "AI_ASSETS_NOT_READY": "Modello AI non disponibile",
   "AI_ASSETS_INITIALIZING": "Inizializzazione del modello...",
   "SETTINGS_TRASH_AI_SONGS": "Canzoni AI spazzatura",
-  "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "Sposta automaticamente nel cestino i brani generati dall'IA: dal 97% da soli, dall'80% quando l'artista ha 3 brani segnalati. I brani usciti prima del 2023, o di artisti che pubblicavano musica già prima del 2023, non vengono mai segnalati.",
+  "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "Sposta automaticamente nel cestino i brani generati dall'IA: dal 97% da soli, dall'80% quando l'artista ha 3 brani segnalati. Le uscite precedenti al 2023 non vengono mai segnalate.",
   "DESCRIPTION_CLEAR_AI_STORAGE": "Cancella tutti i risultati di classificazione dell'AI memorizzati ({{count}} brani memorizzati).",
   "ACTION_CLEAR_AI_STORAGE": "Chiaro",
   "MESSAGE_AI_STORAGE_CLEARED": "Risultati dell'IA approvati",

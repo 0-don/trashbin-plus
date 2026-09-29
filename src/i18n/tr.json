@@ -69,7 +69,7 @@
   "AI_ASSETS_NOT_READY": "AI modeli mevcut değil",
   "AI_ASSETS_INITIALIZING": "Model başlatılıyor...",
   "SETTINGS_TRASH_AI_SONGS": "Çöp Yapay Zeka Şarkıları",
-  "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "Yapay zekâ şarkılarını otomatik olarak çöpe at: tek başına %97'den, sanatçının 3 işaretli şarkısı olduğunda %80'den itibaren. 2023'ten önce yayınlanan şarkılar ya da 2023'ten önce müzik yayınlamış sanatçıların şarkıları asla işaretlenmez.",
+  "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "Yapay zekâ şarkılarını otomatik olarak çöpe at: tek başına %97'den, sanatçının 3 işaretli şarkısı olduğunda %80'den itibaren. 2023'ten önceki yayınlar asla işaretlenmez.",
   "DESCRIPTION_CLEAR_AI_STORAGE": "Tüm saklı yapay zeka sınıflandırma sonuçlarını temizle ({{count}} şarkı saklı).",
   "ACTION_CLEAR_AI_STORAGE": "Açık",
   "MESSAGE_AI_STORAGE_CLEARED": "AI sonuçları temizlendi",

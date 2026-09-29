@@ -69,7 +69,7 @@
   "AI_ASSETS_NOT_READY": "Az AI modell nem elérhető",
   "AI_ASSETS_INITIALIZING": "Modell inicializálása...",
   "SETTINGS_TRASH_AI_SONGS": "Szemét AI dalok",
-  "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "MI-dalok automatikus kukába helyezése: önmagukban 97%-tól, 80%-tól, ha az előadónak már 3 megjelölt dala van. A 2023 előtt megjelent dalokat, illetve azoknak az előadóknak a dalait, akik már 2023 előtt is adtak ki zenét, soha nem jelöli meg.",
+  "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "MI-dalok automatikus kukába helyezése: önmagukban 97%-tól, 80%-tól, ha az előadónak már 3 megjelölt dala van. A 2023 előtti kiadásokat soha nem jelöli meg.",
   "DESCRIPTION_CLEAR_AI_STORAGE": "Az összes tárolt MI-os besorolási eredmény törlése ({{count}} dal tárolva).",
   "ACTION_CLEAR_AI_STORAGE": "Tiszta",
   "MESSAGE_AI_STORAGE_CLEARED": "Az MI eredmények törölve lettek",

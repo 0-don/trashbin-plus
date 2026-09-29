@@ -69,7 +69,7 @@
   "AI_ASSETS_NOT_READY": "AI-model ikke tilgængelig",
   "AI_ASSETS_INITIALIZING": "Initialiserer model...",
   "SETTINGS_TRASH_AI_SONGS": "Affalds-AI-sange",
-  "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "Smid automatisk AI-sange i papirkurven: fra 97 % alene, fra 80 %, når kunstneren har 3 markerede sange. Sange udgivet før 2023 eller af kunstnere, der udgav musik før 2023, markeres aldrig.",
+  "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "Smid automatisk AI-sange i papirkurven: fra 97 % alene, fra 80 %, når kunstneren har 3 markerede sange. Udgivelser fra før 2023 markeres aldrig.",
   "DESCRIPTION_CLEAR_AI_STORAGE": "Ryd alle gemte AI-klassificeringsresultater ({{count}} sange gemt).",
   "ACTION_CLEAR_AI_STORAGE": "Klar",
   "MESSAGE_AI_STORAGE_CLEARED": "AI-resultater godkendt",

@@ -69,7 +69,7 @@
   "AI_ASSETS_NOT_READY": "AI mudel pole saadaval",
   "AI_ASSETS_INITIALIZING": "Mudeli lähtestamine...",
   "SETTINGS_TRASH_AI_SONGS": "Prügi AI laulud",
-  "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "Vii tehisintellekti lood automaatselt prügikasti: üksi alates 97%, alates 80%, kui artistil on 3 märgistatud lugu. Enne 2023. aastat ilmunud lugusid või artistide lugusid, kes andsid muusikat välja juba enne 2023. aastat, ei märgistata kunagi.",
+  "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "Vii tehisintellekti lood automaatselt prügikasti: üksi alates 97%, alates 80%, kui artistil on 3 märgistatud lugu. Enne 2023. aastat ilmunud lugusid ei märgistata kunagi.",
   "DESCRIPTION_CLEAR_AI_STORAGE": "Tühjenda kõik salvestatud AI klassifitseerimise tulemused (salvestatud {{count}} laulu).",
   "ACTION_CLEAR_AI_STORAGE": "Selge",
   "MESSAGE_AI_STORAGE_CLEARED": "AI tulemused kustutatud",

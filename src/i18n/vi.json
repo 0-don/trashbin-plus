@@ -69,7 +69,7 @@
   "AI_ASSETS_NOT_READY": "Mô hình AI không khả dụng",
   "AI_ASSETS_INITIALIZING": "Khởi tạo mô hình...",
   "SETTINGS_TRASH_AI_SONGS": "Những bài hát AI rác",
-  "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "Tự động chuyển bài hát AI vào thùng rác: từ 97% khi đứng riêng, từ 80% khi nghệ sĩ đã có 3 bài bị gắn cờ. Các bài hát phát hành trước năm 2023, hoặc của nghệ sĩ đã phát hành nhạc từ trước năm 2023, không bao giờ bị gắn cờ.",
+  "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "Tự động chuyển bài hát AI vào thùng rác: từ 97% khi đứng riêng, từ 80% khi nghệ sĩ đã có 3 bài bị gắn cờ. Các bản phát hành trước năm 2023 không bao giờ bị gắn cờ.",
   "DESCRIPTION_CLEAR_AI_STORAGE": "Xóa tất cả kết quả phân loại AI đã lưu ({{count}} bài hát đã lưu).",
   "ACTION_CLEAR_AI_STORAGE": "Rõ ràng",
   "MESSAGE_AI_STORAGE_CLEARED": "Kết quả AI đã được làm rõ",

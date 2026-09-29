@@ -69,7 +69,7 @@
   "AI_ASSETS_NOT_READY": "AI líkan ekki tiltækt",
   "AI_ASSETS_INITIALIZING": "Byrja að frumstilla líkan...",
   "SETTINGS_TRASH_AI_SONGS": "Rusl AI-lög",
-  "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "Hentu gervigreindarlögum sjálfkrafa í ruslið: ein og sér frá 97%, frá 80% þegar flytjandinn á 3 merkt lög. Lög sem komu út fyrir 2023, eða frá flytjendum sem gáfu út tónlist fyrir 2023, eru aldrei merkt.",
+  "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "Hentu gervigreindarlögum sjálfkrafa í ruslið: ein og sér frá 97%, frá 80% þegar flytjandinn á 3 merkt lög. Útgáfur frá því fyrir 2023 eru aldrei merktar.",
   "DESCRIPTION_CLEAR_AI_STORAGE": "Hreinsa öll vistuð niðurstöður frá AI flokkun ({{count}} lög vistuð).",
   "ACTION_CLEAR_AI_STORAGE": "Klár",
   "MESSAGE_AI_STORAGE_CLEARED": "Niðurstöður AI hreinsuðu",

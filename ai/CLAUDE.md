@@ -25,13 +25,13 @@ Secrets live in `ai/.env` (gitignored, loaded with override by sync.py and runpo
 2. `uv run collect/datasets.py --only <source>` (eval: first 30 of a seeded shuffle) and `uv run collect/datasets.py --split train --n 600 --only <source>` (the next n).
 3. `uv run sync.py push` (only new files go up), `uv run sync.py status` must show 0 missing.
 4. Commit and push the code: the pod clones GitHub main.
-5. `uv run train/runpod.py v6 --wait` (about $1.50 on a 4090, results land in `data/runs/` and `data/mn*_v6.log`).
+5. `uv run train/runpod.py v7 --wait` (about $1.25, results land in `data/runs/` and `data/mn*_v7.log`).
 6. Compare the per-source table with the previous version. Spot check a new source first with `train/probe.py`.
 
 ## Rules learned the hard way
 
 - Every clip must look like a Spotify preview: 96kbps 44.1kHz stereo MP3, at most 30s, cut from 30% into the song (`to_preview`). Otherwise the model learns the encoding, not the generator.
-- Humans must come from several sources (Spotify pre 2022, FMA, MTG-Jamendo, MusicCaps). With Spotify-only humans the model learned "not a mastered Spotify release = AI" and flagged 47% of Jamendo.
+- Humans must come from several sources (Spotify pre 2022, Spotify 2023+ by established artists, FMA, MTG-Jamendo, MusicCaps). With Spotify-only humans the model learned "not a mastered Spotify release = AI" and flagged 47% of Jamendo. Without 2023+ humans it learned "modern production = AI" and flagged 20 of 118 recent Cosmic Gate tracks.
 - Eval and train never share tracks or artists; eval is the first 30 per source, train the rest.
 - Pod container RAM is 31GB, decoded audio is 36GB: `load_pcm` memory-maps `.npy` files, never load them eagerly.
 - Python 3.14 defaults to forkserver: the decode pool uses `get_context("fork")`.
@@ -40,6 +40,6 @@ Secrets live in `ai/.env` (gitignored, loaded with override by sync.py and runpo
 - Loudly MANTA is Mureka underneath, VEGA is Loudly's own (loop based). Udio audio is DRM protected, not collectable. The Suno based wrappers (TopMediai, Musicful, MusicWave, Tad AI) are Suno.
 - License status: ArtifactBench, HAIM, SONICS are CC BY-NC; scraped audio (Spotify, Deezer, Suno, ElevenLabs, Lyria, MusicGPT, Boomy) stays private.
 
-## Current best (v5, 2026-09-29)
+## Current best (v6, 2026-09-29)
 
-mn10_v5 (`data/runs/mn10_v5.pt`, on HF): eval AUC 0.994. At threshold 0.8: Spotify humans 0%, FMA 3%, Jamendo 10%, MTG and MusicCaps 0%; Spotify AI-list songs 95%, every neural generator (Suno v2 to v6, Lyria 3/3.5, ElevenLabs v1/v2, Mureka, MiniMax, MusicGPT, Stable Audio, MusicGen, ACE-Step) 87 to 100%. Weak: AIVA 40%, Loudly releases 53%, Mubert (Echoes) 67%, Boomy 70%, current Udio 71% (loop based and MIDI rendered generators are near their ceiling). v5 changes over v4: 4x FMA and 3x MTG-Jamendo human clips, `random_eq` augmentation, human weight 1.5, mn10 batch 64 for 20 x 1000 steps. A run costs about $1.25 on a 4090. Shipped in the extension as `detector-mn10-v5.onnx` from the public HF repo 0don/trashbin-plus-ai (a new version ships under a new file name; bump `MODEL_ASSET` in src/lib/ai-engine.ts and the result cache key in src/store/ai-store.ts).
+mn10_v6 (`data/runs/mn10_v6.pt`, on HF): eval AUC 0.993. v6 adds 2,392 train clips of `human_spotify_modern` (2023+ releases by artists who debuted before 2023, 1,046 artists, disjoint from the 300 track eval set); everything else as v5. At threshold 0.8: modern Spotify humans 1% (v5: 6%), Spotify humans 0%, FMA 3%, Jamendo 7%, MTG and MusicCaps 0%; Spotify AI-list songs 94%, 38 of 48 AI sources at 90% or more (v5: 36). Weak: AIVA 50%, Boomy 67%, Mubert (Echoes) 70%, current Udio 76%, Stable Audio 3 78 to 83%. Whole 2023+ Cosmic Gate catalog (118 tracks, `data/probe_cg.json`): 2 at 0.8 (v5: 20), 0 at 0.97. The extension has no artist debut rule anymore, only the pre 2023 release date skip. A run costs about $1.25 on a 4090 or an L40 (runpod.py falls back through a GPU list). Shipped as `detector-mn10-v6.onnx` from the public HF repo 0don/trashbin-plus-ai (a new version ships under a new file name; bump `MODEL_ASSET` in src/lib/ai-engine.ts and the result cache key in src/store/ai-store.ts).

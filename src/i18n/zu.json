@@ -69,7 +69,7 @@
   "AI_ASSETS_NOT_READY": "Imodeli ye-AI ayitholakala",
   "AI_ASSETS_INITIALIZING": "Iqalela imodeli...",
   "SETTINGS_TRASH_AI_SONGS": "Izindima ze-AI Zengcwele",
-  "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "Faka izingoma ze-AI kudoti ngokuzenzakalelayo: kusukela ku-97% zodwa, kusukela ku-80% uma umculi esenezingoma ezi-3 ezimakiwe. Izingoma ezikhishwe ngaphambi kuka-2023, noma ezabaculi abakhipha umculo ngaphambi kuka-2023, azimakwa neze.",
+  "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "Faka izingoma ze-AI kudoti ngokuzenzakalelayo: kusukela ku-97% zodwa, kusukela ku-80% uma umculi esenezingoma ezi-3 ezimakiwe. Okukhishwe ngaphambi kuka-2023 akumakwa neze.",
   "DESCRIPTION_CLEAR_AI_STORAGE": "Sula wonke amaphethelo akugciniwe kwi-AI (izindima ezingu-{{count}} zicinwe).",
   "ACTION_CLEAR_AI_STORAGE": "Vula",
   "MESSAGE_AI_STORAGE_CLEARED": "Iziphawu ze-AI zacaciswe",

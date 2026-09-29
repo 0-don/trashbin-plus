@@ -69,7 +69,7 @@
   "AI_ASSETS_NOT_READY": "AI eredua ez dago eskuragarri",
   "AI_ASSETS_INITIALIZING": "Eredua abiarazten...",
   "SETTINGS_TRASH_AI_SONGS": "Ikezpenen abestiak",
-  "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "Bota automatikoki AI abestiak zakarrontzira: bakarrik % 97tik aurrera, % 80tik aurrera artistak 3 abesti markatu dituenean. 2023 aurretik argitaratutako abestiak, edo 2023 aurretik musika argitaratzen zuten artistenak, ez dira inoiz markatzen.",
+  "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "Bota automatikoki AI abestiak zakarrontzira: bakarrik % 97tik aurrera, % 80tik aurrera artistak 3 abesti markatu dituenean. 2023 aurreko argitalpenak ez dira inoiz markatzen.",
   "DESCRIPTION_CLEAR_AI_STORAGE": "Ezabatu gorde diren AI sailkapen emaitzak ({{count}} abesti gorde daude).",
   "ACTION_CLEAR_AI_STORAGE": "Garbi",
   "MESSAGE_AI_STORAGE_CLEARED": "AI emaitzek ezabatu dituzte",

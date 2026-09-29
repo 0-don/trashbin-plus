@@ -69,7 +69,7 @@
   "AI_ASSETS_NOT_READY": "AI model not available",
   "AI_ASSETS_INITIALIZING": "Initializing model...",
   "SETTINGS_TRASH_AI_SONGS": "Trash AI Songs",
-  "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "Automatically trash AI songs: at 97% or more on their own, from 80% once the artist has 3 flagged songs. Songs released before 2023, or by artists who released music before 2023, are never flagged.",
+  "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "Automatically trash AI songs: at 97% or more on their own, from 80% once the artist has 3 flagged songs. Releases from before 2023 are never flagged.",
   "DESCRIPTION_CLEAR_AI_STORAGE": "Clear all stored AI classification results ({{count}} songs stored).",
   "ACTION_CLEAR_AI_STORAGE": "Clear",
   "MESSAGE_AI_STORAGE_CLEARED": "AI results cleared",

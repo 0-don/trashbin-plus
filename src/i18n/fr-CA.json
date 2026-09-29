@@ -69,7 +69,7 @@
   "AI_ASSETS_NOT_READY": "Modèle d'IA non disponible",
   "AI_ASSETS_INITIALIZING": "Initialisation du modèle...",
   "SETTINGS_TRASH_AI_SONGS": "Chansons d'IA de mauvaise qualité",
-  "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "Mettre automatiquement à la corbeille les chansons générées par IA : dès 97 % à elles seules, dès 80 % lorsque l'artiste a 3 chansons signalées. Les chansons parues avant 2023, ou d'artistes qui publiaient déjà de la musique avant 2023, ne sont jamais signalées.",
+  "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "Mettre automatiquement à la corbeille les chansons générées par IA : dès 97 % à elles seules, dès 80 % lorsque l'artiste a 3 chansons signalées. Les parutions d'avant 2023 ne sont jamais signalées.",
   "DESCRIPTION_CLEAR_AI_STORAGE": "Effacer tous les résultats de classification par IA ({{count}} chansons stockées).",
   "ACTION_CLEAR_AI_STORAGE": "Clair",
   "MESSAGE_AI_STORAGE_CLEARED": "Les résultats d'IA ont été effacés",

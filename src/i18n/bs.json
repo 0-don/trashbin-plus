@@ -69,7 +69,7 @@
   "AI_ASSETS_NOT_READY": "AI model nije dostupan",
   "AI_ASSETS_INITIALIZING": "Pokretanje modela...",
   "SETTINGS_TRASH_AI_SONGS": "Pjesme Trash AI",
-  "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "Automatski baci AI pjesme u smeće: samostalno od 97%, od 80% čim izvođač ima 3 označene pjesme. Pjesme objavljene prije 2023. ili pjesme izvođača koji su objavljivali muziku prije 2023. nikad se ne označavaju.",
+  "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "Automatski baci AI pjesme u smeće: samostalno od 97%, od 80% čim izvođač ima 3 označene pjesme. Izdanja prije 2023. nikad se ne označavaju.",
   "DESCRIPTION_CLEAR_AI_STORAGE": "Obriši sve spremljene rezultate klasifikacije AI-a ({{count}} pjesama spremljeno).",
   "ACTION_CLEAR_AI_STORAGE": "Jasno",
   "MESSAGE_AI_STORAGE_CLEARED": "Rezultati AI su očišćeni",

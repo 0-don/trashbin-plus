@@ -69,7 +69,7 @@
   "AI_ASSETS_NOT_READY": "KI-Modell nicht verfügbar",
   "AI_ASSETS_INITIALIZING": "Modell wird initialisiert...",
   "SETTINGS_TRASH_AI_SONGS": "Müll-KI-Lieder",
-  "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "KI-Songs automatisch in den Papierkorb: ab 97 % für sich allein, ab 80 %, sobald der Künstler 3 markierte Songs hat. Songs, die vor 2023 erschienen sind oder von Künstlern stammen, die schon vor 2023 Musik veröffentlicht haben, werden nie markiert.",
+  "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "KI-Songs automatisch in den Papierkorb: ab 97 % für sich allein, ab 80 %, sobald der Künstler 3 markierte Songs hat. Veröffentlichungen vor 2023 werden nie markiert.",
   "DESCRIPTION_CLEAR_AI_STORAGE": "Alle gespeicherten KI-Klassifizierungsergebnisse löschen ({{count}} gespeicherte Songs).",
   "ACTION_CLEAR_AI_STORAGE": "Klar",
   "MESSAGE_AI_STORAGE_CLEARED": "KI-Ergebnisse gelöscht",

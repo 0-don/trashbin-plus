@@ -9,9 +9,9 @@ import { fetchMetadata, hexToBase62 } from "./metadata-utils";
 const WASM_BINARY = `ort-wasm-simd-threaded-${ORT_VERSION}.wasm`;
 const WASM_URL = `https://cdn.jsdelivr.net/npm/onnxruntime-web@${ORT_VERSION}/dist/ort-wasm-simd-threaded.wasm`;
 // trained in ai/, a new version ships under a new file name so old installs keep theirs
-const MODEL_ASSET = "detector-mn10-v5.onnx";
+const MODEL_ASSET = "detector-mn10-v6.onnx";
 const MODEL_URL = `https://huggingface.co/0don/trashbin-plus-ai/resolve/main/${MODEL_ASSET}`;
-const MODEL_LABEL = "AI detector v5";
+const MODEL_LABEL = "AI detector v6";
 const STORE_NAME = "assets";
 const LEGACY_VERSION_KEY = "trashbin-ai-assets-version";
 const CORS_PROXY = "https://cors-proxy.spicetify.app";
@@ -237,31 +237,6 @@ export async function getTrackInfo(trackUri: string): Promise<TrackInfo> {
     ? data.artist.filter((a: { gid?: string }) => a.gid).map((a: { gid: string }) => hexToBase62(a.gid))
     : [];
   return { artists, year: data.album?.date?.year ?? null };
-}
-
-export const LS_ARTIST_DEBUT = "trashbin-ai-artist-debut";
-
-// Year of the artist's oldest release. Groups list newest first, so the last entry of each is the oldest.
-export async function getArtistDebutYear(artistId: string): Promise<number | null> {
-  let cache: Record<string, number> = {};
-  try {
-    cache = JSON.parse(Spicetify.LocalStorage.get(LS_ARTIST_DEBUT) ?? "{}");
-  } catch {
-    /* corrupt */
-  }
-  if (cache[artistId] !== undefined) return cache[artistId];
-  const artist = await fetchMetadata("artist", artistId);
-  const oldest: string[] = ["album_group", "single_group", "compilation_group"]
-    .map((g) => artist[g]?.at(-1)?.album?.[0]?.gid)
-    .filter((gid): gid is string => typeof gid === "string");
-  const years = await Promise.all(
-    oldest.map(async (gid) => (await fetchMetadata("album", hexToBase62(gid))).date?.year),
-  );
-  const known = years.filter((y): y is number => typeof y === "number");
-  if (!known.length) return null;
-  cache[artistId] = Math.min(...known);
-  Spicetify.LocalStorage.set(LS_ARTIST_DEBUT, JSON.stringify(cache));
-  return cache[artistId];
 }
 
 async function fetchPreviewUrl(trackUri: string): Promise<string | null> {

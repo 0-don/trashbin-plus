@@ -69,7 +69,7 @@
   "AI_ASSETS_NOT_READY": "Modelo de IA non dispoñible",
   "AI_ASSETS_INITIALIZING": "Iniciando modelo...",
   "SETTINGS_TRASH_AI_SONGS": "Cancións de IA de lixo",
-  "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "Envía automaticamente ao lixo as cancións de IA: desde o 97 % por si soas, desde o 80 % cando o artista xa ten 3 cancións marcadas. As cancións publicadas antes de 2023, ou de artistas que xa publicaban música antes de 2023, nunca se marcan.",
+  "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "Envía automaticamente ao lixo as cancións de IA: desde o 97 % por si soas, desde o 80 % cando o artista xa ten 3 cancións marcadas. Os lanzamentos anteriores a 2023 nunca se marcan.",
   "DESCRIPTION_CLEAR_AI_STORAGE": "Limpar todos os resultados gardados da clasificación de IA ({{count}} cancións gardadas).",
   "ACTION_CLEAR_AI_STORAGE": "Claro",
   "MESSAGE_AI_STORAGE_CLEARED": "Os resultados da IA foron limpos",
