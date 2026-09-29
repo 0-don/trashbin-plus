@@ -90,6 +90,16 @@ def crop(pcm, start):
     return out
 
 
+def speed_crop(pcm, rate):
+    # resampled like slowed / sped up / nightcore uploads: tempo and pitch move together
+    n = int(WIN * rate)
+    start = random.randint(0, max(0, len(pcm) - n))
+    seg = pcm[start : start + n].astype(np.float32) / 32768
+    if len(seg) < 2:
+        return crop(pcm, 0)
+    return np.interp(np.arange(WIN) * rate, np.arange(len(seg)), seg, right=0).astype(np.float32)
+
+
 class Detector(nn.Module):
     def __init__(self, arch):
         super().__init__()
@@ -116,6 +126,22 @@ def random_eq(x):
     db = db - (torch.rand(b, 1, device=dev) < 0.3) * 24 * torch.relu(octave - torch.log2(r(4, 14)))
     db = db - (torch.rand(b, 1, device=dev) < 0.3) * 24 * torch.relu(torch.log2(r(0.04, 0.3)) - octave)
     return torch.fft.irfft(X * 10 ** (db / 20), n=x.shape[-1])
+
+
+def random_reverb(x, p=0.25):
+    # exponential noise tail, the "slowed + reverb" sound
+    b, n = x.shape
+    dev = x.device
+    ir_len = SR * 2
+    t = torch.arange(ir_len, device=dev) / SR
+    decay = torch.rand(b, 1, device=dev) * 1.7 + 0.3
+    ir = torch.randn(b, ir_len, device=dev) * torch.exp(-6.9 * t / decay)
+    ir[:, 0] = 0
+    ir = ir / ir.norm(dim=1, keepdim=True)
+    wet = torch.fft.irfft(torch.fft.rfft(x, n + ir_len) * torch.fft.rfft(ir, n + ir_len), n + ir_len)[:, :n]
+    mix = (torch.rand(b, 1, device=dev) < p) * (torch.rand(b, 1, device=dev) * 0.5 + 0.2)
+    out = x + mix * wet
+    return out * (x.abs().amax(1, keepdim=True) / out.abs().amax(1, keepdim=True).clamp_min(1e-6))
 
 
 @torch.no_grad()
@@ -195,11 +221,13 @@ def main():
             xs, ys = [], []
             for i in pick:
                 c, pcm = train[i]
-                start = random.randint(0, max(0, len(pcm) - WIN))
                 gain = 10 ** (random.uniform(-12, 6) / 20)
-                xs.append(crop(pcm, start) * gain)
+                if random.random() < 0.35:
+                    xs.append(speed_crop(pcm, random.uniform(0.65, 1.3)) * gain)
+                else:
+                    xs.append(crop(pcm, random.randint(0, max(0, len(pcm) - WIN))) * gain)
                 ys.append(c["label"])
-            x = random_eq(torch.from_numpy(np.stack(xs)).to(device))
+            x = random_eq(random_reverb(torch.from_numpy(np.stack(xs)).to(device)))
             y = torch.tensor(ys, dtype=torch.float32, device=device)
             opt.zero_grad()
             loss = loss_fn(model(x), y)
