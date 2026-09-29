@@ -64,6 +64,7 @@
   "SETTINGS_AI_DETECTION_ENABLED": "AI Abesti Detekzioa",
   "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Detektatu adimen artifizialak sortutako abestiak zure gailuan eta erakutsi probabilitate-adierazle bat.",
   "AI_ASSETS_DOWNLOADING_WASM": "WASM exekuzio-garbia deskargatzen...",
+  "AI_ASSETS_DOWNLOADING_MODEL": "{{model}} deskargatzen...",
   "AI_ASSETS_READY": "AI eredua prest dago",
   "AI_ASSETS_NOT_READY": "AI eredua ez dago eskuragarri",
   "AI_ASSETS_INITIALIZING": "Eredua abiarazten...",

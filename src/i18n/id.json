@@ -64,6 +64,7 @@
   "SETTINGS_AI_DETECTION_ENABLED": "Deteksi Lagu AI",
   "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Deteksi lagu buatan AI di perangkat Anda dan tampilkan indikator probabilitas.",
   "AI_ASSETS_DOWNLOADING_WASM": "Mengunduh runtime WASM...",
+  "AI_ASSETS_DOWNLOADING_MODEL": "Mengunduh {{model}}...",
   "AI_ASSETS_READY": "Model AI siap",
   "AI_ASSETS_NOT_READY": "Model AI tidak tersedia",
   "AI_ASSETS_INITIALIZING": "Menginisialisasi model...",

@@ -64,6 +64,7 @@
   "SETTINGS_AI_DETECTION_ENABLED": "AI-sangsgenkendelse",
   "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Registrer AI-genererede sange på din enhed og vis en sandsynlighedsindikator.",
   "AI_ASSETS_DOWNLOADING_WASM": "Downloaderer WASM-kørselsmiljø...",
+  "AI_ASSETS_DOWNLOADING_MODEL": "Downloaderer {{model}}...",
   "AI_ASSETS_READY": "AI-model klar",
   "AI_ASSETS_NOT_READY": "AI-model ikke tilgængelig",
   "AI_ASSETS_INITIALIZING": "Initialiserer model...",

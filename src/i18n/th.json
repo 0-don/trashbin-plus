@@ -64,6 +64,7 @@
   "SETTINGS_AI_DETECTION_ENABLED": "การตรวจจับเพลงด้วยปัญญาประดิษฐ์",
   "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "ตรวจจับเพลงที่สร้างด้วย AI บนอุปกรณ์ของคุณและแสดงตัวบ่งชี้ความน่าจะเป็น",
   "AI_ASSETS_DOWNLOADING_WASM": "กำลังดาวน์โหลดรันไทม์ WASM...",
+  "AI_ASSETS_DOWNLOADING_MODEL": "กำลังดาวน์โหลด {{model}}...",
   "AI_ASSETS_READY": "โมเดลปัญญาประดิษฐ์พร้อมใช้งาน",
   "AI_ASSETS_NOT_READY": "ไม่มีโมเดลปัญญาประดิษฐ์ใช้งานได้",
   "AI_ASSETS_INITIALIZING": "กำลังเริ่มต้นโมเดล...",

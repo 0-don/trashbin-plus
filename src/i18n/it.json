@@ -64,6 +64,7 @@
   "SETTINGS_AI_DETECTION_ENABLED": "Rilevamento di canzoni tramite intelligenza artificiale",
   "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Rileva i brani generati dall'IA sul tuo dispositivo e mostra un indicatore di probabilità.",
   "AI_ASSETS_DOWNLOADING_WASM": "Download del runtime WASM in corso...",
+  "AI_ASSETS_DOWNLOADING_MODEL": "Download di {{model}} in corso...",
   "AI_ASSETS_READY": "Modello AI pronto",
   "AI_ASSETS_NOT_READY": "Modello AI non disponibile",
   "AI_ASSETS_INITIALIZING": "Inizializzazione del modello...",

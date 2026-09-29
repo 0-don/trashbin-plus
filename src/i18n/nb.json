@@ -64,6 +64,7 @@
   "SETTINGS_AI_DETECTION_ENABLED": "AI-sangdeteksjon",
   "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Oppdag AI-genererte sanger på enheten din og vis en sannsynlighetsindikator.",
   "AI_ASSETS_DOWNLOADING_WASM": "Laster ned WASM-kjøretid...",
+  "AI_ASSETS_DOWNLOADING_MODEL": "Laster ned {{model}}...",
   "AI_ASSETS_READY": "AI-modell klar",
   "AI_ASSETS_NOT_READY": "AI-modell ikke tilgjengelig",
   "AI_ASSETS_INITIALIZING": "Initialiserer modell...",

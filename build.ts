@@ -82,31 +82,12 @@ const ortWorkerString: BunPlugin = {
   },
 };
 
-const aiModels: BunPlugin = {
-  name: "ai-models",
-  setup(build) {
-    build.onResolve({ filter: /^virtual:ai-models$/ }, ({ path: p }) => ({
-      path: p,
-      namespace: "ai-models",
-    }));
-    build.onLoad({ filter: /.*/, namespace: "ai-models" }, () => {
-      const b64 = (f: string) =>
-        JSON.stringify(readFileSync(resolve("models", f)).toString("base64"));
-      return {
-        contents: `export const FAKEPRINT_MODEL = ${b64("fakeprint-lr.onnx")};\nexport const CQT_CNN_MODEL = ${b64("cqt-cnn.onnx")};`,
-        loader: "js",
-      };
-    });
-  },
-};
-
 async function buildAiWorker(): Promise<string> {
   const result = await Bun.build({
     entrypoints: [resolve("src/lib/ai-worker.ts")],
     target: "browser",
     format: "iife",
     minify: minifyMode,
-    plugins: [aiModels],
   });
   if (!result.success)
     throw new AggregateError(result.logs, "ai-worker build failed");

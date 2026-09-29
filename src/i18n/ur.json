@@ -64,6 +64,7 @@
   "SETTINGS_AI_DETECTION_ENABLED": "AI گانے کا پتہ لگانا",
   "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "اپنے آلے پر AI سے بنے گانوں کا پتہ لگائیں اور امکان کا اشاریہ دکھائیں۔",
   "AI_ASSETS_DOWNLOADING_WASM": "WASM رن ٹائم ڈاؤن لوڈ ہو رہا ہے...",
+  "AI_ASSETS_DOWNLOADING_MODEL": "ڈاؤن لوڈ ہو رہا ہے {{model}}...",
   "AI_ASSETS_READY": "AI ماڈل تیار ہے",
   "AI_ASSETS_NOT_READY": "AI ماڈل دستیاب نہیں ہے",
   "AI_ASSETS_INITIALIZING": "ماڈل کو شروع کرنا...",

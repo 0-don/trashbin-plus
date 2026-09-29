@@ -64,6 +64,7 @@
   "SETTINGS_AI_DETECTION_ENABLED": "AIによる楽曲検出",
   "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "お使いのデバイス上でAI生成の楽曲を検出し、確率インジケーターを表示します。",
   "AI_ASSETS_DOWNLOADING_WASM": "WASMランタイムをダウンロード中...",
+  "AI_ASSETS_DOWNLOADING_MODEL": "{{model}}をダウンロード中...",
   "AI_ASSETS_READY": "AIモデル準備完了",
   "AI_ASSETS_NOT_READY": "AIモデルは利用できません",
   "AI_ASSETS_INITIALIZING": "モデルを初期化しています...",

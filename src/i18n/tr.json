@@ -64,6 +64,7 @@
   "SETTINGS_AI_DETECTION_ENABLED": "Yapay Zeka Şarkı Tespiti",
   "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Cihazınızda yapay zekâ ile oluşturulmuş şarkıları algılayın ve bir olasılık göstergesi gösterin.",
   "AI_ASSETS_DOWNLOADING_WASM": "WASM çalışma zamanı indiriliyor...",
+  "AI_ASSETS_DOWNLOADING_MODEL": "{{model}} indiriliyor...",
   "AI_ASSETS_READY": "AI modeli hazır",
   "AI_ASSETS_NOT_READY": "AI modeli mevcut değil",
   "AI_ASSETS_INITIALIZING": "Model başlatılıyor...",

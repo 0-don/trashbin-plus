@@ -64,6 +64,7 @@
   "SETTINGS_AI_DETECTION_ENABLED": "AI ଗୀତ ଚିହ୍ନଟ କରିବା",
   "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "ଆପଣଙ୍କ ଡିଭାଇସରେ AI ଦ୍ୱାରା ତିଆରି ଗୀତ ଚିହ୍ନଟ କରନ୍ତୁ ଏବଂ ସମ୍ଭାବନା ସୂଚକ ଦେଖାନ୍ତୁ।",
   "AI_ASSETS_DOWNLOADING_WASM": "WASM ରନଟାଇମ୍ ଡାଉନଲୋଡ୍ ହେଉଛି...",
+  "AI_ASSETS_DOWNLOADING_MODEL": "ଡାଉନଲୋଡ ହେଉଛି {{model}}...",
   "AI_ASSETS_READY": "AI ମଡେଲ୍ ପ୍ରସ୍ତୁତ ଅଛି",
   "AI_ASSETS_NOT_READY": "ଏଆଇ ମଡେଲ୍ ଉପଲବ୍ଧ ନାହିଁ",
   "AI_ASSETS_INITIALIZING": "ମଡେଲ ଆରମ୍ଭ କରାଯାଉଛି ...",

@@ -64,6 +64,7 @@
   "SETTINGS_AI_DETECTION_ENABLED": "አይአይ የሶንግ መለየት",
   "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "በመሣሪያዎ ላይ በAI የተፈጠሩ ዘፈኖችን ይለዩ እና የዕድል አመልካች ያሳዩ።",
   "AI_ASSETS_DOWNLOADING_WASM": "የWASM ሮታ ማውረድ...",
+  "AI_ASSETS_DOWNLOADING_MODEL": "ማውረጃ {{model}}...",
   "AI_ASSETS_READY": "የአይ ሞዴል ዝግጁ ነው",
   "AI_ASSETS_NOT_READY": "የአይ ሞዴል የለም",
   "AI_ASSETS_INITIALIZING": "ማዕረ መፍጠሪያ...",

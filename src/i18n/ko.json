@@ -64,6 +64,7 @@
   "SETTINGS_AI_DETECTION_ENABLED": "AI 노래 감지",
   "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "기기에서 AI가 생성한 곡을 감지하고 확률 표시기를 보여줍니다.",
   "AI_ASSETS_DOWNLOADING_WASM": "WASM 런타임을 다운로드하는 중...",
+  "AI_ASSETS_DOWNLOADING_MODEL": "{{model}}을 다운로드하는 중...",
   "AI_ASSETS_READY": "AI 모델 준비 완료",
   "AI_ASSETS_NOT_READY": "사용 가능한 AI 모델이 없습니다",
   "AI_ASSETS_INITIALIZING": "모델 초기화 중...",

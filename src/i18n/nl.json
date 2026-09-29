@@ -64,6 +64,7 @@
   "SETTINGS_AI_DETECTION_ENABLED": "AI-nummerdetectie",
   "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Detecteer door AI gegenereerde nummers op je apparaat en toon een waarschijnlijkheidsindicator.",
   "AI_ASSETS_DOWNLOADING_WASM": "WASM-runtime downloaden...",
+  "AI_ASSETS_DOWNLOADING_MODEL": "{{model}} downloaden...",
   "AI_ASSETS_READY": "AI-model gereed",
   "AI_ASSETS_NOT_READY": "AI-model niet beschikbaar",
   "AI_ASSETS_INITIALIZING": "Model initialiseren...",

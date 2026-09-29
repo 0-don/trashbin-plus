@@ -64,6 +64,7 @@
   "SETTINGS_AI_DETECTION_ENABLED": "AI Mahnı Aşkarlama",
   "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Cihazınızda süni intellektlə yaradılmış mahnıları aşkar edin və ehtimal göstəricisini göstərin.",
   "AI_ASSETS_DOWNLOADING_WASM": "WASM runtime yüklənir...",
+  "AI_ASSETS_DOWNLOADING_MODEL": "Yüklənir {{model}}...",
   "AI_ASSETS_READY": "İİ modeli hazırdır",
   "AI_ASSETS_NOT_READY": "AI modeli mövcud deyil",
   "AI_ASSETS_INITIALIZING": "Model işə salınır...",

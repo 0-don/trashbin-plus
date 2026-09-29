@@ -64,6 +64,7 @@
   "SETTINGS_AI_DETECTION_ENABLED": "AI Song Detection",
   "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Detect AI-generated songs on your device and show a probability indicator.",
   "AI_ASSETS_DOWNLOADING_WASM": "Downloading WASM runtime...",
+  "AI_ASSETS_DOWNLOADING_MODEL": "Downloading {{model}}...",
   "AI_ASSETS_READY": "AI model ready",
   "AI_ASSETS_NOT_READY": "AI model not available",
   "AI_ASSETS_INITIALIZING": "Initializing model...",

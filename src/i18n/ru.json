@@ -64,6 +64,7 @@
   "SETTINGS_AI_DETECTION_ENABLED": "Обнаружение песен ИИ",
   "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Распознавайте песни, созданные ИИ, прямо на вашем устройстве и показывайте индикатор вероятности.",
   "AI_ASSETS_DOWNLOADING_WASM": "Загрузка среды выполнения WASM...",
+  "AI_ASSETS_DOWNLOADING_MODEL": "Загрузка {{model}}...",
   "AI_ASSETS_READY": "Модель ИИ готова",
   "AI_ASSETS_NOT_READY": "Модель ИИ недоступна",
   "AI_ASSETS_INITIALIZING": "Инициализация модели...",

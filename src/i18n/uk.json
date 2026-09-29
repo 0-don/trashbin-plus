@@ -64,6 +64,7 @@
   "SETTINGS_AI_DETECTION_ENABLED": "Виявлення пісень за допомогою штучного інтелекту",
   "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Розпізнавайте пісні, створені ШІ, просто на вашому пристрої та показуйте індикатор імовірності.",
   "AI_ASSETS_DOWNLOADING_WASM": "Завантаження середовища виконання WASM...",
+  "AI_ASSETS_DOWNLOADING_MODEL": "Завантаження {{model}}...",
   "AI_ASSETS_READY": "Модель штучного інтелекту готова",
   "AI_ASSETS_NOT_READY": "Модель ШІ недоступна",
   "AI_ASSETS_INITIALIZING": "Ініціалізація моделі...",

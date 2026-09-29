@@ -64,6 +64,7 @@
   "SETTINGS_AI_DETECTION_ENABLED": "كشف أغاني الذكاء الاصطناعي",
   "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "اكتشف الأغاني المُنشأة بالذكاء الاصطناعي على جهازك واعرض مؤشر الاحتمالية.",
   "AI_ASSETS_DOWNLOADING_WASM": "جاري تنزيل بيئة تشغيل WASM...",
+  "AI_ASSETS_DOWNLOADING_MODEL": "جاري تنزيل {{model}}...",
   "AI_ASSETS_READY": "نموذج الذكاء الاصطناعي جاهز",
   "AI_ASSETS_NOT_READY": "نموذج الذكاء الاصطناعي غير متوفر",
   "AI_ASSETS_INITIALIZING": "جاري تهيئة النموذج...",

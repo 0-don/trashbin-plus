@@ -64,6 +64,7 @@
   "SETTINGS_AI_DETECTION_ENABLED": "Detectarea cântecelor AI",
   "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Detectează melodiile generate de IA pe dispozitivul tău și afișează un indicator de probabilitate.",
   "AI_ASSETS_DOWNLOADING_WASM": "Se descarcă runtime-ul WASM...",
+  "AI_ASSETS_DOWNLOADING_MODEL": "Se descarcă {{model}}...",
   "AI_ASSETS_READY": "Model de AI pregătit",
   "AI_ASSETS_NOT_READY": "Modelul AI nu este disponibil",
   "AI_ASSETS_INITIALIZING": "Inițializare model...",

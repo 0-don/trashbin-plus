@@ -64,6 +64,7 @@
   "SETTINGS_AI_DETECTION_ENABLED": "AI-låtdetektering",
   "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Upptäck AI-genererade låtar på din enhet och visa en sannolikhetsindikator.",
   "AI_ASSETS_DOWNLOADING_WASM": "Laddar ner WASM-körning...",
+  "AI_ASSETS_DOWNLOADING_MODEL": "Laddar ner {{model}}...",
   "AI_ASSETS_READY": "AI-modell redo",
   "AI_ASSETS_NOT_READY": "AI-modell inte tillgänglig",
   "AI_ASSETS_INITIALIZING": "Initierar modell...",

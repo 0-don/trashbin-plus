@@ -64,6 +64,7 @@
   "SETTINGS_AI_DETECTION_ENABLED": "कृत्रिम बुद्धिमत्ता गीत पत्ता लगाउने",
   "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "आफ्नो उपकरणमा AI ले बनाएका गीतहरू पत्ता लगाउनुहोस् र सम्भाव्यता सूचक देखाउनुहोस्।",
   "AI_ASSETS_DOWNLOADING_WASM": "WASM रनटाइम डाउनलोड गर्दै ...",
+  "AI_ASSETS_DOWNLOADING_MODEL": "{{model}} डाउनलोड गर्दै ...",
   "AI_ASSETS_READY": "एआई मोडेल तयार छ",
   "AI_ASSETS_NOT_READY": "उपलब्ध एआई मोडेल छैन",
   "AI_ASSETS_INITIALIZING": "मोडेल सुरु गर्दै ...",

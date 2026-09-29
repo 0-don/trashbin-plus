@@ -64,6 +64,7 @@
   "SETTINGS_AI_DETECTION_ENABLED": "Pagtuklas sa Kanta ng AI",
   "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Tuklasin ang mga kantang gawa ng AI sa iyong device at magpakita ng indicator ng probabilidad.",
   "AI_ASSETS_DOWNLOADING_WASM": "Nagdo-download ng WASM runtime...",
+  "AI_ASSETS_DOWNLOADING_MODEL": "Nagdo-download ng {{model}}...",
   "AI_ASSETS_READY": "Handa na ang modelo ng AI",
   "AI_ASSETS_NOT_READY": "Hindi available ang AI model",
   "AI_ASSETS_INITIALIZING": "Ini-initialize ang modelo...",

@@ -64,6 +64,7 @@
   "SETTINGS_AI_DETECTION_ENABLED": "AI dalfelismerés",
   "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Ismerd fel a mesterséges intelligenciával készült dalokat a saját eszközödön, és jeleníts meg valószínűségi jelzőt.",
   "AI_ASSETS_DOWNLOADING_WASM": "A WASM futtatókörnyezet letöltése...",
+  "AI_ASSETS_DOWNLOADING_MODEL": "Letöltés: {{model}}...",
   "AI_ASSETS_READY": "AI modell kész",
   "AI_ASSETS_NOT_READY": "Az AI modell nem elérhető",
   "AI_ASSETS_INITIALIZING": "Modell inicializálása...",

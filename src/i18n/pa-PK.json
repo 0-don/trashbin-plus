@@ -64,6 +64,7 @@
   "SETTINGS_AI_DETECTION_ENABLED": "AI گانا شناخت",
   "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "اپنے ڈیوائس اُتے AI نال بنے گاݨیاں دا پتہ لاؤ تے امکان دا اشارہ وکھاؤ۔",
   "AI_ASSETS_DOWNLOADING_WASM": "WASM رن ٹائم ڈاؤن لوڈ ہو رہیا اے...",
+  "AI_ASSETS_DOWNLOADING_MODEL": "{{model}} ڈاؤن لوڈ ہو رہیا اے...",
   "AI_ASSETS_READY": "AI ماڈل تیار ہے",
   "AI_ASSETS_NOT_READY": "اي آئی ماڈل دستیاب نہیں ہے",
   "AI_ASSETS_INITIALIZING": "مڈل شروع کر رہیا اے...",

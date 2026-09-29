@@ -3,14 +3,18 @@ import { ORT_VERSION, ORT_WASM_CODE } from "virtual:ort-worker-wasm";
 import { i18n } from "../components/providers/providers";
 import { useAiStore } from "../store/ai-store";
 import type { WorkerRequest, WorkerResponse } from "./ai-worker";
+import { AI_SAMPLE_RATE } from "./constants";
 import { fetchMetadata, hexToBase62 } from "./metadata-utils";
 
 const WASM_BINARY = `ort-wasm-simd-threaded-${ORT_VERSION}.wasm`;
 const WASM_URL = `https://cdn.jsdelivr.net/npm/onnxruntime-web@${ORT_VERSION}/dist/ort-wasm-simd-threaded.wasm`;
+// trained in ai/, a new version ships under a new file name so old installs keep theirs
+const MODEL_ASSET = "detector-mn10-v5.onnx";
+const MODEL_URL = `https://huggingface.co/0don/trashbin-plus-ai/resolve/main/${MODEL_ASSET}`;
+const MODEL_LABEL = "AI detector v5";
 const STORE_NAME = "assets";
 const LEGACY_VERSION_KEY = "trashbin-ai-assets-version";
 const CORS_PROXY = "https://cors-proxy.spicetify.app";
-const SAMPLE_RATE = 16000;
 
 // ── IndexedDB helpers ─────────────────────────────────────────────
 
@@ -61,7 +65,7 @@ async function idbPut(name: string, data: ArrayBuffer): Promise<void> {
   });
 }
 
-// Drops older ORT runtimes and the retired 85MB SONICS model
+// Drops older ORT runtimes and models, including the retired 85MB SONICS model
 async function deleteStaleAssets(): Promise<void> {
   const db = await getDB();
   const store = db
@@ -70,7 +74,8 @@ async function deleteStaleAssets(): Promise<void> {
   const req = store.getAllKeys();
   await new Promise<void>((resolve, reject) => {
     req.onsuccess = () => {
-      for (const key of req.result) if (key !== WASM_BINARY) store.delete(key);
+      for (const key of req.result)
+        if (key !== WASM_BINARY && key !== MODEL_ASSET) store.delete(key);
       resolve();
     };
     req.onerror = () => reject(req.error);
@@ -84,15 +89,22 @@ function setProgress(message: string | null): void {
   useAiStore.setState({ progress: message });
 }
 
+async function download(name: string, url: string, progress: string) {
+  if (await idbGet(name)) return;
+  setProgress(progress);
+  const response = await fetch(url);
+  if (!response.ok) throw new Error(`Failed to download ${url}: ${response.status}`);
+  await idbPut(name, await response.arrayBuffer());
+}
+
 export async function ensureAssets(): Promise<boolean> {
   try {
-    if (!(await idbGet(WASM_BINARY))) {
-      setProgress(i18n.t("AI_ASSETS_DOWNLOADING_WASM"));
-      const response = await fetch(WASM_URL);
-      if (!response.ok)
-        throw new Error(`Failed to download ${WASM_URL}: ${response.status}`);
-      await idbPut(WASM_BINARY, await response.arrayBuffer());
-    }
+    await download(WASM_BINARY, WASM_URL, i18n.t("AI_ASSETS_DOWNLOADING_WASM"));
+    await download(
+      MODEL_ASSET,
+      MODEL_URL,
+      i18n.t("AI_ASSETS_DOWNLOADING_MODEL", { model: MODEL_LABEL }),
+    );
     await deleteStaleAssets();
     return true;
   } catch (error) {
@@ -117,8 +129,8 @@ function post(target: Worker, msg: WorkerRequest, transfer: Transferable[] = [])
 
 export async function initEngine(): Promise<boolean> {
   try {
-    const wasm = await idbGet(WASM_BINARY);
-    if (!wasm) return false;
+    const [wasm, model] = await Promise.all([idbGet(WASM_BINARY), idbGet(MODEL_ASSET)]);
+    if (!wasm || !model) return false;
 
     const script = ORT_WASM_CODE + "\n" + AI_WORKER_CODE;
     const blob = new Blob([script], { type: "application/javascript" });
@@ -141,7 +153,7 @@ export async function initEngine(): Promise<boolean> {
           resolve(msg.type === "init-done");
         }
       };
-      post(w, { type: "init", wasm }, [wasm]);
+      post(w, { type: "init", wasm, model }, [wasm, model]);
     });
 
     if (ok) {
@@ -197,7 +209,7 @@ let audioCtx: AudioContext | null = null;
 
 function getAudioCtx(): AudioContext {
   if (!audioCtx || audioCtx.state === "closed")
-    audioCtx = new AudioContext({ sampleRate: SAMPLE_RATE });
+    audioCtx = new AudioContext({ sampleRate: AI_SAMPLE_RATE });
   return audioCtx;
 }
 

@@ -64,6 +64,7 @@
   "SETTINGS_AI_DETECTION_ENABLED": "Onesha Wimbo wa AI",
   "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Tambua nyimbo zilizotengenezwa na AI kwenye kifaa chako na uonyeshe kiashiria cha uwezekano.",
   "AI_ASSETS_DOWNLOADING_WASM": "Inapakia mfumo wa WASM...",
+  "AI_ASSETS_DOWNLOADING_MODEL": "Inapakia {{model}}...",
   "AI_ASSETS_READY": "Mfano wa AI unapotosha",
   "AI_ASSETS_NOT_READY": "Mfumo wa AI hautapatikani",
   "AI_ASSETS_INITIALIZING": "Kuanzisha mfano...",

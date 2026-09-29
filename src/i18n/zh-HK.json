@@ -64,6 +64,7 @@
   "SETTINGS_AI_DETECTION_ENABLED": "AI 歌曲偵測",
   "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "在你的裝置上偵測 AI 生成的歌曲，並顯示概率指標。",
   "AI_ASSETS_DOWNLOADING_WASM": "正在下載 WASM 執行環境...",
+  "AI_ASSETS_DOWNLOADING_MODEL": "正在下載 {{model}}...",
   "AI_ASSETS_READY": "AI 模型已準備就緒",
   "AI_ASSETS_NOT_READY": "AI模型不可用",
   "AI_ASSETS_INITIALIZING": "正在初始化模型...",

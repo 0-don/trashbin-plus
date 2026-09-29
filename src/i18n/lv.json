@@ -64,6 +64,7 @@
   "SETTINGS_AI_DETECTION_ENABLED": "AI dziesmu noteikšana",
   "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Nosakiet mākslīgā intelekta radītas dziesmas savā ierīcē un rādiet varbūtības indikatoru.",
   "AI_ASSETS_DOWNLOADING_WASM": "Notiek WASM vidēs vides lejupielāde...",
+  "AI_ASSETS_DOWNLOADING_MODEL": "Notiek {{model}} lejupielāde...",
   "AI_ASSETS_READY": "AI modelis ir gatavs",
   "AI_ASSETS_NOT_READY": "AI modelis nav pieejams",
   "AI_ASSETS_INITIALIZING": "Modelis tiek inicializēts...",

@@ -64,6 +64,7 @@
   "SETTINGS_AI_DETECTION_ENABLED": "Detección de cancións de IA",
   "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Detecta cancións xeradas por IA no teu dispositivo e amosa un indicador de probabilidade.",
   "AI_ASSETS_DOWNLOADING_WASM": "Descargando o tempo de execución WASM...",
+  "AI_ASSETS_DOWNLOADING_MODEL": "Descargando {{model}}...",
   "AI_ASSETS_READY": "Modelo de IA listo",
   "AI_ASSETS_NOT_READY": "Modelo de IA non dispoñible",
   "AI_ASSETS_INITIALIZING": "Iniciando modelo...",

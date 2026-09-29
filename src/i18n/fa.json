@@ -64,6 +64,7 @@
   "SETTINGS_AI_DETECTION_ENABLED": "تشخیص آهنگ هوش مصنوعی",
   "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "آهنگ‌های ساخته‌شده با هوش مصنوعی را روی دستگاه خود شناسایی کنید و نشانگر احتمال را نمایش دهید.",
   "AI_ASSETS_DOWNLOADING_WASM": "در حال دانلود ران‌تایم WASM...",
+  "AI_ASSETS_DOWNLOADING_MODEL": "در حال دانلود {{model}}...",
   "AI_ASSETS_READY": "مدل هوش مصنوعی آماده است",
   "AI_ASSETS_NOT_READY": "مدل هوش مصنوعی موجود نیست",
   "AI_ASSETS_INITIALIZING": "در حال مقداردهی اولیه مدل...",

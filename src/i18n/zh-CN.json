@@ -64,6 +64,7 @@
   "SETTINGS_AI_DETECTION_ENABLED": "AI歌曲检测",
   "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "在你的设备上检测AI生成的歌曲，并显示概率指示器。",
   "AI_ASSETS_DOWNLOADING_WASM": "正在下载 WASM 运行时...",
+  "AI_ASSETS_DOWNLOADING_MODEL": "正在下载 {{model}}...",
   "AI_ASSETS_READY": "AI模型已准备就绪",
   "AI_ASSETS_NOT_READY": "AI 模型不可用",
   "AI_ASSETS_INITIALIZING": "正在初始化模型...",

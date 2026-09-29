@@ -8,7 +8,7 @@ Auto-skip songs and artists you don't like. A modern Spicetify extension.
 - **Context menu** - Right-click any song or artist to trash/untrash
 - **Trash buttons** - Inline trash icons in playlists, albums, and queue
 - **Playbar widget** - Quick trash button and AI probability indicator in the playback bar
-- **AI detection** - Detects AI-generated songs locally via ONNX, combining a spectral fakeprint model and a CQT cepstrum CNN from [lofcz/ai-music-detector](https://github.com/lofcz/ai-music-detector) (MIT, 1.2MB, bundled). Auto-trashes at >=97% on its own, or >=80% once an artist has 3 flagged songs; releases before 2023 are never flagged
+- **AI detection** - Detects AI-generated songs locally via ONNX with our own detector (EfficientAT MobileNet fine-tuned on 50+ generator sources, see [ai/](ai/)). The 17MB model downloads once from Hugging Face. Auto-trashes at >=97% on its own, or >=80% once an artist has 3 flagged songs; releases before 2023 are never flagged
 - **Remote control** - Double-tap play/pause from mobile to toggle skipping. Trash songs by liking them from your phone
 - **Playlist monitor** - Auto-recovers from Spotify playback glitches
 - **Auto clean queue** - Removes trashed songs from Smart Shuffle queue

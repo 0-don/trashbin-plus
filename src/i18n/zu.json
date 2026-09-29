@@ -64,6 +64,7 @@
   "SETTINGS_AI_DETECTION_ENABLED": "Ukuthola Kwe-Song ye-AI",
   "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Thola izingoma ezakhiwe yi-AI kudivayisi yakho futhi ubonise inkomba yamathuba.",
   "AI_ASSETS_DOWNLOADING_WASM": "Ukulanda imvume ye-WASM...",
+  "AI_ASSETS_DOWNLOADING_MODEL": "Iyalanda {{model}}...",
   "AI_ASSETS_READY": "IModeli ye-AI isigulile",
   "AI_ASSETS_NOT_READY": "Imodeli ye-AI ayitholakala",
   "AI_ASSETS_INITIALIZING": "Iqalela imodeli...",

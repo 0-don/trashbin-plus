@@ -16,9 +16,9 @@ const LS_BLOCKLIST_DATA = "trashbin-ai-blocklist:data";
 const LS_BLOCKLIST_TS = "trashbin-ai-blocklist:ts";
 const BLOCKLIST_TTL = 86_400_000; // 24 hours
 
-const LS_KEY = "trashbin-ai-results-v3";
-const LS_FAILED_TS = "trashbin-ai-failed-ts-v3";
-const LEGACY_LS_KEYS = ["trashbin-ai-results", "trashbin-ai-failed-ts", "trashbin-ai-results-v2", "trashbin-ai-failed-ts-v2"];
+const LS_KEY = "trashbin-ai-results-v4";
+const LS_FAILED_TS = "trashbin-ai-failed-ts-v4";
+const LEGACY_LS_KEYS = ["trashbin-ai-results", "trashbin-ai-failed-ts", "trashbin-ai-results-v2", "trashbin-ai-failed-ts-v2", "trashbin-ai-results-v3", "trashbin-ai-failed-ts-v3"];
 const FAILED_RETRY_TTL = 86_400_000; // 24 hours
 const POLL_INTERVAL = 2000;
 const AI_TRASH_THRESHOLD = 0.8;

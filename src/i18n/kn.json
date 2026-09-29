@@ -64,6 +64,7 @@
   "SETTINGS_AI_DETECTION_ENABLED": "AI ಹಾಡು ಪತ್ತೆಹಚ್ಚುವಿಕೆ",
   "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "ನಿಮ್ಮ ಸಾಧನದಲ್ಲಿ AI ರಚಿಸಿದ ಹಾಡುಗಳನ್ನು ಪತ್ತೆಹಚ್ಚಿ ಮತ್ತು ಸಂಭವನೀಯತೆ ಸೂಚಕವನ್ನು ತೋರಿಸಿ.",
   "AI_ASSETS_DOWNLOADING_WASM": "WASM ರನ್‌ಟೈಮ್ ಅನ್ನು ಡೌನ್‌ಲೋಡ್ ಮಾಡುವುದಾಗಿದೆ...",
+  "AI_ASSETS_DOWNLOADING_MODEL": "{{model}} ಡೌನ್‌ಲೋಡ್ ಮಾಡುವುದಾಗಿದೆ...",
   "AI_ASSETS_READY": "ಎಐ ಮಾದರಿ ಸಿದ್ಧವಾಗಿದೆ",
   "AI_ASSETS_NOT_READY": "ಎಐ ಮಾದರಿ ಲಭ್ಯವಿಲ್ಲ",
   "AI_ASSETS_INITIALIZING": "ಮಾದರಿಯನ್ನು ಪ್ರಾರಂಭಿಸುತ್ತಿದೆ...",

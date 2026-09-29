@@ -64,6 +64,7 @@
   "SETTINGS_AI_DETECTION_ENABLED": "Phát hiện bài hát AI",
   "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Phát hiện các bài hát do AI tạo ra ngay trên thiết bị của bạn và hiển thị chỉ báo xác suất.",
   "AI_ASSETS_DOWNLOADING_WASM": "Đang tải xuống bộ chạy WASM...",
+  "AI_ASSETS_DOWNLOADING_MODEL": "Đang tải xuống {{model}}...",
   "AI_ASSETS_READY": "Mô hình AI đã sẵn sàng",
   "AI_ASSETS_NOT_READY": "Mô hình AI không khả dụng",
   "AI_ASSETS_INITIALIZING": "Khởi tạo mô hình...",

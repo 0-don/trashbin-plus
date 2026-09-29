@@ -64,6 +64,7 @@
   "SETTINGS_AI_DETECTION_ENABLED": "एआई गीत पता लगाएमु",
   "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "अपना डिवाइस पर AI से बनल गाना पहचानीं आ संभावना सूचक देखाईं।",
   "AI_ASSETS_DOWNLOADING_WASM": "WASM रनटाइम डाउनलोड हो रहल अछि...",
+  "AI_ASSETS_DOWNLOADING_MODEL": "{{model}} डाउनलोड हो रहल अछि...",
   "AI_ASSETS_READY": "AI मॉडल तैयार हई",
   "AI_ASSETS_NOT_READY": "AI मॉडल उपलब्ध नई हई",
   "AI_ASSETS_INITIALIZING": "मॉडल के आरंभ करैत छलाम...",

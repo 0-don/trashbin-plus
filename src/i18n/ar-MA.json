@@ -64,6 +64,7 @@
   "SETTINGS_AI_DETECTION_ENABLED": "كاشفيات الأغاني بالذكاء الاصطناعي",
   "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "كاشف الأغاني اللي تصاوبات بالذكاء الاصطناعي فالجهاز ديالك وبيّن مؤشر الاحتمالية.",
   "AI_ASSETS_DOWNLOADING_WASM": "التحميل ديال الـWASM runtime...",
+  "AI_ASSETS_DOWNLOADING_MODEL": "التحميل {{model}}...",
   "AI_ASSETS_READY": "النماذج ديال الذكاء الاصطناعي جاهزة",
   "AI_ASSETS_NOT_READY": "النماذج ديال الذكاء الاصطناعي ماشي متاحة",
   "AI_ASSETS_INITIALIZING": "النماذج كيتم تهييئها...",

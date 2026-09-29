@@ -64,6 +64,7 @@
   "SETTINGS_AI_DETECTION_ENABLED": "Teoälylaulutunnistus",
   "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Tunnista tekoälyn luomat kappaleet laitteellasi ja näytä todennäköisyysilmaisin.",
   "AI_ASSETS_DOWNLOADING_WASM": "Ladataan WASM-suoritusaikaa...",
+  "AI_ASSETS_DOWNLOADING_MODEL": "Ladataan {{model}}...",
   "AI_ASSETS_READY": "Teoälymalli valmis",
   "AI_ASSETS_NOT_READY": "Tekoälymallia ei ole saatavilla",
   "AI_ASSETS_INITIALIZING": "Alustetaan mallia...",

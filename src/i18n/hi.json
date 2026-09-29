@@ -64,6 +64,7 @@
   "SETTINGS_AI_DETECTION_ENABLED": "एआई गाना पता लगाना",
   "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "अपने डिवाइस पर AI से बने गानों का पता लगाएँ और संभावना संकेतक दिखाएँ।",
   "AI_ASSETS_DOWNLOADING_WASM": "WASM रनटाइम डाउनलोड हो रहा है...",
+  "AI_ASSETS_DOWNLOADING_MODEL": "{{model}} डाउनलोड हो रहा है...",
   "AI_ASSETS_READY": "एआई मॉडल तैयार है",
   "AI_ASSETS_NOT_READY": "एआई मॉडल उपलब्ध नहीं है",
   "AI_ASSETS_INITIALIZING": "मॉडल को आरंभ कर रहे हैं...",

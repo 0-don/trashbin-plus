@@ -64,6 +64,7 @@
   "SETTINGS_AI_DETECTION_ENABLED": "এআই গান শনাক্তকরণ",
   "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "আপনার ডিভাইসে AI-নির্মিত গান শনাক্ত করুন এবং সম্ভাবনার সূচক দেখান।",
   "AI_ASSETS_DOWNLOADING_WASM": "WASM রানটাইম ডাউনলোড করা হচ্ছে...",
+  "AI_ASSETS_DOWNLOADING_MODEL": "{{model}} ডাউনলোড করা হচ্ছে...",
   "AI_ASSETS_READY": "AI মডেল প্রস্তুত",
   "AI_ASSETS_NOT_READY": "AI মডেল পাওয়া যাচ্ছে না",
   "AI_ASSETS_INITIALIZING": "মডেল চালু করা হচ্ছে...",

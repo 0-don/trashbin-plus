@@ -64,6 +64,7 @@
   "SETTINGS_AI_DETECTION_ENABLED": "זיהוי שירים באמצעות בינה מלאכותית",
   "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "זהה שירים שנוצרו באמצעות בינה מלאכותית במכשיר שלך והצג מחוון הסתברות.",
   "AI_ASSETS_DOWNLOADING_WASM": "מוריד את סביבת הרצת WASM...",
+  "AI_ASSETS_DOWNLOADING_MODEL": "מוריד {{model}}...",
   "AI_ASSETS_READY": "מודל בינה מלאכותית מוכן",
   "AI_ASSETS_NOT_READY": "מודל בינה מלאכותית אינו זמין",
   "AI_ASSETS_INITIALIZING": "מאתחל מודל...",

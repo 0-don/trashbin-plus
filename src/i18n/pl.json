@@ -64,6 +64,7 @@
   "SETTINGS_AI_DETECTION_ENABLED": "Wykrywanie piosenek AI",
   "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Wykrywaj utwory wygenerowane przez AI na swoim urządzeniu i wyświetlaj wskaźnik prawdopodobieństwa.",
   "AI_ASSETS_DOWNLOADING_WASM": "Pobieranie środowiska uruchomieniowego WASM...",
+  "AI_ASSETS_DOWNLOADING_MODEL": "Pobieranie {{model}}...",
   "AI_ASSETS_READY": "Model AI gotowy",
   "AI_ASSETS_NOT_READY": "Model AI niedostępny",
   "AI_ASSETS_INITIALIZING": "Inicjalizowanie modelu...",

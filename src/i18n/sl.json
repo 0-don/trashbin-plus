@@ -64,6 +64,7 @@
   "SETTINGS_AI_DETECTION_ENABLED": "Zaznavanje pesmi z umetno inteligenco",
   "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Zaznajte pesmi, ustvarjene z umetno inteligenco, na svoji napravi in prikažite kazalnik verjetnosti.",
   "AI_ASSETS_DOWNLOADING_WASM": "Prenašanje WASM izvajalnega okolja ...",
+  "AI_ASSETS_DOWNLOADING_MODEL": "Prenašam {{model}}...",
   "AI_ASSETS_READY": "AI model je pripravljen",
   "AI_ASSETS_NOT_READY": "Model AI ni na voljo",
   "AI_ASSETS_INITIALIZING": "Inicializacija modela ...",

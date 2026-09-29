@@ -64,6 +64,7 @@
   "SETTINGS_AI_DETECTION_ENABLED": "Детекција на песна со вештачка интелигенција",
   "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Откријте песни генерирани со вештачка интелигенција на вашиот уред и прикажете индикатор за веројатност.",
   "AI_ASSETS_DOWNLOADING_WASM": "Преземање на WASM извршна средина...",
+  "AI_ASSETS_DOWNLOADING_MODEL": "Преземање на {{model}}...",
   "AI_ASSETS_READY": "AI моделот е готов",
   "AI_ASSETS_NOT_READY": "AI моделот не е достапен",
   "AI_ASSETS_INITIALIZING": "Иницијализација на моделот...",

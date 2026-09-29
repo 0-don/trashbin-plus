@@ -64,6 +64,7 @@
   "SETTINGS_AI_DETECTION_ENABLED": "Greining á AI-lögum",
   "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Greindu lög sem gervigreind hefur búið til í tækinu þínu og sýndu líkindavísi.",
   "AI_ASSETS_DOWNLOADING_WASM": "Sæki WASM keyrsluumhverfi...",
+  "AI_ASSETS_DOWNLOADING_MODEL": "Að hala niður {{model}}...",
   "AI_ASSETS_READY": "AI líkan tilbúið",
   "AI_ASSETS_NOT_READY": "AI líkan ekki tiltækt",
   "AI_ASSETS_INITIALIZING": "Byrja að frumstilla líkan...",

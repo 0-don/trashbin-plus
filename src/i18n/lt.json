@@ -64,6 +64,7 @@
   "SETTINGS_AI_DETECTION_ENABLED": "Dirbtinio intelekto dainų aptikimas",
   "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Aptikite dirbtinio intelekto sukurtas dainas savo įrenginyje ir rodykite tikimybės indikatorių.",
   "AI_ASSETS_DOWNLOADING_WASM": "Atsiunčiamas WASM vykdymo laikas...",
+  "AI_ASSETS_DOWNLOADING_MODEL": "Atsiunčiama {{model}}...",
   "AI_ASSETS_READY": "AI modelis paruoštas",
   "AI_ASSETS_NOT_READY": "AI modelis neprieinamas",
   "AI_ASSETS_INITIALIZING": "Inicijuojamas modelis...",

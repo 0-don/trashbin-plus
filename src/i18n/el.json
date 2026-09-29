@@ -64,6 +64,7 @@
   "SETTINGS_AI_DETECTION_ENABLED": "Ανίχνευση Τραγουδιών Τεχνητής Νοημοσύνης",
   "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Εντοπίστε τραγούδια που δημιουργήθηκαν από τεχνητή νοημοσύνη στη συσκευή σας και εμφανίστε έναν δείκτη πιθανότητας.",
   "AI_ASSETS_DOWNLOADING_WASM": "Λήψη του WASM runtime...",
+  "AI_ASSETS_DOWNLOADING_MODEL": "Λήψη {{model}}...",
   "AI_ASSETS_READY": "Έτοιμο μοντέλο τεχνητής νοημοσύνης",
   "AI_ASSETS_NOT_READY": "Το μοντέλο AI δεν είναι διαθέσιμο",
   "AI_ASSETS_INITIALIZING": "Εκκίνηση μοντέλου...",

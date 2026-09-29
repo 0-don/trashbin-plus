@@ -64,6 +64,7 @@
   "SETTINGS_AI_DETECTION_ENABLED": "AI பாடல் கண்டறிதல்",
   "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "உங்கள் சாதனத்தில் AI உருவாக்கிய பாடல்களைக் கண்டறிந்து நிகழ்தகவுக் காட்டியைக் காட்டுங்கள்.",
   "AI_ASSETS_DOWNLOADING_WASM": "WASM ரன்டைமை பதிவிறக்கம் செய்தல்...",
+  "AI_ASSETS_DOWNLOADING_MODEL": "{{model}} ஐ பதிவிறக்கம் செய்கிறது...",
   "AI_ASSETS_READY": "AI மாதிரி தயாராக உள்ளது",
   "AI_ASSETS_NOT_READY": "AI மாதிரி கிடைக்கவில்லை",
   "AI_ASSETS_INITIALIZING": "மாதிரியைத் தொடங்குகிறது...",

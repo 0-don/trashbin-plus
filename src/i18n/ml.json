@@ -64,6 +64,7 @@
   "SETTINGS_AI_DETECTION_ENABLED": "എഐ പാട്ട് കണ്ടെത്തൽ",
   "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "നിങ്ങളുടെ ഉപകരണത്തിൽ AI സൃഷ്ടിച്ച ഗാനങ്ങൾ കണ്ടെത്തി സാധ്യതാ സൂചകം കാണിക്കുക.",
   "AI_ASSETS_DOWNLOADING_WASM": "WASM റൺടൈം ഡൗൺലോഡ് ചെയ്യുന്നു...",
+  "AI_ASSETS_DOWNLOADING_MODEL": "ഡൗൺലോഡ് ചെയ്യുന്നു {{model}}...",
   "AI_ASSETS_READY": "AI മോഡൽ തയ്യാറാണ്",
   "AI_ASSETS_NOT_READY": "ആർട്ടിഫിഷ്യൽ ഇന്റലിജൻസ് മോഡൽ ലഭ്യമല്ല",
   "AI_ASSETS_INITIALIZING": "മോഡൽ ആരംഭിക്കുന്നു...",

@@ -64,6 +64,7 @@
   "SETTINGS_AI_DETECTION_ENABLED": "AI laulude tuvastamine",
   "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Tuvasta tehisintellekti loodud lood otse oma seadmes ja kuva tõenäosuse näidik.",
   "AI_ASSETS_DOWNLOADING_WASM": "WASM käitusaja allalaadimine...",
+  "AI_ASSETS_DOWNLOADING_MODEL": "Laen alla {{model}}...",
   "AI_ASSETS_READY": "AI mudel on valmis",
   "AI_ASSETS_NOT_READY": "AI mudel pole saadaval",
   "AI_ASSETS_INITIALIZING": "Mudeli lähtestamine...",

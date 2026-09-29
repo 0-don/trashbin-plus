@@ -64,6 +64,7 @@
   "SETTINGS_AI_DETECTION_ENABLED": "AI పాట గుర్తింపు",
   "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "మీ పరికరంలో AI రూపొందించిన పాటలను గుర్తించి సంభావ్యత సూచికను చూపండి.",
   "AI_ASSETS_DOWNLOADING_WASM": "WASM రన్‌టైమ్ డౌన్‌లోడ్ చేస్తోంది...",
+  "AI_ASSETS_DOWNLOADING_MODEL": "{{model}} డౌన్‌లోడ్ చేస్తోంది...",
   "AI_ASSETS_READY": "AI మోడల్ సిద్ధంగా ఉంది",
   "AI_ASSETS_NOT_READY": "ఎఐ మాడల్ అందుబాటులో లేదు",
   "AI_ASSETS_INITIALIZING": "మోడల్‌ని ప్రారంభిస్తోంది...",

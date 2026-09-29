@@ -64,6 +64,7 @@
   "SETTINGS_AI_DETECTION_ENABLED": "Detekcia piesne umelou inteligenciou",
   "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Rozpoznávajte skladby vytvorené umelou inteligenciou priamo vo svojom zariadení a zobrazujte ukazovateľ pravdepodobnosti.",
   "AI_ASSETS_DOWNLOADING_WASM": "Sťahovanie runtime WASM...",
+  "AI_ASSETS_DOWNLOADING_MODEL": "Sťahovanie {{model}}...",
   "AI_ASSETS_READY": "AI model je pripravený",
   "AI_ASSETS_NOT_READY": "AI model nie je k dispozícii",
   "AI_ASSETS_INITIALIZING": "Inicializácia modelu...",

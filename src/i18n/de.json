@@ -64,6 +64,7 @@
   "SETTINGS_AI_DETECTION_ENABLED": "KI-Song-Erkennung",
   "DESCRIPTION_SETTINGS_AI_DETECTION_ENABLED": "Erkenne KI-generierte Songs direkt auf deinem Gerät und zeige einen Wahrscheinlichkeitsindikator an.",
   "AI_ASSETS_DOWNLOADING_WASM": "WASM-Laufzeit wird heruntergeladen...",
+  "AI_ASSETS_DOWNLOADING_MODEL": "{{model}} wird heruntergeladen...",
   "AI_ASSETS_READY": "KI-Modell bereit",
   "AI_ASSETS_NOT_READY": "KI-Modell nicht verfügbar",
   "AI_ASSETS_INITIALIZING": "Modell wird initialisiert...",
