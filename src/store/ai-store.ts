@@ -6,6 +6,7 @@ import {
   getTrackInfo,
   initEngine,
 } from "../lib/ai-engine";
+import { AI_EVIDENCE_KEYS, deezerAiLabel, isArtistVerified } from "../lib/ai-evidence";
 import { AI_INDICATOR_CLASS } from "../lib/constants";
 import { i18n } from "../components/providers/providers";
 import { useTrashbinStore } from "./trashbin-store";
@@ -16,9 +17,9 @@ const LS_BLOCKLIST_DATA = "trashbin-ai-blocklist:data";
 const LS_BLOCKLIST_TS = "trashbin-ai-blocklist:ts";
 const BLOCKLIST_TTL = 86_400_000; // 24 hours
 
-const LS_KEY = "trashbin-ai-results-v7";
-const LS_FAILED_TS = "trashbin-ai-failed-ts-v7";
-const LEGACY_LS_KEYS = ["trashbin-ai-results", "trashbin-ai-failed-ts", "trashbin-ai-results-v2", "trashbin-ai-failed-ts-v2", "trashbin-ai-results-v3", "trashbin-ai-failed-ts-v3", "trashbin-ai-results-v4", "trashbin-ai-failed-ts-v4", "trashbin-ai-artist-hits", "trashbin-ai-results-v5", "trashbin-ai-failed-ts-v5", "trashbin-ai-results-v6", "trashbin-ai-failed-ts-v6", "trashbin-ai-artist-hits-v2", "trashbin-ai-artist-debut"];
+const LS_KEY = "trashbin-ai-results-v8";
+const LS_FAILED_TS = "trashbin-ai-failed-ts-v8";
+const LEGACY_LS_KEYS = ["trashbin-ai-results", "trashbin-ai-failed-ts", "trashbin-ai-results-v2", "trashbin-ai-failed-ts-v2", "trashbin-ai-results-v3", "trashbin-ai-failed-ts-v3", "trashbin-ai-results-v4", "trashbin-ai-failed-ts-v4", "trashbin-ai-artist-hits", "trashbin-ai-results-v5", "trashbin-ai-failed-ts-v5", "trashbin-ai-results-v6", "trashbin-ai-failed-ts-v6", "trashbin-ai-artist-hits-v2", "trashbin-ai-artist-debut", "trashbin-ai-results-v7", "trashbin-ai-failed-ts-v7", "trashbin-ai-artist-hits-v3"];
 const FAILED_RETRY_TTL = 86_400_000; // 24 hours
 const POLL_INTERVAL = 2000;
 const AI_TRASH_THRESHOLD = 0.8;
@@ -27,7 +28,7 @@ const AI_TRASH_CONFIDENT = 0.97;
 const ARTIST_MIN_HITS = 3;
 // Suno launched Dec 2023; older releases are scored human without analysis
 const AI_ERA_START_YEAR = 2023;
-const LS_ARTIST_HITS = "trashbin-ai-artist-hits-v3";
+const LS_ARTIST_HITS = "trashbin-ai-artist-hits-v4";
 const MAX_RETRIES = 4;
 
 interface BlocklistEntry {
@@ -242,10 +243,11 @@ export const useAiStore = create<AiState>((set, get) => ({
     };
 
     // one borderline song never trashes alone: the artist must have ARTIST_MIN_HITS flagged songs,
-    // and reaching that count also trashes the artist's earlier flagged songs
-    const judge = (u: string, probability: number, artists: string[]) => {
-      if (probability >= AI_TRASH_CONFIDENT) trash(u);
-      if (probability < AI_TRASH_THRESHOLD) return;
+    // and reaching that count also trashes the artist's earlier flagged songs.
+    // Deezer carrying the song unlabeled is a dissenting detector: only near certain songs count then.
+    const judge = (u: string, probability: number, artists: string[], deezerDisagrees: boolean) => {
+      if (probability >= AI_TRASH_CONFIDENT && !deezerDisagrees) trash(u);
+      if (probability < (deezerDisagrees ? AI_TRASH_CONFIDENT : AI_TRASH_THRESHOLD)) return;
       const hits = readArtistHits();
       for (const artist of artists) {
         const songs = [...new Set([...(hits[artist] ?? []), u])];
@@ -272,10 +274,26 @@ export const useAiStore = create<AiState>((set, get) => ({
         return;
       }
 
+      const deezerLabel = info.isrc ? await deezerAiLabel(info.isrc).catch(() => null) : null;
+      if (deezerLabel) {
+        console.log(`[trashbin+] ${trackLabel ?? uri}: labeled AI by Deezer`);
+        setResult(uri, 1.0);
+        trash(uri);
+        state.retries.delete(uri);
+        return;
+      }
+
+      if (info.artists[0] && (await isArtistVerified(info.artists[0]))) {
+        console.log(`[trashbin+] ${trackLabel ?? uri}: artist verified by Spotify`);
+        setResult(uri, 0);
+        state.retries.delete(uri);
+        return;
+      }
+
       const probability = await classifyTrack(uri, pos, remaining, trackLabel);
       if (probability !== null) {
         setResult(uri, probability);
-        judge(uri, probability, info.artists);
+        judge(uri, probability, info.artists, deezerLabel === false);
       } else {
         setResult(uri, -1);
       }
@@ -375,6 +393,7 @@ export const useAiStore = create<AiState>((set, get) => ({
     Spicetify.LocalStorage.remove(LS_KEY);
     Spicetify.LocalStorage.remove(LS_FAILED_TS);
     Spicetify.LocalStorage.remove(LS_ARTIST_HITS);
+    for (const key of AI_EVIDENCE_KEYS) Spicetify.LocalStorage.remove(key);
     get().queue.clear();
     set({ results: {} });
     document

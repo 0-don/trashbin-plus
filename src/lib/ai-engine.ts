@@ -226,17 +226,21 @@ function toMono(buffer: AudioBuffer): Float32Array {
 export interface TrackInfo {
   artists: string[];
   year: number | null;
+  isrc: string | null;
 }
 
 // throws when Spotify refuses the lookup (it throttles bursts); the queue retries instead of scoring blind
 export async function getTrackInfo(trackUri: string): Promise<TrackInfo> {
   const trackId = trackUri.split(":")[2];
-  if (!trackId) return { artists: [], year: null };
+  if (!trackId) return { artists: [], year: null, isrc: null };
   const data = await fetchMetadata("track", trackId);
   const artists: string[] = Array.isArray(data.artist)
     ? data.artist.filter((a: { gid?: string }) => a.gid).map((a: { gid: string }) => hexToBase62(a.gid))
     : [];
-  return { artists, year: data.album?.date?.year ?? null };
+  const isrc = Array.isArray(data.external_id)
+    ? (data.external_id.find((e: { type?: string }) => e.type === "isrc")?.id ?? null)
+    : null;
+  return { artists, year: data.album?.date?.year ?? null, isrc };
 }
 
 async function fetchPreviewUrl(trackUri: string): Promise<string | null> {
