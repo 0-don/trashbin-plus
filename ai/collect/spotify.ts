@@ -39,7 +39,12 @@ const MODERN_SEEDS = [
   "45eNHdiiabvmbp4erw26rg", "1Cs0zKBU1kc0i8ypK3B9ai", "69GGBxA162lTqCwzJG5jLp", "4tuJ0bMpJh08gYxL8mrNt4",
   "7CajNmpbOovFoOoasH2HaY", "0NGAZxHanS9e0iNHpR8f2W", "5K4W6rqBFWDnAN6FQUkS6x", "0Y5tJX1MQlPlqiwlOH1tJY",
   "4O15NlyKLIASxsJ0PrXPfz", "1URnnhqYAYcrqrcwql10ft", "6M2wZ9GZgrQXHCFfjv46we", "66CXWjxzNUsdJxJ2JdwvnR",
+  // vocal house, UK garage and TikTok pop with sped up / slowed versions, the scene v6 mistook for AI
+  "5Wj4v7ri4aDONkGEIuo0zp", "1Z0DRUany5l8E7J6XNRlmC", "7wzFljicyOOPYoaOKXOIGx", "67oqxTVS3N7Z6fDVfFC3t6",
+  "2XnY6NZ6rENbLMYabjkRey", "3MAfChoYXWwQfaXZND26IB", "5okL9oHMW5wof7D0x2hQLQ", "0PHFxX65osm9nU2Wp0eXx2",
 ];
+// only seeds for the walk: their own songs are probe sets (data/probe_<name>.json), never trained on
+const HOLDOUT = new Set(["5Wj4v7ri4aDONkGEIuo0zp"]);
 const MODERN_EVAL = 300;
 const AI_ARTISTS = TRAIN ? 2000 : 300;
 const HOPS = TRAIN ? 2 : 1;
@@ -141,6 +146,7 @@ if (MODE === "modern") {
   let evalCount = sets.eval.filter((e) => e.source === "human_spotify_modern").length;
   const save = () => (["eval", "train"] as const).forEach((k) => writeFileSync(files[k], JSON.stringify(sets[k], null, 1)));
   for (const a of await expand([...HUMAN_SEEDS, ...TRAIN_SEEDS, ...MODERN_SEEDS], 2)) {
+    if (HOLDOUT.has(a)) continue;
     const debut = await evaluate<number | null>(`window.__debut("${a}")`);
     if (debut === null || debut >= 2023) continue;
     const top = await evaluate<Top | null>(`window.__top("${a}",10)`);
