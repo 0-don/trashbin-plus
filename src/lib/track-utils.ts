@@ -184,6 +184,11 @@ export function isTrackEffectivelyTrashed(
   return false;
 }
 
+// Spicetify's isPlaying throws while the player has no state yet, e.g. right after Spotify starts
+export function isPlayerPlaying(): boolean {
+  return Spicetify.Player.data ? Spicetify.Player.isPlaying() : false;
+}
+
 export async function skipToNextAllowedTrack() {
   const currentPlayerState = Spicetify.Player.data;
 

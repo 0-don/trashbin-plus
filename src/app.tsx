@@ -21,6 +21,7 @@ import { useRemoteToggle } from "./hooks/use-remote-toggle";
 import { SELECTORS } from "./lib/constants";
 import { registerRemoteApi } from "./lib/remote-api";
 import {
+  isPlayerPlaying,
   isTrackEffectivelyTrashed,
   manageSmartShuffleQueue,
   skipToNextAllowedTrack,
@@ -42,7 +43,7 @@ function App() {
   }, [trashbinStore.initializeFromStorage]);
 
   useEffect(() => {
-    if (trashbinStore.autoplayOnStart && !Spicetify.Player.isPlaying()) {
+    if (trashbinStore.autoplayOnStart && !isPlayerPlaying()) {
       setTimeout(Spicetify.Player.play, 5000);
       setTimeout(Spicetify.Player.play, 60000);
     }

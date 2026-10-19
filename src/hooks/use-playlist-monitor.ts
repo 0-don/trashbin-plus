@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef } from "react";
 import { useTrashbinStore } from "../store/trashbin-store";
+import { isPlayerPlaying } from "../lib/track-utils";
 
 const MONITOR_INTERVAL = 3000;
 const STORAGE_KEY = "trashbin-playlist-monitor";
@@ -58,7 +59,7 @@ export function usePlaylistMonitor() {
 
   const checkPlaybackStatus = useCallback((): void => {
     const playerData = Spicetify.Player.data;
-    const isPlaying = Spicetify.Player.isPlaying();
+    const isPlaying = isPlayerPlaying();
     const hasContext = !!playerData?.context?.uri;
     const hasItem = !!playerData?.item;
 

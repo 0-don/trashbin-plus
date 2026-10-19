@@ -61,6 +61,7 @@ export const ItemRow: React.FC<ItemRowProps> = ({ item, onUntrash }) => {
         </div>
       </div>
       <button
+        type="button"
         onClick={() => navigator.clipboard.writeText(item.uri)}
         className="shrink-0 cursor-pointer border-none! bg-transparent! text-xs text-white/40! transition-colors hover:text-white/60!"
         title={t("TOOLTIP_COPY_URI")}
@@ -68,6 +69,7 @@ export const ItemRow: React.FC<ItemRowProps> = ({ item, onUntrash }) => {
         {item.uri}
       </button>
       <button
+        type="button"
         onClick={(e) => {
           e.stopPropagation();
           e.preventDefault();
@@ -123,6 +125,7 @@ interface TabButtonProps {
 
 export const TabButton: React.FC<TabButtonProps> = (props) => (
   <button
+    type="button"
     onClick={props.onClick}
     className={cn(
       "relative border-b-2 px-4! py-2! text-lg font-medium transition-colors",
