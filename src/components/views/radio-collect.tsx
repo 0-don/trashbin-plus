@@ -16,11 +16,11 @@ interface Props {
   sourceName: string;
 }
 
-type Phase = "setup" | "collecting" | "picking" | "adding" | "done";
+type Phase = "collecting" | "picking" | "adding" | "done";
 
 export function RadioCollectView(props: Props) {
   const { t } = useTranslation();
-  const [phase, setPhase] = useState<Phase>("setup");
+  const [phase, setPhase] = useState<Phase>("collecting");
   const [progress, setProgress] = useState<RadioProgress>({
     done: 0,
     total: props.seedUris.length,
@@ -35,7 +35,6 @@ export function RadioCollectView(props: Props) {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    if (phase !== "collecting") return;
     let cancelled = false;
 
     (async () => {
@@ -57,7 +56,7 @@ export function RadioCollectView(props: Props) {
     return () => {
       cancelled = true;
     };
-  }, [phase]);
+  }, []);
 
   const onPick = async (playlist: WritablePlaylist) => {
     setPhase("adding");
@@ -93,29 +92,12 @@ export function RadioCollectView(props: Props) {
         <p className="rounded bg-[#e74c3c]/20 p-2 text-[#e74c3c]">{error}</p>
       )}
 
-      {phase !== "adding" && phase !== "done" && (
+      {(phase === "collecting" || phase === "picking") && (
         <Toggle
-          label={
-            phase === "setup"
-              ? t("RADIO_SKIP_TRASHED")
-              : t("RADIO_SKIP_TRASHED_COUNT", { count: tracks.length - kept.length })
-          }
+          label={t("RADIO_SKIP_TRASHED", { count: tracks.length - kept.length })}
           enabled={skipTrashed}
           onChange={setSkipTrashed}
         />
-      )}
-
-      {phase === "setup" && (
-        <button
-          type="button"
-          onClick={(event) => {
-            event.stopPropagation();
-            setPhase("collecting");
-          }}
-          className="cursor-pointer self-start rounded-full! border-none! bg-(--spice-button)! px-6! py-2! font-bold text-black! hover:brightness-110"
-        >
-          {t("ACTION_START")}
-        </button>
       )}
 
       {phase === "collecting" && (
