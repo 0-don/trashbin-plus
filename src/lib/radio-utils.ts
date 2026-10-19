@@ -4,7 +4,13 @@ const SEED_TO_PLAYLIST =
 export interface RadioProgress {
   done: number;
   total: number;
-  found: number;
+  tracks: RadioTrack[];
+}
+
+export interface RadioTrack {
+  uri: string;
+  artists?: { uri: string }[];
+  metadata?: Record<string, string>;
 }
 
 export interface WritablePlaylist {
@@ -28,21 +34,20 @@ async function getRadioUri(trackUri: string): Promise<string | null> {
   return res?.mediaItems?.[0]?.uri ?? null;
 }
 
-async function getRadioTracks(radioUri: string): Promise<string[]> {
+async function getRadioTracks(radioUri: string): Promise<RadioTrack[]> {
   const contents = await Spicetify.Platform.PlaylistAPI.getContents(radioUri, {
     limit: 200,
   });
-  return (contents?.items ?? [])
-    .map((item: { uri?: string }) => item.uri)
-    .filter((uri?: string): uri is string => !!uri?.startsWith("spotify:track:"));
+  const items: RadioTrack[] = contents?.items ?? [];
+  return items.filter((item) => item.uri?.startsWith("spotify:track:"));
 }
 
 export async function collectRadioTracks(
   seedUris: string[],
   onProgress: (p: RadioProgress) => void,
   shouldStop: () => boolean,
-): Promise<string[]> {
-  const pooled = new Set<string>();
+): Promise<RadioTrack[]> {
+  const pooled = new Map<string, RadioTrack>();
   let done = 0;
 
   for (const seed of seedUris) {
@@ -51,17 +56,17 @@ export async function collectRadioTracks(
     try {
       const radioUri = await getRadioUri(seed);
       if (radioUri) {
-        for (const uri of await getRadioTracks(radioUri)) pooled.add(uri);
+        for (const track of await getRadioTracks(radioUri)) pooled.set(track.uri, track);
       }
     } catch {
       // a seed without a radio station must not abort the whole run
     }
 
     done++;
-    onProgress({ done, total: seedUris.length, found: pooled.size });
+    onProgress({ done, total: seedUris.length, tracks: Array.from(pooled.values()) });
   }
 
-  return Array.from(pooled);
+  return Array.from(pooled.values());
 }
 
 export async function getWritablePlaylists(): Promise<WritablePlaylist[]> {
@@ -83,10 +88,13 @@ export async function getWritablePlaylists(): Promise<WritablePlaylist[]> {
   return found;
 }
 
+// Spotify refuses adds beyond this many tracks in one playlist
+const PLAYLIST_LIMIT = 10_000;
+
 export async function addTracksToPlaylist(
   playlistUri: string,
   trackUris: string[],
-): Promise<number> {
+): Promise<{ added: number; overflow: number }> {
   const existing = await Spicetify.Platform.PlaylistAPI.getContents(
     playlistUri,
     { limit: 9999999 },
@@ -94,7 +102,8 @@ export async function addTracksToPlaylist(
   const have = new Set(
     (existing?.items ?? []).map((item: { uri: string }) => item.uri),
   );
-  const fresh = trackUris.filter((uri) => !have.has(uri));
+  const unique = trackUris.filter((uri) => !have.has(uri));
+  const fresh = unique.slice(0, Math.max(0, PLAYLIST_LIMIT - have.size));
 
   // PlaylistAPI.add rejects oversized payloads, so commit in chunks
   for (let i = 0; i < fresh.length; i += 100) {
@@ -105,5 +114,5 @@ export async function addTracksToPlaylist(
     );
   }
 
-  return fresh.length;
+  return { added: fresh.length, overflow: unique.length - fresh.length };
 }

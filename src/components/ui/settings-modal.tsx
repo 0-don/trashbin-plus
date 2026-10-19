@@ -56,7 +56,7 @@ const Tooltip: React.FC<{
   );
 };
 
-const Toggle: React.FC<{
+export const Toggle: React.FC<{
   label: string;
   enabled: boolean;
   onChange: (enabled: boolean) => void;
@@ -115,6 +115,7 @@ const ActionButton: React.FC<{
     <label className="w-full pr-4">{description}</label>
     <div className="text-right">
       <button
+        type="button"
         className={cn(
           "rounded-full! bg-transparent! font-bold! transition-transform!",
           "border! border-[#727272]! px-3.75! duration-33!",

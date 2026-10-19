@@ -13,7 +13,7 @@ interface PlaylistContents {
   items: PlaylistItem[];
 }
 
-function isPlaylistItemTrashed(item: PlaylistItem): boolean {
+export function isPlaylistItemTrashed(item: Pick<PlaylistItem, "uri" | "artists" | "metadata">): boolean {
   const state = useTrashbinStore.getState();
 
   if (!item.uri || !item.uri.startsWith("spotify:track:")) return false;

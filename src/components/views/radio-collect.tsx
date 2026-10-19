@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { isPlaylistItemTrashed } from "../../lib/playlist-utils";
 import {
   addTracksToPlaylist,
   collectRadioTracks,
@@ -7,42 +8,45 @@ import {
   RadioProgress,
   WritablePlaylist,
 } from "../../lib/radio-utils";
+import { useTrashbinStore } from "../../store/trashbin-store";
+import { Toggle } from "../ui/settings-modal";
 
 interface Props {
   seedUris: string[];
   sourceName: string;
 }
 
-type Phase = "collecting" | "picking" | "adding" | "done";
+type Phase = "setup" | "collecting" | "picking" | "adding" | "done";
 
 export function RadioCollectView(props: Props) {
   const { t } = useTranslation();
-  const [phase, setPhase] = useState<Phase>("collecting");
+  const [phase, setPhase] = useState<Phase>("setup");
   const [progress, setProgress] = useState<RadioProgress>({
     done: 0,
     total: props.seedUris.length,
-    found: 0,
+    tracks: [],
   });
-  const [tracks, setTracks] = useState<string[]>([]);
+  const [skipTrashed, setSkipTrashed] = useState(true);
   const [playlists, setPlaylists] = useState<WritablePlaylist[]>([]);
   const [filter, setFilter] = useState("");
   const [added, setAdded] = useState(0);
+  const [overflow, setOverflow] = useState(0);
   const [target, setTarget] = useState("");
   const [error, setError] = useState("");
 
   useEffect(() => {
+    if (phase !== "collecting") return;
     let cancelled = false;
 
     (async () => {
       try {
-        const collected = await collectRadioTracks(
+        await collectRadioTracks(
           props.seedUris,
           (p) => !cancelled && setProgress(p),
           () => cancelled,
         );
         if (cancelled) return;
 
-        setTracks(collected);
         setPlaylists(await getWritablePlaylists());
         setPhase("picking");
       } catch (e) {
@@ -53,19 +57,31 @@ export function RadioCollectView(props: Props) {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [phase]);
 
   const onPick = async (playlist: WritablePlaylist) => {
     setPhase("adding");
     setTarget(playlist.name);
     try {
-      setAdded(await addTracksToPlaylist(playlist.uri, tracks));
+      const result = await addTracksToPlaylist(
+        playlist.uri,
+        toAdd.map((track) => track.uri),
+      );
+      setAdded(result.added);
+      setOverflow(result.overflow);
       setPhase("done");
     } catch (e) {
       setError(String(e));
       setPhase("picking");
     }
   };
+
+  // subscribed so the count follows trash changes made while the dialog is open
+  useTrashbinStore((state) => state.trashSongList);
+  useTrashbinStore((state) => state.trashArtistList);
+  const tracks = progress.tracks;
+  const kept = tracks.filter((track) => !isPlaylistItemTrashed(track));
+  const toAdd = skipTrashed ? kept : tracks;
 
   const visible = playlists.filter((p) =>
     p.name.toLowerCase().includes(filter.toLowerCase()),
@@ -75,6 +91,31 @@ export function RadioCollectView(props: Props) {
     <div className="flex max-h-[60vh] min-h-[20rem] flex-col gap-4 p-4">
       {error && (
         <p className="rounded bg-[#e74c3c]/20 p-2 text-[#e74c3c]">{error}</p>
+      )}
+
+      {phase !== "adding" && phase !== "done" && (
+        <Toggle
+          label={
+            phase === "setup"
+              ? t("RADIO_SKIP_TRASHED")
+              : t("RADIO_SKIP_TRASHED_COUNT", { count: tracks.length - kept.length })
+          }
+          enabled={skipTrashed}
+          onChange={setSkipTrashed}
+        />
+      )}
+
+      {phase === "setup" && (
+        <button
+          type="button"
+          onClick={(event) => {
+            event.stopPropagation();
+            setPhase("collecting");
+          }}
+          className="cursor-pointer self-start rounded-full! border-none! bg-(--spice-button)! px-6! py-2! font-bold text-black! hover:brightness-110"
+        >
+          {t("ACTION_START")}
+        </button>
       )}
 
       {phase === "collecting" && (
@@ -94,14 +135,14 @@ export function RadioCollectView(props: Props) {
             />
           </div>
           <p className="text-sm opacity-70">
-            {t("RADIO_FOUND", { count: progress.found })}
+            {t("RADIO_FOUND", { count: toAdd.length })}
           </p>
         </div>
       )}
 
       {phase === "picking" && (
         <>
-          <p>{t("RADIO_PICK_TARGET", { count: tracks.length })}</p>
+          <p>{t("RADIO_PICK_TARGET", { count: toAdd.length })}</p>
           <input
             value={filter}
             onChange={(e) => setFilter(e.target.value)}
@@ -111,9 +152,13 @@ export function RadioCollectView(props: Props) {
           <div className="flex flex-col gap-1 overflow-y-auto">
             {visible.map((playlist) => (
               <button
+                type="button"
                 key={playlist.uri}
-                onClick={() => onPick(playlist)}
-                className="cursor-pointer rounded border-none bg-white/5 px-4 py-3 text-left font-bold text-(--spice-text) hover:bg-white/15"
+                onClick={(event) => {
+                  event.stopPropagation();
+                  onPick(playlist);
+                }}
+                className="cursor-pointer rounded! border-none! bg-white/5! px-4! py-3! text-left font-bold text-(--spice-text) hover:bg-white/15!"
               >
                 {playlist.name}
               </button>
@@ -128,7 +173,14 @@ export function RadioCollectView(props: Props) {
       {phase === "adding" && <p>{t("RADIO_ADDING", { name: target })}</p>}
 
       {phase === "done" && (
-        <p>{t("RADIO_DONE", { count: added, name: target })}</p>
+        <>
+          <p>{t("RADIO_DONE", { count: added, name: target })}</p>
+          {overflow > 0 && (
+            <p className="opacity-70">
+              {t("RADIO_PLAYLIST_FULL", { count: overflow })}
+            </p>
+          )}
+        </>
       )}
     </div>
   );
