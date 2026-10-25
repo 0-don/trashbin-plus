@@ -6,6 +6,7 @@ import { useAiStore } from "../../store/ai-store";
 import { cn } from "../../lib/utils";
 import { useTrashbinStore } from "../../store/trashbin-store";
 import { TRASH_ICON } from "../icons";
+import { version } from "../../../package.json";
 
 const Tooltip: React.FC<{
   children: React.ReactNode;
@@ -196,6 +197,10 @@ const SettingsModal: React.FC = () => {
 
   return (
     <div className="p-4">
+      <p className="mb-2! text-xs text-[rgba(var(--spice-rgb-text),0.5)]!">
+        Trashbin+ {version} | Spotify {Spicetify.Platform?.version ?? "?"} |
+        Spicetify {Spicetify.Config?.version ?? "?"}
+      </p>
       <h2 className="my-2.5! text-lg font-bold text-(--spice-text) first-of-type:mt-0">
         {t("SETTINGS_OPTIONS")}
       </h2>
