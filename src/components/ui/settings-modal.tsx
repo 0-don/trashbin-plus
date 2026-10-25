@@ -1,6 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { HiOutlineQuestionMarkCircle } from "react-icons/hi2";
+import {
+  HiOutlineClipboardDocument,
+  HiOutlineQuestionMarkCircle,
+} from "react-icons/hi2";
 import { SELECTORS } from "../../lib/constants";
 import { useAiStore } from "../../store/ai-store";
 import { cn } from "../../lib/utils";
@@ -195,12 +198,23 @@ const SettingsModal: React.FC = () => {
     Spicetify.showNotification(t("MESSAGE_CLEARED"));
   };
 
+  const versions = `Trashbin+ ${version} | Spotify ${Spicetify.Platform?.version ?? "?"} | Spicetify ${Spicetify.Config?.version ?? "?"}`;
+
   return (
     <div className="p-4">
-      <p className="mb-2! text-xs text-[rgba(var(--spice-rgb-text),0.5)]!">
-        Trashbin+ {version} | Spotify {Spicetify.Platform?.version ?? "?"} |
-        Spicetify {Spicetify.Config?.version ?? "?"}
-      </p>
+      <button
+        type="button"
+        title={t("ACTION_COPY")}
+        onClick={(event) => {
+          event.stopPropagation();
+          Spicetify.Platform.ClipboardAPI.copy(versions);
+          Spicetify.showNotification(t("MESSAGE_COPIED"));
+        }}
+        className="mb-2! flex! cursor-pointer! items-center! gap-1.5! border-none! bg-transparent! p-0! text-xs text-[rgba(var(--spice-rgb-text),0.5)]! hover:text-(--spice-text)!"
+      >
+        {versions}
+        <HiOutlineClipboardDocument size={14} />
+      </button>
       <h2 className="my-2.5! text-lg font-bold text-(--spice-text) first-of-type:mt-0">
         {t("SETTINGS_OPTIONS")}
       </h2>
