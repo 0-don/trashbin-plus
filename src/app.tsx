@@ -27,9 +27,10 @@ import {
   skipToNextAllowedTrack,
 } from "./lib/track-utils";
 import { useTrashbinStore } from "./store/trashbin-store";
+import { version } from "../package.json";
 
 function App() {
-  console.log("trashbin+ loaded v1.1.16!");
+  console.log(`trashbin+ loaded v${version}!`);
 
   const trashbinStore = useTrashbinStore();
 
