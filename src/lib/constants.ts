@@ -14,7 +14,8 @@ export const SELECTORS = {
 export const TRACKLIST_CONFIG = {
   containerSelector: "main",
   buttonSelector: ".trashbin-tracklist-btn",
-  rowSelector: ".main-trackList-trackListRow",
+  // role=row covers Spotify builds that Spicetify's class map does not reach yet
+  rowSelector: '.main-trackList-trackListRow, [role="row"]',
   moreButtonSelector:
     "button[aria-haspopup='menu'], button[data-testid='add-to-playlist-button']",
   buttonClassName: "trashbin-tracklist-btn",
