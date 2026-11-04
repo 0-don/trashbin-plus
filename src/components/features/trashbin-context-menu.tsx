@@ -12,9 +12,9 @@ export function TrashbinContextMenu() {
     const shouldAdd = trashOperations.shouldAddContextMenu(uris);
 
     if (shouldAdd && contextMenuItemRef.current) {
-      contextMenuItemRef.current.name = trashOperations.getContextMenuLabel(
-        uris[0],
-      );
+      const name = trashOperations.getContextMenuLabel(uris[0]);
+      if (contextMenuItemRef.current.name !== name)
+        contextMenuItemRef.current.name = name;
     }
 
     return shouldAdd;

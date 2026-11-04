@@ -19,10 +19,11 @@ export function PlaylistTrashAllContextMenu() {
 
     const applyLabel = (isRestore: boolean) => {
       if (!itemRef.current) return;
-      itemRef.current.name = isRestore
-        ? t("ACTION_RESTORE_ALL")
-        : t("ACTION_TRASH_ALL");
-      itemRef.current.icon = isRestore ? RESTORE_ICON(15) : TRASH_ICON(15);
+      const name = isRestore ? t("ACTION_RESTORE_ALL") : t("ACTION_TRASH_ALL");
+      const icon = isRestore ? RESTORE_ICON(15) : TRASH_ICON(15);
+      // shouldAdd runs during the menu render and Spicetify re-renders on every icon assignment
+      if (itemRef.current.name !== name) itemRef.current.name = name;
+      if (itemRef.current.icon !== icon) itemRef.current.icon = icon;
     };
 
     const shouldAdd = (uris: string[]): boolean => {
