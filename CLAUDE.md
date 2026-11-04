@@ -40,6 +40,19 @@ On the user side: the top of Trashbin+ settings shows `Trashbin+ X | Spotify Y |
 - Confirm the client actually runs the new build: `fetch("extensions/trashbin-plus.js")` inside the page and look for a string from the change.
 - **After Spotify auto-updates** (it did to 1.2.96 on Linux), `spicetify apply` and `refresh` print "Preprocessed Spotify data is outdated" and silently stop copying the extension: builds succeed but never show up. Fix: `spicetify restore backup apply` (restarts Spotify, so not while the owner is mid-task without asking).
 
+## Testing another Spotify version
+
+The owner's client is `spotify-launcher` (Arch), install in `~/.local/share/spotify-launcher/install`, CDP flags in `~/.config/spotify-launcher.conf`. Linux builds come from `https://repository.spotify.com/dists/{stable,testing}/non-free/binary-amd64/Packages` (testing is ahead; Windows is ahead of both, 1.3.6 never shipped for Linux). Spicetify's release notes list the supported range per OS.
+
+Order matters, or Spicetify keeps the old backup and refuses to apply later ("backup version mismatched"):
+
+1. Download the `.deb`, check its SHA256 against the Packages file.
+2. Keep a copy of the current install (`cp -a install install.bak-<ver>`) and of `~/.local/state/spicetify/Backup` (Spicetify's backup lives there, its version in `[Backup]` of `config-xpui.ini`). Old versions vanish from Spotify's repo, so the copy is the only way back.
+3. Stop every `spotify` process (`pkill -x spotify`, never `pkill -f` with a pattern that also matches your own shell), then `spotify-launcher --skip-update --force-update --deb <file>`, then stop Spotify again.
+4. On the clean, unpatched install: `spicetify backup apply`, check `[Backup] version` shows the new build, then start Spotify.
+
+Never run `spicetify restore` with a backup from another Spotify version: it writes the old files over the new install. Stopping Spotify also stops the owner's `bun run dev` watcher; tell them to restart it.
+
 ## Debugging through CDP
 
 Spotify exposes DevTools on `http://127.0.0.1:9225` (Spicetify DevTools enabled). Pick the target whose url contains `xpui`, open its `webSocketDebuggerUrl`, then:
@@ -51,3 +64,10 @@ Spotify exposes DevTools on `http://127.0.0.1:9225` (Spicetify DevTools enabled)
 - **`Runtime.enable` replays the page's earlier console messages.** Seeing `[spicetifyWrapper] Waiting for required webpack modules` right after attaching is the replay of the last page load, not a fresh reload.
 - No clipboard tool is installed (X11, no xclip/wl-paste): to test copying, wrap `Spicetify.Platform.ClipboardAPI.copy` in the page and record its argument.
 - Versions: `Spicetify.Platform.version` (Spotify), `Spicetify.Config.version` (Spicetify CLI), `Spicetify.Config.current_theme`.
+
+## Spotify 1.3.x notes (November 2026)
+
+- Spotify 1.3.4 to 1.3.6 renamed page elements; Spicetify 2.46 maps them for 1.3.4 to 1.3.6. Anything we select by a Spicetify remapped class (`main-*`) disappears when the map misses a build, so pair it with a Spotify attribute (`[role="row"]`, `data-testid`). Issue #3 (Windows 1.3.6) lost the playlist row icons this way.
+- Spicetify 2.46.4 renders extension menu items wrongly on Windows 1.3.6 (spicetify/cli #4039, fixed on its main branch in `cf2081f4` and `c3747cf5`, not yet released on 2026-11-05). Menu crashes there that go away when Trashbin+ is disabled are that bug: we are only the extension that adds items. Check whether a newer Spicetify is out before chasing them.
+- Do not style elements inside `.main-trackCreditsModal-mainSection` globally: every extension's `Spicetify.PopupModal` (Marketplace's Reload dialog included) renders there.
+
