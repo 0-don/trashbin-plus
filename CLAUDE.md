@@ -68,6 +68,6 @@ Spotify exposes DevTools on `http://127.0.0.1:9225` (Spicetify DevTools enabled)
 ## Spotify 1.3.x notes (November 2026)
 
 - Spotify 1.3.4 to 1.3.6 renamed page elements; Spicetify 2.46 maps them for 1.3.4 to 1.3.6. Anything we select by a Spicetify remapped class (`main-*`) disappears when the map misses a build, so pair it with a Spotify attribute (`[role="row"]`, `data-testid`). Issue #3 (Windows 1.3.6) lost the playlist row icons this way.
-- Spicetify 2.46.4 renders extension menu items wrongly on Windows 1.3.6 (spicetify/cli #4039, fixed on its main branch in `cf2081f4` and `c3747cf5`, not yet released on 2026-11-05). Menu crashes there that go away when Trashbin+ is disabled are that bug: we are only the extension that adds items. Check whether a newer Spicetify is out before chasing them.
+- `Spicetify.ContextMenu.Item` calls `shouldAdd` while the menu renders, and its `icon` setter (`leadingIcon`) re-renders on every assignment, even with the same value. Never assign `icon` or `name` inside `shouldAdd` unless the value changed: it loops until React throws error #301 and takes the library panel down (issue #3, fixed in 1.1.22). Repro: right click a playlist in the library and check the panel does not turn into "Something went wrong".
 - Do not style elements inside `.main-trackCreditsModal-mainSection` globally: every extension's `Spicetify.PopupModal` (Marketplace's Reload dialog included) renders there.
 
