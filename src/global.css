@@ -61,8 +61,6 @@
   scrollbar-color: rgb(255 255 255 / 0.3) transparent;
 }
 
-/* :where keeps this reset below the component utilities, which are important too */
-:where(.main-trackCreditsModal-mainSection) button,
 .main-addButton-button {
   background-color: transparent !important;
   border: none !important;
