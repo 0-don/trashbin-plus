@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { useTrashbinStore } from "../../store/trashbin-store";
+import { keepWidgetMounted } from "../../lib/playbar-utils";
 import { TRASH_ICON } from "../icons";
 
 export const TrashbinWidget = React.memo(() => {
@@ -43,6 +44,17 @@ export const TrashbinWidget = React.memo(() => {
     widgetRef.current = widget;
     updateWidgetState(widget);
 
+    const stopMounting = keepWidgetMounted(widget, () => {
+      const state = useTrashbinStore.getState();
+      const uri = Spicetify.Player.data?.item?.uri;
+      return (
+        state.widgetEnabled &&
+        state.trashbinEnabled &&
+        !!uri &&
+        Spicetify.URI.fromString(uri).type === Spicetify.URI.Type.TRACK
+      );
+    });
+
     const handleSongChange = () => updateWidgetState(widget);
     Spicetify.Player.addEventListener("songchange", handleSongChange);
 
@@ -51,6 +63,7 @@ export const TrashbinWidget = React.memo(() => {
     );
 
     return () => {
+      stopMounting();
       unsubscribe();
       Spicetify.Player.removeEventListener("songchange", handleSongChange);
       widget.deregister();

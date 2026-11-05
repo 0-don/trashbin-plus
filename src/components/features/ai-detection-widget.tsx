@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { CgSpinner } from "react-icons/cg";
 import { useAiStore } from "../../store/ai-store";
 import { useTrashbinStore } from "../../store/trashbin-store";
+import { keepWidgetMounted } from "../../lib/playbar-utils";
 import { i18n } from "../providers/providers";
 import { AiIndicator } from "./ai-probability-indicator";
 
@@ -40,6 +41,7 @@ export const AiDetectionWidget: React.FC = () => {
       true,
     );
     widgetRef.current = widget;
+    const stopMounting = keepWidgetMounted(widget, () => true);
 
     const updateWidget = () => {
       const track = Spicetify.Player.data?.item;
@@ -73,6 +75,7 @@ export const AiDetectionWidget: React.FC = () => {
     Spicetify.Player.addEventListener("songchange", updateWidget);
 
     return () => {
+      stopMounting();
       unsub();
       Spicetify.Player.removeEventListener("songchange", updateWidget);
       widget.deregister();
