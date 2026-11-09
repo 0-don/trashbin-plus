@@ -33,6 +33,11 @@ Quicker: grep the served file for the new version string (`grep -o '"1\.1\.[0-9]
 
 On the user side: the top of Trashbin+ settings shows `Trashbin+ X | Spotify Y | Spicetify Z`, and clicking it copies the line. Ask users for that line first; it answers "do they have the latest build" and "which Spotify/Spicetify" at once. Themes are not in it (Marketplace themes all report `marketplace`), so ask for the theme name separately.
 
+## Storage and debug reports
+
+- Persist data in IndexedDB, never in `localStorage`: Spotify gives all extensions together about 2 MB of `localStorage`, and our AI caches once filled 1.9 MB of it (QuotaExceededError for everyone). Trash lists live in the `songs`/`artists` stores of the `trashbin-plus` database; any other value goes through `storedRecord(key, empty)` in `src/lib/kv-storage.ts` (`kv` store, loaded once, saved in batches, moves a same-named `localStorage` value over on first load). Only the small settings toggles stay in `localStorage`.
+- For a bug report, ask for the debug report first: Settings, Storage, "Save a debug report". The JSON has versions, theme, extensions, settings, the page probe (Spicetify APIs, `main-*` class versus `data-testid` markers, row and button counts, where each player bar widget sits, the player bar markup) and the log from `logDebug` in `src/lib/debug-log.ts` (widget states, errors). Log new failure points with `logDebug` so the next report shows them.
+
 ## Running a local build in Spotify
 
 - `bun run dev` (owner usually has it running): `build.ts --watch` rebuilds on every save in `src/` and `spicetify watch -e` reloads Spotify. Every file save therefore reloads the client, which looks like a crash if you are clicking at that moment.
