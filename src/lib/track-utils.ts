@@ -189,31 +189,24 @@ export function isPlayerPlaying(): boolean {
   return Spicetify.Player.data ? Spicetify.Player.isPlaying() : false;
 }
 
+// Never replay the context to skip: Shuffle+ swaps the queue inside the running session and only relabels it,
+// so replaying the context restarted the previous playlist while the new one stayed on screen
 export async function skipToNextAllowedTrack() {
-  const currentPlayerState = Spicetify.Player.data;
-
-  if (!currentPlayerState?.context?.uri) {
-    Spicetify.Player.next();
-    return;
+  const leadingTrashed = [];
+  for (const track of getQueueTracks()) {
+    if (!isTrackEffectivelyTrashed(track.contextTrack)) break;
+    leadingTrashed.push(track);
   }
-
-  const currentContextUri = currentPlayerState.context.uri;
-
-  for (const nextTrack of getQueueTracks()) {
-    if (!isTrackEffectivelyTrashed(nextTrack.contextTrack)) {
-      try {
-        return await Spicetify.Player.playUri(
-          currentContextUri,
-          { featureIdentifier: "playlist" },
-          { skipTo: { uri: nextTrack.contextTrack.uri } },
-        );
-      } catch (err) {
-        // skip error silently
-      }
+  const removable = leadingTrashed
+    .filter((track) => track.contextTrack.uid)
+    .map((track) => ({ uri: track.contextTrack.uri, uid: track.contextTrack.uid }));
+  if (removable.length > 0) {
+    try {
+      await Spicetify.removeFromQueue(removable);
+    } catch {
+      // whatever stays in the queue is skipped again on the next song change
     }
   }
-
-  // Default behavior: just skip to next
   Spicetify.Player.next();
 }
 
