@@ -1,14 +1,15 @@
 const DB_NAME = "trashbin-plus";
-const DB_VERSION = 1;
+const DB_VERSION = 2;
 const SONGS_STORE = "songs";
 const ARTISTS_STORE = "artists";
+export const KV_STORE = "kv";
 
 const LEGACY_SONGS_KEY = "TrashSongList";
 const LEGACY_ARTISTS_KEY = "TrashArtistList";
 
 let dbPromise: Promise<IDBDatabase> | null = null;
 
-function openDb(): Promise<IDBDatabase> {
+export function openDb(): Promise<IDBDatabase> {
   if (dbPromise) return dbPromise;
   dbPromise = new Promise((resolve, reject) => {
     const req = indexedDB.open(DB_NAME, DB_VERSION);
@@ -19,6 +20,9 @@ function openDb(): Promise<IDBDatabase> {
       }
       if (!db.objectStoreNames.contains(ARTISTS_STORE)) {
         db.createObjectStore(ARTISTS_STORE);
+      }
+      if (!db.objectStoreNames.contains(KV_STORE)) {
+        db.createObjectStore(KV_STORE);
       }
     };
     req.onsuccess = () => resolve(req.result);

@@ -41,7 +41,7 @@ export const AiDetectionWidget: React.FC = () => {
       true,
     );
     widgetRef.current = widget;
-    const stopMounting = keepWidgetMounted(widget, () => true);
+    const stopMounting = keepWidgetMounted("ai", widget, () => true);
 
     const updateWidget = () => {
       const track = Spicetify.Player.data?.item;

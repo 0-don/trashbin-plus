@@ -5,6 +5,7 @@ import {
   HiOutlineQuestionMarkCircle,
 } from "react-icons/hi2";
 import { SELECTORS } from "../../lib/constants";
+import { saveDebugReport } from "../../lib/debug-report";
 import { useAiStore } from "../../store/ai-store";
 import { cn } from "../../lib/utils";
 import { useTrashbinStore } from "../../store/trashbin-store";
@@ -347,6 +348,16 @@ const SettingsModal: React.FC = () => {
         label={t("ACTION_CLEAR")}
         description={t("DESCRIPTION_CLEAR")}
         onClick={handleClear}
+      />
+      <ActionButton
+        label={t("ACTION_DEBUG_REPORT")}
+        description={t("DESCRIPTION_DEBUG_REPORT")}
+        onClick={async () => {
+          const saved = await saveDebugReport();
+          Spicetify.showNotification(
+            t(saved ? "MESSAGE_DEBUG_REPORT_SAVED" : "MESSAGE_DEBUG_REPORT_FAILED"),
+          );
+        }}
       />
     </div>
   );

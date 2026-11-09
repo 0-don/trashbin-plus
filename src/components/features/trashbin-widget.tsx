@@ -44,7 +44,7 @@ export const TrashbinWidget = React.memo(() => {
     widgetRef.current = widget;
     updateWidgetState(widget);
 
-    const stopMounting = keepWidgetMounted(widget, () => {
+    const stopMounting = keepWidgetMounted("trash", widget, () => {
       const state = useTrashbinStore.getState();
       const uri = Spicetify.Player.data?.item?.uri;
       return (

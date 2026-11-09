@@ -28,6 +28,7 @@ import {
 } from "./lib/track-utils";
 import { useTrashbinStore } from "./store/trashbin-store";
 import { version } from "../package.json";
+import { captureErrors, logDebug } from "./lib/debug-log";
 
 function App() {
   console.log(`trashbin+ loaded v${version}!`);
@@ -114,6 +115,12 @@ function App() {
 }
 
 (async () => {
+  captureErrors();
+  logDebug("start", {
+    version,
+    spotify: Spicetify.Platform?.version,
+    spicetify: Spicetify.Config?.version,
+  });
   const appRoot = document.createElement("div");
   appRoot.id = "trashbin-plus-root";
   appRoot.className = "fixed top-0 left-0 z-50 pointer-events-none";
