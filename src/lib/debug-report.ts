@@ -2,7 +2,7 @@ import { version } from "../../package.json";
 import { useAiStore } from "../store/ai-store";
 import { useTrashbinStore } from "../store/trashbin-store";
 import { getDebugLog, logDebug } from "./debug-log";
-import { trackedWidgets } from "./playbar-utils";
+import { NOW_PLAYING_TARGETS, trackedWidgets } from "./playbar-utils";
 
 // icons and cover art are noise in a bug report; the markup is what tells us which Spotify layout the user has
 const stripMarkup = (html: string, limit: number) =>
@@ -29,7 +29,9 @@ function probePage() {
     uriApi: typeof Spicetify.URI?.fromString,
     reactDom: typeof Spicetify.ReactDOM,
     nowPlayingMappedClass: !!document.querySelector(".main-nowPlayingWidget-nowPlaying"),
-    nowPlayingTestId: !!document.querySelector('[data-testid="now-playing-widget"]'),
+    nowPlayingTargets: Object.fromEntries(
+      NOW_PLAYING_TARGETS.map((selector) => [selector, !!document.querySelector(selector)]),
+    ),
     trackListRowClass: count(".main-trackList-trackListRow"),
     mainRoleRows: count('main [role="row"]'),
     tracklistButtons: count(".trashbin-tracklist-btn"),

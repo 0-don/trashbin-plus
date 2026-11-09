@@ -1,6 +1,11 @@
 import { logDebug } from "./debug-log";
 
-const NOW_PLAYING_WIDGET = '[data-testid="now-playing-widget"]';
+// Spotify renamed its own marker in 1.3.8 (now-playing-widget-v2); the region inside the bar outlasted both names
+export const NOW_PLAYING_TARGETS = [
+  '[data-testid="now-playing-widget"]',
+  '[data-testid="now-playing-widget-v2"]',
+  '[data-testid="now-playing-bar"] [role="region"]',
+];
 
 export const trackedWidgets = new Map<string, Spicetify.Playbar.Widget>();
 
@@ -20,7 +25,9 @@ export function keepWidgetMounted(
   const mount = () => {
     if (!isWanted()) return report("not wanted");
     if (widget.element.isConnected) return report("mounted");
-    const target = document.querySelector(NOW_PLAYING_WIDGET);
+    const target = NOW_PLAYING_TARGETS.map((selector) =>
+      document.querySelector(selector),
+    ).find((element) => element !== null);
     if (!target) return report("no now playing widget in page");
     target.append(widget.element);
     report("mounted by fallback");
