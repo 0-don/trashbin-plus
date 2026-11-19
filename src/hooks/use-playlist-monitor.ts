@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef } from "react";
 import { useTrashbinStore } from "../store/trashbin-store";
 import { isPlayerPlaying } from "../lib/track-utils";
+import { logDebug } from "../lib/debug-log";
 
 const MONITOR_INTERVAL = 3000;
 const STORAGE_KEY = "trashbin-playlist-monitor";
@@ -50,6 +51,9 @@ export function usePlaylistMonitor() {
   const resumeLastPlaylist = useCallback(async (): Promise<void> => {
     if (!stateRef.current.currentPlaylistUri) return;
 
+    logDebug("playlist monitor resume", {
+      playlist: stateRef.current.currentPlaylistUri,
+    });
     try {
       await Spicetify.Player.playUri(stateRef.current.currentPlaylistUri);
     } catch (error) {

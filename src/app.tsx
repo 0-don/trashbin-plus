@@ -63,6 +63,13 @@ function App() {
     const handleSongChange = async () => {
       const track = Spicetify.Player.data?.item;
       const state = useTrashbinStore.getState();
+      logDebug("songchange", {
+        track: track?.uri,
+        context: Spicetify.Player.data?.context?.uri,
+        trashed: track ? isTrackEffectivelyTrashed(track) : null,
+        device: Spicetify.Platform.ConnectAPI.state.activeDevice.id,
+        hitBack: state.userHitBack,
+      });
 
       const isLocalDevice =
         Spicetify.Platform.ConnectAPI.state.activeDevice.id === "local_device";

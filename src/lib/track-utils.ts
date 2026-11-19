@@ -1,5 +1,6 @@
 import { useTrashbinStore } from "../store/trashbin-store";
 import { SELECTORS } from "./constants";
+import { logDebug } from "./debug-log";
 
 const ENHANCED_RECOMMENDATION_REGEX = /enhanced_recommendation/;
 
@@ -207,6 +208,13 @@ export async function skipToNextAllowedTrack() {
       // whatever stays in the queue is skipped again on the next song change
     }
   }
+  logDebug("skip", {
+    from: Spicetify.Player.data?.item?.uri,
+    context: Spicetify.Player.data?.context?.uri,
+    trashedAhead: leadingTrashed.length,
+    removed: removable.length,
+    next: getQueueTracks()[0]?.contextTrack.uri,
+  });
   Spicetify.Player.next();
 }
 
