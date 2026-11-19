@@ -74,7 +74,7 @@
   "AI_ASSETS_INITIALIZING": "मॉडल के आरंभ करैत छलाम...",
   "SETTINGS_TRASH_AI_SONGS": "कचरा एआई गाना",
   "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "AI वाला गाना अपने-आप कचरा में डालीं: जवन एल्बम पर Deezer AI के लेबल लगवले बा, अकेले 97% भा ओसे बेसी वाला गाना, आ जब कलाकार के 3 गाना चिन्हित हो जाव तब 80% से वाला गाना। सत्यापित कलाकार के गाना आ 2023 से पहिले के रिलीज कबो चिन्हित ना होई।",
-  "DESCRIPTION_CLEAR_AI_STORAGE": "सभ भंडारित एआई वर्गीकरण परिणाम हटा दें ({{count}} गाना भंडारित कएल गेलय हई)।",
+  "DESCRIPTION_CLEAR_AI_STORAGE": "सभ भंडारित एआई वर्गीकरण परिणाम हटा दें ({{count}} गाना भंडारित कएल गेलय हई, {{size}})।",
   "ACTION_CLEAR_AI_STORAGE": "साफ़",
   "MESSAGE_AI_STORAGE_CLEARED": "AI परिणाम साफ कएल गेल छलय",
   "AI_TIER_LIKELY_HUMAN": "संभावित मानव",

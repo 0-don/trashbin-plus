@@ -67,5 +67,8 @@ export function deezerAiLabel(isrc: string): Promise<boolean | null> {
 export const loadAiEvidence = () =>
   Promise.all([verifiedCache.load(), deezerCache.load()]);
 
+export const aiEvidenceBytes = async () =>
+  (await verifiedCache.bytes()) + (await deezerCache.bytes());
+
 export const clearAiEvidence = () =>
   Promise.all([verifiedCache.clear(), deezerCache.clear()]);

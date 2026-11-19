@@ -74,7 +74,7 @@
   "AI_ASSETS_INITIALIZING": "Pokretanje modela...",
   "SETTINGS_TRASH_AI_SONGS": "Pjesme Trash AI",
   "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "Automatski baci AI pjesme u smeće: albume koje Deezer označava kao AI, pjesme s 97 % ili više samostalno i pjesme od 80 % čim izvođač ima 3 označene pjesme. Pjesme potvrđenih izvođača i izdanja prije 2023. nikad se ne označavaju.",
-  "DESCRIPTION_CLEAR_AI_STORAGE": "Obriši sve spremljene rezultate klasifikacije umjetne inteligencije ({{count}} pjesama spremljeno).",
+  "DESCRIPTION_CLEAR_AI_STORAGE": "Obriši sve spremljene rezultate klasifikacije umjetne inteligencije ({{count}} pjesama spremljeno, {{size}}).",
   "ACTION_CLEAR_AI_STORAGE": "Jasno",
   "MESSAGE_AI_STORAGE_CLEARED": "Rezultati AI-ja su očišćeni",
   "AI_TIER_LIKELY_HUMAN": "Vjerojatno ljudski",

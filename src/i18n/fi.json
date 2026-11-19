@@ -74,7 +74,7 @@
   "AI_ASSETS_INITIALIZING": "Alustetaan mallia...",
   "SETTINGS_TRASH_AI_SONGS": "Roska-AI-kappaleet",
   "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "Siirrä tekoälykappaleet automaattisesti roskakoriin: albumit, jotka Deezer merkitsee tekoälyn tekemiksi, kappaleet, jotka yksinään saavat 97 % tai enemmän, ja kappaleet 80 %:sta alkaen, kun artistilla on 3 merkittyä kappaletta. Vahvistettujen artistien kappaleita ja ennen vuotta 2023 julkaistuja ei merkitä koskaan.",
-  "DESCRIPTION_CLEAR_AI_STORAGE": "Poista kaikki tallennetut tekoälyluokittelutulokset ({{count}} kappaletta tallennettuna).",
+  "DESCRIPTION_CLEAR_AI_STORAGE": "Poista kaikki tallennetut tekoälyluokittelutulokset ({{count}} kappaletta tallennettuna, {{size}}).",
   "ACTION_CLEAR_AI_STORAGE": "Selkeä",
   "MESSAGE_AI_STORAGE_CLEARED": "Tekoälytulokset selvitettiin",
   "AI_TIER_LIKELY_HUMAN": "Todennäköisesti ihminen",

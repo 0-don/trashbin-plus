@@ -74,7 +74,7 @@
   "AI_ASSETS_INITIALIZING": "Modell wird initialisiert...",
   "SETTINGS_TRASH_AI_SONGS": "Müll-KI-Lieder",
   "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "KI-Songs automatisch in den Papierkorb: Alben, die Deezer als KI kennzeichnet, Songs ab 97 % für sich allein und Songs ab 80 %, sobald der Künstler 3 markierte Songs hat. Songs verifizierter Künstler und Veröffentlichungen vor 2023 werden nie markiert.",
-  "DESCRIPTION_CLEAR_AI_STORAGE": "Alle gespeicherten KI-Klassifizierungsergebnisse löschen ({{count}} gespeicherte Songs).",
+  "DESCRIPTION_CLEAR_AI_STORAGE": "Alle gespeicherten KI-Klassifizierungsergebnisse löschen ({{count}} gespeicherte Songs, {{size}}).",
   "ACTION_CLEAR_AI_STORAGE": "Klar",
   "MESSAGE_AI_STORAGE_CLEARED": "KI-Ergebnisse gelöscht",
   "AI_TIER_LIKELY_HUMAN": "Wahrscheinlich menschlich",

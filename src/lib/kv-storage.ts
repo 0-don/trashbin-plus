@@ -7,6 +7,7 @@ export interface StoredRecord<T> {
   save: () => void;
   replace: (value: T) => void;
   clear: () => Promise<void>;
+  bytes: () => Promise<number>;
 }
 
 function readKey(db: IDBDatabase, key: string): Promise<unknown> {
@@ -71,6 +72,8 @@ export function storedRecord<T extends object>(
       value = next;
       save();
     },
+    // IndexedDB keeps the structured value, so its JSON length is close to what it occupies
+    bytes: async () => new Blob([JSON.stringify(await load())]).size,
     clear: async () => {
       if (timer) clearTimeout(timer);
       timer = null;

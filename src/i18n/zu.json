@@ -74,7 +74,7 @@
   "AI_ASSETS_INITIALIZING": "Iqalela imodeli...",
   "SETTINGS_TRASH_AI_SONGS": "Izindima ze-AI Zengcwele",
   "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "Faka izingoma ze-AI kudoti ngokuzenzakalelayo: ama-albhamu u-Deezer awabeka ilebula ye-AI, izingoma ezifinyelela ku-97% noma ngaphezulu zodwa, nezingoma kusukela ku-80% uma umculi esenezingoma ezi-3 ezimakiwe. Izingoma zabaculi abaqinisekisiwe nokukhishwe ngaphambi kuka-2023 akumakwa neze.",
-  "DESCRIPTION_CLEAR_AI_STORAGE": "Sula wonke amaphethelo akugciniwe kwi-AI (izindima ezingu-{{count}} zicinwe).",
+  "DESCRIPTION_CLEAR_AI_STORAGE": "Sula wonke amaphethelo akugciniwe kwi-AI (izindima ezingu-{{count}} zicinwe, {{size}}).",
   "ACTION_CLEAR_AI_STORAGE": "Vula",
   "MESSAGE_AI_STORAGE_CLEARED": "Iziphawu ze-AI zacaciswe",
   "AI_TIER_LIKELY_HUMAN": "Umntu okwakhiwa",

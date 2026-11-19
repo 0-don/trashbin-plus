@@ -74,7 +74,7 @@
   "AI_ASSETS_INITIALIZING": "Ini-initialize ang modelo...",
   "SETTINGS_TRASH_AI_SONGS": "Mga Awit ng Basurang AI",
   "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "Awtomatikong itapon ang mga kantang gawa ng AI: mga album na nilagyan ng Deezer ng AI label, mga kantang 97% pataas nang mag-isa, at mga kantang mula 80% kapag may 3 na-flag na kanta ang artist. Hindi kailanman na-flag ang mga kanta ng mga verified na artist at ang mga release bago ang 2023.",
-  "DESCRIPTION_CLEAR_AI_STORAGE": "I-clear ang lahat ng naka-imbak na resulta ng AI classification ({{count}} mga kanta ang naka-imbak).",
+  "DESCRIPTION_CLEAR_AI_STORAGE": "I-clear ang lahat ng naka-imbak na resulta ng AI classification ({{count}} mga kanta ang naka-imbak, {{size}}).",
   "ACTION_CLEAR_AI_STORAGE": "Malinaw",
   "MESSAGE_AI_STORAGE_CLEARED": "Na-clear na ang mga resulta ng AI",
   "AI_TIER_LIKELY_HUMAN": "Malapet na Tao",

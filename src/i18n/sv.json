@@ -74,7 +74,7 @@
   "AI_ASSETS_INITIALIZING": "Initierar modell...",
   "SETTINGS_TRASH_AI_SONGS": "Skräp-AI-låtar",
   "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "Släng AI-låtar automatiskt i papperskorgen: album som Deezer märker som AI, låtar på 97 % eller mer på egen hand och låtar från 80 % när artisten har 3 flaggade låtar. Låtar av verifierade artister och utgåvor från före 2023 flaggas aldrig.",
-  "DESCRIPTION_CLEAR_AI_STORAGE": "Rensa alla lagrade AI-klassificeringsresultat ({{count}} låtar lagrade).",
+  "DESCRIPTION_CLEAR_AI_STORAGE": "Rensa alla lagrade AI-klassificeringsresultat ({{count}} låtar lagrade, {{size}}).",
   "ACTION_CLEAR_AI_STORAGE": "Klart",
   "MESSAGE_AI_STORAGE_CLEARED": "AI-resultat godkända",
   "AI_TIER_LIKELY_HUMAN": "Troligen människa",

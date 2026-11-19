@@ -74,7 +74,7 @@
   "AI_ASSETS_INITIALIZING": "正在初始化模型...",
   "SETTINGS_TRASH_AI_SONGS": "垃圾AI歌曲",
   "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "自动将AI歌曲移入回收站：Deezer标记为AI的专辑；单首概率≥97%的歌曲；同一艺人已有3首被标记时，≥80%的歌曲。认证艺人的歌曲和2023年之前发行的歌曲从不标记。",
-  "DESCRIPTION_CLEAR_AI_STORAGE": "清除所有已存储的AI分类结果（已存储{{count}}首歌曲）。",
+  "DESCRIPTION_CLEAR_AI_STORAGE": "清除所有已存储的AI分类结果（已存储{{count}}首歌曲，{{size}}）。",
   "ACTION_CLEAR_AI_STORAGE": "清晰",
   "MESSAGE_AI_STORAGE_CLEARED": "AI结果已清除",
   "AI_TIER_LIKELY_HUMAN": "可能是人类",

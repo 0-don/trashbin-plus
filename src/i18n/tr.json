@@ -74,7 +74,7 @@
   "AI_ASSETS_INITIALIZING": "Model başlatılıyor...",
   "SETTINGS_TRASH_AI_SONGS": "Çöp Yapay Zeka Şarkıları",
   "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "Yapay zekâ şarkılarını otomatik olarak çöpe at: Deezer'ın yapay zekâ olarak etiketlediği albümler, tek başına %97 ve üzeri olan şarkılar ve sanatçının 3 işaretli şarkısı olduğunda %80'den itibaren şarkılar. Doğrulanmış sanatçıların şarkıları ve 2023'ten önceki yayınlar asla işaretlenmez.",
-  "DESCRIPTION_CLEAR_AI_STORAGE": "Tüm saklı yapay zeka sınıflandırma sonuçlarını temizle ({{count}} şarkı saklı).",
+  "DESCRIPTION_CLEAR_AI_STORAGE": "Tüm saklı yapay zeka sınıflandırma sonuçlarını temizle ({{count}} şarkı saklı, {{size}}).",
   "ACTION_CLEAR_AI_STORAGE": "Açık",
   "MESSAGE_AI_STORAGE_CLEARED": "AI sonuçları temizlendi",
   "AI_TIER_LIKELY_HUMAN": "Muhtemelen İnsan",

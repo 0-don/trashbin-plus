@@ -74,7 +74,7 @@
   "AI_ASSETS_INITIALIZING": "Mudeli lähtestamine...",
   "SETTINGS_TRASH_AI_SONGS": "Prügi AI laulud",
   "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "Vii tehisintellekti lood automaatselt prügikasti: albumid, mille Deezer on märkinud tehisintellekti loodud olevaks, lood, mis üksi on 97% või rohkem, ja lood alates 80%, kui artistil on 3 märgistatud lugu. Kinnitatud artistide lugusid ja enne 2023. aastat ilmunud lugusid ei märgistata kunagi.",
-  "DESCRIPTION_CLEAR_AI_STORAGE": "Tühjenda kõik salvestatud AI klassifitseerimise tulemused (salvestatud {{count}} laulu).",
+  "DESCRIPTION_CLEAR_AI_STORAGE": "Tühjenda kõik salvestatud AI klassifitseerimise tulemused (salvestatud {{count}} laulu, {{size}}).",
   "ACTION_CLEAR_AI_STORAGE": "Selge",
   "MESSAGE_AI_STORAGE_CLEARED": "AI tulemused kustutatud",
   "AI_TIER_LIKELY_HUMAN": "Tõenäoliselt inimene",

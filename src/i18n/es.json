@@ -74,7 +74,7 @@
   "AI_ASSETS_INITIALIZING": "Inicializando modelo...",
   "SETTINGS_TRASH_AI_SONGS": "Canciones de IA de basura",
   "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "Envía automáticamente a la papelera las canciones de IA: los álbumes que Deezer etiqueta como IA, las canciones con el 97% o más por sí solas y las canciones desde el 80% cuando el artista ya tiene 3 canciones marcadas. Las canciones de artistas verificados y los lanzamientos anteriores a 2023 nunca se marcan.",
-  "DESCRIPTION_CLEAR_AI_STORAGE": "Borrar todos los resultados almacenados de clasificación de IA ({{count}} canciones almacenadas).",
+  "DESCRIPTION_CLEAR_AI_STORAGE": "Borrar todos los resultados almacenados de clasificación de IA ({{count}} canciones almacenadas, {{size}}).",
   "ACTION_CLEAR_AI_STORAGE": "Claro",
   "MESSAGE_AI_STORAGE_CLEARED": "Resultados de IA aprobados",
   "AI_TIER_LIKELY_HUMAN": "Probablemente humano",

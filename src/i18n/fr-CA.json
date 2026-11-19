@@ -74,7 +74,7 @@
   "AI_ASSETS_INITIALIZING": "Initialisation du modèle...",
   "SETTINGS_TRASH_AI_SONGS": "Chansons d'IA de mauvaise qualité",
   "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "Mettre automatiquement à la corbeille les chansons générées par IA : les albums que Deezer étiquette comme IA, les chansons à 97 % ou plus à elles seules et les chansons dès 80 % lorsque l'artiste a 3 chansons signalées. Les chansons d'artistes vérifiés et les parutions d'avant 2023 ne sont jamais signalées.",
-  "DESCRIPTION_CLEAR_AI_STORAGE": "Effacer tous les résultats de classification par IA ({{count}} chansons stockées).",
+  "DESCRIPTION_CLEAR_AI_STORAGE": "Effacer tous les résultats de classification par IA ({{count}} chansons stockées, {{size}}).",
   "ACTION_CLEAR_AI_STORAGE": "Clair",
   "MESSAGE_AI_STORAGE_CLEARED": "Les résultats d'IA ont été effacés",
   "AI_TIER_LIKELY_HUMAN": "Probablement humain",

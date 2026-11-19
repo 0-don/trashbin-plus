@@ -74,7 +74,7 @@
   "AI_ASSETS_INITIALIZING": "モデルを初期化しています...",
   "SETTINGS_TRASH_AI_SONGS": "ゴミAIソング",
   "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "AI生成曲を自動でゴミ箱へ：DeezerがAIとラベル付けしたアルバム、単独で97％以上の曲、アーティストに判定済みの曲が3曲あれば80％以上の曲。認証済みアーティストの曲と2023年より前のリリースは判定しません。",
-  "DESCRIPTION_CLEAR_AI_STORAGE": "保存されたすべてのAI分類結果を消去します（{{count}}曲が保存されています）。",
+  "DESCRIPTION_CLEAR_AI_STORAGE": "保存されたすべてのAI分類結果を消去します（{{count}}曲が保存されています、{{size}}）。",
   "ACTION_CLEAR_AI_STORAGE": "クリア",
   "MESSAGE_AI_STORAGE_CLEARED": "AIの結果がクリアされました",
   "AI_TIER_LIKELY_HUMAN": "おそらく人間",

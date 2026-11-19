@@ -74,7 +74,7 @@
   "AI_ASSETS_INITIALIZING": "Inicijuojamas modelis...",
   "SETTINGS_TRASH_AI_SONGS": "Šiukšlių AI dainos",
   "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "Automatiškai perkelk DI dainas į šiukšlinę: albumus, kuriuos Deezer žymi kaip DI, pavienes dainas nuo 97 % ir dainas nuo 80 %, kai atlikėjas turi 3 pažymėtas dainas. Patvirtintų atlikėjų dainos ir iki 2023 m. išleistos dainos niekada nežymimos.",
-  "DESCRIPTION_CLEAR_AI_STORAGE": "Išvalyti visus išsaugotus dirbtinio intelekto klasifikavimo rezultatus (išsaugota {{count}} dainų).",
+  "DESCRIPTION_CLEAR_AI_STORAGE": "Išvalyti visus išsaugotus dirbtinio intelekto klasifikavimo rezultatus (išsaugota {{count}} dainų, {{size}}).",
   "ACTION_CLEAR_AI_STORAGE": "Aišku",
   "MESSAGE_AI_STORAGE_CLEARED": "AI rezultatai išvalyti",
   "AI_TIER_LIKELY_HUMAN": "Tikėtina žmogaus veikla",

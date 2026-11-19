@@ -6,7 +6,7 @@ import {
   getTrackInfo,
   initEngine,
 } from "../lib/ai-engine";
-import { clearAiEvidence, deezerAiLabel, isArtistVerified, loadAiEvidence } from "../lib/ai-evidence";
+import { aiEvidenceBytes, clearAiEvidence, deezerAiLabel, isArtistVerified, loadAiEvidence } from "../lib/ai-evidence";
 import { storedRecord } from "../lib/kv-storage";
 import { AI_INDICATOR_CLASS } from "../lib/constants";
 import { i18n } from "../components/providers/providers";
@@ -64,6 +64,17 @@ const blocklistRecord = storedRecord<{ ts: number; data: BlocklistEntry[] }>(
   "trashbin-ai-blocklist",
   () => ({ ts: 0, data: [] }),
 );
+
+// what the Clear button in settings removes
+export async function aiStorageBytes(): Promise<number> {
+  const sizes = await Promise.all([
+    resultsRecord.bytes(),
+    failedRecord.bytes(),
+    hitsRecord.bytes(),
+    aiEvidenceBytes(),
+  ]);
+  return sizes.reduce((total, size) => total + size, 0);
+}
 
 function extractArtistId(value: string): string | null {
   const trimmed = value.trim();

@@ -74,7 +74,7 @@
   "AI_ASSETS_INITIALIZING": "मॉडल को आरंभ कर रहे हैं...",
   "SETTINGS_TRASH_AI_SONGS": "ट्रैश एआई गाने",
   "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "AI गानों को अपने-आप ट्रैश में डालें: वे एल्बम जिन्हें Deezer AI के रूप में लेबल करता है, अकेले 97% या उससे अधिक वाले गाने, और जब कलाकार के 3 चिह्नित गाने हों तो 80% से गाने। सत्यापित कलाकारों के गाने और 2023 से पहले के रिलीज़ कभी चिह्नित नहीं होते।",
-  "DESCRIPTION_CLEAR_AI_STORAGE": "सभी संग्रहीत एआई वर्गीकरण परिणाम साफ़ करें ({{count}} गाने संग्रहीत हैं)।",
+  "DESCRIPTION_CLEAR_AI_STORAGE": "सभी संग्रहीत एआई वर्गीकरण परिणाम साफ़ करें ({{count}} गाने संग्रहीत हैं, {{size}})।",
   "ACTION_CLEAR_AI_STORAGE": "स्पष्ट",
   "MESSAGE_AI_STORAGE_CLEARED": "एआई परिणाम साफ हो गए",
   "AI_TIER_LIKELY_HUMAN": "संभावित मानव",

@@ -74,7 +74,7 @@
   "AI_ASSETS_INITIALIZING": "Modell inicializálása...",
   "SETTINGS_TRASH_AI_SONGS": "Szemét AI dalok",
   "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "MI-dalok automatikus kukába helyezése: a Deezer által MI-ként címkézett albumok, az önmagukban 97%-os vagy magasabb értékű dalok, és 80%-tól azok a dalok, amelyek előadójának már 3 megjelölt dala van. A hitelesített előadók dalait és a 2023 előtti kiadásokat soha nem jelöli meg.",
-  "DESCRIPTION_CLEAR_AI_STORAGE": "Az összes tárolt MI-os besorolási eredmény törlése ({{count}} dal tárolva).",
+  "DESCRIPTION_CLEAR_AI_STORAGE": "Az összes tárolt MI-os besorolási eredmény törlése ({{count}} dal tárolva, {{size}}).",
   "ACTION_CLEAR_AI_STORAGE": "Tiszta",
   "MESSAGE_AI_STORAGE_CLEARED": "Az MI eredmények törölve lettek",
   "AI_TIER_LIKELY_HUMAN": "Valószínűleg emberi",

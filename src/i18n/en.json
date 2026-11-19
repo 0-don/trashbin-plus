@@ -74,7 +74,7 @@
   "AI_ASSETS_INITIALIZING": "Initializing model...",
   "SETTINGS_TRASH_AI_SONGS": "Trash AI Songs",
   "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "Automatically trash AI songs: albums Deezer labels as AI, songs at 97% or more on their own, and songs from 80% once the artist has 3 flagged songs. Songs by verified artists and releases from before 2023 are never flagged.",
-  "DESCRIPTION_CLEAR_AI_STORAGE": "Clear all stored AI classification results ({{count}} songs stored).",
+  "DESCRIPTION_CLEAR_AI_STORAGE": "Clear all stored AI classification results ({{count}} songs stored, {{size}}).",
   "ACTION_CLEAR_AI_STORAGE": "Clear",
   "MESSAGE_AI_STORAGE_CLEARED": "AI results cleared",
   "AI_TIER_LIKELY_HUMAN": "Likely Human",

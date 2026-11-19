@@ -74,7 +74,7 @@
   "AI_ASSETS_INITIALIZING": "ماڈل کو شروع کرنا...",
   "SETTINGS_TRASH_AI_SONGS": "ٹریش اے آئی گانے",
   "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "AI گانوں کو خودکار طور پر ردی میں ڈالیں: وہ البم جنہیں Deezer نے AI کا لیبل دیا ہو، اکیلے 97% یا اس سے زیادہ والے گانے، اور جب فنکار کے 3 نشان زد گانے ہوں تو 80% سے گانے۔ تصدیق شدہ فنکاروں کے گانے اور 2023 سے پہلے کی ریلیز کبھی نشان زد نہیں ہوتیں۔",
-  "DESCRIPTION_CLEAR_AI_STORAGE": "تمام محفوظ شدہ AI درجہ بندی کے نتائج کو صاف کریں ({{count}} گانے محفوظ ہیں)۔",
+  "DESCRIPTION_CLEAR_AI_STORAGE": "تمام محفوظ شدہ AI درجہ بندی کے نتائج کو صاف کریں ({{count}} گانے محفوظ ہیں، {{size}})۔",
   "ACTION_CLEAR_AI_STORAGE": "صاف",
   "MESSAGE_AI_STORAGE_CLEARED": "ای آئی کے نتائج صاف ہو گئے",
   "AI_TIER_LIKELY_HUMAN": "ممکنہ انسانی",

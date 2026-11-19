@@ -74,7 +74,7 @@
   "AI_ASSETS_INITIALIZING": "Inițializare model...",
   "SETTINGS_TRASH_AI_SONGS": "Cântece AI deșeurilor",
   "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "Mută automat în coș melodiile create cu IA: albumele pe care Deezer le etichetează ca IA, melodiile de 97% sau mai mult singure și melodiile de la 80% când artistul are 3 melodii marcate. Melodiile artiștilor verificați și lansările dinainte de 2023 nu sunt niciodată marcate.",
-  "DESCRIPTION_CLEAR_AI_STORAGE": "Ștergeți toate rezultatele stocate ale clasificării AI ({{count}} melodii stocate).",
+  "DESCRIPTION_CLEAR_AI_STORAGE": "Ștergeți toate rezultatele stocate ale clasificării AI ({{count}} melodii stocate, {{size}}).",
   "ACTION_CLEAR_AI_STORAGE": "Clar",
   "MESSAGE_AI_STORAGE_CLEARED": "Rezultatele AI au fost eliberate",
   "AI_TIER_LIKELY_HUMAN": "Probabil uman",

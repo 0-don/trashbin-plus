@@ -74,7 +74,7 @@
   "AI_ASSETS_INITIALIZING": "Memulakan model...",
   "SETTINGS_TRASH_AI_SONGS": "Lagu AI Sampah",
   "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "Buang lagu AI ke tong sampah secara automatik: album yang dilabel AI oleh Deezer, lagu 97% atau lebih dengan sendirinya, dan lagu daripada 80% apabila artis mempunyai 3 lagu yang ditanda. Lagu daripada artis disahkan dan keluaran sebelum 2023 tidak pernah ditanda.",
-  "DESCRIPTION_CLEAR_AI_STORAGE": "Padamkan semua keputusan pengelasan AI yang disimpan ({{count}} lagu disimpan).",
+  "DESCRIPTION_CLEAR_AI_STORAGE": "Padamkan semua keputusan pengelasan AI yang disimpan ({{count}} lagu disimpan, {{size}}).",
   "ACTION_CLEAR_AI_STORAGE": "Jelas",
   "MESSAGE_AI_STORAGE_CLEARED": "Keputusan AI telah dibersihkan",
   "AI_TIER_LIKELY_HUMAN": "Kemungkinan Manusia",

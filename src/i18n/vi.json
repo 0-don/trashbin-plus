@@ -74,7 +74,7 @@
   "AI_ASSETS_INITIALIZING": "Khởi tạo mô hình...",
   "SETTINGS_TRASH_AI_SONGS": "Những bài hát AI rác",
   "DESCRIPTION_SETTINGS_TRASH_AI_SONGS": "Tự động chuyển bài hát AI vào thùng rác: album được Deezer gắn nhãn AI, bài hát đạt từ 97% trở lên khi đứng riêng, và bài hát từ 80% khi nghệ sĩ đã có 3 bài bị gắn cờ. Bài hát của nghệ sĩ đã xác minh và các bản phát hành trước năm 2023 không bao giờ bị gắn cờ.",
-  "DESCRIPTION_CLEAR_AI_STORAGE": "Xóa tất cả kết quả phân loại AI đã lưu ({{count}} bài hát đã lưu).",
+  "DESCRIPTION_CLEAR_AI_STORAGE": "Xóa tất cả kết quả phân loại AI đã lưu ({{count}} bài hát đã lưu, {{size}}).",
   "ACTION_CLEAR_AI_STORAGE": "Rõ ràng",
   "MESSAGE_AI_STORAGE_CLEARED": "Kết quả AI đã được làm rõ",
   "AI_TIER_LIKELY_HUMAN": "Có thể là con người",

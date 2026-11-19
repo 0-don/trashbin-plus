@@ -6,7 +6,8 @@ import {
 } from "react-icons/hi2";
 import { SELECTORS } from "../../lib/constants";
 import { saveDebugReport } from "../../lib/debug-report";
-import { useAiStore } from "../../store/ai-store";
+import { aiStorageBytes, useAiStore } from "../../store/ai-store";
+import { i18n } from "../providers/providers";
 import { cn } from "../../lib/utils";
 import { useTrashbinStore } from "../../store/trashbin-store";
 import { TRASH_ICON } from "../icons";
@@ -147,9 +148,26 @@ const AiStatusText: React.FC = () => {
   );
 };
 
+function formatBytes(bytes: number, language: string): string {
+  const mb = bytes >= 1024 * 1024;
+  return new Intl.NumberFormat(language, {
+    style: "unit",
+    unit: mb ? "megabyte" : "kilobyte",
+    maximumFractionDigits: 1,
+  }).format(bytes / (mb ? 1024 * 1024 : 1024));
+}
+
 const SettingsModal: React.FC = () => {
   const { t } = useTranslation();
   const store = useTrashbinStore();
+  const aiResultCount = Object.values(useAiStore((s) => s.results)).filter(
+    (v) => v >= 0,
+  ).length;
+  const [aiBytes, setAiBytes] = useState(0);
+
+  useEffect(() => {
+    aiStorageBytes().then(setAiBytes).catch(() => setAiBytes(0));
+  }, [aiResultCount]);
 
   const handleFileImport = () => {
     const input = document.createElement("input");
@@ -316,9 +334,8 @@ const SettingsModal: React.FC = () => {
       <ActionButton
         label={t("ACTION_CLEAR_AI_STORAGE")}
         description={t("DESCRIPTION_CLEAR_AI_STORAGE", {
-          count: Object.values(useAiStore((s) => s.results)).filter(
-            (v) => v >= 0,
-          ).length,
+          count: aiResultCount,
+          size: formatBytes(aiBytes, i18n.language),
         })}
         onClick={() => {
           useAiStore.getState().clearStorage();
