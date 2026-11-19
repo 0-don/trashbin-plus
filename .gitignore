@@ -154,3 +154,4 @@ ai/.venv
 ai/resources
 ai/train/efficientat
 __pycache__
+trashbin-debug*
